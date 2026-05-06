@@ -1652,6 +1652,7 @@ footer a:hover {
     color: var(--accent-text);
     padding: 0.2rem 0.75rem;
     border-radius: 50px;
+    font-family: "Space Grotesk", sans-serif;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -1910,7 +1911,7 @@ footer a:hover {
     border: 2px solid rgba(0, 0, 0, 0.1);
     background: transparent;
     color: var(--text-dark);
-    font-family: "Epilogue", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
 }
 
 .filter-tag:hover,
