@@ -1892,7 +1892,7 @@ footer a:hover {
 }
 
 .filter-bar {
-    padding: 2rem 4rem;
+    padding: 2rem 4rem 1rem;
     background: var(--snow);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     display: flex;
@@ -1924,7 +1924,7 @@ footer a:hover {
 
 /* Blog page — card grid layout */
 .posts-list {
-    padding: 5rem 4rem 8rem;
+    padding: 2.5rem 4rem 8rem;
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
