@@ -1906,12 +1906,10 @@ footer a:hover {
 }
 
 .filter-bar {
-    padding: 2rem 4rem 1rem;
     background: var(--snow);
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    max-width:600px;
 }
 
 .filter-tag {
@@ -1936,7 +1934,7 @@ footer a:hover {
 
 /* Blog page — card grid layout */
 .posts-list {
-    padding: 2.5rem 4rem 8rem;
+    padding: 2.5rem 0;
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
