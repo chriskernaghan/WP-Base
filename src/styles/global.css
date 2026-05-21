@@ -1892,6 +1892,19 @@ footer a:hover {
     animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
+/* Blog page container */
+.blog-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem;
+}
+
+@media (max-width: 768px) {
+    .blog-inner {
+        padding: 0 1.5rem;
+    }
+}
+
 .filter-bar {
     padding: 2rem 4rem 1rem;
     background: var(--snow);
