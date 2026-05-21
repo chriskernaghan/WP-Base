@@ -90,3 +90,4 @@ The post `tag` field is locked to an enum in `src/content/config.ts`. Adding a n
 - The marquee and hero terminal scripts only load on the homepage
 - Case study testimonials are optional in the frontmatter; the layout handles missing ones
 
+
