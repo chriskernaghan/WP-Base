@@ -2197,7 +2197,7 @@ footer a:hover {
    ========================================================================== */
 
 .post-hero {
-    padding: 11rem 2rem 3rem;
+    padding: 11rem 0rem 3rem;
     max-width: var(--frame);
     margin: 0 auto;
     background: var(--snow);
