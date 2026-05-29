@@ -14,6 +14,8 @@
     --text-light: #a8a8b8;
     --snow: #ffffff;
     --muted: #8a8680;
+    --frame: 1200px;
+    --reading: 800px;
     --border: rgba(8, 16, 28, 0.08);
 }
 
