@@ -3145,7 +3145,6 @@ footer a:hover {
 
     .hero-v2-cta-row {
         flex-direction: column;
-        align-items: stretch;
         gap: 1rem;
         width: 100%;
     }
