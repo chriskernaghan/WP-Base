@@ -1,0 +1,32 @@
+---
+// CaseImage.astro — image placeholder for case studies.
+// Renders a lime-tinted empty block (matching the blog hero empty state)
+// that breaks out wider than the reading column. Swap in a real <img>
+// later by passing `src`; the breakout width carries over either way.
+//
+// Usage in MDX:
+//   <CaseImage label="Desktop view" />               full-width placeholder
+//   <CaseImage src="/case-studies/x.png" alt="..." /> real image, broken out
+//   <CaseImage portrait label="Mobile" />            4:5 portrait (for grids)
+
+interface Props {
+  src?: string;
+  alt?: string;
+  label?: string;
+  portrait?: boolean;
+  breakout?: boolean;
+}
+
+const { src, alt = '', label = 'Screenshot', portrait = false, breakout = true } = Astro.props;
+const wrapClass = breakout && !portrait ? 'case-breakout' : '';
+---
+
+{src ? (
+  <div class={`case-image ${wrapClass}`.trim()}>
+    <img src={src} alt={alt} loading="lazy" />
+  </div>
+) : (
+  <div class={`case-placeholder ${portrait ? 'case-placeholder--portrait' : ''} ${wrapClass}`.trim()}>
+    <span>{label}</span>
+  </div>
+)}
