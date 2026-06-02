@@ -19,6 +19,7 @@ testimonial:
 import CaseSection from '../../components/CaseSection.astro';
 import Timeline from '../../components/Timeline.astro';
 import OutcomeGrid from '../../components/OutcomeGrid.astro';
+import CaseImage from '../../components/CaseImage.astro';
 
 <CaseSection label="The Challenge" heading="An Outdated Site Holding Back Growth">
 ExportExplore came to us with a problem: their website no longer reflected the business they had become. As the company scaled and their services evolved, the outdated site was actively working against them.
@@ -34,18 +35,18 @@ They needed a complete fresh start, not just visual updates, but a rebuild that 
 <CaseSection label="The Solution" heading="A Modern WordPress Site Built for Growth">
 We rebuilt ExportExplore's entire web presence from the ground up, working closely with their team to create a site that truly represents their expertise in international trade.
 
-- **Fresh design.** Modern, professional aesthetic that reflects the scale of the business.
-- **Elementor page builder.** Client had experience with Elementor, so we built with it to give them comfortable editing capabilities.
-- **Local hosting partner.** Set up with a reliable local hosting company for performance and support.
-- **Performance optimisation.** Fast load times and clean code from day one.
-- **Security hardening.** Implemented security best practices and monitoring.
+<ul class="solution-tiles">
+<li><strong>Fresh design</strong>Modern, professional aesthetic that reflects the scale of the business.</li>
+<li><strong>Elementor page builder</strong>Client had experience with Elementor, so we built with it to give them comfortable editing capabilities.</li>
+<li><strong>Local hosting partner</strong>Set up with a reliable local hosting company for performance and support.</li>
+<li><strong>Performance optimisation</strong>Fast load times and clean code from day one.</li>
+<li><strong>Security hardening</strong>Implemented security best practices and monitoring.</li>
+</ul>
 
 The goal was to give ExportExplore a platform that accurately represents their expertise while remaining easy for their team to manage and update.
 </CaseSection>
 
-<div class="case-image">
-  <img src="/case-studies/exportexplore-desktop.png" alt="ExportExplore website desktop view" />
-</div>
+<CaseImage label="Desktop homepage" />
 
 <Timeline items={[
   { number: "4", label: "Weeks from brief to launch" },
@@ -69,9 +70,9 @@ The site is fully responsive, delivering a professional experience whether prosp
 
 Clean navigation and clear calls to action ensure visitors can easily find what they need and get in touch.
 
-<div class="responsive-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-  <div class="case-image"><img src="/case-studies/exportexplore-mobile.png" alt="ExportExplore mobile homepage" /></div>
-  <div class="case-image"><img src="/case-studies/exportexplore-mobile-menu.png" alt="ExportExplore mobile navigation" /></div>
+<div class="responsive-grid case-breakout">
+  <CaseImage portrait label="Mobile homepage" />
+  <CaseImage portrait label="Mobile navigation" />
 </div>
 
 Today, ExportExplore has a website that properly represents their expertise in international trade, and a platform that will continue to grow alongside the business.
