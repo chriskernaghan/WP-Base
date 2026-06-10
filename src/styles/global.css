@@ -2952,16 +2952,19 @@ footer a:hover {
 }
 
 /* Solution points rendered as a 2-col tile grid instead of a bunched list */
+
 .solution-tiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin: 2.5rem 0;
     list-style: none;
     padding: 0;
 }
 
+.case-section ul.solution-tiles li,
 .solution-tiles li {
+    flex: 1 1 300px;
     background: var(--snow);
     border: 1px solid rgba(8, 16, 28, 0.08);
     border-left: 3px solid var(--accent);
@@ -2974,6 +2977,7 @@ footer a:hover {
     color: var(--text-dark);
 }
 
+.case-section ul.solution-tiles li::before,
 .solution-tiles li::before {
     content: none;
 }
@@ -3026,31 +3030,25 @@ footer a:hover {
 .outcome-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
     margin-block: 3rem;
 }
 
 .outcome-card {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 16px;
-    border-left: 4px solid var(--midnight);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.outcome-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    border-left-color: var(--accent);
+    background: var(--snow);
+    border: 1px solid rgba(8, 16, 28, 0.08);
+    border-left: 3px solid var(--accent);
+    border-radius: 14px;
+    padding: 1.75rem;
 }
 
 .outcome-card h3 {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--midnight);
-    letter-spacing: -0.02em;
-    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.6rem;
 }
 
 .outcome-card p {
@@ -3516,8 +3514,7 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 
-    .solution-tiles {
-        grid-template-columns: 1fr;
+.solution-tiles {
         gap: 1rem;
     }
 
