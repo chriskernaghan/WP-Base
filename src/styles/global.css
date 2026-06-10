@@ -2878,7 +2878,15 @@ footer a:hover {
    column's centre line, which is also the frame's centre line because
    .case-content is itself centred. width is capped so it never exceeds the
    frame or spills past the viewport gutter. */
-.case-breakout {
+
+.case-breakout,
+.case-content .solution-tiles,
+.case-content .timeline,
+.case-content .outcome-grid,
+.case-content .responsive-grid,
+.case-content .case-testimonial,
+.case-content > .case-placeholder,
+.case-content .case-section > .case-placeholder {
     width: min(var(--frame), calc(100vw - 3rem));
     max-width: none;
     margin-left: 50%;
@@ -2946,7 +2954,7 @@ footer a:hover {
 /* Solution points rendered as a 2-col tile grid instead of a bunched list */
 .solution-tiles {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin: 2.5rem 0;
     list-style: none;
@@ -3515,7 +3523,15 @@ footer a:hover {
 
     /* On mobile the reading column already fills the screen, so the
        breakout would push furniture wider than the viewport. Reset it. */
-    .case-breakout {
+   
+.case-breakout,
+    .case-content .solution-tiles,
+    .case-content .timeline,
+    .case-content .outcome-grid,
+    .case-content .responsive-grid,
+    .case-content .case-testimonial,
+    .case-content > .case-placeholder,
+    .case-content .case-section > .case-placeholder {
         width: 100%;
         margin-left: 0;
         transform: none;
