@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExportExplore — Mega Menu Concept</title>
+<style>
+  /* ============================================================
+     EXPORTEXPLORE — MEGA MENU CONCEPT
+     Self-contained demo. No external dependencies.
+     Brand: deep navy (#10204A), trade/green accent (#2FA88A).
+     ============================================================ */
+
+  :root {
+    --navy:        #10204A;
+    --navy-deep:   #0A1736;
+    --navy-line:   #233560;
+    --accent:      #2FA88A;
+    --accent-soft: #E8F4F0;
+    --ink:         #1C2434;
+    --muted:       #5C6573;
+    --hairline:    #E4E7EC;
+    --panel:       #FFFFFF;
+    --page:        #F5F7FA;
+    --radius:      14px;
+    --shadow:      0 24px 60px -20px rgba(16,32,74,.28);
+    --ease:        cubic-bezier(.16,.84,.44,1);
+    --font:        "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--page);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Header / nav bar ---------- */
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--navy);
+    color: #fff;
+  }
+  .bar-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 28px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 21px;
+    letter-spacing: .3px;
+    white-space: nowrap;
+  }
+  .logo span { font-weight: 400; opacity: .82; }
+  .logo small {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: .6;
+    margin-top: 1px;
+  }
+
+  .nav {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    margin-left: auto;
+  }
+  .nav-item { position: static; display: flex; align-items: center; }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    padding: 0 18px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #E7ECF6;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    position: relative;
+  }
+  .nav-link .chev {
+    width: 9px; height: 9px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform .25s var(--ease);
+    opacity: .7;
+  }
+  .nav-item[data-menu] .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 18px; right: 18px; bottom: 18px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s var(--ease);
+  }
+  .nav-item[data-menu]:hover .nav-link::after,
+  .nav-item[data-menu].open .nav-link::after { transform: scaleX(1); }
+  .nav-item.open .nav-link .chev { transform: rotate(225deg) translateY(2px); }
+
+  .cta {
+    margin-left: 14px;
+    padding: 11px 20px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14.5px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: filter .2s var(--ease);
+  }
+  .cta:hover { filter: brightness(1.07); }
+
+  /* ---------- Mega panel ---------- */
+  .mega {
+    position: absolute;
+    left: 0; right: 0;
+    top: 100%;
+    background: var(--panel);
+    color: var(--ink);
+    border-top: 1px solid var(--navy-line);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+  }
+  .nav-item.open .mega { opacity: 1; visibility: visible; transform: translateY(0); }
+  .mega-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 34px 28px 30px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+
+  /* Services grid (cards) */
+  .grid { display: grid; gap: 8px 26px; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .card {
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background .18s var(--ease);
+  }
+  .card:hover { background: var(--accent-soft); }
+  .card:hover .ico { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .ico {
+    flex: 0 0 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--hairline);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    color: var(--navy);
+    transition: all .18s var(--ease);
+  }
+  .ico svg { width: 19px; height: 19px; }
+  .card h4 { margin: 2px 0 3px; font-size: 15px; font-weight: 700; color: var(--navy); }
+  .card p { margin: 0; font-size: 12.7px; line-height: 1.45; color: var(--muted); }
+
+  /* Two-column split layout (menu list + feature panel) */
+  .split { display: grid; grid-template-columns: 1.55fr 1fr; gap: 0; }
+  .split .left { padding-right: 30px; }
+  .split .right {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+  .feature-tag {
+    font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
+    font-weight: 700; color: var(--accent); margin: 0 0 10px;
+  }
+  .feature-h { font-size: 18px; font-weight: 700; margin: 0 0 8px; line-height: 1.25; }
+  .feature-p { font-size: 13px; line-height: 1.5; color: #C3CCDE; margin: 0 0 18px; }
+  .feature-link {
+    align-self: flex-start;
+    font-size: 13px; font-weight: 700; color: #fff; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 7px;
+    border-bottom: 1px solid var(--accent); padding-bottom: 3px;
+  }
+  .feature-link .arr { transition: transform .2s var(--ease); }
+  .feature-link:hover .arr { transform: translateX(4px); }
+
+  /* Simple link list (Opportunities by location) */
+  .loc-list { list-style: none; margin: 0; padding: 0; }
+  .loc {
+    display: flex; align-items: center; gap: 11px;
+    padding: 9px 12px; border-radius: 9px;
+    text-decoration: none; color: var(--ink);
+    font-size: 14px; font-weight: 500;
+    transition: background .16s var(--ease);
+  }
+  .loc:hover { background: var(--accent-soft); }
+  .flagdot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); flex: 0 0 8px;
+  }
+  .loc .sub { font-size: 11.5px; color: var(--muted); font-weight: 400; margin-left: auto; }
+
+  /* Quiz callout */
+  .quiz {
+    display: flex; gap: 13px; align-items: flex-start;
+    padding: 15px 16px; border-radius: 12px;
+    background: var(--accent-soft);
+    text-decoration: none; color: inherit;
+    border: 1px solid #D4EBE3;
+  }
+  .quiz:hover { border-color: var(--accent); }
+  .quiz .ico { border: 0; background: var(--accent); color: #fff; }
+  .quiz h4 { margin: 2px 0 3px; font-size: 14.5px; color: var(--navy); font-weight: 700; }
+  .quiz p { margin: 0; font-size: 12.3px; color: var(--muted); line-height: 1.4; }
+
+  .col-head { font-size: 13px; font-weight: 700; color: var(--ink); margin: 0 0 6px; }
+
+  /* Location mini-grid */
+  .loc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .loc-tile {
+    display: flex; align-items: center; gap: 11px;
+    padding: 12px 13px; border-radius: 11px;
+    border: 1px solid var(--hairline);
+    text-decoration: none; color: var(--ink);
+    transition: border-color .16s var(--ease), background .16s var(--ease);
+  }
+  .loc-tile:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .loc-tile .flagdot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: 0 0 9px; }
+  .loc-tile .name { font-size: 13.5px; font-weight: 600; line-height: 1.2; }
+  .loc-tile .region { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; font-weight: 500; }
+
+  /* Interactive map placeholder */
+  .map-tile {
+    position: relative; overflow: hidden;
+    border-radius: var(--radius);
+    background:
+      radial-gradient(120% 140% at 80% 10%, rgba(47,168,138,.18), transparent 55%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: #fff; padding: 22px 22px 20px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 100%; text-decoration: none;
+  }
+  /* faint dotted texture under everything */
+  .map-tile::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.12) 1.1px, transparent 1.1px);
+    background-size: 15px 15px;
+    -webkit-mask-image: radial-gradient(120% 80% at 50% 45%, #000 40%, transparent 78%);
+            mask-image: radial-gradient(120% 80% at 50% 45%, #000 40%, transparent 78%);
+    opacity: .45;
+  }
+  /* continent outline sits above texture, below content */
+  .map-world {
+    position: absolute;
+    top: 14%; left: 50%; transform: translateX(-50%);
+    width: 82%; height: auto;
+    opacity: 1;
+    pointer-events: none;
+  }
+  .map-world path { fill: rgba(150,190,215,.07); stroke: rgba(140,185,215,.22); stroke-width: 1.2; }
+  .map-world .pins circle {
+    fill: var(--accent);
+    stroke: rgba(47,168,138,.30);
+    stroke-width: 6;
+    paint-order: stroke;
+  }
+  .map-tile > .map-soon,
+  .map-tile > div { position: relative; z-index: 2; }
+  .map-soon {
+    align-self: flex-start;
+    font-size: 10px; letter-spacing: 1.3px; text-transform: uppercase; font-weight: 700;
+    color: #06231C; background: var(--accent);
+    padding: 4px 9px; border-radius: 999px;
+  }
+  .map-tile h4 { margin: 12px 0 4px; font-size: 16px; font-weight: 700; }
+  .map-tile p { margin: 0 0 16px; font-size: 12.3px; line-height: 1.45; color: #C3CCDE; }
+  .map-tile .feature-link { color: #fff; border-bottom-color: var(--accent); }
+
+  /* ---------- Mobile ---------- */
+  .burger { display: none; }
+  @media (max-width: 940px) {
+    .nav, .cta { display: none; }
+    .burger {
+      display: inline-flex; margin-left: auto;
+      flex-direction: column; gap: 5px;
+      background: none; border: 0; cursor: pointer; padding: 8px;
+    }
+    .burger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+    .grid.cols-3, .grid.cols-2, .split { grid-template-columns: 1fr; }
+    .split .right { margin-top: 16px; }
+    .split .left { padding-right: 0; }
+  }
+
+  /* Demo page scaffolding */
+  .stage {
+    max-width: 1240px; margin: 0 auto; padding: 70px 28px 120px;
+  }
+  .stage h1 {
+    font-size: clamp(28px, 4vw, 46px); color: var(--navy);
+    margin: 0 0 14px; font-weight: 800; line-height: 1.08;
+  }
+  .stage p.lede { font-size: 17px; color: var(--muted); max-width: 620px; line-height: 1.6; margin: 0 0 26px; }
+  .hint {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: #fff; border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 9px 16px; font-size: 13.5px; color: var(--muted);
+  }
+  .hint b { color: var(--navy); }
+  .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, .mega, .nav-link::after, .nav-link .chev { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <div class="bar-inner">
+      <div class="logo">EXPORT<span>EXPLORE</span>
+        <small>Global Trade Promotion</small>
+      </div>
+
+      <nav class="nav" id="nav">
+
+        <!-- ABOUT US -->
+        <div class="nav-item" data-menu>
+          <button class="nav-link">About Us <i class="chev"></i></button>
+          <div class="mega">
+            <div class="mega-inner split">
+              <div class="left">
+                <p class="eyebrow">About ExportExplore</p>
+                <div class="grid cols-2">
+                  <a class="card" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+                    <span><h4>Who We Are</h4><p>Our team, mission and the story behind the work.</p></span>
+                  </a>
+                  <a class="card" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
+                    <span><h4>Community</h4><p>The people and partners we build success with.</p></span>
+                  </a>
+                  <a class="card" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg></span>
+                    <span><h4>Global Network</h4><p>Where we operate and who we partner with worldwide.</p></span>
+                  </a>
+                  <a class="card" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 0 1-10 0V4Z"/><path d="M17 5h2a2 2 0 0 1 0 4h-2M7 5H5a2 2 0 0 0 0 4h2"/></svg></span>
+                    <span><h4>Accreditations</h4><p>The standards bodies that keep our practice sharp.</p></span>
+                  </a>
+                </div>
+              </div>
+              <div class="right">
+                <div>
+                  <p class="feature-tag">Featured</p>
+                  <p class="feature-h">A growing global footprint</p>
+                  <p class="feature-p">Explore the interactive map of every jurisdiction we work in and the partners on the ground.</p>
+                </div>
+                <a class="feature-link" href="#">See the Global Network <span class="arr">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INSIGHT -->
+        <div class="nav-item">
+          <a class="nav-link" href="#">Insight</a>
+        </div>
+
+        <!-- OPPORTUNITIES -->
+        <div class="nav-item" data-menu>
+          <button class="nav-link">Opportunities <i class="chev"></i></button>
+          <div class="mega">
+            <div class="mega-inner split">
+              <div class="left">
+                <p class="eyebrow">Opportunities by location</p>
+                <div class="loc-grid">
+                  <a class="loc-tile" href="#"><span class="flagdot"></span><span><span class="name">Pennsylvania</span><span class="region">Grow & Trade · USA</span></span></a>
+                  <a class="loc-tile" href="#"><span class="flagdot"></span><span><span class="name">Neuchâtel</span><span class="region">Grow your business · Switzerland</span></span></a>
+                  <a class="loc-tile" href="#"><span class="flagdot"></span><span><span class="name">Delaware</span><span class="region">Trade · USA</span></span></a>
+                  <a class="loc-tile" href="#"><span class="flagdot"></span><span><span class="name">Oklahoma</span><span class="region">Invest · USA</span></span></a>
+                  <a class="loc-tile" href="#"><span class="flagdot"></span><span><span class="name">Belfast</span><span class="region">City Region · UK</span></span></a>
+                  <a class="loc-tile" href="#" style="border-style:dashed"><span class="flagdot" style="background:var(--muted)"></span><span><span class="name" style="color:var(--muted)">More coming</span><span class="region">New regions slot in here</span></span></a>
+                </div>
+              </div>
+              <a class="map-tile" href="#">
+                <svg class="map-world" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <!-- Simplified, non-literal world silhouette: enough to read as continents -->
+                  <!-- North America -->
+                  <path d="M70 90 L150 70 L240 95 L235 150 L185 175 L205 220 L165 250 L140 215 L120 165 L95 140 Z"/>
+                  <!-- South America -->
+                  <path d="M215 270 L260 260 L275 320 L250 400 L225 410 L215 345 Z"/>
+                  <!-- Europe -->
+                  <path d="M455 95 L520 85 L545 110 L560 100 L540 140 L500 150 L470 140 L450 120 Z"/>
+                  <!-- Africa -->
+                  <path d="M470 165 L560 160 L580 215 L545 300 L505 320 L480 260 L465 205 Z"/>
+                  <!-- Asia -->
+                  <path d="M560 80 L720 60 L850 95 L870 150 L800 175 L720 160 L640 175 L585 150 L560 110 Z"/>
+                  <!-- SE Asia / India -->
+                  <path d="M650 185 L700 180 L715 230 L675 245 L655 210 Z"/>
+                  <!-- Australia -->
+                  <path d="M790 300 L880 290 L905 340 L860 375 L800 355 Z"/>
+                  <!-- Partner pins, locked to the geography -->
+                  <g class="pins">
+                    <circle cx="170" cy="120" r="7"/>  <!-- USA -->
+                    <circle cx="495" cy="115" r="7"/>  <!-- UK / Europe -->
+                    <circle cx="515" cy="128" r="7"/>  <!-- Switzerland -->
+                    <circle cx="520" cy="290" r="7"/>  <!-- South Africa -->
+                  </g>
+                </svg>
+                <span class="map-soon">Coming soon</span>
+                <div>
+                  <h4>Explore the interactive map</h4>
+                  <p>See our full global footprint and every partner on the ground, one view.</p>
+                  <span class="feature-link">Preview the concept <span class="arr">→</span></span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- OUR SERVICES -->
+        <div class="nav-item" data-menu>
+          <button class="nav-link">Our Services <i class="chev"></i></button>
+          <div class="mega">
+            <div class="mega-inner">
+              <p class="eyebrow">Our Services</p>
+              <div class="grid cols-3">
+                <a class="card" href="#">
+                  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg></span>
+                  <span><h4>Trade Promotion</h4><p>Open doors into new markets with targeted, expert-led campaigns.</p></span>
+                </a>
+                <a class="card" href="#">
+                  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M5 9l7-5 7 5"/><rect x="5" y="9" width="14" height="11" rx="1"/></svg></span>
+                  <span><h4>Foreign Direct Investment</h4><p>Attract and land investment with the right proposition.</p></span>
+                </a>
+                <a class="card" href="#">
+                  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span>
+                  <span><h4>Business Development Consulting</h4><p>Practical strategy to grow capability and pipeline.</p></span>
+                </a>
+                <a class="card" href="#">
+                  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H8l-4 4V4Z"/><path d="M8 9h8M8 12h5"/></svg></span>
+                  <span><h4>Storytelling & Strategy</h4><p>Craft the message that makes your offer impossible to ignore.</p></span>
+                </a>
+                <a class="card" href="#">
+                  <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span>
+                  <span><h4>International Relations</h4><p>Navigate government and cross-border relationships with confidence.</p></span>
+                </a>
+                <a class="card" href="#" style="border:1px dashed var(--hairline)">
+                  <span class="ico" style="border-style:dashed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></span>
+                  <span><h4 style="color:var(--muted)">New service slots in here</h4><p>The grid grows cleanly as you add to your offer.</p></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESOURCES (Quizzes get a home) -->
+        <div class="nav-item" data-menu>
+          <button class="nav-link">Resources <i class="chev"></i></button>
+          <div class="mega">
+            <div class="mega-inner split">
+              <div class="left">
+                <p class="eyebrow">Tools & resources</p>
+                <div class="grid cols-2">
+                  <a class="quiz" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
+                    <span><h4>Export Readiness Quiz</h4><p>5 minutes to see how ready you are to trade abroad.</p></span>
+                  </a>
+                  <a class="quiz" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="13" y="7" width="3" height="10"/></svg></span>
+                    <span><h4>Market Match Quiz</h4><p>Find the markets that best fit your product.</p></span>
+                  </a>
+                  <a class="card" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h12l4 4v12H4Z"/><path d="M8 13h8M8 16h5"/></svg></span>
+                    <span><h4>Insight & Reports</h4><p>Research and articles from the ExportExplore team.</p></span>
+                  </a>
+                  <a class="card" href="#">
+                    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
+                    <span><h4>Case Studies</h4><p>The stories of those who succeeded before you.</p></span>
+                  </a>
+                </div>
+              </div>
+              <div class="right">
+                <div>
+                  <p class="feature-tag">Start here</p>
+                  <p class="feature-h">Not sure where you stand?</p>
+                  <p class="feature-p">Take the Export Readiness Quiz and we'll point you to the right service.</p>
+                </div>
+                <a class="feature-link" href="#">Take the quiz <span class="arr">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </div>
+      </nav>
+
+      <a class="cta" href="#">Get in Contact</a>
+      <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <span class="hint"><span class="pulse"></span> Hover <b>About Us</b>, <b>Opportunities</b>, <b>Our Services</b> or <b>Resources</b> to open the mega menu</span>
+    <h1 style="margin-top:26px">ExportExplore Megamenu concept.</h1>
+    <p class="lede">This is a working mega menu concept for ExportExplore. Each panel groups related links, surfaces a featured action, and — crucially — leaves obvious room for new services, new locations, and the quizzes to slot in as the offer grows.</p>
+  </main>
+
+<script>
+  // Hover opens on desktop; click toggles for touch/keyboard.
+  const items = document.querySelectorAll('.nav-item[data-menu]');
+  items.forEach(item => {
+    const link = item.querySelector('.nav-link');
+    let closeTimer;
+    const open  = () => { items.forEach(i => i.classList.remove('open')); item.classList.add('open'); };
+    const close = () => item.classList.remove('open');
+
+    item.addEventListener('mouseenter', () => { clearTimeout(closeTimer); open(); });
+    item.addEventListener('mouseleave', () => { closeTimer = setTimeout(close, 120); });
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      item.classList.contains('open') ? close() : open();
+    });
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') items.forEach(i => i.classList.remove('open')); });
+  document.addEventListener('click', e => { if (!e.target.closest('.nav-item')) items.forEach(i => i.classList.remove('open')); });
+</script>
+</body>
+</html>
