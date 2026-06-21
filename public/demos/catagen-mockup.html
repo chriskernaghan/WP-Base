@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CATAGEN — To clean and decarbonise the air</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --bone: #f4efe5;
+    --bone-2: #ebe5d8;
+    --bone-3: #ddd5c4;
+    --ink: #0b1f23;
+    --ink-soft: #1a3338;
+    --ink-2: #07171a;
+    --teal: #1fb6a8;
+    --teal-deep: #0f6f68;
+    --teal-glow: #4ad8c9;
+    --line: rgba(11, 31, 35, 0.12);
+    --line-strong: rgba(11, 31, 35, 0.22);
+    --line-dark: rgba(244, 239, 229, 0.14);
+    --muted: rgba(11, 31, 35, 0.62);
+    --muted-dark: rgba(244, 239, 229, 0.66);
+    --serif: 'Fraunces', 'Times New Roman', serif;
+    --sans: 'Inter Tight', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bone);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img, video { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Navigation ---------- */
+  nav.site {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px var(--gutter);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 40px;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: rgba(244, 239, 229, 0.72);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+  }
+  nav.site.on-hero {
+    background: rgba(7, 23, 26, 0.28);
+    border-bottom-color: rgba(244, 239, 229, 0.12);
+    color: var(--bone);
+  }
+  .logo {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: conic-gradient(from 220deg, var(--teal), var(--teal-glow), var(--teal-deep), var(--teal));
+    box-shadow: 0 0 16px rgba(31, 182, 168, 0.45);
+  }
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a {
+    opacity: 0.78;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    padding: 11px 22px;
+    border: 1px solid currentColor;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.9;
+  }
+  .nav-cta:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: var(--ink);
+    opacity: 1;
+  }
+  .nav-cta::after { content: '→'; transition: transform 0.25s; }
+  .nav-cta:hover::after { transform: translateX(3px); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 var(--gutter) 80px;
+    overflow: hidden;
+    color: var(--bone);
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(7, 23, 26, 0.35) 0%, rgba(7, 23, 26, 0.05) 35%, rgba(7, 23, 26, 0.75) 100%),
+      linear-gradient(90deg, rgba(7, 23, 26, 0.45) 0%, transparent 60%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 160px;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: rise 0.9s 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--teal-glow);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 132px);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    max-width: 16ch;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: rise 1s 0.35s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--teal-glow);
+    font-weight: 300;
+  }
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: end;
+    opacity: 0;
+    animation: rise 1s 0.5s forwards;
+  }
+  .hero-lede {
+    font-size: 19px;
+    line-height: 1.5;
+    color: rgba(244, 239, 229, 0.92);
+    max-width: 52ch;
+    font-weight: 300;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 16px 28px;
+    background: var(--teal);
+    color: var(--ink-2);
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--bone);
+    transform: translateY(-2px);
+  }
+  .btn-primary::after { content: '→'; transition: transform 0.25s; }
+  .btn-primary:hover::after { transform: translateX(4px); }
+  .btn-ghost {
+    padding: 16px 24px;
+    border: 1px solid currentColor;
+    border-radius: 100px;
+    font-size: 14px;
+    transition: all 0.25s;
+    opacity: 0.85;
+  }
+  .btn-ghost:hover { opacity: 1; background: rgba(244, 239, 229, 0.08); }
+
+  .hero-meta {
+    text-align: right;
+  }
+  .hero-meta .live {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(244, 239, 229, 0.8);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-meta .live::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--teal-glow);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--teal-glow);
+    animation: pulse 2s infinite;
+  }
+  .hero-meta .place {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 6px;
+    color: var(--bone);
+  }
+
+  /* ---------- Section base ---------- */
+  section { padding: 140px var(--gutter); position: relative; }
+  .container { max-width: 1400px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--teal-deep);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    max-width: 20ch;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--teal-deep); }
+
+  /* ---------- Mission strip ---------- */
+  .mission {
+    padding: 100px var(--gutter);
+    border-bottom: 1px solid var(--line);
+  }
+  .mission-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .mission-lede {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mission-lede em { font-style: italic; color: var(--teal-deep); }
+  .mission-body p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 20px;
+    max-width: 52ch;
+  }
+  .mission-body p:last-child { margin-bottom: 0; }
+
+  /* ---------- Capabilities (4 cards matching menu) ---------- */
+  .capabilities {
+    background: var(--bone-2);
+  }
+  .cap-header {
+    max-width: 1400px;
+    margin: 0 auto 70px;
+  }
+  .caps-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .cap {
+    background: var(--bone-2);
+    padding: 56px 44px 56px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .cap:hover { background: var(--bone); }
+  .cap-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--teal-deep);
+    margin-bottom: 32px;
+  }
+  .cap-icon {
+    width: 56px; height: 56px;
+    margin-bottom: 28px;
+    color: var(--teal-deep);
+  }
+  .cap h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .cap .cap-lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--teal-deep);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  .cap p.cap-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 44ch;
+  }
+  .cap-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: gap 0.25s, color 0.25s;
+  }
+  .cap-link:hover { gap: 16px; color: var(--teal-deep); }
+  .cap-link::after { content: '→'; }
+
+  /* ---------- Split features ---------- */
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--bone);
+  }
+  .feature-content {
+    padding: 120px var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .feature-content h3 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 28px;
+    max-width: 14ch;
+    color: var(--ink);
+  }
+  .feature-content h3 em { color: var(--teal-deep); font-style: italic; }
+  .feature-content p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 52ch;
+    margin-bottom: 32px;
+  }
+  .feature-list {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .feature-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .feature-list .k {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--teal-deep);
+  }
+  .feature-visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+    background: linear-gradient(135deg, #c9d8d4 0%, #e7ddc8 60%, #f4efe5 100%);
+  }
+  .feature-visual.dark {
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 60%, var(--teal-deep) 130%);
+  }
+  .feature-visual svg { width: 100%; height: 100%; }
+
+  .feature.reverse .feature-content { order: 2; }
+  .feature.reverse .feature-visual { order: 1; }
+
+  /* ---------- Technology platforms ---------- */
+  .platforms {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 140px var(--gutter);
+    border-top: 1px solid var(--ink-2);
+  }
+  .platforms .section-eyebrow { color: var(--teal-glow); }
+  .platforms .section-eyebrow::before { background: var(--teal-glow); }
+  .platforms .section-title { color: var(--bone); }
+  .platforms-header {
+    max-width: 1400px;
+    margin: 0 auto 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .platforms-intro {
+    font-size: 17px;
+    color: var(--muted-dark);
+    line-height: 1.65;
+    max-width: 50ch;
+  }
+  .platforms-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line-dark);
+    border: 1px solid var(--line-dark);
+  }
+  .platform {
+    background: var(--ink);
+    padding: 40px 32px 44px;
+    transition: background 0.3s;
+  }
+  .platform:hover { background: var(--ink-soft); }
+  .platform-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal-glow);
+    letter-spacing: 0.14em;
+    margin-bottom: 60px;
+  }
+  .platform svg { width: 44px; height: 44px; color: var(--teal-glow); margin-bottom: 28px; }
+  .platform h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    margin-bottom: 10px;
+    color: var(--bone);
+  }
+  .platform p {
+    font-size: 14px;
+    color: var(--muted-dark);
+    line-height: 1.55;
+  }
+
+  /* ---------- Quote ---------- */
+  .quote {
+    padding: 160px var(--gutter);
+    text-align: left;
+    background: var(--bone);
+  }
+  .quote-inner { max-width: 1100px; margin: 0 auto; }
+  .quote blockquote {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(28px, 3.8vw, 56px);
+    line-height: 1.18;
+    letter-spacing: -0.022em;
+    margin-bottom: 40px;
+    max-width: 22ch;
+    color: var(--ink);
+  }
+  .quote blockquote::before {
+    content: '“';
+    color: var(--teal-deep);
+    font-size: 1.2em;
+    margin-right: 0.05em;
+  }
+  .quote-attr {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .quote-attr::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--muted);
+  }
+
+  /* ---------- Applications ---------- */
+  .applications { background: var(--bone-2); }
+  .app-header {
+    max-width: 1400px;
+    margin: 0 auto 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .app-intro {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 50ch;
+  }
+  .apps-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .app-card {
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .app-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+  .app-card-img {
+    aspect-ratio: 4 / 3;
+    background: var(--bone-3);
+    position: relative;
+    overflow: hidden;
+  }
+  .app-card-img svg { width: 100%; height: 100%; }
+  .app-card-body { padding: 28px 24px 32px; }
+  .app-card h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .app-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ---------- Trust strip ---------- */
+  .trust {
+    padding: 70px var(--gutter);
+    background: var(--bone);
+    border-bottom: 1px solid var(--line);
+  }
+  .trust-inner { max-width: 1400px; margin: 0 auto; }
+  .trust-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+  .trust-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 32px;
+    align-items: center;
+  }
+  .trust-item {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    opacity: 0.62;
+    text-align: center;
+    transition: opacity 0.3s;
+    padding: 20px 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--ink);
+  }
+  .trust-item:hover { opacity: 1; }
+
+  /* ---------- News ---------- */
+  .news-header {
+    max-width: 1400px;
+    margin: 0 auto 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 40px;
+  }
+  .news-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .news-card {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    background: var(--bone);
+  }
+  .news-card:hover { border-color: var(--line-strong); transform: translateY(-4px); }
+  .news-img {
+    aspect-ratio: 4 / 3;
+    background: var(--bone-3);
+    position: relative;
+    overflow: hidden;
+  }
+  .news-img svg { width: 100%; height: 100%; }
+  .news-body { padding: 26px 24px 30px; }
+  .news-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    margin-bottom: 14px;
+  }
+  .news-card h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq { background: var(--bone); border-top: 1px solid var(--line); }
+  .faq-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+  .faq-left p {
+    color: var(--muted);
+    max-width: 32ch;
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .faq-list { border-top: 1px solid var(--line); }
+  details.faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  details.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    transition: color 0.25s;
+    color: var(--ink);
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary:hover { color: var(--teal-deep); }
+  details.faq-item summary::after {
+    content: '+';
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 28px;
+    color: var(--teal-deep);
+    transition: transform 0.3s;
+    line-height: 1;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  details.faq-item .answer {
+    padding: 0 0 28px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 62ch;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta {
+    padding: 160px var(--gutter);
+    background: var(--ink);
+    color: var(--bone);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 600px at 80% 30%, rgba(31, 182, 168, 0.18), transparent 60%),
+      radial-gradient(600px 400px at 10% 80%, rgba(15, 111, 104, 0.14), transparent 55%);
+    pointer-events: none;
+  }
+  .cta .section-eyebrow { color: var(--teal-glow); }
+  .cta .section-eyebrow::before { background: var(--teal-glow); }
+  .cta-inner {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .cta-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    max-width: 14ch;
+    color: var(--bone);
+    margin-bottom: 36px;
+  }
+  .cta-title em { color: var(--teal-glow); font-style: italic; }
+  .cta-pillars {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 28px;
+    margin-top: 0;
+  }
+  .cta-pillars li {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bone);
+    padding-left: 18px;
+    position: relative;
+    opacity: 0.88;
+  }
+  .cta-pillars li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 7px;
+    width: 6px; height: 6px;
+    background: var(--teal-glow);
+    border-radius: 50%;
+  }
+  .cta-aside {
+    padding: 40px 36px;
+    border: 1px solid var(--line-dark);
+    border-radius: 4px;
+    background: rgba(244, 239, 229, 0.04);
+    backdrop-filter: blur(8px);
+  }
+  .cta-aside h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--bone);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .cta-aside p {
+    font-size: 15px;
+    color: var(--muted-dark);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .cta-aside .contact-line {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 8px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 80px var(--gutter) 32px;
+    background: var(--ink-2);
+    color: var(--bone);
+  }
+  .footer-inner { max-width: 1400px; margin: 0 auto; }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .footer-brand .logo { margin-bottom: 20px; color: var(--bone); }
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--muted-dark);
+    max-width: 32ch;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .footer-col h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 11px; }
+  .footer-col a {
+    font-size: 13px;
+    color: var(--bone);
+    opacity: 0.78;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .footer-col a:hover { opacity: 1; color: var(--teal-glow); }
+  .footer-bottom {
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted-dark);
+  }
+
+  /* ---------- Animations ---------- */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .nav-links { display: none; }
+    nav.site { grid-template-columns: 1fr auto; }
+    .hero { padding: 0 var(--gutter) 56px; }
+    .hero-content { padding-top: 130px; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 36px; }
+    .hero-meta { text-align: left; }
+    .mission-inner { grid-template-columns: 1fr; gap: 40px; }
+    .caps-grid { grid-template-columns: 1fr; }
+    .feature, .feature.reverse { grid-template-columns: 1fr; }
+    .feature-visual, .feature.reverse .feature-visual { min-height: 320px; order: 0; }
+    .feature-content, .feature.reverse .feature-content { order: 1; }
+    .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+    .platforms-header, .app-header, .news-header { grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    .apps-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .trust-row { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .news-grid { grid-template-columns: 1fr; }
+    .faq-inner, .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: span 2; }
+    .footer-bottom { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="site on-hero" id="nav">
+  <a href="#" class="logo"><span class="logo-mark"></span>CATAGEN</a>
+  <div class="nav-links">
+    <a href="#emissions-testing">Green Emissions Testing</a>
+    <a href="#saf">SAF</a>
+    <a href="#h2-compression">H₂ Compression</a>
+    <a href="#climahtech">ClimaHtech</a>
+    <a href="#knowledge">Knowledge Hub</a>
+  </div>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="">
+    <source src="hero-bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Engineered in Belfast — Deployed worldwide</div>
+    <h1 class="hero-title">To clean and <em>decarbonise</em> the air.</h1>
+
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-lede">A technology disruptor for cleaner air, sustainable fuels and resilient energy systems — built on deep expertise in thermodynamics, catalysis and e-reactor technology.</p>
+        <div class="hero-actions">
+          <a href="#climahtech" class="btn-primary">Explore the technology</a>
+          <a href="#contact" class="btn-ghost">Contact us</a>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div class="live">Now testing — Belfast</div>
+        <div class="place">Titanic Quarter</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MISSION ============ -->
+<section class="mission">
+  <div class="mission-inner">
+    <div class="mission-lede">
+      CATAGEN is a technology innovation company engineering solutions to <em>clean, decarbonise and secure</em> the air, fuel and energy systems the world depends on.
+    </div>
+    <div class="mission-body">
+      <p>Built on deep expertise in thermodynamics, catalysis and e-reactor technology, CATAGEN challenges conventional infrastructure models with modular, scalable systems designed for real-world impact.</p>
+      <p>At the heart of CATAGEN is the e-reactor — a flexible reactor technology platform that enables precise thermal and chemical processes across multiple industries. First proven in emissions testing, the platform is now being adapted for sustainable fuels, defence energy resilience and industrial applications.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPABILITIES (matches menu: GET / SAF / H2 / ClimaHtech) ============ -->
+<section class="capabilities">
+  <div class="cap-header">
+    <div class="section-eyebrow">Four pillars, one engineering platform</div>
+    <h2 class="section-title">Technology with <em>real-world</em> applications.</h2>
+  </div>
+
+  <div class="caps-grid">
+    <article class="cap" id="emissions-testing">
+      <div class="cap-num">01 / GREEN EMISSIONS TESTING</div>
+      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
+        <rect x="8" y="14" width="40" height="32" rx="2"/>
+        <line x1="8" y1="22" x2="48" y2="22"/>
+        <circle cx="14" cy="18" r="1" fill="currentColor"/>
+        <circle cx="18" cy="18" r="1" fill="currentColor"/>
+        <path d="M 16 30 L 22 30 L 26 36 L 32 26 L 36 30 L 40 30"/>
+      </svg>
+      <h3>Green Emissions Testing</h3>
+      <div class="cap-lede">Accelerated catalyst ageing and emissions testing for OEMs.</div>
+      <p class="cap-body">CATAGEN Green Emissions Testing uses CATAGEN's founding OMEGA e-Reactor technology to support faster, cleaner and more reliable vehicle development.</p>
+      <a href="#" class="cap-link">Explore GET</a>
+    </article>
+
+    <article class="cap" id="saf">
+      <div class="cap-num">02 / SUSTAINABLE AVIATION FUEL</div>
+      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
+        <path d="M 6 36 L 28 14 L 50 36"/>
+        <path d="M 16 36 L 28 24 L 40 36"/>
+        <line x1="28" y1="14" x2="28" y2="46"/>
+        <circle cx="28" cy="46" r="2"/>
+      </svg>
+      <h3>ClimaHtech Green Flight</h3>
+      <div class="cap-lede">Decentralised e-SAF and bio-SAF production.</div>
+      <p class="cap-body">Using CATAGEN's electrically driven E-FUEL GEN reactor, renewable energy, renewable hydrogen and sustainable carbon dioxide to produce SAF.</p>
+      <a href="#" class="cap-link">Explore Green Flight</a>
+    </article>
+
+    <article class="cap" id="h2-compression">
+      <div class="cap-num">03 / H₂ COMPRESSION</div>
+      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
+        <circle cx="28" cy="28" r="18"/>
+        <path d="M 28 10 L 28 18"/>
+        <path d="M 28 38 L 28 46"/>
+        <path d="M 10 28 L 18 28"/>
+        <path d="M 38 28 L 46 28"/>
+        <path d="M 22 22 L 34 34"/>
+        <path d="M 34 22 L 22 34"/>
+      </svg>
+      <h3>ClimaHtech Compress</h3>
+      <div class="cap-lede">Liquid piston hydrogen compression at scale.</div>
+      <p class="cap-body">Efficient liquid piston hydrogen compression technology for next-generation refuelling, dispensing and clean energy infrastructure applications.</p>
+      <a href="#" class="cap-link">Explore Compress</a>
+    </article>
+
+    <article class="cap" id="climahtech">
+      <div class="cap-num">04 / CLIMAHTECH</div>
+      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
+        <circle cx="28" cy="28" r="20"/>
+        <path d="M 8 28 Q 28 14 48 28 Q 28 42 8 28"/>
+        <line x1="28" y1="8" x2="28" y2="48"/>
+      </svg>
+      <h3>ClimaHtech</h3>
+      <div class="cap-lede">e-Reactor and compression technologies for clean fuels.</div>
+      <p class="cap-body">e-FUEL GEN, BIOHGEN and liquid piston hydrogen compression — an integrated platform for clean fuel production, energy security and net zero applications.</p>
+      <a href="#" class="cap-link">Explore ClimaHtech</a>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FEATURE: SAF deep dive ============ -->
+<section class="feature">
+  <div class="feature-content">
+    <div class="section-eyebrow">ClimaHtech Green Flight</div>
+    <h3>Sustainable Aviation Fuel, made at <em>point of demand</em>.</h3>
+    <p>Decentralised, electrically driven production of e-SAF and bio-SAF using renewable energy and sustainable carbon dioxide. Built to scale modular SAF production wherever feedstock and clean energy are available.</p>
+    <ul class="feature-list">
+      <li><span class="k">REACTOR</span><span>E-FUEL GEN — electrically driven, modular</span></li>
+      <li><span class="k">FEEDSTOCK</span><span>Captured CO₂ + renewable hydrogen, or biogenic</span></li>
+      <li><span class="k">OUTPUT</span><span>Drop-in sustainable aviation fuel</span></li>
+      <li><span class="k">DEPLOY</span><span>Containerised, on-site at airports and energy hubs</span></li>
+    </ul>
+  </div>
+  <div class="feature-visual">
+    <svg viewBox="0 0 500 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#dde9e5"/>
+          <stop offset="50%" stop-color="#c7d8d2" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#9bb8b0"/>
+        </linearGradient>
+        <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0f6f68" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#0b1f23" stop-opacity="0.45"/>
+        </linearGradient>
+      </defs>
+      <rect width="500" height="600" fill="url(#sky)"/>
+      <!-- distant horizon clouds -->
+      <g fill="#f4efe5" opacity="0.6">
+        <ellipse cx="120" cy="180" rx="80" ry="14"/>
+        <ellipse cx="350" cy="220" rx="110" ry="12"/>
+        <ellipse cx="220" cy="260" rx="90" ry="10"/>
+      </g>
+      <!-- contrails -->
+      <g stroke="#f4efe5" stroke-width="1.5" fill="none" opacity="0.7">
+        <path d="M -20 150 Q 250 130 520 170"/>
+        <path d="M -20 190 Q 250 175 520 210" opacity="0.4"/>
+      </g>
+      <!-- abstract aircraft silhouette -->
+      <g transform="translate(330, 145)" fill="#0b1f23">
+        <path d="M -50 0 L 50 0 L 56 2 L 50 4 L -50 4 Z" opacity="0.85"/>
+        <path d="M -18 -22 L 14 -22 L 22 4 L -22 4 Z" opacity="0.85"/>
+        <path d="M -10 4 L 10 4 L 14 18 L -14 18 Z" opacity="0.85"/>
+      </g>
+      <!-- horizon line -->
+      <line x1="0" y1="380" x2="500" y2="380" stroke="#0b1f23" stroke-width="0.8" opacity="0.25"/>
+      <!-- reactor / SAF facility -->
+      <rect x="0" y="380" width="500" height="220" fill="url(#ground)"/>
+      <g transform="translate(60, 420)" fill="#0b1f23" opacity="0.78">
+        <rect x="0" y="20" width="58" height="120"/>
+        <rect x="76" y="40" width="58" height="100"/>
+        <rect x="152" y="10" width="58" height="130"/>
+        <rect x="228" y="50" width="58" height="90"/>
+        <rect x="304" y="20" width="58" height="120"/>
+        <line x1="29" y1="20" x2="29" y2="-10" stroke="#0b1f23" stroke-width="2"/>
+        <line x1="181" y1="10" x2="181" y2="-22" stroke="#0b1f23" stroke-width="2"/>
+        <circle cx="29" cy="-12" r="3" fill="#1fb6a8"/>
+        <circle cx="181" cy="-24" r="3" fill="#1fb6a8"/>
+      </g>
+      <!-- subtle steam plume -->
+      <g fill="#f4efe5" opacity="0.35">
+        <ellipse cx="89" cy="380" rx="14" ry="50"/>
+        <ellipse cx="241" cy="370" rx="16" ry="60"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ FEATURE: H2 Compression deep dive ============ -->
+<section class="feature reverse">
+  <div class="feature-content">
+    <div class="section-eyebrow">ClimaHtech Compress</div>
+    <h3>Hydrogen <em>compression</em>, reimagined.</h3>
+    <p>Efficient liquid piston hydrogen compression with applications across dispensing, refuelling, and the wider hydrogen economy — built to support the infrastructure of next-generation clean energy.</p>
+    <ul class="feature-list">
+      <li><span class="k">TECH</span><span>Liquid piston compression — fewer moving parts</span></li>
+      <li><span class="k">APPLICATIONS</span><span>Dispensing, refuelling, industrial H₂</span></li>
+      <li><span class="k">EFFICIENCY</span><span>Lower energy cost per kg compressed</span></li>
+      <li><span class="k">SCALE</span><span>Modular for distributed deployment</span></li>
+    </ul>
+  </div>
+  <div class="feature-visual dark">
+    <svg viewBox="0 0 500 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="comp-glow" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="#4ad8c9" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#0b1f23" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="cyl" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#4ad8c9" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#0f6f68" stop-opacity="0.3"/>
+        </linearGradient>
+      </defs>
+      <rect width="500" height="600" fill="#0b1f23"/>
+      <rect width="500" height="600" fill="url(#comp-glow)"/>
+      <!-- twin compression cylinders -->
+      <g transform="translate(250, 300)">
+        <!-- cylinder 1 -->
+        <g transform="translate(-110, 0)">
+          <rect x="-50" y="-160" width="100" height="320" rx="50" fill="none" stroke="#4ad8c9" stroke-width="1" opacity="0.6"/>
+          <rect x="-50" y="-160" width="100" height="160" fill="url(#cyl)" opacity="0.35"/>
+          <line x1="-50" y1="0" x2="50" y2="0" stroke="#4ad8c9" stroke-width="1.4"/>
+          <line x1="-30" y1="-180" x2="-30" y2="-160" stroke="#4ad8c9" stroke-width="1.4"/>
+          <line x1="30" y1="-180" x2="30" y2="-160" stroke="#4ad8c9" stroke-width="1.4"/>
+          <circle cx="-30" cy="-188" r="4" fill="#4ad8c9"/>
+          <circle cx="30" cy="-188" r="4" fill="#4ad8c9"/>
+        </g>
+        <!-- cylinder 2 -->
+        <g transform="translate(110, 0)">
+          <rect x="-50" y="-160" width="100" height="320" rx="50" fill="none" stroke="#4ad8c9" stroke-width="1" opacity="0.6"/>
+          <rect x="-50" y="-50" width="100" height="210" fill="url(#cyl)" opacity="0.35"/>
+          <line x1="-50" y1="-50" x2="50" y2="-50" stroke="#4ad8c9" stroke-width="1.4"/>
+          <line x1="-30" y1="-180" x2="-30" y2="-160" stroke="#4ad8c9" stroke-width="1.4"/>
+          <line x1="30" y1="-180" x2="30" y2="-160" stroke="#4ad8c9" stroke-width="1.4"/>
+          <circle cx="-30" cy="-188" r="4" fill="#4ad8c9"/>
+          <circle cx="30" cy="-188" r="4" fill="#4ad8c9"/>
+        </g>
+        <!-- crossbar -->
+        <path d="M -110 188 L 110 188 M -110 188 L -110 220 M 110 188 L 110 220" stroke="#4ad8c9" stroke-width="1.4" fill="none" opacity="0.6"/>
+        <!-- H2 molecules -->
+        <g fill="#4ad8c9">
+          <circle cx="-110" cy="-100" r="2.5" opacity="0.9"/>
+          <circle cx="-104" cy="-104" r="2.5" opacity="0.9"/>
+          <circle cx="-115" cy="-60" r="2.2" opacity="0.7"/>
+          <circle cx="-109" cy="-64" r="2.2" opacity="0.7"/>
+          <circle cx="115" cy="40" r="2.5" opacity="0.85"/>
+          <circle cx="121" cy="36" r="2.5" opacity="0.85"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ TECHNOLOGY PLATFORMS ============ -->
+<section class="platforms" id="technology">
+  <div class="platforms-header">
+    <div>
+      <div class="section-eyebrow">The e-Reactor portfolio</div>
+      <h2 class="section-title">One platform, four technologies.</h2>
+    </div>
+    <p class="platforms-intro">At the heart of every CATAGEN system is the e-reactor — adaptable, electrically driven, and engineered to deliver precise thermal and chemical processes at industrial scale.</p>
+  </div>
+
+  <div class="platforms-grid">
+    <div class="platform">
+      <div class="platform-num">P / 01</div>
+      <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.3">
+        <circle cx="22" cy="22" r="14"/>
+        <circle cx="22" cy="22" r="6"/>
+        <path d="M 22 8 L 22 14 M 22 30 L 22 36 M 8 22 L 14 22 M 30 22 L 36 22"/>
+      </svg>
+      <h4>OMEGA e-Reactor</h4>
+      <p>Founding e-Reactor technology for catalyst ageing.</p>
+    </div>
+    <div class="platform">
+      <div class="platform-num">P / 02</div>
+      <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.3">
+        <rect x="8" y="10" width="28" height="24" rx="2"/>
+        <path d="M 14 22 L 20 22 L 24 16 L 28 28 L 34 22"/>
+      </svg>
+      <h4>E-FUEL GEN</h4>
+      <p>e-Reactor technology for e-fuel and SAF production.</p>
+    </div>
+    <div class="platform">
+      <div class="platform-num">P / 03</div>
+      <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.3">
+        <path d="M 22 6 C 14 16 14 24 22 38 C 30 24 30 16 22 6 Z"/>
+        <circle cx="22" cy="24" r="3"/>
+      </svg>
+      <h4>BIOHGEN</h4>
+      <p>e-Reactor for E-SMR and biohydrogen production. Biogenic CO₂ produced.</p>
+    </div>
+    <div class="platform">
+      <div class="platform-num">P / 04</div>
+      <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.3">
+        <rect x="14" y="6" width="16" height="32" rx="8"/>
+        <line x1="14" y1="22" x2="30" y2="22"/>
+        <path d="M 22 12 L 22 18"/>
+      </svg>
+      <h4>COMPRESS</h4>
+      <p>Efficient liquid piston hydrogen compression with several applications.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE ============ -->
+<section class="quote">
+  <div class="quote-inner">
+    <blockquote>If aviation and heavy industry are to decarbonise this century, the technology to do it has to be built now — at scale, on the ground.</blockquote>
+    <div class="quote-attr">Dr. Andrew Woods — Founder &amp; CEO, CATAGEN</div>
+  </div>
+</section>
+
+<!-- ============ APPLICATIONS ============ -->
+<section class="applications">
+  <div class="app-header">
+    <div>
+      <div class="section-eyebrow">Applied across industries</div>
+      <h2 class="section-title">Where CATAGEN technology goes to work.</h2>
+    </div>
+    <p class="app-intro">From light vehicles and heavy-duty fleets to defence platforms and grid-scale energy infrastructure — built to scale where decarbonisation matters most.</p>
+  </div>
+
+  <div class="apps-grid">
+    <article class="app-card">
+      <div class="app-card-img">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="a1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c9d8d4"/><stop offset="100%" stop-color="#9bb8b0"/></linearGradient></defs>
+          <rect width="400" height="300" fill="url(#a1)"/>
+          <g fill="#0b1f23" opacity="0.78">
+            <rect x="80" y="170" width="240" height="50" rx="12"/>
+            <rect x="110" y="140" width="180" height="40" rx="8"/>
+            <circle cx="130" cy="225" r="22"/>
+            <circle cx="270" cy="225" r="22"/>
+            <circle cx="130" cy="225" r="10" fill="#c9d8d4"/>
+            <circle cx="270" cy="225" r="10" fill="#c9d8d4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="app-card-body">
+        <h4>Automotive &amp; emissions</h4>
+        <p>Advanced catalyst ageing and emissions testing for OEMs.</p>
+      </div>
+    </article>
+
+    <article class="app-card">
+      <div class="app-card-img">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dde9e5"/><stop offset="100%" stop-color="#9bb8b0"/></linearGradient></defs>
+          <rect width="400" height="300" fill="url(#a2)"/>
+          <g stroke="#f4efe5" stroke-width="1.4" fill="none" opacity="0.7">
+            <path d="M -20 90 Q 200 70 420 110"/>
+          </g>
+          <g transform="translate(240, 110)" fill="#0b1f23" opacity="0.85">
+            <path d="M -55 0 L 55 0 L 62 3 L 55 6 L -55 6 Z"/>
+            <path d="M -20 -22 L 16 -22 L 24 6 L -24 6 Z"/>
+            <path d="M -10 6 L 10 6 L 14 22 L -14 22 Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="app-card-body">
+        <h4>Sustainable Aviation Fuel</h4>
+        <p>Decentralised, electrically driven production of e-SAF and bio-SAF using renewable energy and sustainable carbon dioxide.</p>
+      </div>
+    </article>
+
+    <article class="app-card">
+      <div class="app-card-img">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="a3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3338"/><stop offset="100%" stop-color="#0b1f23"/></linearGradient></defs>
+          <rect width="400" height="300" fill="url(#a3)"/>
+          <g fill="none" stroke="#4ad8c9" stroke-width="0.8" opacity="0.7">
+            <path d="M 0 220 L 100 200 L 200 210 L 300 195 L 400 205"/>
+            <path d="M 60 220 L 80 180 L 100 220 Z" fill="#4ad8c9" opacity="0.4"/>
+            <path d="M 280 195 L 300 160 L 320 195 Z" fill="#4ad8c9" opacity="0.4"/>
+          </g>
+          <g fill="#4ad8c9" opacity="0.85">
+            <circle cx="200" cy="120" r="3"/>
+            <circle cx="120" cy="140" r="2"/>
+            <circle cx="280" cy="100" r="2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="app-card-body">
+        <h4>Defence, government &amp; resilience</h4>
+        <p>Deployable, electrically driven technologies with multi-fuel capabilities — SAF, e-Diesel, e-Methane and renewable hydrogen for secure local fuel supply and energy security.</p>
+      </div>
+    </article>
+
+    <article class="app-card">
+      <div class="app-card-img">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="a4" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#4ad8c9" stop-opacity="0.4"/><stop offset="100%" stop-color="#9bb8b0"/></radialGradient></defs>
+          <rect width="400" height="300" fill="url(#a4)"/>
+          <g fill="#0b1f23" opacity="0.78">
+            <rect x="80" y="120" width="50" height="120" rx="25"/>
+            <rect x="150" y="100" width="50" height="140" rx="25"/>
+            <rect x="220" y="80" width="50" height="160" rx="25"/>
+            <rect x="290" y="110" width="50" height="130" rx="25"/>
+          </g>
+        </svg>
+      </div>
+      <div class="app-card-body">
+        <h4>Clean energy infrastructure</h4>
+        <p>Compression technology for next-generation hydrogen compression.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="trust">
+  <div class="trust-inner">
+    <div class="trust-label">Backed by · Partnered with · Recognised by</div>
+    <div class="trust-row">
+      <div class="trust-item">WIRED Trailblazer</div>
+      <div class="trust-item">Deloitte Fast 50</div>
+      <div class="trust-item">EY</div>
+      <div class="trust-item">Tech Nation Future Fifty</div>
+      <div class="trust-item">Earthshot Prize</div>
+      <div class="trust-item">Official Supplier 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section id="news">
+  <div class="news-header">
+    <div>
+      <div class="section-eyebrow">Latest news</div>
+      <h2 class="section-title">From the lab and beyond.</h2>
+    </div>
+    <a href="#" class="cap-link">All updates</a>
+  </div>
+
+  <div class="news-grid">
+    <article class="news-card">
+      <div class="news-img">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="n1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3338"/><stop offset="100%" stop-color="#0f6f68"/></linearGradient></defs>
+          <rect width="400" height="300" fill="url(#n1)"/>
+          <g fill="none" stroke="#4ad8c9" stroke-width="0.8" opacity="0.55">
+            <path d="M 0 220 L 80 180 L 160 200 L 240 150 L 320 170 L 400 130"/>
+            <path d="M 0 240 L 80 210 L 160 220 L 240 180 L 320 195 L 400 160" opacity="0.5"/>
+          </g>
+          <text x="20" y="40" font-family="JetBrains Mono" font-size="11" fill="#4ad8c9" opacity="0.85" letter-spacing="2">DEFENCE GROWTH DEAL</text>
+        </svg>
+      </div>
+      <div class="news-body">
+        <div class="news-meta">Press · 2026</div>
+        <h4>CATAGEN attends launch of the Northern Ireland Defence Growth Deal</h4>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <div class="news-img">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#0b1f23"/>
+          <g opacity="0.92">
+            <text x="200" y="155" font-family="Fraunces" font-size="56" font-style="italic" font-weight="300" text-anchor="middle" fill="#f4efe5">WIRED</text>
+            <text x="200" y="190" font-family="JetBrains Mono" font-size="10" letter-spacing="4" text-anchor="middle" fill="#4ad8c9">TRAILBLAZER 2025</text>
+          </g>
+        </svg>
+      </div>
+      <div class="news-body">
+        <div class="news-meta">Recognition · 2025</div>
+        <h4>CATAGEN named as a 2025 WIRED Trailblazer</h4>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <div class="news-img">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="n3" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#1fb6a8" stop-opacity="0.6"/><stop offset="100%" stop-color="#0b1f23"/></radialGradient></defs>
+          <rect width="400" height="300" fill="url(#n3)"/>
+          <g fill="none" stroke="#4ad8c9" stroke-width="0.7" opacity="0.7">
+            <circle cx="200" cy="150" r="40"/>
+            <circle cx="200" cy="150" r="70" opacity="0.5"/>
+            <circle cx="200" cy="150" r="100" opacity="0.3"/>
+          </g>
+          <text x="200" y="155" font-family="JetBrains Mono" font-size="11" fill="#4ad8c9" text-anchor="middle" letter-spacing="3">UK ↔ INDIA</text>
+        </svg>
+      </div>
+      <div class="news-body">
+        <div class="news-meta">Press release · 2026</div>
+        <h4>CATAGEN showcases UK clean-tech innovation in India to advance hydrogen compression and SAF collaboration</h4>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="faq-inner">
+    <div class="faq-left">
+      <div class="section-eyebrow">Frequently asked</div>
+      <h2 class="section-title">Questions, answered plainly.</h2>
+      <p>If you don't see what you're looking for, get in touch with our team — we'll come back to you the same week.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>What is CATAGEN and what does the company do?</summary>
+        <div class="answer">CATAGEN is a clean-tech company developing technologies that accelerate the transition to net zero. We deliver Green Emissions Testing for OEMs, sustainable fuel production through ClimaHtech Green Flight, hydrogen compression through ClimaHtech Compress, and biohydrogen and e-fuel technologies across the ClimaHtech platform.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What industries do CATAGEN work with?</summary>
+        <div class="answer">Automotive OEMs and Tier-1 suppliers, aerospace and aviation, defence and government, energy producers, and industrial decarbonisation programmes.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What is Green Emissions Testing at CATAGEN?</summary>
+        <div class="answer">Accelerated catalyst ageing and emissions testing for OEMs, powered by CATAGEN's founding OMEGA e-Reactor — delivering faster, cleaner and more reliable vehicle development.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What is ClimaHtech and how is it related to CATAGEN?</summary>
+        <div class="answer">ClimaHtech is CATAGEN's platform for next-generation net zero technologies. It includes ClimaHtech Green Flight (SAF), ClimaHtech Compress (hydrogen compression), biohydrogen, e-fuel and other clean energy technologies.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Does CATAGEN offer support with emissions compliance?</summary>
+        <div class="answer">Yes. We work with OEMs and regulators globally on emissions compliance pathways, supported by our testing infrastructure and engineering team.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What is CATAGEN's OMEGA Technology?</summary>
+        <div class="answer">OMEGA is CATAGEN's founding e-Reactor technology — the platform on which Green Emissions Testing was built, and which underpins our wider e-reactor portfolio.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Where is CATAGEN located?</summary>
+        <div class="answer">Headquartered in Belfast, Northern Ireland — Channel Commercial Park, Queens Road, BT3 9DT.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="contact">
+  <div class="cta-inner">
+    <div>
+      <div class="section-eyebrow">Contact us</div>
+      <h2 class="cta-title">Let's drive innovation <em>together</em>.</h2>
+      <ul class="cta-pillars">
+        <li>Emissions compliance</li>
+        <li>SAF production</li>
+        <li>Energy security</li>
+        <li>Hydrogen compression</li>
+      </ul>
+    </div>
+    <div class="cta-aside">
+      <h4>Get in touch</h4>
+      <p>Whether you're an OEM tackling emissions, an airline planning your SAF strategy, or a government building energy resilience — we'd like to hear from you.</p>
+      <div class="contact-line">Titanic Quarter, Belfast</div>
+      <div class="contact-line" style="margin-bottom: 24px;">+44 (0)28 9045 3120</div>
+      <a href="mailto:contact@catagen.com" class="btn-primary">Send a message</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="knowledge">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark"></span>CATAGEN</div>
+        <p>Channel Commercial Park, Unit 5 Elmbank, Queens Road, Belfast, BT3 9DT, United Kingdom.</p>
+        <p>+44 (0)28 9045 3120</p>
+      </div>
+      <div class="footer-col">
+        <h5>Emissions Testing</h5>
+        <ul>
+          <li><a href="#">Aftertreatment Testing</a></li>
+          <li><a href="#">Catalyst Ageing</a></li>
+          <li><a href="#">Characterisation</a></li>
+          <li><a href="#">Performance Testing</a></li>
+          <li><a href="#">Industries</a></li>
+          <li><a href="#">Webinars</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>SAF</h5>
+        <ul>
+          <li><a href="#">ClimaHtech Green Flight</a></li>
+          <li><a href="#">The Technology</a></li>
+          <li><a href="#">Partnership Announcements</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>H₂ Compression</h5>
+        <ul>
+          <li><a href="#">ClimaHtech Compress</a></li>
+          <li><a href="#">Dispensing &amp; Refuelling</a></li>
+          <li><a href="#">Hydrogen Refuelling</a></li>
+          <li><a href="#">Other Applications</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>ClimaHtech</h5>
+        <ul>
+          <li><a href="#">Biohydrogen</a></li>
+          <li><a href="#">E-Fuel</a></li>
+          <li><a href="#">Other Net Zero Tech</a></li>
+          <li><a href="#">Knowledge Hub</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© CATAGEN 2026 — Engineered in Belfast</div>
+      <div>Privacy · Terms · Modern Slavery Statement</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Toggle nav style when scrolling past hero
+  const nav = document.getElementById('nav');
+  const hero = document.querySelector('.hero');
+  const heroBottom = () => hero.offsetTop + hero.offsetHeight - 80;
+  const updateNav = () => {
+    if (window.scrollY < heroBottom()) {
+      nav.classList.add('on-hero');
+    } else {
+      nav.classList.remove('on-hero');
+    }
+  };
+  window.addEventListener('scroll', updateNav, { passive: true });
+  window.addEventListener('resize', updateNav);
+  updateNav();
+</script>
+
+</body>
+</html>
