@@ -2,16 +2,20 @@
 // WhyLocal.astro — block unique to the local page (not on the homepage).
 // Gives Google genuinely different, locally-relevant content and gives NI
 // visitors a real reason to pick a local developer over a faceless agency.
+// Each card carries a simple inline line icon (no dependency).
 const points = [
   {
+    icon: 'pin',
     title: 'Down the road, not overseas',
     body: "Based in Newtownabbey, working with businesses across Belfast and the wider NI area. Same timezone, same working hours, a real person who picks up.",
   },
   {
+    icon: 'person',
     title: 'You deal with me, not a ticket queue',
     body: "No call centres, no account managers, no being passed around. The person auditing your site is the person fixing it.",
   },
   {
+    icon: 'shop',
     title: 'Built for NI small businesses',
     body: "Most of my clients are local firms who need their site to work and bring in enquiries, without paying agency rates for the privilege.",
   },
@@ -29,6 +33,17 @@ const points = [
     <div class="why-local-grid">
       {points.map((point) => (
         <div class="why-local-card">
+          <span class="why-local-icon" aria-hidden="true">
+            {point.icon === 'pin' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+            )}
+            {point.icon === 'person' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+            )}
+            {point.icon === 'shop' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4 4h16l1 5" /><path d="M4 9v11h16V9" /><path d="M3 9h18" /><path d="M9 20v-5h6v5" /></svg>
+            )}
+          </span>
           <h3>{point.title}</h3>
           <p>{point.body}</p>
         </div>
