@@ -3683,7 +3683,7 @@ footer a:hover {
 .why-local-card p {
   margin: 0;
   line-height: 1.65;
-  color: var(--text-light);
+  color: var(--text-dark);
 }
 
 @media (max-width: 768px) {
