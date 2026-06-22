@@ -3598,3 +3598,74 @@ footer a:hover {
 .case-testimonial-role {
     font-size: 0.9rem;
 }
+
+/* ============================================
+   Additions for the Northern Ireland local page
+   Paste into global.css. Uses your existing tokens.
+   ============================================ */
+
+/* Hero sub-paragraph (only used on HeroLocal) */
+.hero-v2-sub {
+  margin: 1.25rem 0 0;
+  max-width: 32ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+/* Why Local section */
+.why-local-section {
+  padding: 6rem 0;
+  background: var(--snow);
+}
+
+.why-local-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.why-local-section h2 {
+  margin: 0.5rem 0 1.25rem;
+  max-width: 20ch;
+}
+
+.why-local-lead {
+  max-width: 60ch;
+  margin: 0 0 3rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+.why-local-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.why-local-card {
+  padding: 2rem;
+  background: var(--cream);
+  border-radius: 12px;
+}
+
+.why-local-card h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+}
+
+.why-local-card p {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+  .why-local-grid {
+    grid-template-columns: 1fr;
+  }
+  .why-local-section {
+    padding: 4rem 0;
+  }
+}
