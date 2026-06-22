@@ -3679,7 +3679,7 @@ footer a:hover {
 /* Hero sub-paragraph (only used on HeroLocal) */
 .hero-v2-sub {
   margin: 1.25rem 0 0;
-  max-width: 32ch;
+  max-width: 64ch;
   font-size: 1.125rem;
   line-height: 1.6;
   color: var(--text-light);
