@@ -1,0 +1,47 @@
+---
+// HeroLocal.astro — local variant of the homepage hero.
+// Same markup and classes as Hero.astro (so styling and the terminal feed
+// are identical), only the headline and supporting copy change for local SEO.
+---
+<section class="hero-v2">
+  <div class="hero-v2-inner">
+    <div class="hero-v2-top">
+      <div class="hero-v2-left">
+        <h1 class="hero-v2-headline">
+          WordPress care for<br />
+          <span class="accent">Northern Ireland<br />businesses</span>
+        </h1>
+        <p class="hero-v2-sub">
+          Maintenance, builds and ongoing support from a developer based in
+          Newtownabbey. Local, on hand, and without the agency price.
+        </p>
+        <ul class="hero-v2-stats">
+          <li><span class="stat-tick" aria-hidden="true">✓</span><strong>4 years</strong> avg. client relationship</li>
+          <li><a href="https://share.google/HmqVC5OhdKakcRtS4" target="_blank" rel="noopener" class="stat-link"><span class="stat-tick" aria-hidden="true">✓</span><strong>5.0</strong> rated on Google</a></li>
+          <li><span class="stat-tick" aria-hidden="true">✓</span><strong>&lt;1 hour</strong> response time</li>
+          <li><span class="stat-tick" aria-hidden="true">✓</span><strong>0</strong> security breaches</li>
+        </ul>
+        <div class="hero-v2-cta-row">
+          <a href="#contact" class="hero-v2-cta-primary">
+            Get Your Free Audit
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+          <a href="#clients" class="hero-v2-cta-secondary">See our work</a>
+        </div>
+      </div>
+      <div class="hero-terminal" aria-hidden="true">
+        <div class="hero-terminal-bar">
+          <div class="hero-terminal-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="hero-terminal-status">
+            <span class="hero-terminal-pulse"></span>
+            <span class="hero-terminal-status-text">All systems operational</span>
+          </div>
+          <div class="hero-terminal-clock" id="hero-terminal-clock">--:--:--</div>
+        </div>
+        <div class="hero-terminal-feed" id="hero-terminal-feed"></div>
+      </div>
+    </div>
+  </div>
+</section>
