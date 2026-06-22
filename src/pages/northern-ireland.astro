@@ -1,0 +1,64 @@
+---
+// northern-ireland.astro — local landing page for Northern Ireland search.
+// Same template as the homepage, but with local-focused copy in the hero,
+// a "why local" block, and a local FAQ. Proof/structure sections are reused
+// unchanged. Schema is passed into BaseLayout via the optional `schema` prop.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroLocal from '../components/HeroLocal.astro';
+import Marquee from '../components/Marquee.astro';
+import Clients from '../components/Clients.astro';
+import WhyLocal from '../components/WhyLocal.astro';
+import Process from '../components/Process.astro';
+import Pricing from '../components/Pricing.astro';
+import LatestPosts from '../components/LatestPosts.astro';
+import FAQLocal from '../components/FAQLocal.astro';
+import Contact from '../components/Contact.astro';
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://wpbase.co.uk/#localbusiness',
+  name: 'WP Base',
+  description:
+    'WordPress maintenance, web design and custom builds for small businesses across Northern Ireland.',
+  url: 'https://wpbase.co.uk/northern-ireland',
+  email: 'chris@feedme.design',
+  telephone: '+447379334695',
+  priceRange: '££',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Newtownabbey',
+    addressRegion: 'Northern Ireland',
+    addressCountry: 'GB',
+  },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Northern Ireland' },
+    { '@type': 'City', name: 'Belfast' },
+    { '@type': 'City', name: 'Newtownabbey' },
+  ],
+  knowsAbout: ['WordPress', 'Website maintenance', 'Web design', 'WordPress migrations'],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '5',
+  },
+};
+---
+<BaseLayout
+  title="WordPress Maintenance & Web Design in Northern Ireland — WP Base"
+  description="WordPress care for Northern Ireland small businesses. Maintenance, custom builds, migrations and support from a local developer in Newtownabbey — without the agency price."
+  schema={localBusinessSchema}
+>
+  <HeroLocal />
+  <Marquee />
+  <Clients />
+  <WhyLocal />
+  <Process />
+  <Pricing />
+  <LatestPosts />
+  <FAQLocal />
+  <Contact />
+</BaseLayout>
+<script>
+  import '../scripts/homepage.ts';
+</script>
