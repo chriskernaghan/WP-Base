@@ -933,15 +933,211 @@
     .footer-brand { grid-column: span 2; }
     .footer-bottom { flex-direction: column; gap: 12px; }
   }
+
+  /* ---------- Mega menu ---------- */
+  .has-mega { position: static; }
+  .has-mega > a { position: relative; }
+
+  .mega {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    margin-top: 64px;
+    background: var(--bone);
+    border-bottom: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 24px 48px -24px rgba(11, 31, 35, 0.28);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s 0.28s;
+    z-index: 90;
+    color: var(--ink);
+  }
+  /* keep the panel open while hovering the trigger OR the panel itself */
+  .has-mega:hover .mega,
+  .mega:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s;
+  }
+  /* invisible bridge so the cursor can cross the gap without closing */
+  .mega::before {
+    content: '';
+    position: absolute;
+    top: -24px; left: 0; right: 0;
+    height: 24px;
+  }
+
+  .mega-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px var(--gutter) 40px;
+  }
+  .mega-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 0.85fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mega-col h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  .mega-col ul { list-style: none; }
+  .mega-col li { margin-bottom: 12px; }
+  .mega-col a {
+    font-size: 15px;
+    color: var(--ink);
+    opacity: 0.82;
+    transition: opacity 0.2s, color 0.2s;
+    line-height: 1.4;
+  }
+  .mega-col a:hover { opacity: 1; color: var(--teal-deep); }
+
+  .mega-promo {
+    background: var(--teal);
+    border-radius: 4px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s;
+    min-height: 130px;
+  }
+  .mega-promo:hover { transform: translateY(-3px); }
+  .mega-promo-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .mega-promo-link {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink-2);
+    letter-spacing: -0.01em;
+  }
+
+  .mega-industries { padding-top: 32px; }
+  .mega-industries-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .mega-industries-row {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 16px;
+  }
+  .ind {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    color: var(--teal-deep);
+    transition: transform 0.2s;
+  }
+  .ind:hover { transform: translateY(-3px); }
+  .ind svg { width: 36px; height: 36px; }
+  .ind span {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+
+  /* megamenu hides on the breakpoint where nav-links is already hidden */
+  @media (max-width: 960px) {
+    .mega { display: none; }
+  }
 </style>
 </head>
 <body>
-
 <!-- ============ NAV ============ -->
 <nav class="site on-hero" id="nav">
   <a href="#" class="logo"><span class="logo-mark"></span>CATAGEN</a>
   <div class="nav-links">
-    <a href="#emissions-testing">Green Emissions Testing</a>
+    <div class="has-mega">
+      <a href="#emissions-testing">Green Emissions Testing</a>
+      <div class="mega" role="region" aria-label="Green Emissions Testing menu">
+        <div class="mega-inner">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <h5>Green Emissions Testing</h5>
+              <ul>
+                <li><a href="#">Our Technology</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Emissions Certification</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Announcements</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <h5>Catalyst Ageing</h5>
+              <ul>
+                <li><a href="#">Standard Bench Test (SBC)</a></li>
+                <li><a href="#">Lean Spike / Fuel Cut</a></li>
+                <li><a href="#">OBD Limit / Threshold Ageing</a></li>
+                <li><a href="#">Custom OEM Cycles</a></li>
+                <li><a href="#">R&amp;D Ageing</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <h5>Characterisation Performance Tests</h5>
+              <ul>
+                <li><a href="#">Oxygen Storage Capacity Test (OSC)</a></li>
+                <li><a href="#">Light Off Test (Fast/Slow)</a></li>
+                <li><a href="#">Lambda / Air Fuel Ratio Sweep (AFR)</a></li>
+                <li><a href="#">Drive Cycle Test (WLTC)</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <h5>Knowledgebased Advanced Offering</h5>
+              <ul>
+                <li><a href="#">'Golden Catalyst replication'</a></li>
+                <li><a href="#">Virtual Services Modelling</a></li>
+                <li><a href="#">PGM Optimisation Services</a></li>
+                <li><a href="#">Catalyst Poisoning</a></li>
+                <li><a href="#">Bespoke Testing</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-promo">
+              <div class="mega-promo-label">Webinar Series</div>
+              <div class="mega-promo-link">Browse on-demand →</div>
+            </a>
+          </div>
+
+          <div class="mega-industries">
+            <div class="mega-industries-label">Industries we work with</div>
+            <div class="mega-industries-row">
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 26 L11 18 L29 18 L32 26"/><rect x="6" y="26" width="28" height="6" rx="2"/><circle cx="13" cy="32" r="2.5"/><circle cx="27" cy="32" r="2.5"/></svg><span>Auto</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="28" r="5"/><circle cx="29" cy="28" r="5"/><path d="M11 28 L18 18 L26 18 L29 28 M18 18 L14 14"/></svg><span>Motorcycles</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="8" y="20" width="16" height="10" rx="1"/><path d="M24 24 L30 24 L33 28 L33 30 L8 30"/><circle cx="14" cy="32" r="2.5"/><circle cx="27" cy="32" r="2.5"/><path d="M10 20 L10 14 L16 14"/></svg><span>Heavy Duty</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 8 C14 18 14 24 20 32 C26 24 26 18 20 8 Z"/><circle cx="20" cy="24" r="3"/></svg><span>Fuel / Lubricants</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 26 Q20 22 32 26 L29 31 L11 31 Z"/><path d="M16 22 L16 14 L24 17 L16 18"/></svg><span>Recreational</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 28 L14 20 L26 20 L30 28"/><rect x="8" y="28" width="24" height="5" rx="2"/><circle cx="14" cy="33" r="2"/><circle cx="26" cy="33" r="2"/><path d="M20 20 L20 14"/></svg><span>Non-Road</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="9" y="16" width="22" height="12" rx="2"/><path d="M13 16 L13 28 M27 16 L27 28 M9 22 L31 22"/></svg><span>Catalyst Mfrs</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="9" y="18" width="22" height="12" rx="1"/><path d="M13 18 L13 14 L27 14 L27 18"/><path d="M16 24 L20 24 M24 22 L24 26"/></svg><span>Genset</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 26 Q20 23 31 26 L28 31 L12 31 Z"/><path d="M14 23 L14 15 L26 19 Z"/></svg><span>Marine</span></div>
+              <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="20" cy="20" r="11"/><path d="M21 13 L16 21 L20 21 L19 27 L24 19 L20 19 Z" fill="currentColor" stroke="none"/></svg><span>Reformer Catalyst</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <a href="#saf">SAF</a>
     <a href="#h2-compression">H₂ Compression</a>
     <a href="#climahtech">ClimaHtech</a>
