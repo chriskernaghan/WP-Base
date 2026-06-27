@@ -1,153 +1,273 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WordPress Hosting in Northern Ireland — WP Base</title>
-  <meta name="description" content="WordPress hosting sorted and managed for small businesses in Northern Ireland. The right host for your site, set up properly, looked after for you. No reselling markup, no guesswork.">
-  <link rel="canonical" href="https://wpbase.co.uk/hosting/">
+---
+// hosting.astro — commercial landing page targeting NI hosting search.
+// Thin page: wraps BaseLayout, reuses Marquee / Pricing / Contact, and adds
+// a self-contained hosting block with scoped styles (same pattern as WhyLocal).
+// Positioning: hosting is managed as part of the relationship, not resold at
+// a margin — leans on the ownership angle from the hosting blog post.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Marquee from '../components/Marquee.astro';
+import Pricing from '../components/Pricing.astro';
+import Contact from '../components/Contact.astro';
 
-  <!-- Async Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Epilogue:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Epilogue:wght@400;500;600;700&display=swap"></noscript>
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Managed WordPress Hosting',
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'WP Base',
+    url: 'https://wpbase.co.uk/',
+    email: 'chris@feedme.design',
+    telephone: '+447379334695',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Newtownabbey',
+      addressRegion: 'Northern Ireland',
+      addressCountry: 'GB',
+    },
+  },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Northern Ireland' },
+  description:
+    'Managed WordPress hosting for small businesses in Northern Ireland. The right host for your site, set up properly and looked after, in your own account.',
+};
 
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-
-  <div id="nav-placeholder"></div>
-
-  <main class="hosting-page">
-
-    <!-- Hero -->
-    <section class="hosting-hero">
-      <div class="frame">
-        <p class="eyebrow">WordPress Hosting · Northern Ireland</p>
-        <h1>Hosting sorted, and looked after.</h1>
-        <p class="hosting-lead">
-          The right host for your site, set up properly, and managed so you never
-          have to think about it again. No reselling markup. No tier you don't need.
-          Just hosting that does its job, handled by someone who actually understands it.
-        </p>
-        <div class="hosting-hero-cta">
-          <a href="/#contact" class="btn btn-primary">Get Your Free Audit</a>
-          <a href="#what-you-get" class="btn btn-ghost">What you get</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- The problem -->
-    <section class="hosting-problem">
-      <div class="reading">
-        <p class="eyebrow">The usual story</p>
-        <h2>Most businesses are on the wrong host and don't know it.</h2>
-        <p>
-          When I audit local websites, the hosting is almost never right-sized.
-          It's either too cheap to do its job, so the site is slow and quietly
-          costing you enquiries, or it's far more than a small business site needs,
-          so you're overpaying every month for power you'll never use.
-        </p>
-        <p>
-          Either way, nobody's keeping an eye on it. Hosting is the kind of decision
-          that gets made once, under time pressure, and then forgotten about for years.
-          That's exactly how sites end up slow, expensive, or both.
-        </p>
-      </div>
-    </section>
-
-    <!-- What you get -->
-    <section class="hosting-offer" id="what-you-get">
-      <div class="frame">
-        <p class="eyebrow">What hosting with WP Base looks like</p>
-        <h2>Right-sized, set up properly, kept running.</h2>
-
-        <div class="offer-grid">
-          <div class="offer-card">
-            <h3>The right host, not the most expensive one</h3>
-            <p>
-              I match your site to hosting that fits it. For most small business
-              sites that's quality managed WordPress hosting, fast, reliable, and
-              built for WordPress specifically. You're never paying for a tier you
-              don't need.
-            </p>
-          </div>
-
-          <div class="offer-card">
-            <h3>Set up the right way from day one</h3>
-            <p>
-              Migration handled, caching configured, backups running, SSL in place.
-              The fiddly parts that go wrong when they're rushed. Done once, done properly,
-              with no downtime for your visitors.
-            </p>
-          </div>
-
-          <div class="offer-card">
-            <h3>You own your account</h3>
-            <p>
-              Your hosting is in your name, with your login. You're never locked in
-              or held hostage by a developer who controls the keys. I manage it for you,
-              but it's yours, and you can see exactly what you're paying.
-            </p>
-          </div>
-
-          <div class="offer-card">
-            <h3>Looked after, not left alone</h3>
-            <p>
-              Performance watched, updates applied, problems caught before you notice them.
-              If something breaks at 9pm on a Tuesday, I deal with it. Hosting that's
-              actually managed, not just paid for.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Honest positioning -->
-    <section class="hosting-honest">
-      <div class="reading">
-        <p class="eyebrow">Worth saying plainly</p>
-        <h2>I'm not a hosting company.</h2>
-        <p>
-          I don't make my money marking up servers. I put you on the host that's
-          right for your site, in your own account, and I look after it as part of
-          looking after your website. The value is in the work and the watching, not
-          in reselling you space at a margin.
-        </p>
-        <p>
-          If you're a small business in Northern Ireland and you're not sure whether
-          your current hosting is helping you or quietly holding you back, that's
-          exactly the kind of thing the free audit answers. Honest assessment, plain
-          English, no sales pitch.
-        </p>
-        <div class="hosting-honest-cta">
-          <a href="/#contact" class="btn btn-primary">Get Your Free Audit</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Related reading -->
-    <section class="hosting-related">
-      <div class="reading">
-        <p class="eyebrow">Read first</p>
-        <h2>Not sure which camp you're in?</h2>
-        <p>
-          I wrote a full guide on how to tell whether your hosting is too cheap,
-          too expensive, or right-sized for a Northern Ireland small business,
-          and what to do about it.
-        </p>
-        <a href="/posts/wrong-hosting-northern-ireland-business" class="related-link">
-          Why Most Northern Ireland Businesses Are Choosing the Wrong Hosting →
+const offer = [
+  {
+    title: 'The right host, not the dearest one',
+    body: "I match your site to hosting that actually fits it. For most small business sites that's quality managed WordPress hosting: fast, reliable, built for WordPress. You're never paying for a tier you don't need.",
+  },
+  {
+    title: 'Set up properly from day one',
+    body: 'Migration handled, caching configured, backups running, SSL in place. The fiddly parts that go wrong when they get rushed, done once and done right, with no downtime for your visitors.',
+  },
+  {
+    title: 'You own your account',
+    body: "Your hosting is in your name, with your login. You're never locked in or held hostage by a developer who controls the keys. I manage it for you, but it's yours, and you can see exactly what you pay.",
+  },
+  {
+    title: 'Looked after, not left alone',
+    body: "Performance watched, updates applied, problems caught before you notice them. If something breaks at 9pm on a Tuesday, I deal with it. Hosting that's actually managed, not just paid for.",
+  },
+];
+---
+<BaseLayout
+  title="WordPress Hosting in Northern Ireland — WP Base"
+  description="Managed WordPress hosting for Northern Ireland small businesses. The right host for your site, set up properly and looked after, in your own account. No reselling markup, no guesswork."
+  schema={serviceSchema}
+>
+  <section class="hosting-hero-section">
+    <div class="hosting-inner">
+      <span class="section-label">WordPress Hosting · Northern Ireland</span>
+      <h1 class="hosting-headline">
+        Hosting sorted,<br />
+        <span class="accent">and looked after</span>
+      </h1>
+      <p class="hosting-lead">
+        The right host for your site, set up properly, and managed so you never have
+        to think about it again. No reselling markup, no tier you don't need. Just
+        hosting that does its job, handled by someone who understands it.
+      </p>
+      <div class="hosting-cta-row">
+        <a href="#contact" class="hosting-cta-primary">
+          Get Your Free Audit
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
         </a>
+        <a href="#what-you-get" class="hosting-cta-secondary">What you get</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <Marquee />
 
-  <div id="footer-placeholder"></div>
+  <section class="hosting-problem-section">
+    <div class="hosting-reading">
+      <span class="section-label">The usual story</span>
+      <h2>Most businesses are on the wrong host and don't know it</h2>
+      <p>
+        When I audit local websites, the hosting is almost never right-sized. It's
+        either too cheap to do its job, so the site is slow and losing you enquiries,
+        or it's far more than a small business site needs, so you're overpaying every
+        month for power you'll never use.
+      </p>
+      <p>
+        Either way, nobody's keeping an eye on it. Hosting is the kind of decision that
+        gets made once, under time pressure, then forgotten about for years. That's
+        exactly how sites end up slow, expensive, or both.
+      </p>
+    </div>
+  </section>
 
-  <script src="/nav.js"></script>
-  <script src="/footer.js"></script>
-</body>
-</html>
+  <section id="what-you-get" class="hosting-offer-section">
+    <div class="hosting-inner">
+      <span class="section-label">What hosting with WP Base looks like</span>
+      <h2>Right-sized, set up properly, kept running</h2>
+      <div class="hosting-grid">
+        {offer.map((item) => (
+          <div class="hosting-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="hosting-honest-section">
+    <div class="hosting-reading">
+      <span class="section-label">Worth saying plainly</span>
+      <h2>I'm not a hosting company</h2>
+      <p>
+        I don't make my money marking up servers. I put you on the host that's right
+        for your site, in your own account, and look after it as part of looking after
+        your website. The value is in the work and the watching, not in reselling you
+        space at a margin.
+      </p>
+      <p>
+        If you run a small business in Northern Ireland and you're not sure whether
+        your current hosting is helping you or quietly holding you back, that's exactly
+        what the free audit answers. Honest assessment, plain English, no sales pitch.
+      </p>
+      <p class="hosting-related-link">
+        <a href="/posts/wrong-hosting-northern-ireland-business">
+          Read: Why Most Northern Ireland Businesses Are Choosing the Wrong Hosting →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <Pricing />
+  <Contact />
+</BaseLayout>
+
+<style>
+  .hosting-hero-section {
+    padding: 7rem 1.5rem 4rem;
+  }
+  .hosting-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hosting-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin: 1rem 0 1.5rem;
+  }
+  .hosting-headline .accent {
+    color: var(--accent);
+  }
+  .hosting-lead {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    max-width: 640px;
+    opacity: 0.85;
+  }
+  .hosting-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .hosting-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--midnight);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .hosting-cta-primary:hover {
+    transform: translateY(-2px);
+  }
+  .hosting-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(8, 16, 28, 0.2);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease;
+  }
+  .hosting-cta-secondary:hover {
+    border-color: var(--midnight);
+  }
+
+  .hosting-problem-section,
+  .hosting-honest-section {
+    padding: 4rem 1.5rem;
+  }
+  .hosting-reading {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hosting-reading h2,
+  .hosting-offer-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0.75rem 0 1.5rem;
+  }
+  .hosting-reading p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    opacity: 0.85;
+  }
+  .hosting-related-link a {
+    color: var(--midnight);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .hosting-offer-section {
+    padding: 4rem 1.5rem;
+  }
+  .hosting-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .hosting-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(8, 16, 28, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .hosting-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+  }
+  .hosting-card p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 720px) {
+    .hosting-grid {
+      grid-template-columns: 1fr;
+    }
+    .hosting-hero-section {
+      padding-top: 5.5rem;
+    }
+  }
+</style>
