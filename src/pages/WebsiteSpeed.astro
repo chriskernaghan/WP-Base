@@ -1,0 +1,284 @@
+---
+// website-speed.astro — commercial landing page targeting "slow website" pain.
+// Thin page: wraps BaseLayout, reuses Marquee / Pricing / Contact, and adds a
+// self-contained speed block with scoped styles (same pattern as hosting.astro).
+// Positioning: a slow site is a business problem, not a technical one. Leads with
+// the lost-enquiries angle and the cached-browser point so the owner who thinks
+// "it loads fine for me" sees why first-time mobile visitors get a slower site.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Marquee from '../components/Marquee.astro';
+import Pricing from '../components/Pricing.astro';
+import Contact from '../components/Contact.astro';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Website Speed Optimisation',
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'WP Base',
+    url: 'https://wpbase.co.uk/',
+    email: 'hello@wpbase.co.uk',
+    telephone: '+447379334695',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Newtownabbey',
+      addressRegion: 'Northern Ireland',
+      addressCountry: 'GB',
+    },
+  },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Northern Ireland' },
+  description:
+    'Website speed optimisation for small businesses in Northern Ireland. A slow site loses enquiries and bookings before a visitor sees what you offer. Honest assessment, then the work to fix it.',
+};
+
+const offer = [
+  {
+    title: 'Find out what it actually costs you',
+    body: "I measure your site the way a first-time visitor on a phone experiences it, not the way it feels on your own device. You get a clear picture of how slow it really is and where the seconds are going, in plain numbers you can act on.",
+  },
+  {
+    title: 'Fix the things that move the needle',
+    body: 'Oversized images, bloated plugins, no caching, a host that can\'t keep up. The usual culprits are predictable, and most of them are fixable without rebuilding anything. I sort the ones that make a real difference to load time first.',
+  },
+  {
+    title: 'Faster for the people who matter',
+    body: "The goal isn't a perfect score to frame on the wall. It's that someone landing on your site from a Google search on their phone sees your business quickly enough to stay, rather than bouncing back to a competitor who loaded first.",
+  },
+  {
+    title: 'Kept fast, not just made fast',
+    body: "Speed isn't a one-off. Sites drift slower over time as content, images and plugins pile up. As part of a care plan I keep an eye on it, so the work you pay for once doesn't unravel six months later.",
+  },
+];
+---
+<BaseLayout
+  title="Website Speed Optimisation in Northern Ireland — WP Base"
+  description="Is your website slow? A slow site loses enquiries and bookings before a visitor sees what you offer. Website speed optimisation for Northern Ireland small businesses, with an honest assessment first."
+  schema={serviceSchema}
+>
+  <section class="speed-hero-section">
+    <div class="speed-inner">
+      <span class="section-label">Website Speed · Northern Ireland</span>
+      <h1 class="speed-headline">
+        A slow website is<br />
+        <span class="accent">losing you business</span>
+      </h1>
+      <p class="speed-lead">
+        Most visitors won't wait. If your site takes too long to load on a phone,
+        they're gone before they see what you offer, and you never know it happened.
+        The good news is that slow sites are usually fixable, and it starts with
+        knowing how slow yours really is.
+      </p>
+      <div class="speed-cta-row">
+        <a href="#contact" class="speed-cta-primary">
+          Get Your Free Audit
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+        </a>
+        <a href="#what-you-get" class="speed-cta-secondary">What you get</a>
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <section class="speed-problem-section">
+    <div class="speed-reading">
+      <span class="section-label">The usual story</span>
+      <h2>It loads fine for you, and slowly for everyone else</h2>
+      <p>
+        Here's the trap. You visit your own website all the time, so your browser has
+        it saved and ready, and you're usually on good wifi at the office or at home.
+        It feels quick. So it's easy to assume it's quick for everyone.
+      </p>
+      <p>
+        A first-time visitor gets a completely different experience. They're often on
+        a phone, on mobile data, with nothing saved, landing cold from a Google search.
+        That's the version that matters, because that's the version a potential customer
+        sees, and it can be several seconds slower than the one you see. More than half
+        of people abandon a site that takes longer than three seconds to load, and most
+        of them never come back to try again.
+      </p>
+    </div>
+  </section>
+
+  <section id="what-you-get" class="speed-offer-section">
+    <div class="speed-inner">
+      <span class="section-label">What fixing it with WP Base looks like</span>
+      <h2>Measured properly, fixed sensibly, kept fast</h2>
+      <div class="speed-grid">
+        {offer.map((item) => (
+          <div class="speed-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="speed-honest-section">
+    <div class="speed-reading">
+      <span class="section-label">Worth saying plainly</span>
+      <h2>This is about enquiries, not vanity scores</h2>
+      <p>
+        Speed tools spit out a number out of a hundred, and it's tempting to chase a
+        perfect score for its own sake. I don't work that way. The only reason speed
+        matters is that a faster site keeps more of your visitors long enough to become
+        customers. That's the goal, and everything I do serves it.
+      </p>
+      <p>
+        If you run a small business in Northern Ireland and you've a feeling your site
+        is sluggish, or you've simply never checked, the free audit tells you where you
+        stand. Honest assessment, plain English, no sales pitch. If it's fine, I'll tell
+        you it's fine.
+      </p>
+      <p class="speed-related-link">
+        <a href="/posts/speed-kills-slow-websites">
+          Read: What a Slow Website Is Costing Your Business →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <Pricing />
+  <Contact />
+</BaseLayout>
+
+<style>
+  .speed-hero-section {
+    padding: 7rem 1.5rem 4rem;
+    background: var(--midnight);
+    color: var(--snow);
+  }
+  .speed-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  /* eyebrow label sits on a dark background in the hero, so lighten it */
+  .speed-hero-section .section-label {
+    color: var(--text-light);
+  }
+  .speed-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin: 1rem 0 1.5rem;
+  }
+  .speed-headline .accent {
+    color: var(--accent);
+  }
+  .speed-lead {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    max-width: 640px;
+    opacity: 0.9;
+  }
+  .speed-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .speed-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--midnight);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .speed-cta-primary:hover {
+    transform: translateY(-2px);
+  }
+  .speed-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--snow);
+    transition: border-color 0.15s ease;
+  }
+  .speed-cta-secondary:hover {
+    border-color: var(--snow);
+  }
+
+  .speed-problem-section,
+  .speed-honest-section {
+    padding: 4rem 1.5rem;
+  }
+  .speed-reading {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .speed-reading h2,
+  .speed-offer-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0.75rem 0 1.5rem;
+  }
+  .speed-reading p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    opacity: 0.85;
+  }
+  .speed-related-link a {
+    color: var(--midnight);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .speed-offer-section {
+    padding: 4rem 1.5rem;
+  }
+  .speed-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .speed-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(8, 16, 28, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .speed-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+  }
+  .speed-card p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 720px) {
+    .speed-grid {
+      grid-template-columns: 1fr;
+    }
+    .speed-hero-section {
+      padding-top: 5.5rem;
+    }
+  }
+</style>
