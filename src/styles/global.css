@@ -139,10 +139,20 @@ nav {
     background: white;
     border: 1px solid var(--sand);
     border-radius: 8px;
-    min-width: 200px;
+    min-width: 220px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     margin-top: 0;
     padding-top: 0.5rem;
+}
+
+/* Invisible bridge so the menu doesn't drop while the cursor crosses the gap */
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -0.75rem;
+    left: 0;
+    width: 100%;
+    height: 0.75rem;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -265,8 +275,17 @@ nav {
     text-decoration: none;
 }
 
-.mobile-menu .dropdown-menu {
-    display: none !important;
+/* On mobile the service pages are listed flat (no tap-to-expand) for
+   reliability and crawlability. The label row sits above the indented links. */
+.mobile-menu .mobile-services-label {
+    font-weight: 600;
+    color: var(--midnight);
+}
+
+.mobile-menu .mobile-sublink {
+    padding-left: 3rem;
+    font-size: 1rem;
+    opacity: 0.9;
 }
 
 /* Mobile CTA */
