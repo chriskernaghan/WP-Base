@@ -1,1 +1,104 @@
+---
+// WhatsAppWidget.astro — floating WhatsApp chat bubble, shown on every page.
+// Uses a plain wa.me link, no API/business account setup required.
+const phone = '447379334695'; // +44 7379 334695
+const message = "Hi Chris, I've got a question about my WordPress site";
+const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+---
 
+<a
+  class="whatsapp-widget"
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Message Chris on WhatsApp"
+>
+  <span class="whatsapp-widget-icon" aria-hidden="true">
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor">
+      <path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.663 4.523 1.813 6.383L4 29l7.805-1.775A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.75a9.7 9.7 0 0 1-4.94-1.35l-.354-.21-4.632 1.053 1.08-4.518-.232-.37A9.71 9.71 0 0 1 5.25 15c0-5.93 4.823-10.75 10.754-10.75S26.75 9.07 26.75 15 21.935 24.75 16.004 24.75Zm5.53-7.36c-.303-.152-1.79-.883-2.068-.984-.278-.101-.48-.152-.682.152-.202.303-.784.984-.96 1.187-.177.202-.354.227-.657.076-.303-.152-1.278-.47-2.434-1.501-.9-.803-1.507-1.795-1.684-2.098-.177-.303-.019-.467.133-.618.136-.136.303-.354.455-.53.152-.177.202-.303.303-.505.101-.202.05-.379-.025-.53-.076-.152-.682-1.644-.934-2.253-.246-.591-.497-.511-.682-.52l-.581-.01c-.202 0-.53.076-.808.379-.278.303-1.06 1.036-1.06 2.527s1.085 2.933 1.236 3.136c.152.202 2.135 3.26 5.174 4.57.723.312 1.287.499 1.727.639.726.231 1.386.198 1.908.12.582-.087 1.79-.732 2.042-1.44.253-.707.253-1.313.177-1.44-.076-.126-.278-.202-.581-.354Z"/>
+    </svg>
+  </span>
+  <span class="whatsapp-widget-label">WhatsApp</span>
+</a>
+
+<style>
+  .whatsapp-widget {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #25d366;
+    color: #08101c;
+    border-radius: 999px;
+    padding: 0.85rem;
+    box-shadow: 0 8px 24px rgba(8, 16, 28, 0.25);
+    text-decoration: none;
+    line-height: 1;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, padding 0.2s ease;
+  }
+
+  .whatsapp-widget-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: #08101c;
+    flex-shrink: 0;
+  }
+
+  .whatsapp-widget-label {
+    font-family: "Epilogue", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #08101c;
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    transition: max-width 0.25s ease, opacity 0.2s ease;
+  }
+
+  .whatsapp-widget:hover,
+  .whatsapp-widget:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(8, 16, 28, 0.3);
+  }
+
+  /* Expand to show the label on hover, desktop only — keeps the
+     mobile bubble compact so it never covers content underneath. */
+  @media (hover: hover) and (min-width: 769px) {
+    .whatsapp-widget:hover .whatsapp-widget-label,
+    .whatsapp-widget:focus-visible .whatsapp-widget-label {
+      max-width: 100px;
+      opacity: 1;
+    }
+
+    .whatsapp-widget:hover,
+    .whatsapp-widget:focus-visible {
+      padding: 0.85rem 1.1rem;
+    }
+  }
+
+  /* Smaller footprint on mobile so it doesn't sit over the fixed nav
+     or crowd small-screen CTAs. Nudged up slightly clear of the safe area. */
+  @media (max-width: 768px) {
+    .whatsapp-widget {
+      right: 1rem;
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      padding: 0.75rem;
+    }
+
+    .whatsapp-widget-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .whatsapp-widget-label {
+      display: none;
+    }
+  }
+</style>
