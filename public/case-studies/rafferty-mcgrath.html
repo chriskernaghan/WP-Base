@@ -63,13 +63,23 @@
   .hero-image {
     height: 62vh; min-height: 440px; background: var(--navy);
     position: relative; overflow: hidden;
+    background-size: cover; background-position: center;
+  }
+  /* Dark gradient anchored to the top so the white nav stays legible over
+     bright images, fading to transparent so it doesn't muddy the photo. */
+  .hero-image::before {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(to bottom,
+      rgba(20,16,12,0.55) 0%,
+      rgba(20,16,12,0.28) 22%,
+      rgba(20,16,12,0) 45%);
   }
   .hero-image .placeholder-fill {
     position: absolute; inset: 0;
     background: radial-gradient(120% 90% at 70% 10%, #3a4258 0%, #262c3d 55%, #1c2030 100%);
   }
   .hero-image .placeholder-note {
-    position: absolute; inset: 0; display: flex; align-items: center;
+    position: absolute; inset: 0; z-index: 2; display: flex; align-items: center;
     justify-content: center; color: rgba(255,255,255,0.35);
     font-size: 0.85rem; letter-spacing: 0.04em; text-align: center; padding: 0 20px;
   }
@@ -196,7 +206,7 @@
 <body>
 
 <div class="demo-banner">
-  Demo concept for Rafferty McGrath &amp; Co — built by feedme.design. Not the live site.
+  Demo concept for Rafferty McGrath &amp; Co — built by wpbase.co.uk. Not the live site.
 </div>
 
 <header>
@@ -217,7 +227,7 @@
   <div class="hero-image">
     <div class="placeholder-fill"></div>
     <div class="placeholder-note">
-      <img src="belfast-background.jpg" alt="" />
+      <img src="belfast-background.jpg" alt="">
     </div>
   </div>
 
@@ -399,7 +409,7 @@
     </div>
     <div class="footer-bottom">
       <span>&copy; Rafferty McGrath &amp; Co Solicitors. Demo concept only.</span>
-      <span>Demo built by feedme.design</span>
+      <span>Demo built by wpbase.co.uk</span>
     </div>
   </div>
 </footer>
