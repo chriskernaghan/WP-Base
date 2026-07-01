@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rafferty McGrath & Co Solicitors – Antrim Road Belfast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2b2118;
+    --rust: #b5561e;
+    --rust-deep: #9a4718;
+    --navy: #262c3d;
+    --cream: #f4efe6;
+    --cream-soft: #efe8db;
+    --sage: #a7c1a8;
+    --line: #ddd3c2;
+    --muted: #6b5f52;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+  }
+  .eyebrow::before {
+    content: ""; width: 9px; height: 9px;
+    border: 1.5px solid var(--rust); border-radius: 50%;
+  }
+  .demo-banner {
+    background: var(--ink); color: var(--cream); text-align: center;
+    font-size: 0.8rem; padding: 9px 16px; letter-spacing: 0.03em;
+  }
+  header { position: absolute; top: 40px; left: 0; right: 0; z-index: 40; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo {
+    font-family: 'Newsreader', serif; font-size: 1.55rem;
+    letter-spacing: 0.04em; color: var(--white); font-weight: 500;
+  }
+  nav ul { display: flex; gap: 34px; list-style: none; align-items: center; }
+  nav a { font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+  nav a:hover { color: var(--white); }
+  .hero { position: relative; }
+  .hero-image {
+    height: 62vh; min-height: 440px; background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  .hero-image .placeholder-fill {
+    position: absolute; inset: 0;
+    background: radial-gradient(120% 90% at 70% 10%, #3a4258 0%, #262c3d 55%, #1c2030 100%);
+  }
+  .hero-image .placeholder-note {
+    position: absolute; inset: 0; display: flex; align-items: center;
+    justify-content: center; color: rgba(255,255,255,0.35);
+    font-size: 0.85rem; letter-spacing: 0.04em; text-align: center; padding: 0 20px;
+  }
+  .hero-panel {
+    background: var(--cream); position: relative; margin-top: -70px;
+    border-top-left-radius: 26px; border-top-right-radius: 26px;
+  }
+  .hero-panel-inner {
+    display: grid; grid-template-columns: 1.35fr 1fr; gap: 60px;
+    align-items: end; padding: 54px 0 76px;
+  }
+  .hero-headline {
+    font-size: clamp(2.8rem, 6.5vw, 5.4rem); color: var(--ink); letter-spacing: -0.025em;
+  }
+  .hero-headline .accent { color: var(--rust); font-style: italic; }
+  .hero-eyebrow-row { padding-top: 34px; padding-bottom: 26px; }
+  .hero-support { padding-bottom: 14px; }
+  .hero-support p {
+    font-size: 1.12rem; color: var(--muted); max-width: 340px; margin-bottom: 28px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--rust); color: var(--white); padding: 15px 26px;
+    border-radius: 8px; font-weight: 500; font-size: 0.95rem;
+    transition: background 0.2s ease;
+  }
+  .btn:hover { background: var(--rust-deep); }
+  .btn .arrow { font-size: 1.05rem; line-height: 1; }
+  .accent-tabs { display: flex; gap: 0; margin-top: 40px; }
+  .accent-tabs span { height: 8px; flex: 1; max-width: 120px; }
+  .accent-tabs span:nth-child(1) { background: var(--sage); }
+  .accent-tabs span:nth-child(2) { background: var(--rust); }
+  .accent-tabs span:nth-child(3) { background: var(--ink); }
+  .services { padding: 100px 0 90px; }
+  .services-head {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: end; margin-bottom: 56px;
+  }
+  .services-head h2 { font-size: clamp(2rem, 3.6vw, 3rem); color: var(--ink); }
+  .services-head p { color: var(--muted); max-width: 380px; justify-self: end; }
+  .service-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden;
+  }
+  .service-card { background: var(--cream); padding: 34px 30px 30px; transition: background 0.2s ease; }
+  .service-card:hover { background: var(--cream-soft); }
+  .service-num {
+    font-family: 'Newsreader', serif; font-style: italic;
+    color: var(--rust); font-size: 1rem; margin-bottom: 18px;
+  }
+  .service-card h3 { font-size: 1.4rem; color: var(--ink); margin-bottom: 16px; }
+  .service-card ul { list-style: none; color: var(--muted); font-size: 0.93rem; }
+  .service-card li { padding: 7px 0; border-top: 1px solid var(--line); }
+  .service-card li:first-child { border-top: none; }
+  .story { background: var(--navy); color: var(--cream); padding: 96px 0; }
+  .story-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+  .story h2 { font-size: clamp(1.9rem, 3.4vw, 2.8rem); color: var(--white); margin: 18px 0 22px; }
+  .story .eyebrow { color: rgba(255,255,255,0.6); }
+  .story .eyebrow::before { border-color: var(--rust); }
+  .story p { color: rgba(244,239,230,0.82); font-size: 1.05rem; }
+  .story-image {
+    aspect-ratio: 4/3; border-radius: 16px;
+    background: radial-gradient(120% 100% at 30% 20%, #3a4258, #1c2030);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.35); font-size: 0.85rem; text-align: center; padding: 20px;
+  }
+  .quote { padding: 100px 0; text-align: center; }
+  .quote .eyebrow { margin-bottom: 22px; }
+  .quote h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--ink); max-width: 720px; margin: 0 auto 20px; }
+  .quote h2 .accent { color: var(--rust); font-style: italic; }
+  .quote p { color: var(--muted); max-width: 480px; margin: 0 auto 34px; }
+  .testimonials { padding: 90px 0; background: var(--cream-soft); }
+  .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 50px; }
+  .t-card { background: var(--cream); border: 1px solid var(--line); border-radius: 14px; padding: 30px 28px; }
+  .t-card .mark {
+    font-family: 'Newsreader', serif; font-style: italic; font-size: 2.4rem;
+    color: var(--rust); line-height: 0.5; display: block; margin-bottom: 18px;
+  }
+  .t-card p { color: var(--muted); font-size: 0.95rem; }
+  .t-card .name { display: block; margin-top: 20px; font-weight: 600; color: var(--ink); font-size: 0.85rem; }
+  footer { background: var(--ink); color: rgba(244,239,230,0.7); padding: 70px 0 32px; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px;
+    padding-bottom: 46px; border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .footer-logo {
+    font-family: 'Newsreader', serif; font-size: 1.5rem; color: var(--cream);
+    letter-spacing: 0.04em; margin-bottom: 16px;
+  }
+  .footer-top p { font-size: 0.92rem; max-width: 300px; }
+  .footer-top h4 {
+    color: var(--cream); font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 18px; font-weight: 600;
+  }
+  .footer-top ul { list-style: none; font-size: 0.92rem; }
+  .footer-top li { padding: 6px 0; }
+  .footer-top a:hover { color: var(--cream); }
+  .social-row { display: flex; gap: 12px; margin-top: 20px; }
+  .social-row a {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); display: flex; align-items: center;
+    justify-content: center; font-size: 0.78rem; font-weight: 600;
+    color: var(--cream); transition: background 0.2s ease;
+  }
+  .social-row a:hover { background: var(--rust); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; padding-top: 26px;
+    font-size: 0.82rem; flex-wrap: wrap; gap: 10px;
+  }
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    nav { display: none; }
+    .hero-panel-inner { grid-template-columns: 1fr; gap: 30px; align-items: start; }
+    .services-head { grid-template-columns: 1fr; }
+    .services-head p { justify-self: start; }
+    .service-grid { grid-template-columns: 1fr; }
+    .story-inner { grid-template-columns: 1fr; gap: 36px; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  Demo concept for Rafferty McGrath &amp; Co — built by feedme.design. Not the live site.
+</div>
+
+<header>
+  <div class="wrap nav-inner">
+    <div class="logo">Rafferty McGrath</div>
+    <nav>
+      <ul>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-image">
+    <div class="placeholder-fill"></div>
+    <div class="placeholder-note">
+      [ Placeholder: full-bleed atmospheric image — Belfast cityscape, Antrim Road, or a warm human portrait of the team ]
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <div class="wrap">
+      <div class="hero-eyebrow-row">
+        <span class="eyebrow">On your side, in plain English</span>
+      </div>
+      <div class="hero-panel-inner">
+        <h1 class="hero-headline">
+          We live in the law so <span class="accent">you don't get lost in it.</span>
+        </h1>
+        <div class="hero-support">
+          <p>
+            Belfast solicitors who explain legal technicalities in straightforward English,
+            and stay firmly on your side when it matters most.
+          </p>
+          <a class="btn" href="#quote">Get a free quote <span class="arrow">&rarr;</span></a>
+          <div class="accent-tabs">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head">
+      <h2>What we help with</h2>
+      <p>A wide range of services that protect you both in good times and bad.</p>
+    </div>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Personal Injury</h3>
+        <ul>
+          <li>Road traffic accidents</li>
+          <li>Accidents at work</li>
+          <li>Criminal injury</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>House Buying &amp; Selling</h3>
+        <ul>
+          <li>House buying and selling</li>
+          <li>Remortgaging</li>
+          <li>Transfers of equity and title queries</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Matrimonial</h3>
+        <ul>
+          <li>Divorce and separation</li>
+          <li>Finance settlement and housing rights</li>
+          <li>Contact with children following separation</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Children</h3>
+        <ul>
+          <li>Contact with children on divorce</li>
+          <li>Unmarried parents' rights</li>
+          <li>Social services involvement</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>Repossession</h3>
+        <ul>
+          <li>Your rights</li>
+          <li>The bank's rights</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h3>Mediation</h3>
+        <ul>
+          <li>Support through relationship breakdown</li>
+          <li>Help reaching decisions</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap story-inner">
+    <div>
+      <span class="eyebrow">Our story</span>
+      <h2>We're on your side</h2>
+      <p>
+        We're a team of Belfast solicitors who know our specialist areas down to the last
+        clause, but who keep an open mind on every legal issue and explain the technicalities
+        in straightforward English. Our role is clear: to provide supportive, effective legal
+        services to people in times of stress. Whether it's a personal injury claim, a
+        contentious divorce, or a business dispute, you'll find we take a fresh and effective
+        approach to the law.
+      </p>
+    </div>
+    <div class="story-image">
+      [ Placeholder: team photo or office interior ]
+    </div>
+  </div>
+</section>
+
+<section class="quote" id="quote">
+  <div class="wrap">
+    <span class="eyebrow">Conveyancing</span>
+    <h2>Get a free, instant conveyancing quote <span class="accent">online.</span></h2>
+    <p>Tell us a little about your move and get a no-obligation quote in minutes.</p>
+    <a class="btn" href="#contact">Start your quote <span class="arrow">&rarr;</span></a>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <span class="eyebrow">What clients say</span>
+    <div class="testimonial-grid">
+      <div class="t-card">
+        <span class="mark">"</span>
+        <p>[ Placeholder: pull a real testimonial from the existing Testimonials page ]</p>
+        <span class="name">&mdash; Client name</span>
+      </div>
+      <div class="t-card">
+        <span class="mark">"</span>
+        <p>[ Placeholder: pull a real testimonial from the existing Testimonials page ]</p>
+        <span class="name">&mdash; Client name</span>
+      </div>
+      <div class="t-card">
+        <span class="mark">"</span>
+        <p>[ Placeholder: pull a real testimonial from the existing Testimonials page ]</p>
+        <span class="name">&mdash; Client name</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Rafferty McGrath &amp; Co</div>
+        <p>Belfast solicitors providing supportive, effective legal services in times of stress.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="mailto:info@raffertymcgrath.com" aria-label="Email">@</a>
+        </div>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li>028 90 770046</li>
+          <li>info@raffertymcgrath.com</li>
+          <li>Antrim Road, Belfast</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; Rafferty McGrath &amp; Co Solicitors. Demo concept only.</span>
+      <span>Demo built by feedme.design</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
