@@ -74,6 +74,7 @@ nav {
 
 .nav-links {
     display: flex;
+    align-items: center;
     justify-content: right;
     gap: 2.5rem;
     margin-left: auto;
