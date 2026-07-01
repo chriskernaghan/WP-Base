@@ -235,6 +235,8 @@ nav {
     top: 80px;
     left: 0;
     width: 100%;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
     background: var(--snow);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     flex-direction: column;
@@ -244,6 +246,23 @@ nav {
 
 .mobile-menu.open {
     display: flex;
+}
+
+/* Backdrop behind the open mobile menu, so page content underneath
+   doesn't visually bleed up against the menu's last item / CTA */
+.mobile-menu-backdrop {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: rgba(8, 16, 28, 0.35);
+    z-index: 998;
+}
+
+.mobile-menu-backdrop.open {
+    display: block;
 }
 
 .mobile-menu a,
