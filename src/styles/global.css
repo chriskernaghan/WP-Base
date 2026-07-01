@@ -110,6 +110,7 @@ nav {
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
+    align-items:center;
 }
 
 .nav-cta:hover {
