@@ -3,6 +3,7 @@
 // Handles <head>, fonts, gtag, nav, footer. One file to rule them all.
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import WhatsAppWidget from '../components/WhatsAppWidget.astro';
 import '../styles/global.css';
 interface Props {
   title: string;
@@ -55,5 +56,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
     <Nav />
     <slot />
     <Footer />
+    <WhatsAppWidget />
   </body>
 </html>
