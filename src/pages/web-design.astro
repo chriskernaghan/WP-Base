@@ -1,0 +1,291 @@
+---
+// web-design.astro — commercial landing page for web design work.
+// Thin page: wraps BaseLayout, reuses Marquee / Pricing / Contact, and adds a
+// self-contained design block with scoped styles (same pattern as website-speed.astro).
+// Positioning: a website is a first impression that either wins work or loses it.
+// Leads with the trust angle (what an outdated site says about the business) and
+// keeps the pitch honest — built to bring in enquiries, not to win design awards.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Marquee from '../components/Marquee.astro';
+import Pricing from '../components/Pricing.astro';
+import Contact from '../components/Contact.astro';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Web Design',
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'WP Base',
+    url: 'https://wpbase.co.uk/',
+    email: 'hello@wpbase.co.uk',
+    telephone: '+447379334695',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Newtownabbey',
+      addressRegion: 'Northern Ireland',
+      addressCountry: 'GB',
+    },
+  },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Northern Ireland' },
+  description:
+    'Web design for small businesses in Northern Ireland. Clean, fast websites built to win you enquiries, not design awards. Built properly on WordPress, easy to update, and looked after once they are live.',
+};
+
+const offer = [
+  {
+    title: 'Designed around what you want it to do',
+    body: "Before anything gets built, we work out what the site is actually for. More enquiries, more bookings, looking credible to bigger clients. Every page then earns its place by moving a visitor towards that, rather than existing because other sites have one.",
+  },
+  {
+    title: 'Built properly, not bolted together',
+    body: 'Built on WordPress with clean, fast foundations, so it loads quickly on a phone and doesn\'t fall over the first time a plugin updates. You own it outright, it lives in your accounts, and any developer could pick it up after me.',
+  },
+  {
+    title: 'Easy for you to update',
+    body: "You shouldn't need to ring a developer to change your opening hours or add a news post. I set the site up so the everyday edits are genuinely doable by you, with a walkthrough when we hand over so nothing feels like a mystery.",
+  },
+  {
+    title: 'Looked after once it\u2019s live',
+    body: "Launch day isn't the finish line. Sites need updates, backups and a bit of attention to stay fast and secure. Most of my design clients move onto a care plan afterwards, so the site keeps working as well in year three as it did in week one.",
+  },
+];
+---
+<BaseLayout
+  title="Web Design in Northern Ireland — WP Base"
+  description="Web design for small businesses in Northern Ireland. Clean, fast websites built to win you enquiries, built properly on WordPress, and looked after once they're live."
+  schema={serviceSchema}
+>
+  <section class="design-hero-section">
+    <div class="design-inner">
+      <span class="section-label">Web Design · Northern Ireland</span>
+      <h1 class="design-headline">
+        A website that<br />
+        <span class="accent">wins you work</span>
+      </h1>
+      <p class="design-lead">
+        Your website is usually the first look someone gets at your business, and
+        they make their mind up fast. I design and build clean, quick websites for
+        small businesses in Northern Ireland that make that first impression count,
+        and turn more of your visitors into enquiries.
+      </p>
+      <div class="design-cta-row">
+        <a href="#contact" class="design-cta-primary">
+          Get Your Free Audit
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+        </a>
+        <a href="#what-you-get" class="design-cta-secondary">What you get</a>
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <section class="design-problem-section">
+    <div class="design-reading">
+      <span class="section-label">The uncomfortable truth</span>
+      <h2>People judge your business by your website, fair or not</h2>
+      <p>
+        You might do brilliant work. But if someone lands on a site that looks ten
+        years old, loads slowly on their phone, or has a contact form that doesn't
+        work, a fair few of them will assume the business behind it is the same.
+        They won't tell you. They'll just click back and ring the next result on
+        Google instead.
+      </p>
+      <p>
+        The frustrating part is that you never see it happen. There's no bounced
+        email, no missed call, no feedback. Just enquiries that end up with a
+        competitor who made a better first impression. A well-built website doesn't need
+        to be flashy to fix this. It needs to look credible, load fast, work on a
+        phone, and make it obvious how to get in touch.
+      </p>
+    </div>
+  </section>
+
+  <section id="what-you-get" class="design-offer-section">
+    <div class="design-inner">
+      <span class="section-label">What building with WP Base looks like</span>
+      <h2>Designed with a purpose, built to last</h2>
+      <div class="design-grid">
+        {offer.map((item) => (
+          <div class="design-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="design-honest-section">
+    <div class="design-reading">
+      <span class="section-label">Worth saying plainly</span>
+      <h2>Built to bring in enquiries, not to win design awards</h2>
+      <p>
+        Plenty of agencies will sell you something beautiful that takes months,
+        costs a fortune, and leaves you dependent on them for every small change.
+        That's not what I do. I build sites for small businesses that need to look
+        the part, load fast, and bring in work, delivered by one person you can
+        actually get on the phone.
+      </p>
+      <p>
+        And if your current site is closer than you think, I'll say so. Sometimes a
+        business doesn't need a rebuild, it needs a tidy-up, a speed fix, or a bit
+        of care. The free audit tells you which camp you're in, honestly, before
+        anyone talks about money.
+      </p>
+      <p class="design-related-link">
+        <a href="/#clients">
+          See recent work: Catagen, ExportExplore and more →
+        </a>
+      </p>
+      <p class="design-related-link">
+        A good build is only the start. Keeping it fast is
+        <a href="/website-speed">website speed</a> work, and keeping it secure and
+        up to date is ongoing <a href="/wordpress-maintenance">WordPress maintenance</a>.
+      </p>
+    </div>
+  </section>
+
+  <Pricing />
+  <Contact />
+</BaseLayout>
+
+<style>
+  .design-hero-section {
+    padding: 7rem 1.5rem 4rem;
+    background: var(--midnight);
+    color: var(--snow);
+  }
+  .design-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  /* eyebrow label sits on a dark background in the hero, so lighten it */
+  .design-hero-section .section-label {
+    color: var(--text-light);
+  }
+  .design-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin: 1rem 0 1.5rem;
+  }
+  .design-headline .accent {
+    color: var(--accent);
+  }
+  .design-lead {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    max-width: 640px;
+    opacity: 0.9;
+  }
+  .design-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .design-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--midnight);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .design-cta-primary:hover {
+    transform: translateY(-2px);
+  }
+  .design-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--snow);
+    transition: border-color 0.15s ease;
+  }
+  .design-cta-secondary:hover {
+    border-color: var(--snow);
+  }
+
+  .design-problem-section,
+  .design-honest-section {
+    padding: 4rem 1.5rem;
+  }
+  .design-reading {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .design-reading h2,
+  .design-offer-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0.75rem 0 1.5rem;
+  }
+  .design-reading p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    opacity: 0.85;
+  }
+  .design-related-link a {
+    color: var(--midnight);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .design-offer-section {
+    padding: 4rem 1.5rem;
+  }
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .design-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(8, 16, 28, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .design-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+  }
+  .design-card p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 720px) {
+    .design-grid {
+      grid-template-columns: 1fr;
+    }
+    .design-hero-section {
+      padding-top: 5.5rem;
+    }
+  }
+</style>
