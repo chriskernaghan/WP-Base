@@ -1,17 +1,7 @@
----
-// Nav.astro — site-wide navigation
-// Desktop: single-column mega-menu with icon + description per service.
-// Mobile: Services collapses into a tap-to-expand accordion.
-// Icons are inline SVG (no dependencies). To add a service later, copy one
-// .mega-item block in the desktop menu and one .mobile-sublink in the mobile
-// accordion — nothing else needs to change.
----
-
 <nav>
   <div class="nav-inner">
     <a href="/" class="logo">WP Base</a>
     <div class="nav-links">
-      <a href="/#clients">Case Studies</a>
       <div class="dropdown">
         <a href="/wordpress-maintenance" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
           Services
@@ -58,8 +48,9 @@
           </a>
         </div>
       </div>
-      <a href="/#pricing">Pricing</a>
+      <a href="/#clients">Case Studies</a>
       <a href="/blog">Blog</a>
+      <a href="/#pricing">Pricing</a>
       <a class="nav-cta" href="mailto:hello@wpbase.co.uk">Get in Touch</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -74,8 +65,6 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="/#clients">Case Studies</a>
-
   <div class="mobile-accordion" id="mobileServicesAccordion">
     <button class="mobile-accordion-toggle" id="mobileServicesToggle" aria-expanded="false" aria-controls="mobileServicesPanel">
       Services
@@ -90,8 +79,9 @@
     </div>
   </div>
 
-  <a href="/#pricing">Pricing</a>
+  <a href="/#clients">Case Studies</a>
   <a href="/blog">Blog</a>
+  <a href="/#pricing">Pricing</a>
   <a href="/#contact" class="mobile-cta">Get Your Free Audit</a>
 </div>
 
