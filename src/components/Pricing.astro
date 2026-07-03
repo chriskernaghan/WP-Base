@@ -1,10 +1,13 @@
 ---
-// Pricing.astro — three tiers plus custom card.
+// Pricing.astro — three tiers plus custom card, with monthly/annual billing toggle.
+// Annual = 10 months' price (two months free). Displayed as monthly equivalent.
 
 const tiers = [
   {
     tier: 'Silver',
-    price: '99',
+    monthly: 99,
+    annualMonthly: 82,
+    annualTotal: 990,
     hours: '5 hours included',
     featured: false,
     features: [
@@ -17,7 +20,9 @@ const tiers = [
   },
   {
     tier: 'Gold',
-    price: '169',
+    monthly: 169,
+    annualMonthly: 140,
+    annualTotal: 1690,
     hours: '10 hours included',
     featured: true,
     features: [
@@ -30,7 +35,9 @@ const tiers = [
   },
   {
     tier: 'Platinum',
-    price: '239',
+    monthly: 239,
+    annualMonthly: 199,
+    annualTotal: 2390,
     hours: '15 hours included',
     featured: false,
     features: [
@@ -50,13 +57,24 @@ const tiers = [
     <h2>Simple, Transparent Pricing</h2>
     <p>No surprises, no hidden fees, just reliable WordPress care at a fixed monthly rate</p>
   </div>
-  <div class="pricing-grid">
+  <div class="billing-toggle" role="group" aria-label="Billing period">
+    <button type="button" class="billing-option is-active" data-billing="monthly" aria-pressed="true">Monthly</button>
+    <button type="button" class="billing-option" data-billing="annual" aria-pressed="false">
+      Annual <span class="billing-badge">2 months free</span>
+    </button>
+  </div>
+  <div class="pricing-grid" data-billing-mode="monthly">
     {tiers.map((tier) => (
       <div class={`pricing-card${tier.featured ? ' featured' : ''}`}>
         {tier.featured && <div class="featured-label">Most Popular</div>}
         <div class="pricing-tier">{tier.tier}</div>
-        <div class="pricing-price"><sup>£</sup>{tier.price}</div>
-        <div class="pricing-period">per month</div>
+        <div class="pricing-price">
+          <sup>£</sup><span class="price-value" data-monthly={tier.monthly} data-annual={tier.annualMonthly}>{tier.monthly}</span>
+        </div>
+        <div class="pricing-period">
+          <span class="period-monthly">per month</span>
+          <span class="period-annual">per month, billed annually (£{tier.annualTotal.toLocaleString('en-GB')})</span>
+        </div>
         <div class="pricing-hours">⏱ {tier.hours}</div>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
@@ -73,3 +91,29 @@ const tiers = [
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll('.billing-toggle').forEach((toggle) => {
+    const grid = toggle.parentElement?.querySelector('.pricing-grid');
+    if (!grid) return;
+
+    toggle.querySelectorAll('.billing-option').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-billing');
+        if (!mode || btn.classList.contains('is-active')) return;
+
+        toggle.querySelectorAll('.billing-option').forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-pressed', String(active));
+        });
+
+        grid.setAttribute('data-billing-mode', mode);
+        grid.querySelectorAll('.price-value').forEach((el) => {
+          const value = el.getAttribute(mode === 'annual' ? 'data-annual' : 'data-monthly');
+          if (value) el.textContent = value;
+        });
+      });
+    });
+  });
+</script>
