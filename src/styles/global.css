@@ -107,7 +107,7 @@ nav {
     padding: 0.65rem 1.5rem;
     border-radius: 50px;
     font-size: 0.85rem;
-    font-weight: 700;
+    font-weight: bold !important;
     text-decoration: none;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -250,8 +250,6 @@ nav {
     display: flex;
 }
 
-/* Backdrop behind the open mobile menu, so page content underneath
-   doesn't visually bleed up against the menu's last item / CTA */
 .mobile-menu-backdrop {
     display: none;
     position: fixed;
@@ -296,8 +294,6 @@ nav {
     text-decoration: none;
 }
 
-/* On mobile the service pages are listed flat (no tap-to-expand) for
-   reliability and crawlability. The label row sits above the indented links. */
 .mobile-menu .mobile-services-label {
     font-weight: 600;
     color: var(--midnight);
@@ -314,7 +310,7 @@ nav {
     background: var(--accent);
     color: var(--accent-text) !important;
     text-align: center;
-    font-weight: 700;
+    font-weight: bold !important;
     transition: background 0.3s ease;
 }
 
@@ -583,7 +579,7 @@ nav {
     background: var(--accent);
     color: var(--accent-text);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: bold !important;
     font-size: 0.95rem;
     border-radius: 50px;
     transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -730,6 +726,7 @@ footer a:hover {
     font-size: 0.9rem;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-weight: bold !important;
 }
 
 .hero-v2-cta-primary:hover {
