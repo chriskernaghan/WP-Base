@@ -3886,3 +3886,73 @@ footer a:hover {
     padding: 4rem 0;
   }
 }
+
+/* ── Billing toggle (append to end of global.css) ───────────── */
+
+.billing-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    background: var(--snow);
+    border: 1px solid var(--sand);
+    border-radius: 50px;
+    padding: 0.35rem;
+    width: fit-content;
+    margin: 0 auto 3rem;
+}
+
+.billing-option {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light);
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    padding: 0.55rem 1.4rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.25s ease;
+}
+
+.billing-option:hover {
+    color: var(--midnight);
+}
+
+.billing-option.is-active {
+    background: var(--midnight);
+    color: var(--cream);
+}
+
+.billing-badge {
+    background: var(--accent);
+    color: var(--accent-text);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.pricing-period .period-annual {
+    display: none;
+}
+
+.pricing-grid[data-billing-mode="annual"] .period-monthly {
+    display: none;
+}
+
+.pricing-grid[data-billing-mode="annual"] .period-annual {
+    display: inline;
+}
+
+@media (max-width: 640px) {
+    .billing-option {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
