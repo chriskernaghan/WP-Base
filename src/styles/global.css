@@ -3887,7 +3887,7 @@ footer a:hover {
   }
 }
 
-/* ── Billing toggle (append to end of global.css) ───────────── */
+/* ── Billing toggle + condensed pricing (append to end of global.css) ── */
 
 .billing-toggle {
     display: flex;
@@ -3938,21 +3938,64 @@ footer a:hover {
     white-space: nowrap;
 }
 
-.pricing-period .period-annual {
-    display: none;
+/* Condensed card overrides */
+
+.pricing-card {
+    padding: 2rem;
 }
 
-.pricing-grid[data-billing-mode="annual"] .period-monthly {
-    display: none;
+.pricing-price {
+    font-size: 3rem;
+    margin-bottom: 0.2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
 }
 
-.pricing-grid[data-billing-mode="annual"] .period-annual {
-    display: inline;
+.price-period {
+    font-family: "Epilogue", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-light);
+    letter-spacing: 0;
+}
+
+.pricing-card.featured .price-period {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.pricing-billed {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 1.25rem;
+    visibility: hidden;
+}
+
+.pricing-grid[data-billing-mode="annual"] .pricing-billed {
+    visibility: visible;
+}
+
+.pricing-card.featured .pricing-billed {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.pricing-hours {
+    margin-bottom: 1.25rem;
+    padding: 0.4rem 0.9rem;
+}
+
+.pricing-features li {
+    line-height: 1.35;
+    white-space: nowrap;
 }
 
 @media (max-width: 640px) {
     .billing-option {
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
+    }
+
+    .pricing-features li {
+        white-space: normal;
     }
 }
