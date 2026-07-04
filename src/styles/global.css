@@ -416,7 +416,6 @@ nav {
     text-align: left;
     cursor: pointer;
     font-family: inherit;
-    font-weight: 600;
     font-size: 1.1rem;
     color: var(--midnight);
     padding: 1.1rem 2rem;
