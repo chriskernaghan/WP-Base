@@ -667,6 +667,59 @@ footer a:hover {
     gap: 2.25rem;
 }
 
+/* Google rating pill — sits above the headline as lead proof */
+.hero-v2-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    align-self: flex-start;
+    background: rgba(212, 255, 58, 0.12);
+    border: 1px solid rgba(212, 255, 58, 0.4);
+    color: var(--midnight);
+    text-decoration: none;
+    padding: 0.5rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    line-height: 1;
+    opacity: 0;
+    animation: heroFadeUp 0.6s ease forwards;
+    animation-delay: 0.15s;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-v2-rating:hover {
+    background: rgba(212, 255, 58, 0.2);
+    border-color: rgba(212, 255, 58, 0.7);
+}
+
+.hero-v2-rating-stars {
+    color: #E5A000;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+}
+
+.hero-v2-rating-text {
+    color: var(--midnight);
+    font-weight: 400;
+}
+
+.hero-v2-rating-text strong {
+    font-weight: 600;
+}
+
+/* Plain-English description under the headline */
+.hero-v2-left .hero-v2-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 440px;
+    opacity: 0;
+    animation: heroFadeUp 0.7s ease forwards;
+    animation-delay: 0.4s;
+}
+
 .hero-v2-headline {
     font-family: "Space Grotesk", sans-serif;
     font-size: clamp(2.8rem, 4.8vw, 4.5rem);
@@ -881,7 +934,9 @@ footer a:hover {
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .hero-v2-tag,
+    .hero-v2-rating,
     .hero-v2-headline,
+    .hero-v2-left .hero-v2-desc,
     .hero-v2-right,
     .hero-v2-stats,
     .hero-v2-cta-row,
