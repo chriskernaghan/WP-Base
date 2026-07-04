@@ -1,7 +1,7 @@
 ---
 // Pricing.astro — three tiers plus custom card, monthly/annual toggle, condensed layout.
 // Annual = 10 months' price (two months free), shown as monthly equivalent.
-
+// CTAs link to Stripe Payment Links; the billing toggle swaps both price and href.
 const tiers = [
   {
     tier: 'Silver',
@@ -10,6 +10,8 @@ const tiers = [
     annualTotal: 990,
     hours: '5 hours included',
     featured: false,
+    monthlyUrl: 'STRIPE_SILVER_MONTHLY_URL',
+    annualUrl: 'STRIPE_SILVER_ANNUAL_URL',
     features: [
       'Core, plugin & theme updates',
       'Daily backups',
@@ -24,6 +26,8 @@ const tiers = [
     annualTotal: 1690,
     hours: '10 hours included',
     featured: true,
+    monthlyUrl: 'STRIPE_GOLD_MONTHLY_URL',
+    annualUrl: 'STRIPE_GOLD_ANNUAL_URL',
     features: [
       'Everything in Silver',
       'Performance optimisation',
@@ -39,6 +43,8 @@ const tiers = [
     annualTotal: 2390,
     hours: '15 hours included',
     featured: false,
+    monthlyUrl: 'STRIPE_PLATINUM_MONTHLY_URL',
+    annualUrl: 'STRIPE_PLATINUM_ANNUAL_URL',
     features: [
       'Everything in Gold',
       'Content updates',
@@ -49,7 +55,6 @@ const tiers = [
   },
 ];
 ---
-
 <section id="pricing" class="pricing">
   <div class="section-header">
     <span class="section-label">Pricing</span>
@@ -77,7 +82,7 @@ const tiers = [
         <ul class="pricing-features">
           {tier.features.map((f) => <li>{f}</li>)}
         </ul>
-        <a href="#contact" class="pricing-cta">Get Started</a>
+        <a href={tier.monthlyUrl} class="pricing-cta" data-monthly-url={tier.monthlyUrl} data-annual-url={tier.annualUrl}>Get Started</a>
       </div>
     ))}
     <div class="pricing-card pricing-custom">
@@ -88,27 +93,27 @@ const tiers = [
     </div>
   </div>
 </section>
-
 <script>
   document.querySelectorAll('.billing-toggle').forEach((toggle) => {
     const grid = toggle.parentElement?.querySelector('.pricing-grid');
     if (!grid) return;
-
     toggle.querySelectorAll('.billing-option').forEach((btn) => {
       btn.addEventListener('click', () => {
         const mode = btn.getAttribute('data-billing');
         if (!mode || btn.classList.contains('is-active')) return;
-
         toggle.querySelectorAll('.billing-option').forEach((b) => {
           const active = b === btn;
           b.classList.toggle('is-active', active);
           b.setAttribute('aria-pressed', String(active));
         });
-
         grid.setAttribute('data-billing-mode', mode);
         grid.querySelectorAll('.price-value').forEach((el) => {
           const value = el.getAttribute(mode === 'annual' ? 'data-annual' : 'data-monthly');
           if (value) el.textContent = value;
+        });
+        grid.querySelectorAll('.pricing-cta[data-monthly-url]').forEach((el) => {
+          const url = el.getAttribute(mode === 'annual' ? 'data-annual-url' : 'data-monthly-url');
+          if (url) el.setAttribute('href', url);
         });
       });
     });
