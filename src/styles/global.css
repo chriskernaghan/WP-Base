@@ -959,8 +959,8 @@ footer a:hover {
     font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
     width: 100%;
     max-width: 480px;
-    justify-self: end;
-    align-self: end;
+    justify-self: middle;
+    align-self: middle;
     opacity: 0;
     animation: heroFadeUp 0.7s ease forwards;
     animation-delay: 0.5s;
