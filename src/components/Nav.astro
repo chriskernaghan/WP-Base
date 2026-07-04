@@ -1,12 +1,3 @@
----
-// Nav.astro — site-wide navigation
-// Desktop: single-column mega-menu with icon + description per service.
-// Mobile: Services collapses into a tap-to-expand accordion.
-// Icons are inline SVG (no dependencies). To add a service later, copy one
-// .mega-item block in the desktop menu and one .mobile-sublink in the mobile
-// accordion — nothing else needs to change.
----
-
 <nav>
   <div class="nav-inner">
     <a href="/" class="logo">WP Base</a>
@@ -125,11 +116,31 @@
     mobileMenuBackdrop?.classList.remove('open');
   }
 
+  // Pin the menu directly below the nav's real bottom edge. The nav's height
+  // varies (mobile padding, scroll state), so a hardcoded CSS top clips the
+  // first menu item. Measure it instead.
+  function positionMobileMenu() {
+    const navEl = document.querySelector('nav');
+    if (!navEl || !mobileMenu) return;
+    const navBottom = Math.round(navEl.getBoundingClientRect().bottom);
+    mobileMenu.style.top = navBottom + 'px';
+    mobileMenu.style.maxHeight = `calc(100vh - ${navBottom}px)`;
+    if (mobileMenuBackdrop) {
+      mobileMenuBackdrop.style.top = navBottom + 'px';
+      mobileMenuBackdrop.style.height = `calc(100vh - ${navBottom}px)`;
+    }
+  }
+
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
+      positionMobileMenu();
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
       mobileMenuBackdrop?.classList.toggle('open');
+    });
+
+    window.addEventListener('resize', () => {
+      if (mobileMenu.classList.contains('open')) positionMobileMenu();
     });
 
     // Close the menu when a real navigation link is tapped, but NOT when the
