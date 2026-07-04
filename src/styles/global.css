@@ -3579,7 +3579,7 @@ footer a:hover {
 
     /* Blog responsive */
     .latest-posts {
-        padding: 3.5rem 1.25rem;
+        padding: 0rem 1.25rem;
     }
 
     .posts-header {
@@ -3605,7 +3605,7 @@ footer a:hover {
 
     /* FAQ responsive */
     .faq-section {
-        padding: 3.5rem 1.25rem;
+        padding: 0 1.25rem;
     }
 
     .faq-inner > h2 {
