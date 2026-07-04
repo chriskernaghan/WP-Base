@@ -1,10 +1,3 @@
----
-// website-speed.astro — commercial landing page targeting "slow website" pain.
-// Thin page: wraps BaseLayout, reuses Marquee / Pricing / Contact, and adds a
-// self-contained speed block with scoped styles (same pattern as hosting.astro).
-// Positioning: a slow site is a business problem, not a technical one. Leads with
-// the lost-enquiries angle and the cached-browser point so the owner who thinks
-// "it loads fine for me" sees why first-time mobile visitors get a slower site.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Marquee from '../components/Marquee.astro';
 import Pricing from '../components/Pricing.astro';
@@ -36,18 +29,22 @@ const offer = [
   {
     title: 'Find out what it actually costs you',
     body: "I measure your site the way a first-time visitor on a phone experiences it, not the way it feels on your own device. You get a clear picture of how slow it really is and where the seconds are going, in plain numbers you can act on.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="16" r="9" stroke="currentColor" stroke-width="2"/><path d="M14 7V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 3.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 16l4-4" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {
     title: 'Fix the things that move the needle',
     body: 'Oversized images, bloated plugins, no caching, a host that can\'t keep up. The usual culprits are predictable, and most of them are fixable without rebuilding anything. I sort the ones that make a real difference to load time first.',
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 8h18M5 14h18M5 20h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="8" r="2.5" fill="var(--midnight)" stroke="var(--accent)" stroke-width="2"/><circle cx="18" cy="14" r="2.5" fill="var(--midnight)" stroke="var(--accent)" stroke-width="2"/><circle cx="13" cy="20" r="2.5" fill="var(--midnight)" stroke="var(--accent)" stroke-width="2"/></svg>`,
   },
   {
     title: 'Faster for the people who matter',
     body: "The goal isn't a perfect score to frame on the wall. It's that someone landing on your site from a Google search on their phone sees your business quickly enough to stay, rather than bouncing back to a competitor who loaded first.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="9" y="3" width="10" height="22" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M15.5 8.5 12 14h3.5L13 19.5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Kept fast, not just made fast',
     body: "Speed isn't a one-off. Sites drift slower over time as content, images and plugins pile up. As part of a care plan I keep an eye on it, so the work you pay for once doesn't unravel six months later.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23 14a9 9 0 1 1-2.6-6.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M23 4v5h-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
 ];
 ---
@@ -57,24 +54,66 @@ const offer = [
   schema={serviceSchema}
 >
   <section class="speed-hero-section">
-    <div class="speed-inner">
-      <span class="section-label">Website Speed · Northern Ireland</span>
-      <h1 class="speed-headline">
-        A slow website is<br />
-        <span class="accent">losing you business</span>
-      </h1>
-      <p class="speed-lead">
-        Most visitors won't wait. If your site takes too long to load on a phone,
-        they're gone before they see what you offer, and you never know it happened.
-        The good news is that slow sites are usually fixable, and it starts with
-        knowing how slow yours really is.
-      </p>
-      <div class="speed-cta-row">
-        <a href="#contact" class="speed-cta-primary">
-          Get Your Free Audit
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-        </a>
-        <a href="#what-you-get" class="speed-cta-secondary">What you get</a>
+    <div class="speed-inner speed-hero-grid">
+      <div class="speed-hero-copy">
+        <span class="section-label">Website Speed · Northern Ireland</span>
+        <h1 class="speed-headline">
+          A slow website is<br />
+          <span class="accent">losing you business</span>
+        </h1>
+        <p class="speed-lead">
+          Most visitors won't wait. If your site takes too long to load on a phone,
+          they're gone before they see what you offer, and you never know it happened.
+          The good news is that slow sites are usually fixable, and it starts with
+          knowing how slow yours really is.
+        </p>
+        <div class="speed-cta-row">
+          <a href="#contact" class="speed-cta-primary">
+            Get Your Free Audit
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+          <a href="#what-you-get" class="speed-cta-secondary">What you get</a>
+        </div>
+      </div>
+
+      <div class="speed-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <g stroke="rgba(255,255,255,0.07)" stroke-width="1">
+            <line x1="60" y1="0" x2="60" y2="440"/>
+            <line x1="500" y1="0" x2="500" y2="440"/>
+            <line x1="0" y1="60" x2="560" y2="60"/>
+            <line x1="0" y1="380" x2="560" y2="380"/>
+          </g>
+          <g>
+            <rect x="90" y="40" width="380" height="310" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <path d="M90 54a14 14 0 0 1 14-14h352a14 14 0 0 1 14 14v20H90V54Z" fill="rgba(255,255,255,0.06)"/>
+            <circle cx="112" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
+            <circle cx="126" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
+            <circle cx="140" cy="57" r="4" fill="var(--accent)"/>
+            <path d="M170 250 A110 110 0 0 1 390 250" stroke="rgba(255,255,255,0.18)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M335 155 A110 110 0 0 1 390 250" stroke="var(--accent)" stroke-width="10" stroke-linecap="round"/>
+            <line x1="163" y1="250" x2="151" y2="250" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="203" y1="172" x2="194" y2="164" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="280" y1="140" x2="280" y2="128" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="357" y1="172" x2="366" y2="164" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="397" y1="250" x2="409" y2="250" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="280" y1="250" x2="346" y2="172" stroke="rgba(255,255,255,0.9)" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="280" cy="250" r="9" fill="var(--accent)"/>
+            <rect x="216" y="286" width="128" height="9" rx="4.5" fill="rgba(255,255,255,0.85)"/>
+            <rect x="240" y="306" width="80" height="7" rx="3.5" fill="rgba(255,255,255,0.3)"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-a">
+            <rect x="410" y="118" width="132" height="56" rx="10" fill="var(--accent)"/>
+            <path d="M430 132 424 143h7l-4.5 11" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <rect x="448" y="134" width="52" height="7" rx="3.5" fill="var(--midnight)"/>
+            <rect x="448" y="148" width="36" height="7" rx="3.5" fill="var(--midnight)" opacity="0.55"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-b">
+            <rect x="28" y="300" width="96" height="40" rx="10" fill="rgba(11,17,32,0.9)" stroke="rgba(255,255,255,0.16)"/>
+            <path d="M42 320 L48 326 L60 312" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="70" y="316" width="42" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
+          </g>
+        </svg>
       </div>
     </div>
   </section>
@@ -108,6 +147,7 @@ const offer = [
       <div class="speed-grid">
         {offer.map((item) => (
           <div class="speed-card">
+            <div class="speed-card-icon" set:html={item.icon} />
             <h3>{item.title}</h3>
             <p>{item.body}</p>
           </div>
@@ -154,10 +194,17 @@ const offer = [
     padding: 7rem 1.5rem 4rem;
     background: var(--midnight);
     color: var(--snow);
+    overflow: hidden;
   }
   .speed-inner {
     max-width: 1200px;
     margin: 0 auto;
+  }
+  .speed-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
   }
   /* eyebrow label sits on a dark background in the hero, so lighten it */
   .speed-hero-section .section-label {
@@ -218,6 +265,31 @@ const offer = [
     border-color: var(--snow);
   }
 
+  .speed-hero-art {
+    min-width: 0;
+  }
+  .speed-hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hero-art-chip-a {
+    animation: heroChipFloat 6s ease-in-out infinite;
+  }
+  .hero-art-chip-b {
+    animation: heroChipFloat 7s ease-in-out 1.2s infinite;
+  }
+  @keyframes heroChipFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-art-chip-a,
+    .hero-art-chip-b {
+      animation: none;
+    }
+  }
+
   .speed-problem-section,
   .speed-honest-section {
     padding: 4rem 1.5rem;
@@ -264,6 +336,21 @@ const offer = [
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.4);
   }
+  .speed-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(8, 16, 28, 0.12);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    color: var(--midnight);
+  }
+  .speed-card-icon svg {
+    width: 26px;
+    height: 26px;
+  }
   .speed-card h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
@@ -276,6 +363,18 @@ const offer = [
     line-height: 1.6;
     margin: 0;
     opacity: 0.85;
+  }
+
+  @media (max-width: 960px) {
+    .speed-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .speed-hero-art {
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
   }
 
   @media (max-width: 720px) {
