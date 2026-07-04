@@ -1,10 +1,4 @@
 ---
-// web-design.astro — commercial landing page for web design work.
-// Thin page: wraps BaseLayout, reuses Marquee / Pricing / Contact, and adds a
-// self-contained design block with scoped styles (same pattern as website-speed.astro).
-// Positioning: a website is a first impression that either wins work or loses it.
-// Leads with the trust angle (what an outdated site says about the business) and
-// keeps the pitch honest — built to bring in enquiries, not to win design awards.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Marquee from '../components/Marquee.astro';
 import Pricing from '../components/Pricing.astro';
@@ -36,18 +30,22 @@ const offer = [
   {
     title: 'Designed around what you want it to do',
     body: "Before anything gets built, we work out what the site is actually for. More enquiries, more bookings, looking credible to bigger clients. Every page then earns its place by moving a visitor towards that, rather than existing because other sites have one.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="5" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="1.75" fill="var(--accent)"/></svg>`,
   },
   {
     title: 'Built properly, not bolted together',
     body: 'Built on WordPress with clean, fast foundations, so it loads quickly on a phone and doesn\'t fall over the first time a plugin updates. You own it outright, it lives in your accounts, and any developer could pick it up after me.',
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5 24.5 9 14 14.5 3.5 9 14 3.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 14.5 14 20l10.5-5.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 19.5 14 25l10.5-5.5" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Easy for you to update',
     body: "You shouldn't need to ring a developer to change your opening hours or add a news post. I set the site up so the everyday edits are genuinely doable by you, with a walkthrough when we hand over so nothing feels like a mystery.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.5 5.5 22.5 10.5 10 23H5v-5L17.5 5.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M15 8l5 5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {
     title: 'Looked after once it\u2019s live',
     body: "Launch day isn't the finish line. Sites need updates, backups and a bit of attention to stay fast and secure. Most of my design clients move onto a care plan afterwards, so the site keeps working as well in year three as it did in week one.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5c3.5 2 7 3 9.5 3v8c0 5.5-4 8.9-9.5 10.5C8.5 23.4 4.5 20 4.5 14.5v-8c2.5 0 6-1 9.5-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m10 14 3 3 5.5-6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
 ];
 ---
@@ -57,24 +55,80 @@ const offer = [
   schema={serviceSchema}
 >
   <section class="design-hero-section">
-    <div class="design-inner">
-      <span class="section-label">Web Design · Northern Ireland</span>
-      <h1 class="design-headline">
-        A website that<br />
-        <span class="accent">wins you work</span>
-      </h1>
-      <p class="design-lead">
-        Your website is usually the first look someone gets at your business, and
-        they make their mind up fast. I design and build clean, quick websites for
-        small businesses in Northern Ireland that make that first impression count,
-        and turn more of your visitors into enquiries.
-      </p>
-      <div class="design-cta-row">
-        <a href="#contact" class="design-cta-primary">
-          Get Your Free Audit
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-        </a>
-        <a href="#what-you-get" class="design-cta-secondary">What you get</a>
+    <div class="design-inner design-hero-grid">
+      <div class="design-hero-copy">
+        <span class="section-label">Web Design · Northern Ireland</span>
+        <h1 class="design-headline">
+          A website that<br />
+          <span class="accent">wins you work</span>
+        </h1>
+        <p class="design-lead">
+          Your website is usually the first look someone gets at your business, and
+          they make their mind up fast. I design and build clean, quick websites for
+          small businesses in Northern Ireland that make that first impression count,
+          and turn more of your visitors into enquiries.
+        </p>
+        <div class="design-cta-row">
+          <a href="#contact" class="design-cta-primary">
+            Get Your Free Audit
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+          <a href="#what-you-get" class="design-cta-secondary">What you get</a>
+        </div>
+      </div>
+
+      <div class="design-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <g stroke="rgba(255,255,255,0.07)" stroke-width="1">
+            <line x1="60" y1="0" x2="60" y2="440"/>
+            <line x1="500" y1="0" x2="500" y2="440"/>
+            <line x1="0" y1="60" x2="560" y2="60"/>
+            <line x1="0" y1="380" x2="560" y2="380"/>
+          </g>
+          <g class="hero-art-browser">
+            <rect x="90" y="40" width="380" height="310" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <path d="M90 54a14 14 0 0 1 14-14h352a14 14 0 0 1 14 14v20H90V54Z" fill="rgba(255,255,255,0.06)"/>
+            <circle cx="112" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
+            <circle cx="126" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
+            <circle cx="140" cy="57" r="4" fill="var(--accent)"/>
+            <rect x="116" y="94" width="54" height="8" rx="4" fill="rgba(255,255,255,0.85)"/>
+            <rect x="346" y="92" width="30" height="10" rx="5" fill="rgba(255,255,255,0.22)"/>
+            <rect x="384" y="90" width="62" height="14" rx="7" fill="var(--accent)"/>
+            <rect x="116" y="134" width="232" height="16" rx="6" fill="rgba(255,255,255,0.85)"/>
+            <rect x="116" y="158" width="170" height="16" rx="6" fill="var(--accent)"/>
+            <rect x="116" y="190" width="250" height="7" rx="3.5" fill="rgba(255,255,255,0.3)"/>
+            <rect x="116" y="204" width="212" height="7" rx="3.5" fill="rgba(255,255,255,0.3)"/>
+            <rect x="116" y="230" width="106" height="28" rx="14" fill="var(--accent)"/>
+            <rect x="138" y="242" width="62" height="5" rx="2.5" fill="var(--midnight)"/>
+            <g>
+              <rect x="116" y="280" width="100" height="52" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="132" cy="296" r="6" fill="var(--accent)"/>
+              <rect x="126" y="310" width="66" height="6" rx="3" fill="rgba(255,255,255,0.28)"/>
+            </g>
+            <g>
+              <rect x="230" y="280" width="100" height="52" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="246" cy="296" r="6" fill="rgba(255,255,255,0.6)"/>
+              <rect x="240" y="310" width="66" height="6" rx="3" fill="rgba(255,255,255,0.28)"/>
+            </g>
+            <g>
+              <rect x="344" y="280" width="100" height="52" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="360" cy="296" r="6" fill="rgba(255,255,255,0.6)"/>
+              <rect x="354" y="310" width="66" height="6" rx="3" fill="rgba(255,255,255,0.28)"/>
+            </g>
+          </g>
+          <g class="hero-art-chip hero-art-chip-a">
+            <rect x="410" y="118" width="132" height="56" rx="10" fill="var(--accent)"/>
+            <path d="M426 154 L438 140 L448 148 L464 130" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M464 130 L464 140 M464 130 L454 130" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="476" y="132" width="52" height="7" rx="3.5" fill="var(--midnight)"/>
+            <rect x="476" y="146" width="36" height="7" rx="3.5" fill="var(--midnight)" opacity="0.55"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-b">
+            <rect x="28" y="300" width="96" height="40" rx="10" fill="rgba(11,17,32,0.9)" stroke="rgba(255,255,255,0.16)"/>
+            <path d="M42 320 L48 326 L60 312" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="70" y="316" width="42" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
+          </g>
+        </svg>
       </div>
     </div>
   </section>
@@ -109,6 +163,7 @@ const offer = [
       <div class="design-grid">
         {offer.map((item) => (
           <div class="design-card">
+            <div class="design-card-icon" set:html={item.icon} />
             <h3>{item.title}</h3>
             <p>{item.body}</p>
           </div>
@@ -156,10 +211,17 @@ const offer = [
     padding: 7rem 1.5rem 4rem;
     background: var(--midnight);
     color: var(--snow);
+    overflow: hidden;
   }
   .design-inner {
     max-width: 1200px;
     margin: 0 auto;
+  }
+  .design-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
   }
   /* eyebrow label sits on a dark background in the hero, so lighten it */
   .design-hero-section .section-label {
@@ -220,6 +282,31 @@ const offer = [
     border-color: var(--snow);
   }
 
+  .design-hero-art {
+    min-width: 0;
+  }
+  .design-hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hero-art-chip-a {
+    animation: heroChipFloat 6s ease-in-out infinite;
+  }
+  .hero-art-chip-b {
+    animation: heroChipFloat 7s ease-in-out 1.2s infinite;
+  }
+  @keyframes heroChipFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-art-chip-a,
+    .hero-art-chip-b {
+      animation: none;
+    }
+  }
+
   .design-problem-section,
   .design-honest-section {
     padding: 4rem 1.5rem;
@@ -266,6 +353,21 @@ const offer = [
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.4);
   }
+  .design-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(8, 16, 28, 0.12);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    color: var(--midnight);
+  }
+  .design-card-icon svg {
+    width: 26px;
+    height: 26px;
+  }
   .design-card h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
@@ -278,6 +380,18 @@ const offer = [
     line-height: 1.6;
     margin: 0;
     opacity: 0.85;
+  }
+
+  @media (max-width: 960px) {
+    .design-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .design-hero-art {
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
   }
 
   @media (max-width: 720px) {
