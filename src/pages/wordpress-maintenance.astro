@@ -1,9 +1,3 @@
----
-// wordpress-maintenance.astro — service-depth landing page for WordPress
-// maintenance. Distinct lane from the homepage (sells the whole business) and
-// the northern-ireland page (owns the local term). This page goes deep on what
-// ongoing maintenance actually involves and what a care plan covers, national in
-// scope. Same self-contained pattern as hosting.astro / website-speed.astro.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Marquee from '../components/Marquee.astro';
 import Pricing from '../components/Pricing.astro';
@@ -34,26 +28,32 @@ const included = [
   {
     title: 'Core, theme and plugin updates',
     body: "WordPress and its plugins put out updates constantly, and skipping them is how sites break or get hacked. I apply them carefully, check nothing broke afterwards, and roll back if anything does. You never see the faff, just a site that stays current.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23 14a9 9 0 1 1-2.6-6.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M23 4v5h-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Backups that actually work',
     body: 'Regular backups, stored off your server, tested so they restore when it counts. Plenty of sites have backups running that nobody has ever checked. The first time you need one is the worst time to find out it was broken.',
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="14" cy="7" rx="8" ry="3.5" stroke="currentColor" stroke-width="2"/><path d="M6 7v13.5c0 1.9 3.6 3.5 8 3.5s8-1.6 8-3.5V7" stroke="currentColor" stroke-width="2"/><path d="M6 14c0 1.9 3.6 3.5 8 3.5s8-1.6 8-3.5" stroke="var(--accent)" stroke-width="2"/></svg>`,
   },
   {
     title: 'Security and uptime monitoring',
     body: "I keep an eye on the site so problems get caught early, not when a customer emails to say it is down. SSL kept valid, login locked down sensibly, and an alert to me rather than a nasty surprise to you.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5c3.5 2 7 3 9.5 3v8c0 5.5-4 8.9-9.5 10.5C8.5 23.4 4.5 20 4.5 14.5v-8c2.5 0 6-1 9.5-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m10 14 3 3 5.5-6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Performance kept in check',
     body: 'Sites get slower over time as content and images build up. I keep load times honest, so the site stays quick for the people landing on it from a search, not just for you on your own connection.',
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 19a9 9 0 0 1 18 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 19l4.5-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="19" r="2" fill="var(--accent)"/></svg>`,
   },
   {
     title: 'Small fixes and changes',
     body: "The bits that pile up: a new page, updated opening hours, a broken link, a form that stopped sending. Your plan hours cover the small jobs, so they get done rather than sitting on a list for months.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21.5 3.8a5.2 5.2 0 0 0-6.7 6.7L4.6 20.7a2.1 2.1 0 1 0 3 3L17.8 13.5a5.2 5.2 0 0 0 6.7-6.7l-3.3 3.3-3.3-3.3 3.6-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="6.4" cy="21.9" r="1" fill="var(--accent)"/></svg>`,
   },
   {
     title: 'A real person to ask',
     body: "No ticketing system, no account manager relaying messages. You email me, I answer, I do the thing. For a small business that just wants the website handled, that direct line is most of the value.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5.5 5.5h17a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H13.5l-5 4.5V18.5h-3a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="10" cy="12" r="1.25" fill="var(--accent)"/><circle cx="14.5" cy="12" r="1.25" fill="var(--accent)"/><circle cx="19" cy="12" r="1.25" fill="var(--accent)"/></svg>`,
   },
 ];
 ---
@@ -63,24 +63,74 @@ const included = [
   schema={serviceSchema}
 >
   <section class="maint-hero-section">
-    <div class="maint-inner">
-      <span class="section-label">WordPress Maintenance</span>
-      <h1 class="maint-headline">
-        Your website,<br />
-        <span class="accent">handled</span>
-      </h1>
-      <p class="maint-lead">
-        A WordPress site is never finished. It needs updating, watching and the
-        occasional fix to stay fast, secure and working. A care plan covers all of
-        that for a fixed monthly fee, so the website is one less thing on your plate
-        and there is always someone to call when you need something done.
-      </p>
-      <div class="maint-cta-row">
-        <a href="#contact" class="maint-cta-primary">
-          Get Your Free Audit
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-        </a>
-        <a href="#whats-included" class="maint-cta-secondary">What's included</a>
+    <div class="maint-inner maint-hero-grid">
+      <div class="maint-hero-copy">
+        <span class="section-label">WordPress Maintenance</span>
+        <h1 class="maint-headline">
+          Your website,<br />
+          <span class="accent">handled</span>
+        </h1>
+        <p class="maint-lead">
+          A WordPress site is never finished. It needs updating, watching and the
+          occasional fix to stay fast, secure and working. A care plan covers all of
+          that for a fixed monthly fee, so the website is one less thing on your plate
+          and there is always someone to call when you need something done.
+        </p>
+        <div class="maint-cta-row">
+          <a href="#contact" class="maint-cta-primary">
+            Get Your Free Audit
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+          <a href="#whats-included" class="maint-cta-secondary">What's included</a>
+        </div>
+      </div>
+
+      <div class="maint-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <g stroke="rgba(255,255,255,0.07)" stroke-width="1">
+            <line x1="60" y1="0" x2="60" y2="440"/>
+            <line x1="500" y1="0" x2="500" y2="440"/>
+            <line x1="0" y1="60" x2="560" y2="60"/>
+            <line x1="0" y1="380" x2="560" y2="380"/>
+          </g>
+          <g>
+            <rect x="110" y="48" width="340" height="304" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <rect x="134" y="76" width="120" height="9" rx="4.5" fill="rgba(255,255,255,0.85)"/>
+            <rect x="134" y="100" width="292" height="8" rx="4" fill="rgba(255,255,255,0.12)"/>
+            <rect x="134" y="100" width="218" height="8" rx="4" fill="var(--accent)"/>
+            <g>
+              <rect x="134" y="132" width="292" height="44" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="156" cy="154" r="9" fill="var(--accent)"/>
+              <path d="m152 154 3 3 5.5-6" stroke="var(--midnight)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="176" y="150" width="150" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
+            </g>
+            <g>
+              <rect x="134" y="188" width="292" height="44" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="156" cy="210" r="9" fill="var(--accent)"/>
+              <path d="m152 210 3 3 5.5-6" stroke="var(--midnight)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="176" y="206" width="118" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
+            </g>
+            <g>
+              <rect x="134" y="244" width="292" height="44" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="156" cy="266" r="9" stroke="rgba(255,255,255,0.35)" stroke-width="2" fill="none"/>
+              <rect x="176" y="262" width="136" height="7" rx="3.5" fill="rgba(255,255,255,0.3)"/>
+            </g>
+            <rect x="134" y="308" width="104" height="26" rx="13" fill="var(--accent)"/>
+            <rect x="154" y="319" width="64" height="5" rx="2.5" fill="var(--midnight)"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-a">
+            <rect x="404" y="112" width="132" height="56" rx="10" fill="var(--accent)"/>
+            <path d="M442 128a10 10 0 1 1-8 4" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M433 126v6h6" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <rect x="462" y="128" width="52" height="7" rx="3.5" fill="var(--midnight)"/>
+            <rect x="462" y="142" width="36" height="7" rx="3.5" fill="var(--midnight)" opacity="0.55"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-b">
+            <rect x="32" y="296" width="96" height="40" rx="10" fill="rgba(11,17,32,0.9)" stroke="rgba(255,255,255,0.16)"/>
+            <path d="M46 316 L52 322 L64 308" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="74" y="312" width="42" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
+          </g>
+        </svg>
       </div>
     </div>
   </section>
@@ -114,6 +164,7 @@ const included = [
       <div class="maint-grid">
         {included.map((item) => (
           <div class="maint-card">
+            <div class="maint-card-icon" set:html={item.icon} />
             <h3>{item.title}</h3>
             <p>{item.body}</p>
           </div>
@@ -161,10 +212,17 @@ const included = [
     padding: 7rem 1.5rem 4rem;
     background: var(--midnight);
     color: var(--snow);
+    overflow: hidden;
   }
   .maint-inner {
     max-width: 1200px;
     margin: 0 auto;
+  }
+  .maint-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
   }
   /* eyebrow label sits on a dark background in the hero, so lighten it */
   .maint-hero-section .section-label {
@@ -225,6 +283,31 @@ const included = [
     border-color: var(--snow);
   }
 
+  .maint-hero-art {
+    min-width: 0;
+  }
+  .maint-hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hero-art-chip-a {
+    animation: heroChipFloat 6s ease-in-out infinite;
+  }
+  .hero-art-chip-b {
+    animation: heroChipFloat 7s ease-in-out 1.2s infinite;
+  }
+  @keyframes heroChipFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-art-chip-a,
+    .hero-art-chip-b {
+      animation: none;
+    }
+  }
+
   .maint-problem-section,
   .maint-honest-section {
     padding: 4rem 1.5rem;
@@ -271,6 +354,21 @@ const included = [
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.4);
   }
+  .maint-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(8, 16, 28, 0.12);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    color: var(--midnight);
+  }
+  .maint-card-icon svg {
+    width: 26px;
+    height: 26px;
+  }
   .maint-card h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
@@ -290,6 +388,18 @@ const included = [
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  @media (max-width: 960px) {
+    .maint-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .maint-hero-art {
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+
   @media (max-width: 720px) {
     .maint-grid {
       grid-template-columns: 1fr;
