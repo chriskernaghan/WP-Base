@@ -1,5 +1,5 @@
 ---
-// Hero.astro — top of the homepage. Headline, stats, CTAs, terminal feed.
+// Hero.astro — top of the homepage. Rating pill, headline, description, stats, CTAs, terminal feed.
 // Terminal animation initialises from the homepage script.
 ---
 
@@ -7,15 +7,23 @@
   <div class="hero-v2-inner">
     <div class="hero-v2-top">
       <div class="hero-v2-left">
+        <a href="https://share.google/HmqVC5OhdKakcRtS4" target="_blank" rel="noopener" class="hero-v2-rating">
+          <span class="hero-v2-rating-stars" aria-hidden="true">★★★★★</span>
+          <span class="hero-v2-rating-text"><strong>5.0</strong> on Google · clients love working with me</span>
+        </a>
         <h1 class="hero-v2-headline">
           WordPress care<br />
           <span class="accent">without the<br />agency price</span>
         </h1>
+        <p class="hero-v2-desc">
+          Maintenance, updates, backups and security handled for a fixed monthly
+          fee, by one person you can actually get on the phone.
+        </p>
         <ul class="hero-v2-stats">
           <li><span class="stat-tick" aria-hidden="true">✓</span><strong>4 years</strong> avg. client relationship</li>
-          <li><a href="https://share.google/HmqVC5OhdKakcRtS4" target="_blank" rel="noopener" class="stat-link"><span class="stat-tick" aria-hidden="true">✓</span><strong>5.0</strong> rated on Google</a></li>
           <li><span class="stat-tick" aria-hidden="true">✓</span><strong>&lt;1 hour</strong> response time</li>
           <li><span class="stat-tick" aria-hidden="true">✓</span><strong>0</strong> security breaches</li>
+          <li><span class="stat-tick" aria-hidden="true">✓</span><strong>NI</strong> based &amp; direct access</li>
         </ul>
         <div class="hero-v2-cta-row">
           <a href="#contact" class="hero-v2-cta-primary">
