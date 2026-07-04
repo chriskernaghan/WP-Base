@@ -1,9 +1,4 @@
 ---
-// hosting.astro — commercial landing page targeting NI hosting search.
-// Thin page: wraps BaseLayout, reuses Marquee / Pricing / Contact, and adds
-// a self-contained hosting block with scoped styles (same pattern as WhyLocal).
-// Positioning: hosting is managed as part of the relationship, not resold at
-// a margin — leans on the ownership angle from the hosting blog post.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Marquee from '../components/Marquee.astro';
 import Pricing from '../components/Pricing.astro';
@@ -35,18 +30,22 @@ const offer = [
   {
     title: 'The right host, not the dearest one',
     body: "I match your site to hosting that actually fits it. For most small business sites that's quality managed WordPress hosting: fast, reliable, built for WordPress. You're never paying for a tier you don't need.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.5 7v14M23.5 7v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8.5 14h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11.5 11l-3 3 3 3" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 11l3 3-3 3" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Set up properly from day one',
     body: 'Migration handled, caching configured, backups running, SSL in place. The fiddly parts that go wrong when they get rushed, done once and done right, with no downtime for your visitors.',
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2"/><path d="m9.5 14 3 3 6-7" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'You own your account',
     body: "Your hosting is in your name, with your login. You're never locked in or held hostage by a developer who controls the keys. I manage it for you, but it's yours, and you can see exactly what you pay.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="9" cy="14" r="4.5" stroke="currentColor" stroke-width="2"/><path d="M13.5 14H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M19.5 14v4M24 14v3" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {
     title: 'Looked after, not left alone',
     body: "Performance watched, updates applied, problems caught before you notice them. If something breaks at 9pm on a Tuesday, I deal with it. Hosting that's actually managed, not just paid for.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 14s4-7.5 11-7.5S25 14 25 14s-4 7.5-11 7.5S3 14 3 14Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="14" cy="14" r="3.5" stroke="var(--accent)" stroke-width="2"/></svg>`,
   },
 ];
 ---
@@ -56,23 +55,75 @@ const offer = [
   schema={serviceSchema}
 >
   <section class="hosting-hero-section">
-    <div class="hosting-inner">
-      <span class="section-label">WordPress Hosting · Northern Ireland</span>
-      <h1 class="hosting-headline">
-        Hosting sorted,<br />
-        <span class="accent">and looked after</span>
-      </h1>
-      <p class="hosting-lead">
-        The right host for your site, set up properly, and managed so you never have
-        to think about it again. No reselling markup, no tier you don't need. Just
-        hosting that does its job, handled by someone who understands it.
-      </p>
-      <div class="hosting-cta-row">
-        <a href="#contact" class="hosting-cta-primary">
-          Get Your Free Audit
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-        </a>
-        <a href="#what-you-get" class="hosting-cta-secondary">What you get</a>
+    <div class="hosting-inner hosting-hero-grid">
+      <div class="hosting-hero-copy">
+        <span class="section-label">WordPress Hosting · Northern Ireland</span>
+        <h1 class="hosting-headline">
+          Hosting sorted,<br />
+          <span class="accent">and looked after</span>
+        </h1>
+        <p class="hosting-lead">
+          The right host for your site, set up properly, and managed so you never have
+          to think about it again. No reselling markup, no tier you don't need. Just
+          hosting that does its job, handled by someone who understands it.
+        </p>
+        <div class="hosting-cta-row">
+          <a href="#contact" class="hosting-cta-primary">
+            Get Your Free Audit
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+          <a href="#what-you-get" class="hosting-cta-secondary">What you get</a>
+        </div>
+      </div>
+
+      <div class="hosting-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <g stroke="rgba(255,255,255,0.07)" stroke-width="1">
+            <line x1="60" y1="0" x2="60" y2="440"/>
+            <line x1="500" y1="0" x2="500" y2="440"/>
+            <line x1="0" y1="60" x2="560" y2="60"/>
+            <line x1="0" y1="380" x2="560" y2="380"/>
+          </g>
+          <g>
+            <rect x="140" y="52" width="280" height="296" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <g>
+              <rect x="164" y="80" width="232" height="60" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="184" cy="110" r="5" fill="var(--accent)"/>
+              <circle cx="202" cy="110" r="5" fill="rgba(255,255,255,0.25)"/>
+              <rect x="300" y="98" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+              <rect x="300" y="110" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+              <rect x="300" y="122" width="52" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+            </g>
+            <g>
+              <rect x="164" y="156" width="232" height="60" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="184" cy="186" r="5" fill="var(--accent)"/>
+              <circle cx="202" cy="186" r="5" fill="rgba(255,255,255,0.25)"/>
+              <rect x="300" y="174" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+              <rect x="300" y="186" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+              <rect x="300" y="198" width="52" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+            </g>
+            <g>
+              <rect x="164" y="232" width="232" height="60" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+              <circle cx="184" cy="262" r="5" fill="var(--accent)"/>
+              <circle cx="202" cy="262" r="5" fill="rgba(255,255,255,0.25)"/>
+              <rect x="300" y="250" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+              <rect x="300" y="262" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+              <rect x="300" y="274" width="52" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
+            </g>
+            <rect x="216" y="312" width="128" height="8" rx="4" fill="rgba(255,255,255,0.85)"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-a">
+            <rect x="398" y="106" width="132" height="56" rx="10" fill="var(--accent)"/>
+            <path d="M414 140 h6 l4-12 6 20 5-14 4 6 h8" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <rect x="464" y="122" width="52" height="7" rx="3.5" fill="var(--midnight)"/>
+            <rect x="464" y="136" width="36" height="7" rx="3.5" fill="var(--midnight)" opacity="0.55"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-b">
+            <rect x="42" y="286" width="96" height="40" rx="10" fill="rgba(11,17,32,0.9)" stroke="rgba(255,255,255,0.16)"/>
+            <path d="M56 306 L62 312 L74 298" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="84" y="302" width="42" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
+          </g>
+        </svg>
       </div>
     </div>
   </section>
@@ -104,6 +155,7 @@ const offer = [
       <div class="hosting-grid">
         {offer.map((item) => (
           <div class="hosting-card">
+            <div class="hosting-card-icon" set:html={item.icon} />
             <h3>{item.title}</h3>
             <p>{item.body}</p>
           </div>
@@ -150,10 +202,17 @@ const offer = [
     padding: 7rem 1.5rem 4rem;
     background: var(--midnight);
     color: var(--snow);
+    overflow: hidden;
   }
   .hosting-inner {
     max-width: 1200px;
     margin: 0 auto;
+  }
+  .hosting-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
   }
   /* eyebrow label sits on a dark background in the hero, so lighten it */
   .hosting-hero-section .section-label {
@@ -214,6 +273,31 @@ const offer = [
     border-color: var(--snow);
   }
 
+  .hosting-hero-art {
+    min-width: 0;
+  }
+  .hosting-hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hero-art-chip-a {
+    animation: heroChipFloat 6s ease-in-out infinite;
+  }
+  .hero-art-chip-b {
+    animation: heroChipFloat 7s ease-in-out 1.2s infinite;
+  }
+  @keyframes heroChipFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-art-chip-a,
+    .hero-art-chip-b {
+      animation: none;
+    }
+  }
+
   .hosting-problem-section,
   .hosting-honest-section {
     padding: 4rem 1.5rem;
@@ -260,6 +344,21 @@ const offer = [
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.4);
   }
+  .hosting-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(8, 16, 28, 0.12);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    color: var(--midnight);
+  }
+  .hosting-card-icon svg {
+    width: 26px;
+    height: 26px;
+  }
   .hosting-card h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
@@ -272,6 +371,18 @@ const offer = [
     line-height: 1.6;
     margin: 0;
     opacity: 0.85;
+  }
+
+  @media (max-width: 960px) {
+    .hosting-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .hosting-hero-art {
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
   }
 
   @media (max-width: 720px) {
