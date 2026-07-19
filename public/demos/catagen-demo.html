@@ -98,6 +98,16 @@
     padding: 6px;
   }
 
+  .logo img{
+    max-width:15%
+  }
+
+  .hero-video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
   nav.site {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -391,6 +401,11 @@
   .feature-list .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--teal-deep); }
   .feature-visual { position: relative; overflow: hidden; min-height: 600px; background: var(--bone-3); }
   .feature-visual.dark { background: var(--ink-soft); }
+  .feature-visual img{
+    height:100%;
+    width:100%;
+    object-fit:cover;
+  }
 
   .feature.reverse .feature-content { order: 2; }
   .feature.reverse .feature-visual { order: 1; }
@@ -421,6 +436,7 @@
   .platform:hover { background: var(--ink-soft); }
   .platform-num { font-family: var(--mono); font-size: 11px; color: var(--teal-glow); letter-spacing: 0.14em; margin-bottom: 32px; }
   .platform-img { aspect-ratio: 4 / 3; margin-bottom: 24px; border-radius: 3px; overflow: hidden; }
+  .platform-img img{ width:100%; height:100%; object-fit:cover; }
   .platform h4 {
     font-family: var(--display);
     font-weight: 400;
@@ -433,7 +449,8 @@
 
   .spotlight { background: var(--bone-2); }
   .spotlight-inner { max-width: 1400px; margin: 0 auto; }
-  .spotlight-video { aspect-ratio: 16 / 8.2; border-radius: 4px; overflow: hidden; margin-top: 50px; }
+  .spotlight-video { position: relative; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; margin-top: 50px; background: var(--ink); }
+  .spotlight-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .spotlight-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
   .spotlight-thumb { aspect-ratio: 16 / 9; border-radius: 3px; overflow: hidden; }
 
@@ -665,6 +682,7 @@
     border-bottom: 1px solid var(--line-dark);
   }
   .footer-brand .logo { margin-bottom: 20px; color: var(--bone); }
+  .footer-brand .logo img { max-width: 150px; width: auto; }
   .footer-brand p { font-size: 13px; color: var(--muted-dark); max-width: 32ch; line-height: 1.6; margin-bottom: 16px; }
   .footer-col h5 {
     font-family: var(--mono);
@@ -806,7 +824,6 @@
     will-change: opacity, transform;
   }
   .reveal.in { opacity: 1; transform: translateY(0); }
-  /* staggered children */
   .stagger > * {
     opacity: 0;
     transform: translateY(24px);
@@ -819,7 +836,6 @@
   .stagger.in > *:nth-child(4) { transition-delay: 0.24s; }
   .stagger.in > *:nth-child(5) { transition-delay: 0.32s; }
   .stagger.in > *:nth-child(6) { transition-delay: 0.4s; }
-  /* subtle line-draw under section eyebrows on reveal */
   .reveal .section-eyebrow::before,
   .stagger .section-eyebrow::before {
     transform: scaleX(0);
@@ -828,7 +844,6 @@
   }
   .reveal.in .section-eyebrow::before,
   .stagger.in .section-eyebrow::before { transform: scaleX(1); }
-  /* gentle lift on feature visuals as they enter */
   .feature-visual.reveal { transform: translateY(0) scale(1.02); }
   .feature-visual.reveal.in { transform: translateY(0) scale(1); }
 
@@ -842,7 +857,7 @@
 </head>
 <body>
 <nav class="site on-hero" id="nav">
-  <a href="#" class="logo"><span class="logo-mark"></span>CATAGEN</a>
+  <a href="#" class="logo"><img src="images/logo.png" alt=""></a>
   <div class="nav-links">
     <div class="has-mega">
       <a href="#emissions-testing">Green Emissions Testing</a>
@@ -921,11 +936,12 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-media">
-    <div class="img-placeholder dark">
-      <div class="ph-label">HERO IMAGE / VIDEO<span class="ph-dims">Full-bleed · 16:9 or wider · landscape, plant, or facility shot</span></div>
-    </div>
-  </div>
+<div class="hero-media">
+  <video class="hero-video" autoplay muted loop playsinline poster="/path/to/fallback.jpg">
+    <source src="videos/banner_bg.mp4" type="video/mp4">
+    <source src="videos/banner_bg.webm" type="video/webm">
+  </video>
+</div>
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
@@ -1042,7 +1058,7 @@
   </div>
   <div class="feature-visual reveal">
     <div class="img-placeholder">
-      <div class="ph-label">AIRCRAFT / AVIATION IMAGE<span class="ph-dims">Portrait or 3:4 · plane on runway or in flight</span></div>
+      <img src="images/airplane.webp" alt="">
     </div>
   </div>
 </section>
@@ -1061,7 +1077,7 @@
   </div>
   <div class="feature-visual dark reveal">
     <div class="img-placeholder dark">
-      <div class="ph-label">H₂ COMPRESSION / RIG IMAGE<span class="ph-dims">Portrait or 3:4 · equipment, rig, or refuelling shot</span></div>
+      <img src="images/clean.webp" alt="">
     </div>
   </div>
 </section>
@@ -1075,32 +1091,32 @@
     <p class="platforms-intro">At the heart of every CATAGEN system is the e-reactor — adaptable, electrically driven, and engineered to deliver precise thermal and chemical processes at industrial scale.</p>
   </div>
 
-  <div class="platforms-grid stagger">
-    <div class="platform">
-      <div class="platform-num">P / 01</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">OMEGA<span class="ph-dims">4:3</span></div></div></div>
-      <h4>OMEGA e-Reactor</h4>
-      <p>Founding e-Reactor technology for catalyst ageing.</p>
-    </div>
-    <div class="platform">
-      <div class="platform-num">P / 02</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">E-FUEL GEN<span class="ph-dims">4:3</span></div></div></div>
-      <h4>E-FUEL GEN</h4>
-      <p>e-Reactor technology for e-fuel and SAF production.</p>
-    </div>
-    <div class="platform">
-      <div class="platform-num">P / 03</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">BIOHGEN<span class="ph-dims">4:3</span></div></div></div>
-      <h4>BIOHGEN</h4>
-      <p>e-Reactor for E-SMR and biohydrogen production. Biogenic CO₂ produced.</p>
-    </div>
-    <div class="platform">
-      <div class="platform-num">P / 04</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">COMPRESS<span class="ph-dims">4:3</span></div></div></div>
-      <h4>COMPRESS</h4>
-      <p>Efficient liquid piston hydrogen compression with several applications.</p>
-    </div>
+<div class="platforms-grid stagger">
+  <div class="platform">
+    <div class="platform-num">P / 01</div>
+    <div class="platform-img"><div class="img-placeholder dark"><img src="images/omega.webp" alt=""></div></div>
+    <h4>OMEGA e-Reactor</h4>
+    <p>Founding e-Reactor technology for catalyst ageing.</p>
   </div>
+  <div class="platform">
+    <div class="platform-num">P / 02</div>
+    <div class="platform-img"><div class="img-placeholder dark"><img src="images/efuel.webp" alt=""></div></div>
+    <h4>E-FUEL GEN</h4>
+    <p>e-Reactor technology for e-fuel and SAF production.</p>
+  </div>
+  <div class="platform">
+    <div class="platform-num">P / 03</div>
+    <div class="platform-img"><div class="img-placeholder dark"><img src="images/biohgen.webp" alt=""></div></div>
+    <h4>BIOHGEN</h4>
+    <p>e-Reactor for E-SMR and biohydrogen production. Biogenic CO₂ produced.</p>
+  </div>
+  <div class="platform">
+    <div class="platform-num">P / 04</div>
+    <div class="platform-img"><div class="img-placeholder dark"><img src="images/compress.webp" alt=""></div></div>
+    <h4>COMPRESS</h4>
+    <p>Efficient liquid piston hydrogen compression with several applications.</p>
+  </div>
+</div>
 </section>
 
 <section class="spotlight">
@@ -1108,9 +1124,7 @@
     <div class="section-eyebrow">CEO spotlight</div>
     <h2 class="section-title">Meet the team behind the <em>technology</em>.</h2>
     <div class="spotlight-video">
-      <div class="img-placeholder dark">
-        <div class="ph-label">FEATURE VIDEO — DR. ANDREW WOODS<span class="ph-dims">16:8.2 · video player with poster frame</span></div>
-      </div>
+      <iframe src="https://player.vimeo.com/video/771618223?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="spotlight-thumbs stagger">
       <div class="spotlight-thumb"><div class="img-placeholder"><div class="ph-label">VIDEO THUMB 1<span class="ph-dims">16:9</span></div></div></div>
@@ -1295,7 +1309,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="logo"><span class="logo-mark"></span>CATAGEN</div>
+        <div class="logo"><img src="images/logo.png" alt="CATAGEN"></div>
         <p>Channel Commercial Park, Unit 5 Elmbank, Queens Road, Belfast, BT3 9DT, United Kingdom.</p>
         <p>+44 (0)28 9045 3120</p>
       </div>
