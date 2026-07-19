@@ -684,7 +684,25 @@
     transform: translateY(0);
     transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s;
   }
+  /* invisible hover bridge so the menu doesn't close in the gap */
   .mega::before { content: ''; position: absolute; top: -24px; left: 0; right: 0; height: 24px; }
+
+  /* triangle pointer marking the hovered nav item */
+  .mega::after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: var(--mega-arrow-x, 120px);
+    width: 18px; height: 18px;
+    background: var(--bone);
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    transform: translateX(-50%) rotate(45deg);
+    transition: left 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+    opacity: 0;
+    z-index: 91;
+  }
+  .has-mega:hover .mega::after, .mega:hover::after { opacity: 1; }
 
   .mega-inner { max-width: 1400px; margin: 0 auto; padding: 48px var(--gutter) 40px; }
   .mega-cols {
@@ -732,10 +750,71 @@
     margin-bottom: 24px;
   }
   .mega-industries-row { display: grid; grid-template-columns: repeat(10, 1fr); gap: 16px; }
-  .ind { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; color: var(--teal-deep); transition: transform 0.2s; }
-  .ind:hover { transform: translateY(-3px); }
+  .ind {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    text-align: center; color: var(--teal-deep);
+    opacity: 0; transform: translateX(-14px);
+    transition: transform 0.2s ease, opacity 0.45s ease;
+  }
+  .mega.is-open .ind { opacity: 1; transform: translateX(0); }
+  .mega.is-open .ind:nth-child(1)  { transition-delay: 0.02s; }
+  .mega.is-open .ind:nth-child(2)  { transition-delay: 0.06s; }
+  .mega.is-open .ind:nth-child(3)  { transition-delay: 0.10s; }
+  .mega.is-open .ind:nth-child(4)  { transition-delay: 0.14s; }
+  .mega.is-open .ind:nth-child(5)  { transition-delay: 0.18s; }
+  .mega.is-open .ind:nth-child(6)  { transition-delay: 0.22s; }
+  .mega.is-open .ind:nth-child(7)  { transition-delay: 0.26s; }
+  .mega.is-open .ind:nth-child(8)  { transition-delay: 0.30s; }
+  .mega.is-open .ind:nth-child(9)  { transition-delay: 0.34s; }
+  .mega.is-open .ind:nth-child(10) { transition-delay: 0.38s; }
+  .ind:hover { transform: translateY(-3px); transition-delay: 0s; }
   .ind svg { width: 36px; height: 36px; }
   .ind span { font-size: 11px; color: var(--muted); line-height: 1.3; letter-spacing: 0.01em; }
+
+  /* latest-posts marquee along the base of the mega menu */
+  .mega-marquee {
+    height: 25px;
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .mega-marquee-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 38s linear infinite;
+  }
+  .mega:hover .mega-marquee-track:hover { animation-play-state: paused; }
+  .mega-marquee-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mega-marquee-item::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--teal); flex-shrink: 0;
+  }
+  .mega-marquee-item a { color: var(--muted); transition: color 0.2s; }
+  .mega-marquee-item a:hover { color: var(--teal-deep); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mega-marquee-track { animation: none; }
+    .mega.is-open .ind { transition-delay: 0s !important; }
+  }
 
   @media (max-width: 960px) { .mega { display: none; } }
 
@@ -945,6 +1024,19 @@
               <div class="ind"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="20" cy="20" r="11"/><path d="M21 13 L16 21 L20 21 L19 27 L24 19 L20 19 Z" fill="currentColor" stroke="none"/></svg><span>Reformer Catalyst</span></div>
             </div>
           </div>
+
+          <div class="mega-marquee" aria-label="Latest posts">
+            <div class="mega-marquee-track">
+              <span class="mega-marquee-item"><a href="#">Latest — CATAGEN attends launch of the Northern Ireland Defence Growth Deal</a></span>
+              <span class="mega-marquee-item"><a href="#">Blog — Why accelerated catalyst ageing beats engine-based testing</a></span>
+              <span class="mega-marquee-item"><a href="#">Press — CATAGEN named a 2025 WIRED Trailblazer</a></span>
+              <span class="mega-marquee-item"><a href="#">Insight — Preparing aftertreatment systems for Euro 7</a></span>
+              <span class="mega-marquee-item" aria-hidden="true"><a href="#">Latest — CATAGEN attends launch of the Northern Ireland Defence Growth Deal</a></span>
+              <span class="mega-marquee-item" aria-hidden="true"><a href="#">Blog — Why accelerated catalyst ageing beats engine-based testing</a></span>
+              <span class="mega-marquee-item" aria-hidden="true"><a href="#">Press — CATAGEN named a 2025 WIRED Trailblazer</a></span>
+              <span class="mega-marquee-item" aria-hidden="true"><a href="#">Insight — Preparing aftertreatment systems for Euro 7</a></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -959,8 +1051,8 @@
 <header class="hero subhero">
   <div class="hero-media">
     <video class="hero-video" autoplay muted loop playsinline poster="/path/to/fallback.jpg">
-      <source src="videos/cleantech.mp4" type="video/mp4">
-      <source src="videos/cleantech.webm" type="video/webm">
+      <source src="videos/banner_bg.mp4" type="video/mp4">
+      <source src="videos/banner_bg.webm" type="video/webm">
     </video>
   </div>
   <div class="hero-overlay"></div>
@@ -1374,6 +1466,20 @@
   window.addEventListener('scroll', updateNav, { passive: true });
   window.addEventListener('resize', updateNav);
   updateNav();
+
+  // Mega menu: trigger icon stagger + position the triangle pointer under the hovered trigger
+  document.querySelectorAll('.has-mega').forEach(hm => {
+    const mega = hm.querySelector('.mega');
+    const trigger = hm.querySelector('a');
+    if (!mega || !trigger) return;
+    const positionArrow = () => {
+      const r = trigger.getBoundingClientRect();
+      mega.style.setProperty('--mega-arrow-x', (r.left + r.width / 2) + 'px');
+    };
+    hm.addEventListener('mouseenter', () => { positionArrow(); mega.classList.add('is-open'); });
+    hm.addEventListener('mouseleave', () => { mega.classList.remove('is-open'); });
+    window.addEventListener('resize', positionArrow);
+  });
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealables = document.querySelectorAll('.reveal, .stagger');
