@@ -814,6 +814,11 @@
   .means-tag::before { content: ''; width: 24px; height: 1px; background: var(--teal-deep); }
 
   .stats { background: var(--ink); color: var(--bone); }
+  .stats .section-title { color: var(--bone); }
+  .stats .section-eyebrow { color: var(--teal-glow); }
+  .stats .section-eyebrow::before { background: var(--teal-glow); }
+  .stats .section-title em { color: var(--teal-glow); }
+  .stats .platforms-intro { color: var(--muted-dark); }
   .stats-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); }
   .stat { background: var(--ink); padding: 44px 32px; transition: background 0.3s; }
   .stat:hover { background: var(--ink-soft); }
@@ -954,8 +959,8 @@
 <header class="hero subhero">
   <div class="hero-media">
     <video class="hero-video" autoplay muted loop playsinline poster="/path/to/fallback.jpg">
-      <source src="videos/cleantech.mp4" type="video/mp4">
-      <source src="videos/cleantech.mp4" type="video/webm">
+      <source src="videos/banner_bg.mp4" type="video/mp4">
+      <source src="videos/banner_bg.webm" type="video/webm">
     </video>
   </div>
   <div class="hero-overlay"></div>
@@ -1104,13 +1109,13 @@
     <p class="platforms-intro">Electrically driven testing replaces slow, costly engine programmes — with tighter control, broader adaptability and a fraction of the emissions.</p>
   </div>
   <div class="stats-grid stagger">
-    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Continuous testing</div></div>
+    <div class="stat"><div class="stat-num" data-count="24" data-suffix="/7">24/7</div><div class="stat-label">Continuous testing</div></div>
     <div class="stat"><div class="stat-num">High</div><div class="stat-label">Testing adaptability</div></div>
-    <div class="stat"><div class="stat-num">30%</div><div class="stat-label">Up to — cost savings</div></div>
-    <div class="stat"><div class="stat-num">&lt;2%</div><div class="stat-label">Test variability</div></div>
+    <div class="stat"><div class="stat-num" data-count="30" data-suffix="%">30%</div><div class="stat-label">Up to — cost savings</div></div>
+    <div class="stat"><div class="stat-num" data-count="2" data-prefix="&lt;" data-suffix="%">&lt;2%</div><div class="stat-label">Test variability</div></div>
     <div class="stat"><div class="stat-num">Full</div><div class="stat-label">Operating conditions</div></div>
     <div class="stat"><div class="stat-num">Any</div><div class="stat-label">Gas compositions</div></div>
-    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">CO₂ saving</div></div>
+    <div class="stat"><div class="stat-num" data-count="98" data-suffix="%">98%</div><div class="stat-label">CO₂ saving</div></div>
     <div class="stat"><div class="stat-num">Expert</div><div class="stat-label">Team expertise</div></div>
   </div>
 </section>
@@ -1381,6 +1386,34 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     revealables.forEach(el => io.observe(el));
+  }
+
+  // Count-up for numeric stats
+  const counters = document.querySelectorAll('.stat-num[data-count]');
+  const runCount = (el) => {
+    const target = parseInt(el.getAttribute('data-count'), 10);
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
+    if (prefersReduced) { el.innerHTML = prefix + target + suffix; return; }
+    const duration = 1600;
+    const start = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const val = Math.round(ease(p) * target);
+      el.innerHTML = prefix + val + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.innerHTML = prefix + target + suffix;
+    };
+    requestAnimationFrame(tick);
+  };
+  if (counters.length) {
+    const statsIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { runCount(entry.target); statsIO.unobserve(entry.target); }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => statsIO.observe(c));
   }
 </script>
 </body>
