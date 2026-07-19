@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CATAGEN — To clean and decarbonise the air</title>
+<title>CATAGEN — Green Emissions Testing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
   :root {
     --bone: #ffffff;
     --bone-2: #f6f7f7;
@@ -838,11 +839,114 @@
     .hero-eyebrow, .hero-title, .hero-bottom { animation: none !important; opacity: 1 !important; }
     .reveal .section-eyebrow::before, .stagger .section-eyebrow::before { transform: scaleX(1); transition: none; }
   }
+
+
+
+  /* ===== Green Emissions Testing — page-specific ===== */
+
+  /* Hero variant: shorter than homepage, image-backed */
+  .subhero { min-height: 74vh; }
+  .subhero .hero-title { font-size: clamp(40px, 6vw, 92px); max-width: 18ch; }
+  .subhero .hero-lede { max-width: 56ch; }
+
+  /* Intro + challenges */
+  .challenges { background: var(--bone); }
+  .challenges-head { max-width: 1400px; margin: 0 auto 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; }
+  .challenges-intro { font-size: 17px; color: var(--muted); line-height: 1.65; max-width: 52ch; }
+  .challenge-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .challenge { background: var(--bone); padding: 44px 32px 48px; transition: background 0.3s; }
+  .challenge:hover { background: var(--bone-2); }
+  .challenge svg { width: 40px; height: 40px; color: var(--teal-deep); margin-bottom: 28px; }
+  .challenge h4 { font-family: var(--display); font-weight: 500; font-size: 18px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
+  .challenge p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+  /* Services — large image cards */
+  .services { background: var(--bone-2); }
+  .services-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .service-card { position: relative; border-radius: 6px; overflow: hidden; min-height: 320px; display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid var(--line); background: var(--ink); isolation: isolate; }
+  .service-card .service-bg { position: absolute; inset: 0; z-index: 0; }
+  .service-card .service-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(11,31,35,0.15) 0%, rgba(11,31,35,0.55) 55%, rgba(11,31,35,0.9) 100%); }
+  .service-card .service-body { position: relative; z-index: 2; padding: 40px 36px 36px; color: var(--bone); }
+  .service-card .service-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-glow); margin-bottom: 14px; }
+  .service-card h3 { font-family: var(--display); font-weight: 500; font-size: 27px; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px; max-width: 16ch; }
+  .service-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.55; max-width: 44ch; margin-bottom: 20px; }
+  .service-card .service-link { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone); display: inline-flex; align-items: center; gap: 10px; transition: gap 0.25s; }
+  .service-card .service-link::after { content: '→'; }
+  .service-card:hover .service-link { gap: 16px; }
+
+  /* OMEGA feature reuses .feature; add a "means for you" list style */
+  .means-list { list-style: none; margin-top: 8px; }
+  .means-list li { position: relative; padding-left: 26px; margin-bottom: 14px; font-size: 15px; color: var(--ink); line-height: 1.5; }
+  .means-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+  .means-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-deep); display: flex; align-items: center; gap: 12px; margin: 28px 0 20px; }
+  .means-tag::before { content: ''; width: 24px; height: 1px; background: var(--teal-deep); }
+
+  /* Stats band (dark) */
+  .stats { background: var(--ink); color: var(--bone); }
+  .stats-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); }
+  .stat { background: var(--ink); padding: 44px 32px; transition: background 0.3s; }
+  .stat:hover { background: var(--ink-soft); }
+  .stat .stat-num { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 3.4vw, 52px); letter-spacing: -0.03em; color: var(--teal-glow); line-height: 1; margin-bottom: 16px; }
+  .stat .stat-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-dark); line-height: 1.5; }
+
+  /* Industries icon grid */
+  .industries { background: var(--bone); }
+  .industries-grid { max-width: 1400px; margin: 48px auto 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .industry { background: var(--bone); padding: 32px 16px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; transition: background 0.3s; }
+  .industry:hover { background: var(--bone-2); }
+  .industry svg { width: 38px; height: 38px; color: var(--teal-deep); }
+  .industry span { font-size: 12px; color: var(--muted); line-height: 1.3; }
+
+  /* Testimonial feature (Ducati) */
+  .testimonial { background: var(--ink); color: var(--bone); }
+  .testimonial-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--line-dark); }
+  .testimonial-media { position: relative; min-height: 440px; }
+  .testimonial-content { padding: 72px 60px; display: flex; flex-direction: column; justify-content: center; background: var(--ink-soft); }
+  .testimonial-badge { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-glow); margin-bottom: 28px; }
+  .testimonial blockquote { font-family: var(--display); font-weight: 300; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.3; letter-spacing: -0.015em; color: var(--bone); margin-bottom: 28px; }
+  .testimonial .attr { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-dark); }
+
+  /* Certification logos */
+  .certification { background: var(--bone-2); }
+  .cert-grid { max-width: 1400px; margin: 48px auto 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+  .cert-item { height: 90px; }
+  .cert-item .logo-placeholder { height: 100%; }
+
+  /* Discovery call / contact */
+  .discovery { background: var(--ink); color: var(--bone); }
+  .discovery-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
+  .discovery .section-eyebrow { color: var(--teal-glow); }
+  .discovery .section-eyebrow::before { background: var(--teal-glow); }
+  .discovery h2 { font-family: var(--display); font-weight: 300; font-size: clamp(32px, 4vw, 60px); line-height: 1.02; letter-spacing: -0.03em; color: var(--bone); margin-bottom: 24px; }
+  .discovery p.disco-lede { font-size: 16px; color: var(--muted-dark); line-height: 1.6; max-width: 44ch; margin-bottom: 32px; }
+  .disco-contact { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-glow); margin-bottom: 8px; }
+  .form-card { background: rgba(255,255,255,0.04); border: 1px solid var(--line-dark); border-radius: 6px; padding: 40px 36px; backdrop-filter: blur(8px); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-dark); margin-bottom: 8px; }
+  .field input, .field textarea, .field select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--line-dark); border-radius: 4px; padding: 13px 14px; color: var(--bone); font-family: var(--sans); font-size: 14px; transition: border-color 0.2s, background 0.2s; }
+  .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--teal); background: rgba(255,255,255,0.07); }
+  .field textarea { resize: vertical; min-height: 96px; }
+  .field select { appearance: none; -webkit-appearance: none; cursor: pointer; }
+
+  @media (max-width: 960px) {
+    .challenges-head { grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    .challenge-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid { grid-template-columns: repeat(3, 1fr); }
+    .testimonial-inner { grid-template-columns: 1fr; }
+    .testimonial-media { min-height: 280px; }
+    .testimonial-content { padding: 48px 32px; }
+    .cert-grid { grid-template-columns: repeat(3, 1fr); }
+    .discovery-inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+
 </style>
 </head>
 <body>
 <nav class="site on-hero" id="nav">
-  <a href="#" class="logo"><span class="logo-mark"></span>CATAGEN</a>
+  <a href="catagen-demo.html" class="logo"><span class="logo-mark"></span>CATAGEN</a>
   <div class="nav-links">
     <div class="has-mega">
       <a href="#emissions-testing">Green Emissions Testing</a>
@@ -852,7 +956,7 @@
             <div class="mega-col">
               <h5>Green Emissions Testing</h5>
               <ul>
-                <li><a href="catagen-green-emissions.html">Our Technology</a></li>
+                <li><a href="#">Our Technology</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Emissions Certification</a></li>
                 <li><a href="#">Testimonials</a></li>
@@ -920,279 +1024,297 @@
   <a href="#contact" class="nav-cta">Contact</a>
 </nav>
 
-<header class="hero">
+<header class="hero subhero">
   <div class="hero-media">
     <div class="img-placeholder dark">
-      <div class="ph-label">HERO IMAGE / VIDEO<span class="ph-dims">Full-bleed · 16:9 or wider · landscape, plant, or facility shot</span></div>
+      <div class="ph-label">HERO — LAB / TESTING FACILITY<span class="ph-dims">Full-bleed · 16:9 or wider · engine test cell or reactor rig</span></div>
     </div>
   </div>
   <div class="hero-overlay"></div>
-
   <div class="hero-content">
-    <div class="hero-eyebrow">Engineered in Belfast — Deployed worldwide</div>
-    <h1 class="hero-title">To clean and <em>decarbonise</em> the air.</h1>
-
+    <div class="hero-eyebrow">Green Emissions Testing</div>
+    <h1 class="hero-title">Cleaner emissions testing, <em>without the engine</em>.</h1>
     <div class="hero-bottom">
       <div>
-        <p class="hero-lede">A technology disruptor for cleaner air, sustainable fuels and resilient energy systems — built on deep expertise in thermodynamics, catalysis and e-reactor technology.</p>
+        <p class="hero-lede">Accelerated catalyst ageing and emissions testing powered by CATAGEN's OMEGA e-Reactor — precise, repeatable and electrically driven, for faster and cleaner vehicle development.</p>
         <div class="hero-actions">
-          <a href="#climahtech" class="btn-primary">Explore the technology</a>
-          <a href="#contact" class="btn-ghost">Contact us</a>
+          <a href="#services" class="btn-primary">Our services</a>
+          <a href="#discovery" class="btn-ghost">Book a discovery call</a>
         </div>
       </div>
       <div class="hero-meta">
-        <div class="live">Now testing — Belfast</div>
-        <div class="place">Titanic Quarter</div>
+        <div class="live">OMEGA e-Reactor</div>
+        <div class="place">Belfast</div>
       </div>
     </div>
   </div>
 </header>
 
-<section class="mission">
-  <div class="mission-inner reveal">
-    <div class="mission-lede">
-      CATAGEN is a technology innovation company engineering solutions to <em>clean, decarbonise and secure</em> the air, fuel and energy systems the world depends on.
+<!-- CHALLENGES -->
+<section class="challenges">
+  <div class="challenges-head reveal">
+    <div>
+      <div class="section-eyebrow">The real-world challenge</div>
+      <h2 class="section-title">The challenges of <em>emissions compliance</em>.</h2>
     </div>
-    <div class="mission-body">
-      <p>Built on deep expertise in thermodynamics, catalysis and e-reactor technology, CATAGEN challenges conventional infrastructure models with modular, scalable systems designed for real-world impact.</p>
-      <p>At the heart of CATAGEN is the e-reactor — a flexible reactor technology platform that enables precise thermal and chemical processes across multiple industries. First proven in emissions testing, the platform is now being adapted for sustainable fuels, defence energy resilience and industrial applications.</p>
+    <p class="challenges-intro">OEM and aftertreatment teams must deliver compliant solutions under rising costs, complexity and risk. CATAGEN provides precise, repeatable, electrically driven emissions testing to meet them.</p>
+  </div>
+  <div class="challenge-grid stagger">
+    <div class="challenge">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 6 L32 13 L32 27 L20 34 L8 27 L8 13 Z"/><path d="M20 14 L20 22 M20 26 L20 26.5"/></svg>
+      <h4>Increasing regulatory complexity</h4>
+      <p>Tighter limits, evolving test cycles and moving targets across global standards.</p>
+    </div>
+    <div class="challenge">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="20" cy="20" r="13"/><path d="M20 12 L20 20 L26 24"/></svg>
+      <h4>Time and cost pressure</h4>
+      <p>Engine-based testing is expensive, slow to run and hard to scale with development timelines.</p>
+    </div>
+    <div class="challenge">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 28 L16 18 L22 24 L32 11"/><path d="M26 11 L32 11 L32 17"/></svg>
+      <h4>Correlation &amp; durability risk</h4>
+      <p>Results must correlate to real performance testing and durability across ageing and aftertreatment degradation.</p>
+    </div>
+    <div class="challenge">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 7 C14 16 14 22 20 31 C26 22 26 16 20 7 Z"/><circle cx="20" cy="23" r="3"/></svg>
+      <h4>New fuels &amp; emissions</h4>
+      <p>Hybridisation, alternative fuels and advanced catalyst materials introduce new degradation mechanisms and legacy test struggles to replicate.</p>
     </div>
   </div>
 </section>
 
-<section class="capabilities">
+<!-- SERVICES -->
+<section class="services" id="services">
   <div class="cap-header reveal">
-    <div class="section-eyebrow">Four pillars, one engineering platform</div>
-    <h2 class="section-title">Technology with <em>real-world</em> applications.</h2>
+    <div class="section-eyebrow">Green Emissions Testing services</div>
+    <h2 class="section-title">Testing and ageing, from <em>early screening to compliance</em>.</h2>
   </div>
-
-  <div class="caps-grid stagger">
-    <article class="cap" id="emissions-testing">
-      <div class="cap-num">01 / GREEN EMISSIONS TESTING</div>
-      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
-        <rect x="8" y="14" width="40" height="32" rx="2"/>
-        <line x1="8" y1="22" x2="48" y2="22"/>
-        <circle cx="14" cy="18" r="1" fill="currentColor"/>
-        <circle cx="18" cy="18" r="1" fill="currentColor"/>
-        <path d="M 16 30 L 22 30 L 26 36 L 32 26 L 36 30 L 40 30"/>
-      </svg>
-      <h3>Green Emissions Testing</h3>
-      <div class="cap-lede">Accelerated catalyst ageing and emissions testing for OEMs.</div>
-      <p class="cap-body">CATAGEN Green Emissions Testing uses CATAGEN's founding OMEGA e-Reactor technology to support faster, cleaner and more reliable vehicle development.</p>
-      <a href="#" class="cap-link">Explore GET</a>
+  <div class="services-grid stagger">
+    <article class="service-card">
+      <div class="service-bg"><div class="img-placeholder dark"><div class="ph-label">CATALYST AGEING RIG<span class="ph-dims">landscape · fills card</span></div></div></div>
+      <div class="service-scrim"></div>
+      <div class="service-body">
+        <div class="service-kicker">01 / Catalyst Ageing</div>
+        <h3>Catalyst ageing without an engine</h3>
+        <p>Accelerated, engine-representative catalyst ageing without engine operation — supports emissions durability testing across automotive and industrial applications.</p>
+        <a href="#" class="service-link">Accelerate your emissions compliance</a>
+      </div>
     </article>
-
-    <article class="cap" id="saf">
-      <div class="cap-num">02 / SUSTAINABLE AVIATION FUEL</div>
-      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
-        <path d="M 6 36 L 28 14 L 50 36"/>
-        <path d="M 16 36 L 28 24 L 40 36"/>
-        <line x1="28" y1="14" x2="28" y2="46"/>
-        <circle cx="28" cy="46" r="2"/>
-      </svg>
-      <h3>ClimaHtech Green Flight</h3>
-      <div class="cap-lede">Decentralised e-SAF and bio-SAF production.</div>
-      <p class="cap-body">Using CATAGEN's electrically driven E-FUEL GEN reactor, renewable energy, renewable hydrogen and sustainable carbon dioxide to produce SAF.</p>
-      <a href="#" class="cap-link">Explore Green Flight</a>
+    <article class="service-card">
+      <div class="service-bg"><div class="img-placeholder dark"><div class="ph-label">CHARACTERISATION LAB<span class="ph-dims">landscape · fills card</span></div></div></div>
+      <div class="service-scrim"></div>
+      <div class="service-body">
+        <div class="service-kicker">02 / Characterisation</div>
+        <h3>Characterisation performance tests</h3>
+        <p>Performance and characterisation testing of fresh and aged catalysts and aftertreatment systems, supporting emissions development, correlation and compliance activities.</p>
+        <a href="#" class="service-link">Explore our services</a>
+      </div>
     </article>
-
-    <article class="cap" id="h2-compression">
-      <div class="cap-num">03 / H₂ COMPRESSION</div>
-      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
-        <circle cx="28" cy="28" r="18"/>
-        <path d="M 28 10 L 28 18"/>
-        <path d="M 28 38 L 28 46"/>
-        <path d="M 10 28 L 18 28"/>
-        <path d="M 38 28 L 46 28"/>
-        <path d="M 22 22 L 34 34"/>
-        <path d="M 34 22 L 22 34"/>
-      </svg>
-      <h3>ClimaHtech Compress</h3>
-      <div class="cap-lede">Liquid piston hydrogen compression at scale.</div>
-      <p class="cap-body">Efficient liquid piston hydrogen compression technology for next-generation refuelling, dispensing and clean energy infrastructure applications.</p>
-      <a href="#" class="cap-link">Explore Compress</a>
+    <article class="service-card">
+      <div class="service-bg"><div class="img-placeholder dark"><div class="ph-label">R&amp;D / MODELLING<span class="ph-dims">landscape · fills card</span></div></div></div>
+      <div class="service-scrim"></div>
+      <div class="service-body">
+        <div class="service-kicker">03 / Advanced offering</div>
+        <h3>Advanced knowledgebased offerings</h3>
+        <p>Expert interpretation of emissions ageing and durability data to support informed engineering decisions — reduced development programmes and optimised catalyst formulations.</p>
+        <a href="#" class="service-link">Explore our offering</a>
+      </div>
     </article>
-
-    <article class="cap" id="climahtech">
-      <div class="cap-num">04 / CLIMAHTECH</div>
-      <svg class="cap-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.3">
-        <circle cx="28" cy="28" r="20"/>
-        <path d="M 8 28 Q 28 14 48 28 Q 28 42 8 28"/>
-        <line x1="28" y1="8" x2="28" y2="48"/>
-      </svg>
-      <h3>ClimaHtech</h3>
-      <div class="cap-lede">e-Reactor and compression technologies for clean fuels.</div>
-      <p class="cap-body">e-FUEL GEN, BIOHGEN and liquid piston hydrogen compression — an integrated platform for clean fuel production, energy security and net zero applications.</p>
-      <a href="#" class="cap-link">Explore ClimaHtech</a>
+    <article class="service-card">
+      <div class="service-bg"><div class="img-placeholder dark"><div class="ph-label">DIESEL AFTERTREATMENT<span class="ph-dims">landscape · fills card</span></div></div></div>
+      <div class="service-scrim"></div>
+      <div class="service-body">
+        <div class="service-kicker">04 / Diesel aftertreatment</div>
+        <h3>Diesel aftertreatment accelerated ageing cycle</h3>
+        <p>Accelerated, representative ageing cycles for diesel aftertreatment systems — providing faster durability results without full engine-based ageing programmes.</p>
+        <a href="#" class="service-link">Explore our services</a>
+      </div>
     </article>
   </div>
 </section>
 
-<section class="feature">
-  <div class="feature-content reveal">
-    <div class="section-eyebrow">ClimaHtech Green Flight</div>
-    <h3>Sustainable Aviation Fuel, made at <em>point of demand</em>.</h3>
-    <p>Decentralised, electrically driven production of e-SAF and bio-SAF using renewable energy and sustainable carbon dioxide. Built to scale modular SAF production wherever feedstock and clean energy are available.</p>
-    <ul class="feature-list">
-      <li><span class="k">REACTOR</span><span>E-FUEL GEN — electrically driven, modular</span></li>
-      <li><span class="k">FEEDSTOCK</span><span>Captured CO₂ + renewable hydrogen, or biogenic</span></li>
-      <li><span class="k">OUTPUT</span><span>Drop-in sustainable aviation fuel</span></li>
-      <li><span class="k">DEPLOY</span><span>Containerised, on-site at airports and energy hubs</span></li>
-    </ul>
-  </div>
-  <div class="feature-visual reveal">
-    <div class="img-placeholder">
-      <div class="ph-label">AIRCRAFT / AVIATION IMAGE<span class="ph-dims">Portrait or 3:4 · plane on runway or in flight</span></div>
-    </div>
-  </div>
-</section>
-
+<!-- OMEGA feature -->
 <section class="feature reverse">
   <div class="feature-content reveal">
-    <div class="section-eyebrow">ClimaHtech Compress</div>
-    <h3>Hydrogen <em>compression</em>, reimagined.</h3>
-    <p>Efficient liquid piston hydrogen compression with applications across dispensing, refuelling, and the wider hydrogen economy — built to support the infrastructure of next-generation clean energy.</p>
-    <ul class="feature-list">
-      <li><span class="k">TECH</span><span>Liquid piston compression — fewer moving parts</span></li>
-      <li><span class="k">APPLICATIONS</span><span>Dispensing, refuelling, industrial H₂</span></li>
-      <li><span class="k">EFFICIENCY</span><span>Lower energy cost per kg compressed</span></li>
-      <li><span class="k">SCALE</span><span>Modular for distributed deployment</span></li>
+    <div class="section-eyebrow">OMEGA e-Reactor</div>
+    <h3>Electrically driven reactor technology for <em>emissions testing</em>.</h3>
+    <p>CATAGEN's OMEGA Technology is a proprietary, electrically driven reactor platform that reproduces world catalyst and aftertreatment conditions without a full engine or vehicle. It enables accelerated ageing with high control and repeatability — reducing test cost, programme time and CO₂ emissions while delivering engine-representative, regulation-relevant results.</p>
+    <div class="means-tag">What this means for you</div>
+    <ul class="means-list">
+      <li>Faster ageing and development decisions</li>
+      <li>Consistent conditions for reliable comparison</li>
+      <li>Reduced carbon footprint of testing programmes</li>
     </ul>
   </div>
   <div class="feature-visual dark reveal">
-    <div class="img-placeholder dark">
-      <div class="ph-label">H₂ COMPRESSION / RIG IMAGE<span class="ph-dims">Portrait or 3:4 · equipment, rig, or refuelling shot</span></div>
-    </div>
+    <div class="img-placeholder dark"><div class="ph-label">OMEGA e-REACTOR UNIT<span class="ph-dims">Portrait or 3:4 · containerised reactor equipment</span></div></div>
   </div>
 </section>
 
-<section class="platforms" id="technology">
-  <div class="platforms-header reveal">
-    <div>
-      <div class="section-eyebrow">The e-Reactor portfolio</div>
-      <h2 class="section-title">One platform, four technologies.</h2>
-    </div>
-    <p class="platforms-intro">At the heart of every CATAGEN system is the e-reactor — adaptable, electrically driven, and engineered to deliver precise thermal and chemical processes at industrial scale.</p>
-  </div>
-
-  <div class="platforms-grid stagger">
-    <div class="platform">
-      <div class="platform-num">P / 01</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">OMEGA<span class="ph-dims">4:3</span></div></div></div>
-      <h4>OMEGA e-Reactor</h4>
-      <p>Founding e-Reactor technology for catalyst ageing.</p>
-    </div>
-    <div class="platform">
-      <div class="platform-num">P / 02</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">E-FUEL GEN<span class="ph-dims">4:3</span></div></div></div>
-      <h4>E-FUEL GEN</h4>
-      <p>e-Reactor technology for e-fuel and SAF production.</p>
-    </div>
-    <div class="platform">
-      <div class="platform-num">P / 03</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">BIOHGEN<span class="ph-dims">4:3</span></div></div></div>
-      <h4>BIOHGEN</h4>
-      <p>e-Reactor for E-SMR and biohydrogen production. Biogenic CO₂ produced.</p>
-    </div>
-    <div class="platform">
-      <div class="platform-num">P / 04</div>
-      <div class="platform-img"><div class="img-placeholder dark"><div class="ph-label">COMPRESS<span class="ph-dims">4:3</span></div></div></div>
-      <h4>COMPRESS</h4>
-      <p>Efficient liquid piston hydrogen compression with several applications.</p>
-    </div>
-  </div>
-</section>
-
-<section class="spotlight">
-  <div class="spotlight-inner reveal">
-    <div class="section-eyebrow">CEO spotlight</div>
-    <h2 class="section-title">Meet the team behind the <em>technology</em>.</h2>
-    <div class="spotlight-video">
-      <div class="img-placeholder dark">
-        <div class="ph-label">FEATURE VIDEO — DR. ANDREW WOODS<span class="ph-dims">16:8.2 · video player with poster frame</span></div>
-      </div>
-    </div>
-    <div class="spotlight-thumbs stagger">
-      <div class="spotlight-thumb"><div class="img-placeholder"><div class="ph-label">VIDEO THUMB 1<span class="ph-dims">16:9</span></div></div></div>
-      <div class="spotlight-thumb"><div class="img-placeholder"><div class="ph-label">VIDEO THUMB 2<span class="ph-dims">16:9</span></div></div></div>
-      <div class="spotlight-thumb"><div class="img-placeholder"><div class="ph-label">VIDEO THUMB 3<span class="ph-dims">16:9</span></div></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="quote">
-  <div class="quote-inner reveal">
-    <div>
-      <blockquote>If aviation and heavy industry are to decarbonise this century, the technology to do it has to be built now — at scale, on the ground.</blockquote>
-      <div class="quote-attr">Dr. Andrew Woods — Founder &amp; CEO, CATAGEN</div>
-    </div>
-    <div class="quote-portrait">
-      <div class="img-placeholder"><div class="ph-label">CEO PORTRAIT<span class="ph-dims">3:4</span></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="applications">
-  <div class="app-header reveal">
-    <div>
-      <div class="section-eyebrow">Applied across industries</div>
-      <h2 class="section-title">Where CATAGEN technology goes to work.</h2>
-    </div>
-    <p class="app-intro">From light vehicles and heavy-duty fleets to defence platforms and grid-scale energy infrastructure — built to scale where decarbonisation matters most.</p>
-  </div>
-
-  <div class="apps-grid stagger">
-    <article class="app-card">
-      <div class="app-card-img"><div class="img-placeholder"><div class="ph-label">AUTOMOTIVE / MOTORCYCLE<span class="ph-dims">4:3</span></div></div></div>
-      <div class="app-card-body">
-        <h4>Automotive &amp; emissions</h4>
-        <p>Advanced catalyst ageing and emissions testing for OEMs.</p>
-      </div>
-    </article>
-
-    <article class="app-card">
-      <div class="app-card-img"><div class="img-placeholder"><div class="ph-label">AVIATION<span class="ph-dims">4:3</span></div></div></div>
-      <div class="app-card-body">
-        <h4>Sustainable Aviation Fuel</h4>
-        <p>Decentralised, electrically driven production of e-SAF and bio-SAF using renewable energy and sustainable carbon dioxide.</p>
-      </div>
-    </article>
-
-    <article class="app-card">
-      <div class="app-card-img"><div class="img-placeholder dark"><div class="ph-label">DEFENCE / MILITARY<span class="ph-dims">4:3</span></div></div></div>
-      <div class="app-card-body">
-        <h4>Defence, government &amp; resilience</h4>
-        <p>Deployable, electrically driven technologies with multi-fuel capabilities — SAF, e-Diesel, e-Methane and renewable hydrogen for secure local fuel supply and energy security.</p>
-      </div>
-    </article>
-
-    <article class="app-card">
-      <div class="app-card-img"><div class="img-placeholder"><div class="ph-label">ENERGY INFRASTRUCTURE<span class="ph-dims">4:3</span></div></div></div>
-      <div class="app-card-body">
-        <h4>Clean energy infrastructure</h4>
-        <p>Compression technology for next-generation hydrogen compression.</p>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- TRUST STRIP: partner / recognition logos — the client called this out as especially important.
-     Each slot is now a dedicated logo placeholder (dashed border, fixed height) rather than a text pill,
-     so real logo art drops straight in and stays visually aligned. -->
+<!-- PARTNER LOGOS -->
 <section class="trust">
   <div class="trust-inner reveal">
-    <div class="trust-label">Backed by · Partnered with · Recognised by</div>
+    <div class="trust-label">Trusted by leading manufacturers</div>
     <div class="trust-row stagger">
-      <div class="trust-item"><div class="logo-placeholder">WIRED Trailblazer</div></div>
-      <div class="trust-item"><div class="logo-placeholder">Deloitte Fast 50</div></div>
-      <div class="trust-item"><div class="logo-placeholder">EY</div></div>
-      <div class="trust-item"><div class="logo-placeholder">Tech Nation Future Fifty</div></div>
-      <div class="trust-item"><div class="logo-placeholder">Earthshot Prize</div></div>
-      <div class="trust-item"><div class="logo-placeholder">Official Supplier 2026</div></div>
+      <div class="trust-item"><div class="logo-placeholder">MV Agusta</div></div>
+      <div class="trust-item"><div class="logo-placeholder">Volvo Penta</div></div>
+      <div class="trust-item"><div class="logo-placeholder">TVS</div></div>
+      <div class="trust-item"><div class="logo-placeholder">SC-Project</div></div>
+      <div class="trust-item"><div class="logo-placeholder">Akrapovič</div></div>
+      <div class="trust-item"><div class="logo-placeholder">Ducati</div></div>
     </div>
   </div>
 </section>
 
+<!-- STATS -->
+<section class="stats">
+  <div class="platforms-header reveal">
+    <div>
+      <div class="section-eyebrow">Why CATAGEN</div>
+      <h2 class="section-title">Precision, adaptability, <em>and real savings</em>.</h2>
+    </div>
+    <p class="platforms-intro">Electrically driven testing replaces slow, costly engine programmes — with tighter control, broader adaptability and a fraction of the emissions.</p>
+  </div>
+  <div class="stats-grid stagger">
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Continuous testing</div></div>
+    <div class="stat"><div class="stat-num">High</div><div class="stat-label">Testing adaptability</div></div>
+    <div class="stat"><div class="stat-num">30%</div><div class="stat-label">Up to — cost savings</div></div>
+    <div class="stat"><div class="stat-num">&lt;2%</div><div class="stat-label">Test variability</div></div>
+    <div class="stat"><div class="stat-num">Full</div><div class="stat-label">Operating conditions</div></div>
+    <div class="stat"><div class="stat-num">Any</div><div class="stat-label">Gas compositions</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">CO₂ saving</div></div>
+    <div class="stat"><div class="stat-num">Expert</div><div class="stat-label">Team expertise</div></div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries">
+  <div class="app-header reveal">
+    <div>
+      <div class="section-eyebrow">Industries we work with</div>
+      <h2 class="section-title">Built for every emissions programme.</h2>
+    </div>
+    <p class="app-intro">CATAGEN Green Emissions Testing supports manufacturers across automotive, heavy-duty and industrial sectors — applying electrically driven emissions testing and catalyst ageing across diverse platforms, fuels and operating conditions.</p>
+  </div>
+  <div class="industries-grid stagger">
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 26 L11 18 L29 18 L32 26"/><rect x="6" y="26" width="28" height="6" rx="2"/><circle cx="13" cy="32" r="2.5"/><circle cx="27" cy="32" r="2.5"/></svg><span>Auto</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="28" r="5"/><circle cx="29" cy="28" r="5"/><path d="M11 28 L18 18 L26 18 L29 28 M18 18 L14 14"/></svg><span>Motorcycles</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="8" y="20" width="16" height="10" rx="1"/><path d="M24 24 L30 24 L33 28 L33 30 L8 30"/><circle cx="14" cy="32" r="2.5"/><circle cx="27" cy="32" r="2.5"/><path d="M10 20 L10 14 L16 14"/></svg><span>Heavy Duty</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="8" y="20" width="18" height="10" rx="1"/><path d="M26 30 L34 30 L34 22 L28 22"/><circle cx="14" cy="32" r="2.5"/><circle cx="30" cy="32" r="2.5"/></svg><span>Heavier Cargo</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 8 C14 18 14 24 20 32 C26 24 26 18 20 8 Z"/><circle cx="20" cy="24" r="3"/></svg><span>Fuel / Lubricants</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 26 Q20 22 32 26 L29 31 L11 31 Z"/><path d="M16 22 L16 14 L24 17 L16 18"/></svg><span>Recreational</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 28 L14 20 L26 20 L30 28"/><rect x="8" y="28" width="24" height="5" rx="2"/><circle cx="14" cy="33" r="2"/><circle cx="26" cy="33" r="2"/><path d="M20 20 L20 14"/></svg><span>Non-Road</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="9" y="16" width="22" height="12" rx="2"/><path d="M13 16 L13 28 M27 16 L27 28 M9 22 L31 22"/></svg><span>Catalyst Mfrs</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="9" y="18" width="22" height="12" rx="1"/><path d="M13 18 L13 14 L27 14 L27 18"/><path d="M16 24 L20 24 M24 22 L24 26"/></svg><span>Genset</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 26 Q20 23 31 26 L28 31 L12 31 Z"/><path d="M14 23 L14 15 L26 19 Z"/></svg><span>Marine</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="8" y="14" width="24" height="14" rx="2"/><path d="M14 28 L14 32 M26 28 L26 32 M12 20 L28 20"/></svg><span>Non-Road Diesel</span></div>
+    <div class="industry"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="20" cy="20" r="11"/><path d="M21 13 L16 21 L20 21 L19 27 L24 19 L20 19 Z" fill="currentColor" stroke="none"/></svg><span>Reformer Catalyst</span></div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-inner reveal">
+    <div class="testimonial-media"><div class="img-placeholder dark"><div class="ph-label">DUCATI — OFFICIAL SUPPLIER<span class="ph-dims">fills half · motorcycle / brand imagery</span></div></div></div>
+    <div class="testimonial-content">
+      <div class="testimonial-badge">Official Supplier of Ducati</div>
+      <blockquote>CATAGEN has become a preferred supplier for Ducati, thanks to their consistent technical expertise and clear understanding of catalyst ageing — the collaboration continues to deliver precise, reliable results.</blockquote>
+      <div class="attr">Frederico Benedetti — Calibration Project Manager, Ducati</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATION -->
+<section class="certification">
+  <div class="cap-header reveal">
+    <div class="section-eyebrow">Emissions certification</div>
+    <h2 class="section-title">Recognised by the bodies that <em>set the standard</em>.</h2>
+  </div>
+  <div class="cert-grid stagger">
+    <div class="cert-item"><div class="logo-placeholder">VCA</div></div>
+    <div class="cert-item"><div class="logo-placeholder">TÜV</div></div>
+    <div class="cert-item"><div class="logo-placeholder">LuxControl</div></div>
+    <div class="cert-item"><div class="logo-placeholder">DEKRA</div></div>
+    <div class="cert-item"><div class="logo-placeholder">Vehicle Certification Agency</div></div>
+    <div class="cert-item"><div class="logo-placeholder">Applus IDIADA</div></div>
+    <div class="cert-item"><div class="logo-placeholder">TÜV Rheinland</div></div>
+    <div class="cert-item"><div class="logo-placeholder">ATEL</div></div>
+    <div class="cert-item"><div class="logo-placeholder">UTAC</div></div>
+    <div class="cert-item"><div class="logo-placeholder">CERTO</div></div>
+    <div class="cert-item"><div class="logo-placeholder">Emissions Analytics</div></div>
+    <div class="cert-item"><div class="logo-placeholder">EU / DEU</div></div>
+  </div>
+</section>
+
+<!-- DISCOVERY CALL -->
+<section class="discovery" id="discovery">
+  <div class="discovery-inner reveal">
+    <div>
+      <div class="section-eyebrow">Book a discovery call</div>
+      <h2>Learn how Green Emissions Testing can support your compliance.</h2>
+      <p class="disco-lede">Tell us about your programme and our engineering team will be in touch to discuss how CATAGEN can accelerate your emissions development.</p>
+      <div class="disco-contact">Titanic Quarter, Belfast</div>
+      <div class="disco-contact">+44 (0)28 9045 3120</div>
+    </div>
+    <div class="form-card">
+      <div class="form-row">
+        <div class="field"><label>First name</label><input type="text" placeholder="First name"></div>
+        <div class="field"><label>Last name</label><input type="text" placeholder="Last name"></div>
+      </div>
+      <div class="field"><label>Work email</label><input type="email" placeholder="you@company.com"></div>
+      <div class="field"><label>How can we help?</label>
+        <select>
+          <option>Catalyst ageing</option>
+          <option>Characterisation performance testing</option>
+          <option>Diesel aftertreatment ageing</option>
+          <option>Advanced / knowledgebased offering</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field"><label>Message</label><textarea placeholder="A little about your programme…"></textarea></div>
+      <a href="#" class="btn-primary">Send message</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-inner reveal">
+    <div class="faq-left">
+      <div class="section-eyebrow">Frequently asked</div>
+      <h2 class="section-title">Green Emissions Testing, explained.</h2>
+      <p>If you don't see what you're looking for, get in touch with our team — we'll come back to you the same week.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>What is Green Emissions Testing at CATAGEN?</summary>
+        <div class="answer">Green Emissions Testing at CATAGEN is a suite of advanced emissions testing, catalyst ageing and characterisation services delivered using electrically driven reactor technology — including highly variable, engine-representative ageing without the need for a full engine or vehicle.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How is CATAGEN's Green Emissions Testing different from traditional engine-based testing?</summary>
+        <div class="answer">It replaces slow, costly engine programmes with electrically driven reactors that reproduce catalyst and aftertreatment conditions precisely — delivering faster, more repeatable results at a fraction of the cost and emissions.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What is catalyst ageing and why is it important for emissions compliance?</summary>
+        <div class="answer">Catalyst ageing simulates the degradation a catalyst experiences over its service life, so its end-of-life emissions performance can be verified against regulatory limits before deployment.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can CATAGEN support alternative fuels and new powertrain technologies?</summary>
+        <div class="answer">Yes. The reactor platform adapts to alternative fuels, hybrid systems and advanced catalyst materials, reproducing the new degradation mechanisms these introduce.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is CATAGEN Green Emissions Testing suitable for regulatory submissions?</summary>
+        <div class="answer">Results are engine-representative and regulation-relevant, and CATAGEN works with OEMs and regulators globally on compliance pathways supported by recognised accreditation.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How do I get started with CATAGEN Green Emissions Testing?</summary>
+        <div class="answer">Book a discovery call above and our engineering team will discuss your programme and the right testing approach for your goals.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
 <section id="news">
   <div class="news-header reveal">
     <div>
@@ -1201,7 +1323,6 @@
     </div>
     <a href="#" class="cap-link">All updates</a>
   </div>
-
   <div class="news-grid stagger">
     <article class="news-card">
       <div class="news-img"><div class="img-placeholder dark"><div class="ph-label">PRESS PHOTO — DEFENCE GROWTH DEAL<span class="ph-dims">4:3</span></div></div></div>
@@ -1210,15 +1331,13 @@
         <h4>CATAGEN attends launch of the Northern Ireland Defence Growth Deal</h4>
       </div>
     </article>
-
     <article class="news-card">
-      <div class="news-img"><div class="img-placeholder dark"><div class="ph-label">WIRED TRAILBLAZER BADGE<span class="ph-dims">4:3</span></div></div></div>
+      <div class="news-img"><div class="img-placeholder dark"><div class="ph-label">SAF / GREEN FLIGHT<span class="ph-dims">4:3</span></div></div></div>
       <div class="news-body">
-        <div class="news-meta">Recognition · 2025</div>
-        <h4>CATAGEN named as a 2025 WIRED Trailblazer</h4>
+        <div class="news-meta">Press release · 2026</div>
+        <h4>Loganair signs 15-year Sustainable Aviation Fuel offtake agreement with ClimaHtech Green Flight</h4>
       </div>
     </article>
-
     <article class="news-card">
       <div class="news-img"><div class="img-placeholder dark"><div class="ph-label">PRESS PHOTO — UK/INDIA<span class="ph-dims">4:3</span></div></div></div>
       <div class="news-body">
@@ -1229,64 +1348,30 @@
   </div>
 </section>
 
-<section class="faq">
-  <div class="faq-inner reveal">
-    <div class="faq-left">
-      <div class="section-eyebrow">Frequently asked</div>
-      <h2 class="section-title">Questions, answered plainly.</h2>
-      <p>If you don't see what you're looking for, get in touch with our team — we'll come back to you the same week.</p>
+<!-- ABOUT -->
+<section class="mission" style="border-top: 1px solid var(--line);">
+  <div class="mission-inner reveal">
+    <div class="mission-lede">
+      About <em>CATAGEN</em> — creating and engineering the solutions that will accelerate the transition to net zero.
     </div>
-    <div class="faq-list">
-      <details class="faq-item" open>
-        <summary>What is CATAGEN and what does the company do?</summary>
-        <div class="answer">CATAGEN is a clean-tech company developing technologies that accelerate the transition to net zero. We deliver Green Emissions Testing for OEMs, sustainable fuel production through ClimaHtech Green Flight, hydrogen compression through ClimaHtech Compress, and biohydrogen and e-fuel technologies across the ClimaHtech platform.</div>
-      </details>
-      <details class="faq-item">
-        <summary>What industries do CATAGEN work with?</summary>
-        <div class="answer">Automotive OEMs and Tier-1 suppliers, aerospace and aviation, defence and government, energy producers, and industrial decarbonisation programmes.</div>
-      </details>
-      <details class="faq-item">
-        <summary>What is Green Emissions Testing at CATAGEN?</summary>
-        <div class="answer">Accelerated catalyst ageing and emissions testing for OEMs, powered by CATAGEN's founding OMEGA e-Reactor — delivering faster, cleaner and more reliable vehicle development.</div>
-      </details>
-      <details class="faq-item">
-        <summary>What is ClimaHtech and how is it related to CATAGEN?</summary>
-        <div class="answer">ClimaHtech is CATAGEN's platform for next-generation net zero technologies. It includes ClimaHtech Green Flight (SAF), ClimaHtech Compress (hydrogen compression), biohydrogen, e-fuel and other clean energy technologies.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Does CATAGEN offer support with emissions compliance?</summary>
-        <div class="answer">Yes. We work with OEMs and regulators globally on emissions compliance pathways, supported by our testing infrastructure and engineering team.</div>
-      </details>
-      <details class="faq-item">
-        <summary>What is CATAGEN's OMEGA Technology?</summary>
-        <div class="answer">OMEGA is CATAGEN's founding e-Reactor technology — the platform on which Green Emissions Testing was built, and which underpins our wider e-reactor portfolio.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Where is CATAGEN located?</summary>
-        <div class="answer">Headquartered in Belfast, Northern Ireland — Channel Commercial Park, Queens Road, BT3 9DT.</div>
-      </details>
+    <div class="mission-body">
+      <p>Our capabilities span green emissions testing, sustainable aviation fuel (SAF) production, hydrogen compression and a wider suite of ClimaHtech net zero systems powered by our patented e-reactor and high-temperature chemical engineering expertise.</p>
+      <p>CATAGEN's mission is to clean and decarbonise the air.</p>
     </div>
   </div>
 </section>
 
-<section class="cta" id="contact">
-  <div class="cta-inner reveal">
-    <div>
-      <div class="section-eyebrow">Contact us</div>
-      <h2 class="cta-title">Let's drive innovation <em>together</em>.</h2>
-      <ul class="cta-pillars">
-        <li>Emissions compliance</li>
-        <li>SAF production</li>
-        <li>Energy security</li>
-        <li>Hydrogen compression</li>
-      </ul>
-    </div>
-    <div class="cta-aside">
-      <h4>Get in touch</h4>
-      <p>Whether you're an OEM tackling emissions, an airline planning your SAF strategy, or a government building energy resilience — we'd like to hear from you.</p>
-      <div class="contact-line">Titanic Quarter, Belfast</div>
-      <div class="contact-line" style="margin-bottom: 24px;">+44 (0)28 9045 3120</div>
-      <a href="#" class="btn-primary">Send a message</a>
+<!-- RECOGNITION -->
+<section class="trust" style="padding-top: 40px;">
+  <div class="trust-inner reveal">
+    <div class="trust-label">Backed by · Partnered with · Recognised by</div>
+    <div class="trust-row stagger">
+      <div class="trust-item"><div class="logo-placeholder">WIRED Trailblazer</div></div>
+      <div class="trust-item"><div class="logo-placeholder">Deloitte Fast 50</div></div>
+      <div class="trust-item"><div class="logo-placeholder">EY</div></div>
+      <div class="trust-item"><div class="logo-placeholder">Tech Nation Future Fifty</div></div>
+      <div class="trust-item"><div class="logo-placeholder">Earthshot Prize</div></div>
+      <div class="trust-item"><div class="logo-placeholder">500 Businesses</div></div>
     </div>
   </div>
 </section>
@@ -1345,22 +1430,19 @@
   </div>
 </footer>
 
+
 <script>
   const nav = document.getElementById('nav');
   const hero = document.querySelector('.hero');
   const heroBottom = () => hero.offsetTop + hero.offsetHeight - 80;
   const updateNav = () => {
-    if (window.scrollY < heroBottom()) {
-      nav.classList.add('on-hero');
-    } else {
-      nav.classList.remove('on-hero');
-    }
+    if (window.scrollY < heroBottom()) { nav.classList.add('on-hero'); }
+    else { nav.classList.remove('on-hero'); }
   };
   window.addEventListener('scroll', updateNav, { passive: true });
   window.addEventListener('resize', updateNav);
   updateNav();
 
-  // Scroll-reveal
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealables = document.querySelectorAll('.reveal, .stagger');
   if (prefersReduced) {
@@ -1368,15 +1450,11 @@
   } else {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     revealables.forEach(el => io.observe(el));
   }
 </script>
-
 </body>
 </html>
