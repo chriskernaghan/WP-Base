@@ -866,6 +866,78 @@
   .anno-tag .anno-tag-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--teal-glow); margin-bottom: 3px; }
   .anno-tag .anno-tag-value { font-family: var(--sans); font-size: 13px; line-height: 1.4; color: var(--bone); }
 
+
+  /* ===== SAF production — cinematic scroll section ===== */
+  .saf-cinema { height: 480vh; position: relative; background: var(--ink); padding: 0; }
+  .saf-cinema-stage {
+    position: sticky; top: 0; height: 100vh;
+    display: grid; grid-template-columns: 0.9fr 1.6fr;
+    gap: 40px; align-items: center;
+    max-width: 1500px; margin: 0 auto;
+    padding: 110px var(--gutter) 60px;
+    overflow: hidden; color: var(--bone);
+  }
+  .saf-cinema-left .section-eyebrow { color: var(--teal-glow); }
+  .saf-cinema-left .section-eyebrow::before { background: var(--teal-glow); }
+  .saf-cinema-left h3 {
+    font-family: var(--display); font-weight: 300;
+    font-size: clamp(30px, 3vw, 52px); line-height: 1.04;
+    letter-spacing: -0.025em; margin-bottom: 20px; max-width: 16ch; color: var(--bone);
+  }
+  .saf-cinema-left h3 em { color: var(--teal-glow); font-style: normal; }
+  .saf-cinema-left p.cin-lede { font-size: 15px; color: var(--muted-dark); line-height: 1.6; max-width: 42ch; margin-bottom: 30px; }
+  .cin-steps { list-style: none; border-top: 1px solid var(--line-dark); }
+  .cin-steps li {
+    display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: baseline;
+    padding: 12px 0; border-bottom: 1px solid var(--line-dark);
+    font-size: 14.5px; color: var(--bone);
+    opacity: 0.32; transition: opacity 0.4s ease, background 0.4s ease;
+  }
+  .cin-steps li .n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--teal-glow); }
+  .cin-steps li.lit { opacity: 1; }
+  .cin-steps li.now { background: rgba(74, 216, 201, 0.07); }
+  .cin-progress {
+    margin-top: 26px; height: 2px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden;
+  }
+  .cin-progress i { display: block; height: 100%; width: 0%; background: var(--teal-glow); transition: width 0.2s linear; }
+  .cin-hint {
+    margin-top: 14px; font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-dark);
+  }
+
+  .saf-cinema-right { width: 100%; height: 100%; display: flex; align-items: center; }
+  .saf-cinema-right svg { width: 100%; height: auto; max-height: 78vh; display: block; }
+
+  /* SVG element states */
+  .cin-plate { opacity: 0.14; transition: opacity 0.6s ease; }
+  .cin-plate.lit { opacity: 1; }
+  .cin-plate .plate-top { fill: rgba(255,255,255,0.06); stroke: rgba(255,255,255,0.22); stroke-width: 1; }
+  .cin-plate.reactor .plate-top { fill: rgba(31,182,168,0.14); stroke: rgba(74,216,201,0.55); }
+  .cin-plate.output .plate-top { fill: rgba(110,168,220,0.12); stroke: rgba(110,168,220,0.5); }
+  .cin-plate.lit .plate-top { filter: drop-shadow(0 0 14px rgba(74,216,201,0.25)); }
+  .cin-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; fill: var(--bone); text-transform: uppercase; }
+  .cin-label.brand { fill: var(--teal-glow); font-size: 10px; }
+  .cin-sub { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; fill: rgba(255,255,255,0.55); }
+  .cin-num { font-family: var(--mono); font-size: 13px; fill: var(--teal-glow); }
+  .cin-seg { fill: none; stroke: var(--teal-glow); stroke-width: 1.6; opacity: 0.9; }
+  .cin-seglabel { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; fill: rgba(255,255,255,0.5); text-transform: uppercase; opacity: 0; transition: opacity 0.5s ease 0.3s; }
+  .cin-seglabel.lit { opacity: 1; }
+  .cin-dot { fill: var(--teal-glow); opacity: 0; }
+  .cin-dot.lit { opacity: 1; }
+  .cin-cube-l { fill: rgba(255,255,255,0.10); }
+  .cin-cube-r { fill: rgba(255,255,255,0.04); }
+  .cin-cube-t { fill: rgba(74,216,201,0.35); }
+
+  @media (max-width: 960px) {
+    .saf-cinema { height: auto; }
+    .saf-cinema-stage { position: static; height: auto; grid-template-columns: 1fr; padding: 90px var(--gutter) 60px; }
+    .saf-cinema-right svg { max-height: none; }
+    .cin-hint { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cin-plate, .cin-steps li, .cin-seglabel { transition: none; }
+  }
+
   @media (max-width: 960px) {
     .challenges-head { grid-template-columns: 1fr; gap: 24px; align-items: start; }
     .challenge-grid { grid-template-columns: repeat(2, 1fr); }
@@ -983,14 +1055,14 @@
 <header class="hero subhero">
   <div class="hero-media">
     <video class="hero-video" autoplay muted loop playsinline poster="/path/to/fallback.jpg">
-      <source src="videos/airline.mp4" type="video/mp4">
-      <source src="videos/airline.webm" type="video/webm">
+      <source src="videos/saf.mp4" type="video/mp4">
+      <source src="videos/saf.webm" type="video/webm">
     </video>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">ClimaHtech Green Flight</div>
-    <h1 class="hero-title">Sustainable Aviation Fuel, made at <em>point of demand</em></h1>
+    <h1 class="hero-title">Sustainable Aviation Fuel, made at <em>point of demand</em>.</h1>
     <div class="hero-bottom">
       <div>
         <p class="hero-lede">Decentralised, electrically driven production of e-SAF and bio-SAF using renewable energy and sustainable carbon dioxide — built to scale modular SAF production wherever feedstock and clean energy are available.</p>
@@ -1090,56 +1162,125 @@
   </div>
 </section>
 
-<!-- E-FUEL GEN feature — annotated diagram (reuses the interactive overlay built for the homepage) -->
-<section class="feature">
-  <div class="feature-content reveal">
-    <div class="section-eyebrow">ClimaHtech Green Flight</div>
-    <h3>Sustainable Aviation Fuel, made at <em>point of demand</em>.</h3>
-    <p>Decentralised, electrically driven production of e-SAF and bio-SAF using renewable energy and sustainable carbon dioxide. Built to scale modular SAF production wherever feedstock and clean energy are available.</p>
-    <ul class="feature-list" id="saf-rows">
-      <li data-point="reactor" class="active"><span class="k">REACTOR</span><span>E-FUEL GEN — electrically driven, modular</span></li>
-      <li data-point="feedstock"><span class="k">FEEDSTOCK</span><span>Captured CO₂ + renewable hydrogen, or biogenic</span></li>
-      <li data-point="output"><span class="k">OUTPUT</span><span>Drop-in sustainable aviation fuel</span></li>
-      <li data-point="deploy"><span class="k">DEPLOY</span><span>Containerised, on-site at airports and energy hubs</span></li>
-    </ul>
-  </div>
-  <div class="feature-visual reveal">
-    <div class="img-placeholder">
-      <div class="ph-label">AIRCRAFT CLIMBING<span class="ph-dims">portrait or 3:4 · sky, wing/engine detail visible</span></div>
-      <div class="anno-layer" id="saf-anno-layer">
-        <div class="anno" data-for="reactor">
-          <div class="anno-dot" style="left:38%; top:52%;"></div>
-          <div class="anno-line" style="left:calc(38% + 6px); top:52%; width:130px; transform:rotate(-18deg);"></div>
-          <div class="anno-tag" style="left:calc(38% + 130px); top:26%;">
-            <div class="anno-tag-label">REACTOR</div>
-            <div class="anno-tag-value">E-FUEL GEN — electrically driven, modular</div>
-          </div>
-        </div>
-        <div class="anno" data-for="feedstock">
-          <div class="anno-dot" style="left:64%; top:38%;"></div>
-          <div class="anno-line" style="left:calc(64% + 6px); top:38%; width:150px; transform:rotate(10deg);"></div>
-          <div class="anno-tag" style="left:calc(64% + 150px); top:44%;">
-            <div class="anno-tag-label">FEEDSTOCK</div>
-            <div class="anno-tag-value">Captured CO₂ + renewable hydrogen, or biogenic</div>
-          </div>
-        </div>
-        <div class="anno" data-for="output">
-          <div class="anno-dot" style="left:22%; top:70%;"></div>
-          <div class="anno-line" style="left:calc(22% + 6px); top:70%; width:120px; transform:rotate(22deg);"></div>
-          <div class="anno-tag" style="left:calc(22% + 120px); top:78%;">
-            <div class="anno-tag-label">OUTPUT</div>
-            <div class="anno-tag-value">Drop-in sustainable aviation fuel</div>
-          </div>
-        </div>
-        <div class="anno" data-for="deploy">
-          <div class="anno-dot" style="left:78%; top:66%;"></div>
-          <div class="anno-line" style="left:calc(78% + 6px); top:66%; width:100px; transform:rotate(-14deg);"></div>
-          <div class="anno-tag" style="left:calc(78% + 100px); top:44%;">
-            <div class="anno-tag-label">DEPLOY</div>
-            <div class="anno-tag-value">Containerised, on-site at airports and energy hubs</div>
-          </div>
-        </div>
-      </div>
+<!-- SAF PRODUCTION — cinematic scroll section -->
+<section class="saf-cinema" id="production">
+  <div class="saf-cinema-stage">
+    <div class="saf-cinema-left">
+      <div class="section-eyebrow">SAF production process</div>
+      <h3>From renewable energy to the <em>runway</em>.</h3>
+      <p class="cin-lede">Scroll to follow the journey — renewable inputs feed CATAGEN's e-reactors, and drop-in sustainable aviation fuel arrives exactly where it's needed.</p>
+      <ol class="cin-steps" id="cin-steps">
+        <li data-beat="0"><span class="n">01</span><span>Renewable energy</span></li>
+        <li data-beat="1"><span class="n">02</span><span>Biomass</span></li>
+        <li data-beat="2"><span class="n">03</span><span>e-SMR — ClimaHtech BIOHGEN</span></li>
+        <li data-beat="3"><span class="n">04</span><span>e-RWGS — ClimaHtech E-FUEL GEN</span></li>
+        <li data-beat="3"><span class="n">05</span><span>e-FT — ClimaHtech E-FUEL GEN</span></li>
+        <li data-beat="4"><span class="n">06</span><span>Blending or upgrading</span></li>
+      </ol>
+      <div class="cin-progress"><i id="cin-bar"></i></div>
+      <div class="cin-hint">Scroll to advance</div>
+    </div>
+
+    <div class="saf-cinema-right">
+      <svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" aria-label="SAF production process diagram">
+
+        <!-- connector segments (drawn on scroll) -->
+        <path class="cin-seg" id="seg-1" d="M 180 172 L 180 230 L 296 230"/>
+        <path class="cin-seg" id="seg-2" d="M 244 300 L 300 300 L 300 234"/>
+        <path class="cin-seg" id="seg-3" d="M 564 230 L 660 230 L 660 282"/>
+        <path class="cin-seg" id="seg-4" d="M 660 418 L 660 450 L 796 450"/>
+        <path class="cin-seg" id="seg-5" d="M 890 498 L 890 545 L 976 545"/>
+
+        <text class="cin-seglabel" id="lbl-1" x="192" y="212">Electricity &amp; water</text>
+        <text class="cin-seglabel" id="lbl-2" x="252" y="290">Biomass</text>
+        <text class="cin-seglabel" id="lbl-3" x="600" y="218">H&#8322; &amp; CO&#8322;</text>
+        <text class="cin-seglabel" id="lbl-4" x="676" y="444">Syncrude</text>
+        <text class="cin-seglabel" id="lbl-5" x="902" y="534">ASTM D7566</text>
+
+        <!-- flow dots -->
+        <circle class="cin-dot" id="dot-1" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 180 172 L 180 230 L 296 230"/></circle>
+        <circle class="cin-dot" id="dot-3" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 564 230 L 660 230 L 660 282"/></circle>
+        <circle class="cin-dot" id="dot-4" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 660 418 L 660 450 L 796 450"/></circle>
+        <circle class="cin-dot" id="dot-5" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 890 498 L 890 545 L 976 545"/></circle>
+
+        <!-- 01 Renewable energy -->
+        <g class="cin-plate" id="plate-0">
+          <polygon class="plate-top" points="180,70 290,120 180,170 70,120"/>
+          <line x1="150" y1="118" x2="150" y2="82" stroke="rgba(255,255,255,0.6)" stroke-width="1.6"/>
+          <g stroke="var(--teal-glow)" stroke-width="1.6">
+            <line x1="150" y1="82" x2="150" y2="66"/><line x1="150" y1="82" x2="164" y2="90"/><line x1="150" y1="82" x2="136" y2="90"/>
+          </g>
+          <line x1="205" y1="130" x2="205" y2="98" stroke="rgba(255,255,255,0.6)" stroke-width="1.6"/>
+          <g stroke="var(--teal-glow)" stroke-width="1.6">
+            <line x1="205" y1="98" x2="205" y2="82"/><line x1="205" y1="98" x2="219" y2="106"/><line x1="205" y1="98" x2="191" y2="106"/>
+          </g>
+          <polygon points="235,124 259,135 235,146 211,135" fill="rgba(74,216,201,0.3)" stroke="rgba(74,216,201,0.6)" stroke-width="1"/>
+          <text class="cin-num" x="84" y="105">1.</text>
+          <text class="cin-label" x="96" y="196">Renewable energy</text>
+        </g>
+
+        <!-- 02 Biomass -->
+        <g class="cin-plate" id="plate-1">
+          <polygon class="plate-top" points="150,252 244,300 150,348 56,300"/>
+          <ellipse cx="132" cy="296" rx="13" ry="7" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+          <path d="M 119 296 L 119 312 A 13 7 0 0 0 145 312 L 145 296" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+          <ellipse cx="168" cy="288" rx="13" ry="7" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+          <path d="M 155 288 L 155 304 A 13 7 0 0 0 181 304 L 181 288" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+          <text class="cin-num" x="72" y="288">2.</text>
+          <text class="cin-label" x="102" y="372">Biomass</text>
+        </g>
+
+        <!-- 03 BIOHGEN -->
+        <g class="cin-plate reactor" id="plate-2">
+          <polygon class="plate-top" points="430,172 564,230 430,288 296,230"/>
+          <polygon class="cin-cube-t" points="430,192 486,216 430,240 374,216"/>
+          <polygon class="cin-cube-l" points="374,216 430,240 430,272 374,248"/>
+          <polygon class="cin-cube-r" points="486,216 430,240 430,272 486,248"/>
+          <text class="cin-num" x="314" y="218">3.</text>
+          <text class="cin-label brand" x="366" y="306">ClimaHtech</text>
+          <text class="cin-label" x="366" y="322">BIOHGEN</text>
+          <text class="cin-sub" x="366" y="337">e-SMR</text>
+        </g>
+
+        <!-- 04/05 E-FUEL GEN -->
+        <g class="cin-plate reactor" id="plate-3">
+          <polygon class="plate-top" points="660,282 800,350 660,418 520,350"/>
+          <polygon class="cin-cube-t" points="640,306 700,332 640,358 580,332"/>
+          <polygon class="cin-cube-l" points="580,332 640,358 640,392 580,366"/>
+          <polygon class="cin-cube-r" points="700,332 640,358 640,392 700,366"/>
+          <polygon class="cin-cube-t" points="716,336 762,356 716,376 670,356"/>
+          <polygon class="cin-cube-l" points="670,356 716,376 716,402 670,382"/>
+          <polygon class="cin-cube-r" points="762,356 716,376 716,402 762,382"/>
+          <text class="cin-num" x="536" y="336">4. 5.</text>
+          <text class="cin-label brand" x="596" y="440">ClimaHtech</text>
+          <text class="cin-label" x="596" y="456">E-FUEL GEN</text>
+          <text class="cin-sub" x="596" y="471">e-RWGS · e-FT</text>
+        </g>
+
+        <!-- 06 Blending -->
+        <g class="cin-plate" id="plate-4">
+          <polygon class="plate-top" points="890,402 984,450 890,498 796,450"/>
+          <line x1="874" y1="452" x2="874" y2="414" stroke="rgba(255,255,255,0.6)" stroke-width="1.6"/>
+          <ellipse cx="874" cy="412" rx="7" ry="4" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"/>
+          <ellipse cx="906" cy="446" rx="14" ry="8" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+          <path d="M 892 446 L 892 460 A 14 8 0 0 0 920 460 L 920 446" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+          <text class="cin-num" x="812" y="440">6.</text>
+          <text class="cin-label" x="820" y="522">Blending / upgrading</text>
+        </g>
+
+        <!-- Airport -->
+        <g class="cin-plate output" id="plate-5">
+          <polygon class="plate-top" points="1080,478 1188,532 1080,586 972,532"/>
+          <line x1="1022" y1="556" x2="1130" y2="512" stroke="rgba(110,168,220,0.55)" stroke-width="5" stroke-linecap="round"/>
+          <line x1="1032" y1="552" x2="1120" y2="516" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="6 6"/>
+          <g stroke="rgba(255,255,255,0.75)" stroke-width="1.6" fill="none">
+            <path d="M 1064 540 L 1088 530 M 1076 526 L 1076 546 M 1068 546 L 1084 540"/>
+          </g>
+          <line x1="1130" y1="516" x2="1130" y2="494" stroke="rgba(255,255,255,0.6)" stroke-width="1.6"/>
+          <circle cx="1130" cy="492" r="3.5" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"/>
+          <text class="cin-label" x="1006" y="612">Airport — drop-in SAF</text>
+        </g>
+      </svg>
     </div>
   </div>
 </section>
@@ -1472,6 +1613,69 @@
     }, { threshold: 0.5 });
     counters.forEach(c => statsIO.observe(c));
   }
+
+  // SAF production — cinematic scroll progression
+  (function () {
+    const wrap = document.querySelector('.saf-cinema');
+    if (!wrap) return;
+    const plates = [0,1,2,3,4,5].map(i => document.getElementById('plate-' + i));
+    const segs = [1,2,3,4,5].map(i => document.getElementById('seg-' + i));
+    const lbls = [1,2,3,4,5].map(i => document.getElementById('lbl-' + i));
+    const dots = { 1: document.getElementById('dot-1'), 3: document.getElementById('dot-3'), 4: document.getElementById('dot-4'), 5: document.getElementById('dot-5') };
+    const steps = document.querySelectorAll('#cin-steps li');
+    const bar = document.getElementById('cin-bar');
+
+    // prep segments for draw-on animation
+    segs.forEach(s => {
+      const len = s.getTotalLength();
+      s.style.strokeDasharray = len;
+      s.style.strokeDashoffset = len;
+      s.style.transition = 'stroke-dashoffset 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+
+    // which segments/labels draw at each beat (beat = plate index being revealed)
+    const segsAtBeat = { 2: [0, 1], 3: [2], 4: [3], 5: [4] };
+
+    function render(beat, p) {
+      plates.forEach((pl, i) => pl.classList.toggle('lit', i <= beat));
+      segs.forEach((s, i) => {
+        const drawn = Object.entries(segsAtBeat).some(([b, arr]) => beat >= +b && arr.includes(i));
+        s.style.strokeDashoffset = drawn ? 0 : s.getTotalLength();
+        lbls[i].classList.toggle('lit', drawn);
+        const dotKey = i + 1;
+        if (dots[dotKey]) dots[dotKey].classList.toggle('lit', drawn);
+      });
+      steps.forEach(li => {
+        const b = +li.dataset.beat;
+        li.classList.toggle('lit', b <= beat);
+        li.classList.toggle('now', b === beat);
+      });
+      if (bar) bar.style.width = Math.round(p * 100) + '%';
+    }
+
+    if (prefersReduced || window.matchMedia('(max-width: 960px)').matches) {
+      // static: everything visible
+      render(5, 1);
+      return;
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const rect = wrap.getBoundingClientRect();
+        const total = wrap.offsetHeight - window.innerHeight;
+        const p = Math.min(1, Math.max(0, -rect.top / total));
+        const beat = Math.min(5, Math.floor(p * 6.2));
+        render(beat, p);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
 
   // SAF process annotation overlay
   (function () {
