@@ -935,6 +935,33 @@
     .hero-eyebrow, .hero-title, .hero-bottom { animation: none !important; opacity: 1 !important; }
     .reveal .section-eyebrow::before, .stagger .section-eyebrow::before { transform: scaleX(1); transition: none; }
   }
+
+  /* ---------- Hero word-rotate ---------- */
+  .word-rotate {
+    display: inline-grid;
+    vertical-align: bottom;
+  }
+  .word-rotate span {
+    grid-area: 1 / 1;
+    font-style: normal;
+    color: var(--teal-glow);
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(0.12em);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+  }
+  .word-rotate span.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .word-rotate span.is-leaving {
+    opacity: 0;
+    transform: translateY(-0.12em);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .word-rotate span { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -1041,7 +1068,7 @@
 
   <div class="hero-content">
     <div class="hero-eyebrow">Engineered in Belfast — Deployed worldwide</div>
-    <h1 class="hero-title">To clean and <em>decarbonise</em> the air</h1>
+    <h1 class="hero-title">To clean and <span class="word-rotate" id="hero-rotator"><span class="is-active">decarbonise</span><span>secure</span><span>decentralise</span></span> the air</h1>
 
     <div class="hero-bottom">
       <div>
@@ -1499,6 +1526,26 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     revealables.forEach(el => io.observe(el));
   }
+
+  // Hero word-rotate
+  (function () {
+    const words = document.querySelectorAll('#hero-rotator span');
+    if (words.length < 2) return;
+    let idx = 0;
+    const ROTATE_MS = 2600;
+
+    function next() {
+      const current = words[idx];
+      idx = (idx + 1) % words.length;
+      const incoming = words[idx];
+      current.classList.remove('is-active');
+      current.classList.add('is-leaving');
+      incoming.classList.add('is-active');
+      setTimeout(() => current.classList.remove('is-leaving'), 550);
+    }
+
+    if (!prefersReduced) setInterval(next, ROTATE_MS);
+  })();
 </script>
 
 </body>
