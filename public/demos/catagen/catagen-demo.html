@@ -489,7 +489,7 @@
   }
   .quote-attr::before { content: ''; width: 28px; height: 1px; background: var(--muted); }
   .quote-portrait { width: 280px; aspect-ratio: 3 / 4; border-radius: 4px; overflow: hidden; flex-shrink: 0; }
-  .quote-portrait img {width:100%; width:100%; object-fit:cover;}
+  .quote-portrait img {width:100%; height:100%; object-fit:cover;}
 
   .applications { background: var(--bone-2); }
   .app-header {
@@ -510,6 +510,7 @@
     transition: transform 0.3s, border-color 0.3s;
   }
   .app-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+  .app-card-img { aspect-ratio: 4 / 3; overflow: hidden; }
   .app-card-img img,
   .app-card-img video { width: 100%; height: 100%; object-fit: cover; }
   .app-card-body { padding: 28px 24px 32px; }
@@ -1305,7 +1306,9 @@
     </article>
 
     <article class="app-card">
-      <div class="app-card-img"><video src="videos/cleanenergy.mp4" autoplay muted loop playsinline></video></div>
+      <div class="app-card-img">
+        <video src="videos/cleanenergy.mp4" poster="images/cleanenergy.webp" muted loop playsinline preload="metadata"></video>
+      </div>
       <div class="app-card-body">
         <h4>Clean energy infrastructure</h4>
         <p>Compression technology for next-generation hydrogen compression.</p>
@@ -1548,7 +1551,25 @@
 
     if (!prefersReduced) setInterval(next, ROTATE_MS);
   })();
+
+  (function () {
+  document.querySelectorAll('.app-card').forEach(card => {
+    const video = card.querySelector('video');
+    if (!video) return;
+    card.addEventListener('mouseenter', () => {
+      video.currentTime = 0;
+      const p = video.play();
+      if (p) p.catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+})();
 </script>
+
+
 
 </body>
 </html>
