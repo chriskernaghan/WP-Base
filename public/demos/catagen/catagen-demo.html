@@ -1569,19 +1569,18 @@
     if (!prefersReduced) setInterval(next, ROTATE_MS);
   })();
 
-  (function () {
-  document.querySelectorAll('.app-card').forEach(card => {
-    const video = card.querySelector('video');
-    if (!video) return;
-    card.addEventListener('mouseenter', () => {
-      video.currentTime = 0;
-      const p = video.play();
-      if (p) p.catch(() => {});
-    });
-    card.addEventListener('mouseleave', () => {
-      video.pause();
-      video.currentTime = 0;
-    });
+(function () {
+  const promo = document.querySelector('.mega-promo');
+  const video = promo && promo.querySelector('video');
+  if (!video) return;
+  promo.addEventListener('mouseenter', () => {
+    video.currentTime = 0;
+    const p = video.play();
+    if (p) p.catch(() => {});
+  });
+  promo.addEventListener('mouseleave', () => {
+    video.pause();
+    video.currentTime = 0;
   });
 })();
 </script>
