@@ -812,7 +812,16 @@
 .mega-promo {
   position: relative;
   overflow: hidden;
+  background: var(--teal);
+  border-radius: 4px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s;
+  min-height: 130px;
 }
+.mega-promo:hover { transform: translateY(-3px); }
 .mega-promo-video {
   position: absolute;
   inset: 0;
