@@ -871,9 +871,9 @@
   .saf-cinema { height: 480vh; position: relative; background: var(--ink); padding: 0; }
   .saf-cinema-stage {
     position: sticky; top: 0; height: 100vh;
-    display: grid; grid-template-columns: 0.9fr 1.6fr;
-    gap: 40px; align-items: center;
-    max-width: 1500px; margin: 0 auto;
+    display: grid; grid-template-columns: 0.72fr 2fr;
+    gap: 48px; align-items: center;
+    max-width: 1680px; margin: 0 auto;
     padding: 110px var(--gutter) 60px;
     overflow: hidden; color: var(--bone);
   }
@@ -900,13 +900,27 @@
     margin-top: 26px; height: 2px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden;
   }
   .cin-progress i { display: block; height: 100%; width: 0%; background: var(--teal-glow); transition: width 0.2s linear; }
+  .cin-hint-row { margin-top: 16px; display: flex; align-items: center; gap: 16px; }
   .cin-hint {
-    margin-top: 14px; font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 10px;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-dark);
   }
+  .cin-play {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 18px; border: 1px solid var(--line-dark); border-radius: 100px;
+    background: rgba(255,255,255,0.04); color: var(--bone);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; transition: border-color 0.25s, background 0.25s;
+  }
+  .cin-play:hover { border-color: var(--teal-glow); background: rgba(74,216,201,0.08); }
+  .cin-play .ic { width: 0; height: 0; border-style: solid; }
+  .cin-play .ic.play { border-width: 5px 0 5px 8px; border-color: transparent transparent transparent var(--teal-glow); }
+  .cin-play.playing .ic.play { display: none; }
+  .cin-play .ic.pause { display: none; width: 8px; height: 10px; border: 0; border-left: 3px solid var(--teal-glow); border-right: 3px solid var(--teal-glow); }
+  .cin-play.playing .ic.pause { display: inline-block; }
 
   .saf-cinema-right { width: 100%; height: 100%; display: flex; align-items: center; }
-  .saf-cinema-right svg { width: 100%; height: auto; max-height: 78vh; display: block; }
+  .saf-cinema-right svg { width: 100%; height: auto; max-height: 84vh; display: block; }
 
   /* SVG element states */
   .cin-plate { opacity: 0.14; transition: opacity 0.6s ease; }
@@ -915,12 +929,12 @@
   .cin-plate.reactor .plate-top { fill: rgba(31,182,168,0.14); stroke: rgba(74,216,201,0.55); }
   .cin-plate.output .plate-top { fill: rgba(110,168,220,0.12); stroke: rgba(110,168,220,0.5); }
   .cin-plate.lit .plate-top { filter: drop-shadow(0 0 14px rgba(74,216,201,0.25)); }
-  .cin-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; fill: var(--bone); text-transform: uppercase; }
-  .cin-label.brand { fill: var(--teal-glow); font-size: 10px; }
-  .cin-sub { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; fill: rgba(255,255,255,0.55); }
-  .cin-num { font-family: var(--mono); font-size: 13px; fill: var(--teal-glow); }
-  .cin-seg { fill: none; stroke: var(--teal-glow); stroke-width: 1.6; opacity: 0.9; }
-  .cin-seglabel { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; fill: rgba(255,255,255,0.5); text-transform: uppercase; opacity: 0; transition: opacity 0.5s ease 0.3s; }
+  .cin-label { font-family: var(--mono); font-size: 16px; letter-spacing: 0.1em; fill: var(--bone); text-transform: uppercase; }
+  .cin-label.brand { fill: var(--teal-glow); font-size: 12.5px; }
+  .cin-sub { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em; fill: rgba(255,255,255,0.6); }
+  .cin-num { font-family: var(--mono); font-size: 17px; fill: var(--teal-glow); }
+  .cin-seg { fill: none; stroke: var(--teal-glow); stroke-width: 2.2; opacity: 0.9; }
+  .cin-seglabel { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.1em; fill: rgba(255,255,255,0.5); text-transform: uppercase; opacity: 0; transition: opacity 0.5s ease 0.3s; }
   .cin-seglabel.lit { opacity: 1; }
   .cin-dot { fill: var(--teal-glow); opacity: 0; }
   .cin-dot.lit { opacity: 1; }
@@ -932,7 +946,7 @@
     .saf-cinema { height: auto; }
     .saf-cinema-stage { position: static; height: auto; grid-template-columns: 1fr; padding: 90px var(--gutter) 60px; }
     .saf-cinema-right svg { max-height: none; }
-    .cin-hint { display: none; }
+    .cin-hint-row { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .cin-plate, .cin-steps li, .cin-seglabel { transition: none; }
@@ -1055,8 +1069,8 @@
 <header class="hero subhero">
   <div class="hero-media">
     <video class="hero-video" autoplay muted loop playsinline poster="/path/to/fallback.jpg">
-      <source src="videos/airline.mp4" type="video/mp4">
-      <source src="videos/airline.webm" type="video/webm">
+      <source src="videos/aviation.mp4" type="video/mp4">
+      <source src="videos/aviation.webm" type="video/webm">
     </video>
   </div>
   <div class="hero-overlay"></div>
@@ -1178,11 +1192,16 @@
         <li data-beat="4"><span class="n">06</span><span>Blending or upgrading</span></li>
       </ol>
       <div class="cin-progress"><i id="cin-bar"></i></div>
-      <div class="cin-hint">Scroll to advance</div>
+      <div class="cin-hint-row">
+        <button class="cin-play" id="cin-play" type="button" aria-label="Auto-play the production sequence">
+          <span class="ic play"></span><span class="ic pause"></span><span class="lbl">Play</span>
+        </button>
+        <div class="cin-hint">Or scroll to advance</div>
+      </div>
     </div>
 
     <div class="saf-cinema-right">
-      <svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" aria-label="SAF production process diagram">
+      <svg viewBox="40 40 1160 590" xmlns="http://www.w3.org/2000/svg" aria-label="SAF production process diagram">
 
         <!-- connector segments (drawn on scroll) -->
         <path class="cin-seg" id="seg-1" d="M 180 172 L 180 230 L 296 230"/>
@@ -1198,10 +1217,10 @@
         <text class="cin-seglabel" id="lbl-5" x="902" y="534">ASTM D7566</text>
 
         <!-- flow dots -->
-        <circle class="cin-dot" id="dot-1" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 180 172 L 180 230 L 296 230"/></circle>
-        <circle class="cin-dot" id="dot-3" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 564 230 L 660 230 L 660 282"/></circle>
-        <circle class="cin-dot" id="dot-4" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 660 418 L 660 450 L 796 450"/></circle>
-        <circle class="cin-dot" id="dot-5" r="4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 890 498 L 890 545 L 976 545"/></circle>
+        <circle class="cin-dot" id="dot-1" r="5"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 180 172 L 180 230 L 296 230"/></circle>
+        <circle class="cin-dot" id="dot-3" r="5"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 564 230 L 660 230 L 660 282"/></circle>
+        <circle class="cin-dot" id="dot-4" r="5"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 660 418 L 660 450 L 796 450"/></circle>
+        <circle class="cin-dot" id="dot-5" r="5"><animateMotion dur="2.6s" repeatCount="indefinite" path="M 890 498 L 890 545 L 976 545"/></circle>
 
         <!-- 01 Renewable energy -->
         <g class="cin-plate" id="plate-0">
@@ -1675,6 +1694,50 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     onScroll();
+
+    // Auto-play: smoothly scrolls the page through the sequence
+    const playBtn = document.getElementById('cin-play');
+    if (playBtn) {
+      let playing = false;
+      let rafId = null;
+      const DURATION = 14000;
+
+      function stopPlay() {
+        playing = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+        playBtn.classList.remove('playing');
+        playBtn.querySelector('.lbl').textContent = 'Play';
+      }
+
+      function startPlay() {
+        const startY = wrap.offsetTop;
+        const endY = wrap.offsetTop + wrap.offsetHeight - window.innerHeight;
+        // jump to section start if we're before it; otherwise continue from where we are
+        const fromY = Math.max(startY, Math.min(window.scrollY, endY));
+        const remaining = endY - fromY;
+        if (remaining <= 4) { window.scrollTo(0, startY); return startPlay(); }
+        const dur = DURATION * (remaining / (endY - startY));
+        const t0 = performance.now();
+        playing = true;
+        playBtn.classList.add('playing');
+        playBtn.querySelector('.lbl').textContent = 'Pause';
+        function step(now) {
+          if (!playing) return;
+          const t = Math.min(1, (now - t0) / dur);
+          window.scrollTo({ top: fromY + remaining * t, behavior: 'instant' });
+          if (t < 1) { rafId = requestAnimationFrame(step); }
+          else stopPlay();
+        }
+        rafId = requestAnimationFrame(step);
+      }
+
+      playBtn.addEventListener('click', () => { playing ? stopPlay() : startPlay(); });
+      // any manual input cancels auto-play so it never fights the user
+      ['wheel', 'touchstart', 'keydown'].forEach(ev =>
+        window.addEventListener(ev, () => { if (playing) stopPlay(); }, { passive: true })
+      );
+    }
   })();
 
   // SAF process annotation overlay
