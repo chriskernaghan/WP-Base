@@ -954,6 +954,7 @@
 
   @media (max-width: 960px) {
     .challenges-head { grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    .platforms-header { grid-template-columns: 1fr; gap: 24px; align-items: start; }
     .challenge-grid { grid-template-columns: repeat(2, 1fr); }
     .services-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -966,11 +967,117 @@
     .anno-tag { max-width: 160px; padding: 7px 10px; }
     .anno-tag .anno-tag-value { font-size: 12px; }
   }
+  /* small phones */
+  @media (max-width: 560px) {
+    .challenge-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-row { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .testimonial-content { padding: 36px 24px; }
+    section { padding: 90px var(--gutter); }
+  }
   @media (prefers-reduced-motion: reduce) {
     .anno { transition: none; }
     .anno-dot::after { animation: none; }
   }
 
+
+  /* ---------- Mobile navigation ---------- */
+  .nav-toggle {
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center; justify-content: center;
+    background: none; border: 0; padding: 0; cursor: pointer;
+    color: inherit;
+  }
+  .nav-toggle .bars { position: relative; width: 22px; height: 14px; display: block; }
+  .nav-toggle .bars span {
+    position: absolute; left: 0; width: 100%; height: 1.5px;
+    background: currentColor; border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease, top 0.3s ease;
+  }
+  .nav-toggle .bars span:nth-child(1) { top: 0; }
+  .nav-toggle .bars span:nth-child(2) { top: 6px; }
+  .nav-toggle .bars span:nth-child(3) { top: 12px; }
+  body.nav-open .nav-toggle .bars span:nth-child(1) { top: 6px; transform: rotate(45deg); }
+  body.nav-open .nav-toggle .bars span:nth-child(2) { opacity: 0; }
+  body.nav-open .nav-toggle .bars span:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+
+  .mobile-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--ink);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px var(--gutter) 40px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s 0.35s;
+  }
+  body.nav-open .mobile-nav {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s;
+  }
+  .mobile-nav ul { list-style: none; }
+  .mobile-nav li { border-bottom: 1px solid var(--line-dark); }
+  .mobile-nav li:first-child { border-top: 1px solid var(--line-dark); }
+  .mobile-nav a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 4px;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    color: var(--bone);
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1), color 0.2s ease;
+  }
+  body.nav-open .mobile-nav a { opacity: 1; transform: translateY(0); }
+  body.nav-open .mobile-nav li:nth-child(1) a { transition-delay: 0.08s; }
+  body.nav-open .mobile-nav li:nth-child(2) a { transition-delay: 0.14s; }
+  body.nav-open .mobile-nav li:nth-child(3) a { transition-delay: 0.20s; }
+  body.nav-open .mobile-nav li:nth-child(4) a { transition-delay: 0.26s; }
+  body.nav-open .mobile-nav li:nth-child(5) a { transition-delay: 0.32s; }
+  .mobile-nav a::after { content: '\2192'; color: var(--teal-glow); font-size: 20px; opacity: 0.7; }
+  .mobile-nav a.is-current { color: var(--teal-glow); }
+  .mobile-nav-foot {
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-dark);
+    opacity: 0;
+    transition: opacity 0.4s ease 0.38s;
+  }
+  body.nav-open .mobile-nav-foot { opacity: 1; }
+  body.nav-open { overflow: hidden; }
+  /* keep the bar (and its close button) above the panel and transparent while open */
+  body.nav-open nav.site {
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    color: var(--bone);
+    z-index: 101;
+  }
+
+  @media (max-width: 960px) {
+    .nav-toggle { display: inline-flex; margin-left: auto; }
+    nav.site { grid-template-columns: auto 1fr; gap: 12px; }
+    nav.site .nav-cta { display: none; }
+  }
+  @media (min-width: 961px) {
+    .mobile-nav { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-nav, .mobile-nav a, .nav-toggle .bars span, .mobile-nav-foot { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -1063,20 +1170,36 @@
     <a href="#climahtech">ClimaHtech</a>
     <a href="#knowledge">Knowledge Hub</a>
   </div>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+    <span class="bars"><span></span><span></span><span></span></span>
+  </button>
+
   <a href="#contact" class="nav-cta">Contact</a>
 </nav>
+
+<div class="mobile-nav" id="mobileNav">
+      <ul>
+        <li><a href="catagen-green-emissions.html">Green Emissions Testing</a></li>
+        <li><a href="catagen-saf.html" class="is-current">SAF</a></li>
+        <li><a href="#h2-compression">H₂ Compression</a></li>
+        <li><a href="#climahtech">ClimaHtech</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="mobile-nav-foot">CATAGEN — Titanic Quarter, Belfast</div>
+    </div>
+
 
 <header class="hero subhero">
   <div class="hero-media">
     <video class="hero-video" autoplay muted loop playsinline poster="/path/to/fallback.jpg">
-      <source src="videos/airline.mp4" type="video/mp4">
-      <source src="videos/airline.webm" type="video/webm">
+      <source src="videos/saf.mp4" type="video/mp4">
+      <source src="videos/saf.webm" type="video/webm">
     </video>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">ClimaHtech Green Flight</div>
-    <h1 class="hero-title">Sustainable Aviation Fuel, made at <em>point of demand</em></h1>
+    <h1 class="hero-title">Sustainable Aviation Fuel, made at <em>point of demand</em>.</h1>
     <div class="hero-bottom">
       <div>
         <p class="hero-lede">Decentralised, electrically driven production of e-SAF and bio-SAF using renewable energy and sustainable carbon dioxide — built to scale modular SAF production wherever feedstock and clean energy are available.</p>
@@ -1774,6 +1897,22 @@
     activate(rows[0].dataset.point, true);
     if (!prefersReduced) restart();
   })();
+
+  // Mobile navigation
+  (function () {
+    const toggle = document.querySelector('.nav-toggle');
+    const panel = document.querySelector('.mobile-nav');
+    if (!toggle || !panel) return;
+    const close = () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded','false'); };
+    toggle.addEventListener('click', () => {
+      const open = document.body.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 960) close(); });
+  })();
+
 </script>
 </body>
 </html>
