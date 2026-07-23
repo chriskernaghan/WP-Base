@@ -1091,10 +1091,19 @@
   }
   body.nav-open .mobile-nav-foot { opacity: 1; }
   body.nav-open { overflow: hidden; }
+  /* keep the bar (and its close button) above the panel and transparent while open */
+  body.nav-open nav.site {
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    color: var(--bone);
+    z-index: 101;
+  }
 
   @media (max-width: 960px) {
-    .nav-toggle { display: inline-flex; }
-    nav.site { grid-template-columns: auto 1fr auto; gap: 12px; }
+    .nav-toggle { display: inline-flex; margin-left: auto; }
+    nav.site { grid-template-columns: auto 1fr; gap: 12px; }
     nav.site .nav-cta { display: none; }
   }
   @media (min-width: 961px) {
