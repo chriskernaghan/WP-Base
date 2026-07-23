@@ -872,6 +872,11 @@
   font-weight: 500;
   letter-spacing: -0.01em;
 }
+/* the promo is an <a> inside .nav-links, which sets nowrap — allow wrapping here */
+.nav-links a.mega-promo, .mega-promo, .mega-promo-link, .mega-promo-label {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
 .mega-promo:hover .mega-promo-video { opacity: 1; }
 .mega-promo:hover .mega-promo-scrim { background: linear-gradient(160deg, rgba(11, 31, 35, 0.48) 0%, rgba(11, 31, 35, 0.68) 100%); }
 
