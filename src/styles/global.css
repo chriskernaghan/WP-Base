@@ -3196,45 +3196,84 @@ footer a:hover {
     font-weight: 700;
 }
 
-/* Solution points rendered as a 2-col tile grid instead of a bunched list */
+/* --------------------------------------------------------------------------
+   Solution points — numbered spec sheet
+   Replaces the earlier left-accent-border card treatment. Two columns divided
+   by hairline rules, with the number supplied by a CSS counter so the MDX
+   stays as a plain <ul class="solution-tiles"> of <li><strong>Title</strong>
+   description</li>. An odd final item spans the full width rather than
+   leaving a gap.
+   -------------------------------------------------------------------------- */
 
 .solution-tiles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin: 2.5rem 0;
-    list-style: none;
+    --rule: rgba(8, 16, 28, 0.12);
+    counter-reset: solution;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin: 3rem 0;
     padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
 }
 
 .case-section ul.solution-tiles li,
 .solution-tiles li {
-    flex: 1 1 300px;
-    background: var(--snow);
-    border: 1px solid rgba(8, 16, 28, 0.08);
-    border-left: 3px solid var(--accent);
-    border-radius: 14px;
-    padding: 1.75rem;
+    --num-offset: 0rem;
+    counter-increment: solution;
+    position: relative;
     margin: 0;
+    padding: 2rem 2.5rem 2rem calc(var(--num-offset) + 3.25rem);
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 0;
+    background: transparent;
     font-family: "Epilogue", sans-serif;
     font-size: 1rem;
     line-height: 1.7;
     color: var(--text-dark);
 }
 
+.case-section ul.solution-tiles li:nth-child(even),
+.solution-tiles li:nth-child(even) {
+    --num-offset: 2.5rem;
+    padding-right: 0;
+    border-left: 1px solid var(--rule);
+}
+
+/* Lone final item on an odd count fills the row */
+.case-section ul.solution-tiles li:last-child:nth-child(odd),
+.solution-tiles li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
 .case-section ul.solution-tiles li::before,
 .solution-tiles li::before {
-    content: none;
+    content: counter(solution, decimal-leading-zero);
+    position: absolute;
+    top: 2.15rem;
+    left: var(--num-offset);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+    color: var(--midnight);
+    background: var(--accent);
+    padding: 0.45rem 0.5rem;
+    border-radius: 3px;
 }
 
 .solution-tiles li strong {
     display: block;
     font-family: "Space Grotesk", sans-serif;
     font-size: 1.15rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--midnight);
     margin-bottom: 0.4rem;
     letter-spacing: -0.01em;
+    line-height: 1.3;
 }
 
 .case-image img {
@@ -3780,8 +3819,24 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 
-.solution-tiles {
-        gap: 1rem;
+    /* Solution spec sheet — single column, no vertical divider */
+    .solution-tiles {
+        grid-template-columns: 1fr;
+        margin: 2rem 0;
+    }
+
+    .case-section ul.solution-tiles li,
+    .solution-tiles li,
+    .case-section ul.solution-tiles li:nth-child(even),
+    .solution-tiles li:nth-child(even) {
+        --num-offset: 0rem;
+        padding: 1.75rem 0 1.75rem 3.25rem;
+        border-left: none;
+    }
+
+    .case-section ul.solution-tiles li::before,
+    .solution-tiles li::before {
+        top: 1.9rem;
     }
 
     /* On mobile the reading column already fills the screen, so the
