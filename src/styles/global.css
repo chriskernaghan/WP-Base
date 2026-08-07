@@ -3321,7 +3321,6 @@ footer a:hover {
 .outcome-card {
     background: var(--snow);
     border: 1px solid rgba(8, 16, 28, 0.08);
-    border-left: 3px solid var(--accent);
     border-radius: 14px;
     padding: 1.75rem;
 }
