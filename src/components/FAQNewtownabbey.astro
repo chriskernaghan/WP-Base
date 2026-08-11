@@ -1,0 +1,60 @@
+---
+// FAQNewtownabbey.astro — Newtownabbey variant of FAQLocal.astro.
+// Same markup and classes. Every question and answer is written fresh rather
+// than reused from the NI page, since near-identical FAQ blocks across two
+// location pages are what gets them treated as thin.
+const faqs = [
+  {
+    q: 'Are you genuinely based in Newtownabbey?',
+    a: "Yes. I live here and I work here, so this isn't a page built to catch a search term. If you're local and you'd rather meet than email, that's easy to arrange.",
+    open: true,
+  },
+  {
+    q: 'Can you come out to see us?',
+    a: "If it's useful, yes. Mallusk, Glengormley, Ballyclare and the Abbey Centre area are all a short run. Most work happens remotely because that's faster for everyone, but I'm not going to tell you a face to face is impossible when it's fifteen minutes away.",
+  },
+  {
+    q: 'Do you only work with Newtownabbey businesses?',
+    a: 'No. Clients are spread across Northern Ireland and the wider UK, including Belfast and Lisburn. Being local just means you get the option of meeting in person and someone working your own hours.',
+  },
+  {
+    q: "What if my site isn't WordPress?",
+    a: "Still worth a conversation. I've moved sites off Squarespace, Wix and older custom builds onto WordPress before, and I'll give you an honest view on whether moving is worth the money in your case.",
+  },
+  {
+    q: 'How much does looking after a site cost?',
+    a: "Care plans start at £99 a month and go up depending on how much support you need. One off work is quoted separately once I've had a look at the site. Either way you get a price before anything starts.",
+  },
+  {
+    q: 'Am I tied into anything?',
+    a: "No. It's a rolling monthly arrangement and you can stop whenever you want. I'd rather keep clients on the strength of the work than on a contract clause.",
+  },
+  {
+    q: "Something's broken right now. How fast can you look?",
+    a: "Ring or email and I'll usually have eyes on it within the hour during working hours. Urgent things get dealt with urgently rather than scheduled in for next week.",
+  },
+  {
+    q: "I'm not technical. Is that going to be a problem?",
+    a: "Not in the slightest. Most clients aren't, and I don't expect anyone to learn WordPress to work with me. You tell me what you need the site to do and I'll handle how it gets done.",
+  },
+];
+---
+<section id="faq" class="faq-section">
+  <div class="faq-inner">
+    <span class="section-label">Questions</span>
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <details class="faq-item" open={faq.open}>
+          <summary class="faq-question">
+            <span>{faq.q}</span>
+            <span class="faq-icon"></span>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

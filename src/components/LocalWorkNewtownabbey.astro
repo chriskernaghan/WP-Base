@@ -1,0 +1,52 @@
+---
+// LocalWorkNewtownabbey.astro — extra content block for the Newtownabbey page.
+// Reuses the why-local-section classes so it needs no new CSS, with a distinct
+// id so the two blocks can be targeted separately later if needed.
+const jobs = [
+  {
+    icon: 'clock',
+    title: 'The site nobody has touched in three years',
+    body: 'The person who built it has moved on, the plugins are years out of date, and nobody is confident enough to press update. I take it over, bring it current safely, and keep it that way on a monthly plan.',
+  },
+  {
+    icon: 'alert',
+    title: 'The site that looks fine but loses enquiries',
+    body: "Forms that fail without telling anyone, a phone number that isn't tappable on a mobile, a contact page that takes eight seconds to load. Small things that add up to real work lost over a year.",
+  },
+  {
+    icon: 'refresh',
+    title: 'The site that needs replaced properly',
+    body: "Sometimes the honest answer is that patching it is throwing good money after bad. When that's the case I'll say so, build you something clean, and hand it over with everything sitting in your own accounts.",
+  },
+];
+---
+<section id="local-work" class="why-local-section">
+  <div class="why-local-inner">
+    <span class="section-label">The work</span>
+    <h2>The three jobs I get asked for most around here</h2>
+    <p class="why-local-lead">
+      Local businesses rarely come looking for a rebuild. They come because
+      something specific has gone wrong, or because the site has stopped
+      pulling its weight.
+    </p>
+    <div class="why-local-grid">
+      {jobs.map((job) => (
+        <div class="why-local-card">
+          <span class="why-local-icon" aria-hidden="true">
+            {job.icon === 'clock' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+            )}
+            {job.icon === 'alert' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>
+            )}
+            {job.icon === 'refresh' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 15.7" /><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8.3" /><path d="M21 3v5.3h-5.3" /><path d="M3 21v-5.3h5.3" /></svg>
+            )}
+          </span>
+          <h3>{job.title}</h3>
+          <p>{job.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+// WhyNewtownabbey.astro — Newtownabbey variant of WhyLocal.astro.
+// Same markup and classes, but the copy leans on actual places and travel
+// rather than the generic timezone argument used on the NI page, so the two
+// location pages are not near-duplicates of each other.
+const points = [
+  {
+    icon: 'pin',
+    title: 'On your doorstep',
+    body: "Working with businesses across Glengormley, Whiteabbey, Jordanstown, Carnmoney, Monkstown, Rathcoole and Mossley, out to Ballyclare, Ballynure, Doagh and Templepatrick. If you'd rather talk in person than over email, that's a short drive rather than a day out.",
+  },
+  {
+    icon: 'shop',
+    title: 'Mallusk to the Abbey Centre',
+    body: 'A lot of local work comes from the trade and manufacturing side around Mallusk and Global Point, and from retail and service businesses closer to the Abbey Centre. Different businesses, same problem: a website that has to bring in enquiries and keep working.',
+  },
+  {
+    icon: 'person',
+    title: 'You deal with me',
+    body: 'No account managers, no call centre, no being handed between people. The person who audits your site is the person who fixes it and the person who answers when you ring.',
+  },
+];
+---
+<section id="why-local" class="why-local-section">
+  <div class="why-local-inner">
+    <span class="section-label">Actually here</span>
+    <h2>Based in Newtownabbey, not just serving it</h2>
+    <p class="why-local-lead">
+      Plenty of web companies list Newtownabbey on a page of towns they cover.
+      I live and work here. That matters on the day your enquiry form stops
+      working and you need someone to pick up the phone rather than log a
+      ticket and come back to you on Thursday.
+    </p>
+    <div class="why-local-grid">
+      {points.map((point) => (
+        <div class="why-local-card">
+          <span class="why-local-icon" aria-hidden="true">
+            {point.icon === 'pin' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+            )}
+            {point.icon === 'person' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+            )}
+            {point.icon === 'shop' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4 4h16l1 5" /><path d="M4 9v11h16V9" /><path d="M3 9h18" /><path d="M9 20v-5h6v5" /></svg>
+            )}
+          </span>
+          <h3>{point.title}</h3>
+          <p>{point.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
