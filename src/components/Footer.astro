@@ -65,6 +65,11 @@ const areas = [
       <p class="footer-legal">&copy; {year} WP Base. All rights reserved.</p>
       <ul class="footer-legal-links">
         <li><a href="/privacy">Privacy Policy</a></li>
+        <li>
+          <button type="button" class="footer-legal-btn" data-cookie-settings>
+            Cookie settings
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -175,7 +180,8 @@ const areas = [
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
   .footer-legal,
-  .footer-legal-links a {
+  .footer-legal-links a,
+  .footer-legal-links .footer-legal-btn {
     font-family: 'Epilogue', sans-serif;
     font-size: 0.88rem;
     opacity: 0.55;
@@ -189,13 +195,27 @@ const areas = [
     padding: 0;
     margin: 0;
   }
-  .footer-legal-links a {
+  .footer-legal-links a,
+  .footer-legal-links .footer-legal-btn {
     color: var(--snow);
     text-decoration: none;
     transition: opacity 0.15s ease;
   }
-  .footer-legal-links a:hover {
+  .footer-legal-links a:hover,
+  .footer-legal-links .footer-legal-btn:hover {
     opacity: 1;
+  }
+  .footer-legal-links .footer-legal-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    line-height: inherit;
+  }
+  .footer-legal-links .footer-legal-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
   }
 
   @media (max-width: 960px) {
