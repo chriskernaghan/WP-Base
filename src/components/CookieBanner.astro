@@ -1,0 +1,192 @@
+---
+---
+<div
+  class="cookie-bar"
+  id="cookie-bar"
+  role="region"
+  aria-label="Cookie choices"
+  hidden
+>
+  <div class="cookie-bar__text">
+    <p class="cookie-bar__title">Cookies on this site</p>
+    <p class="cookie-bar__body">
+      We use analytics cookies to see which pages people find useful. They are
+      not set unless you say yes. Security and form cookies are always on
+      because the site needs them to work. More detail is in our
+      <a href="/privacy">privacy policy</a>.
+    </p>
+  </div>
+  <div class="cookie-bar__actions">
+    <button type="button" class="cookie-btn cookie-btn--reject" data-consent="reject">
+      Reject
+    </button>
+    <button type="button" class="cookie-btn cookie-btn--accept" data-consent="accept">
+      Accept
+    </button>
+  </div>
+</div>
+
+<style>
+  .cookie-bar {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+    max-width: 620px;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.4rem;
+    background: var(--midnight, #08101c);
+    color: var(--snow, #f7f7f5);
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(8, 16, 28, 0.35);
+    font-family: 'Epilogue', system-ui, sans-serif;
+    transform: translateY(140%);
+    transition: transform 0.35s ease;
+  }
+
+  .cookie-bar[data-visible='true'] {
+    transform: translateY(0);
+  }
+
+  .cookie-bar__text {
+    flex: 1 1 300px;
+  }
+
+  .cookie-bar__title {
+    margin: 0 0 0.35rem;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .cookie-bar__body {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    opacity: 0.82;
+  }
+
+  .cookie-bar__body a {
+    color: var(--accent, #d4ff3a);
+    text-underline-offset: 3px;
+  }
+
+  .cookie-bar__actions {
+    display: flex;
+    gap: 0.6rem;
+    flex: 0 0 auto;
+  }
+
+  .cookie-btn {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.65rem 1.35rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+
+  .cookie-btn:hover {
+    opacity: 0.85;
+  }
+
+  .cookie-btn:focus-visible {
+    outline: 2px solid var(--accent, #d4ff3a);
+    outline-offset: 3px;
+  }
+
+  .cookie-btn--accept {
+    background: var(--accent, #d4ff3a);
+    color: var(--midnight, #08101c);
+    border: 1px solid var(--accent, #d4ff3a);
+  }
+
+  .cookie-btn--reject {
+    background: transparent;
+    color: var(--snow, #f7f7f5);
+    border: 1px solid rgba(247, 247, 245, 0.45);
+  }
+
+  @media (max-width: 560px) {
+    .cookie-bar {
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 0.75rem;
+      padding: 1.1rem;
+    }
+    .cookie-bar__actions {
+      width: 100%;
+    }
+    .cookie-btn {
+      flex: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cookie-bar {
+      transition: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var bar = document.getElementById('cookie-bar');
+    if (!bar) return;
+
+    function show() {
+      bar.hidden = false;
+      requestAnimationFrame(function () {
+        bar.setAttribute('data-visible', 'true');
+      });
+    }
+
+    function hide() {
+      bar.removeAttribute('data-visible');
+      window.setTimeout(function () { bar.hidden = true; }, 350);
+    }
+
+    function save(analytics) {
+      try {
+        localStorage.setItem(
+          'wpb-consent',
+          JSON.stringify({ analytics: analytics, time: Date.now(), version: 1 })
+        );
+      } catch (e) {}
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          analytics_storage: analytics ? 'granted' : 'denied'
+        });
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: analytics ? 'wpb_consent_granted' : 'wpb_consent_denied'
+      });
+
+      hide();
+    }
+
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-consent]');
+      if (!btn) return;
+      save(btn.getAttribute('data-consent') === 'accept');
+    });
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-cookie-settings]');
+      if (!link) return;
+      e.preventDefault();
+      show();
+    });
+
+    if (!window.wpbConsentSaved) show();
+  })();
+</script>
