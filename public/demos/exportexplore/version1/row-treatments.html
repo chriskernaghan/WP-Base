@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Row treatments — ExportExplore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fira+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=1786491386971">
+<style>
+  body { padding-bottom: 80px; }
+  .optnote {
+    max-width: var(--max, 1560px); margin: 0 auto;
+    padding: 46px var(--edge) 14px;
+    display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+    border-top: 1px solid var(--rule-light);
+  }
+  .optnote:first-of-type { border-top: 0; }
+  .optnote__id {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em;
+    color: var(--mint); flex: none;
+  }
+  .optnote__name {
+    font-family: var(--font-head); font-weight: 700; font-size: 21px;
+    letter-spacing: -0.02em; color: var(--paper);
+  }
+  .optnote__why { font-size: 16px; color: rgba(242,246,248,0.6); max-width: 62ch; }
+  .pagehead { padding: 76px var(--edge) 8px; max-width: var(--max, 1560px); margin: 0 auto; }
+  .pagehead h1 {
+    margin: 14px 0 0; font-family: var(--font-head); font-weight: 700;
+    font-size: clamp(38px, 4vw, 62px); line-height: 1; letter-spacing: -0.035em;
+  }
+  .pagehead p { margin-top: 18px; font-size: 20px; color: rgba(242,246,248,0.7); max-width: 58ch; }
+
+  /* A — measure shift: heading rows sit narrow, body rows run wide */
+  .v-measure .stanza__lead { max-width: 16ch; }
+  .v-measure .stanza__body { max-width: 44ch; }
+  .v-measure + .v-measure { border-top: 1px solid var(--rule-light); }
+
+  /* B — numbered spine */
+  .v-spine .v-num {
+    font-family: var(--font-head); font-weight: 700; font-size: 46px;
+    line-height: 0.9; letter-spacing: -0.04em; color: var(--mint); opacity: 0.55;
+  }
+
+  /* C — grouped pair, one rule around two rows */
+  .v-group { border-top: 1px solid var(--rule-light); }
+  .v-group + .v-group { border-top: 0; padding-top: 0; }
+  .v-group + .v-group .stanza__lead::before {
+    content: ''; display: block; width: 46px; height: 2px;
+    background: var(--mint); margin-bottom: 20px; opacity: 0.7;
+  }
+
+  /* D — full-width beat, no second column */
+  .v-beat { display: block; padding: 92px var(--edge); text-align: left; }
+  .v-beat .stanza__lead {
+    max-width: 22ch; font-size: clamp(38px, 4.4vw, 72px);
+    line-height: 1.02; letter-spacing: -0.038em; margin-top: 18px;
+  }
+  .v-beat .stanza__body { margin-top: 26px; max-width: 46ch; }
+
+  /* E — body as a set of short points */
+  .v-points .v-list { display: grid; gap: 0; align-content: start; }
+  .v-points .v-list div {
+    display: grid; grid-template-columns: 22px 1fr; gap: 16px;
+    padding: 15px 0; border-top: 1px solid var(--rule-light);
+    font-size: 18px; color: rgba(242,246,248,0.82);
+  }
+  .v-points .v-list div:last-child { border-bottom: 1px solid var(--rule-light); }
+  .v-points .v-list b {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.1em; color: var(--mint); padding-top: 5px;
+  }
+
+  /* F — inverted: label and body left, heading right */
+  .v-invert > .stanza__body { max-width: 46ch; }
+  .v-invert .stanza__lead { max-width: 18ch; font-size: clamp(30px, 2.8vw, 44px); }
+
+  /* Grid placement only above the 760px breakpoint where styles.css collapses
+     .stanza--flow to one column — these rules are later in source order and
+     would otherwise win and keep the rows multi-column on a phone. */
+  @media (min-width: 761px) {
+    .v-spine { grid-template-columns: 88px minmax(0, 0.8fr) minmax(0, 1fr); gap: 18px 64px; }
+    .v-spine .v-num { grid-column: 1; grid-row: 1 / span 2; }
+    .v-spine .kicker { grid-column: 2; grid-row: 1; }
+    .v-spine .stanza__lead { grid-column: 2; grid-row: 2; }
+    .v-spine > .stanza__body { grid-column: 3; grid-row: 1 / span 2; }
+
+    .v-points .v-list { grid-column: 2; grid-row: 1 / span 2; }
+
+    .v-invert { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
+    .v-invert .kicker { grid-column: 1; grid-row: 1; }
+    .v-invert > .stanza__body { grid-column: 1; grid-row: 2; }
+    .v-invert .stanza__lead { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="pagehead">
+  <p class="kicker">Six treatments &middot; same copy</p>
+  <h1>Ways to vary the row</h1>
+  <p>Each uses the two rows from the agencies page. The grid, type and rules are the site's own — only the row's internal structure changes.</p>
+</div>
+
+<div class="optnote">
+  <span class="optnote__id">A</span>
+  <span class="optnote__name">Measure shift</span>
+  <span class="optnote__why">Nothing moves position. The heading gets a tighter measure and the body a shorter line, so the second row breathes differently without changing the reading path. The smallest possible intervention.</span>
+</div>
+<section class="stanza stanza--flow v-measure">
+  <p class="kicker">How it runs</p>
+  <h2 class="stanza__lead">One retainer, four moving parts</h2>
+  <p class="stanza__body">Scoping first, so we agree what success looks like. Then a qualified pipeline built from our own network, in-market activity to move it, and a reporting rhythm you can put in front of a minister without rewriting it.</p>
+</section>
+<section class="stanza stanza--flow v-measure">
+  <p class="kicker">What it's like to work with us</p>
+  <h2 class="stanza__lead">The people you meet are the people who do the work</h2>
+  <p class="stanza__body">You'll have a senior consultant who knows your region, agreed activity levels, and quarterly reporting written so you can take it straight to your board without translating it first.</p>
+</section>
+
+<div class="optnote">
+  <span class="optnote__id">B</span>
+  <span class="optnote__name">Numbered spine</span>
+  <span class="optnote__why">A mint numeral holds the left edge and turns the stack into a sequence. Works when the rows genuinely run in order; misleading when they don't.</span>
+</div>
+<section class="stanza stanza--flow v-spine">
+  <span class="v-num">01</span>
+  <p class="kicker">How it runs</p>
+  <h2 class="stanza__lead">One retainer, four moving parts</h2>
+  <p class="stanza__body">Scoping first, so we agree what success looks like. Then a qualified pipeline built from our own network, in-market activity to move it, and a reporting rhythm you can put in front of a minister without rewriting it.</p>
+</section>
+<section class="stanza stanza--flow v-spine">
+  <span class="v-num">02</span>
+  <p class="kicker">What it's like to work with us</p>
+  <h2 class="stanza__lead">The people you meet are the people who do the work</h2>
+  <p class="stanza__body">You'll have a senior consultant who knows your region, agreed activity levels, and quarterly reporting written so you can take it straight to your board without translating it first.</p>
+</section>
+
+<div class="optnote">
+  <span class="optnote__id">C</span>
+  <span class="optnote__name">Grouped pair</span>
+  <span class="optnote__why">One rule wraps both rows instead of boxing each. A short mint tick marks the second, so they read as two halves of one argument rather than two entries in a list.</span>
+</div>
+<section class="stanza stanza--flow v-group">
+  <p class="kicker">How it runs</p>
+  <h2 class="stanza__lead">One retainer, four moving parts</h2>
+  <p class="stanza__body">Scoping first, so we agree what success looks like. Then a qualified pipeline built from our own network, in-market activity to move it, and a reporting rhythm you can put in front of a minister without rewriting it.</p>
+</section>
+<section class="stanza stanza--flow v-group">
+  <p class="kicker">What it's like to work with us</p>
+  <h2 class="stanza__lead">The people you meet are the people who do the work</h2>
+  <p class="stanza__body">You'll have a senior consultant who knows your region, agreed activity levels, and quarterly reporting written so you can take it straight to your board without translating it first.</p>
+</section>
+
+<div class="optnote">
+  <span class="optnote__id">D</span>
+  <span class="optnote__name">Full-width beat</span>
+  <span class="optnote__why">The second row abandons the two-column grid entirely and runs at display size. Use once per page, on the line you most want remembered &mdash; it stops being a beat if it happens twice.</span>
+</div>
+<section class="stanza stanza--flow">
+  <p class="kicker">How it runs</p>
+  <h2 class="stanza__lead">One retainer, four moving parts</h2>
+  <p class="stanza__body">Scoping first, so we agree what success looks like. Then a qualified pipeline built from our own network, in-market activity to move it, and a reporting rhythm you can put in front of a minister without rewriting it.</p>
+</section>
+<section class="stanza v-beat">
+  <p class="kicker">What it's like to work with us</p>
+  <h2 class="stanza__lead">The people you meet are the people who do the work</h2>
+  <p class="stanza__body">A senior consultant who knows your region, agreed activity levels, and quarterly reporting you can take straight to your board.</p>
+</section>
+
+<div class="optnote">
+  <span class="optnote__id">E</span>
+  <span class="optnote__name">Points, not paragraph</span>
+  <span class="optnote__why">Same left column, but the right becomes short ruled lines. Changes the density without moving anything, and suits copy that's already a list wearing a paragraph's clothes.</span>
+</div>
+<section class="stanza stanza--flow v-points">
+  <p class="kicker">How it runs</p>
+  <h2 class="stanza__lead">One retainer, four moving parts</h2>
+  <div class="v-list">
+    <div><b>01</b><span>Scoping first, so we agree what success looks like.</span></div>
+    <div><b>02</b><span>A qualified pipeline, built from our own network.</span></div>
+    <div><b>03</b><span>In-market activity to move it.</span></div>
+    <div><b>04</b><span>Reporting you can put in front of a minister without rewriting it.</span></div>
+  </div>
+</section>
+<section class="stanza stanza--flow v-points">
+  <p class="kicker">What it's like to work with us</p>
+  <h2 class="stanza__lead">The people you meet are the people who do the work</h2>
+  <div class="v-list">
+    <div><b>&mdash;</b><span>A senior consultant who knows your region.</span></div>
+    <div><b>&mdash;</b><span>Agreed activity levels, set before we start.</span></div>
+    <div><b>&mdash;</b><span>Quarterly reporting, board-ready as written.</span></div>
+  </div>
+</section>
+
+<div class="optnote">
+  <span class="optnote__id">F</span>
+  <span class="optnote__name">Inverted weight</span>
+  <span class="optnote__why">Label and body on the left, heading large on the right. Not alternation &mdash; every row does this, so the path stays learnable. Reads more like a spread than a spec sheet.</span>
+</div>
+<section class="stanza stanza--flow v-invert">
+  <p class="kicker">How it runs</p>
+  <h2 class="stanza__lead">One retainer, four moving parts</h2>
+  <p class="stanza__body">Scoping first, so we agree what success looks like. Then a qualified pipeline built from our own network, in-market activity to move it, and a reporting rhythm you can put in front of a minister without rewriting it.</p>
+</section>
+<section class="stanza stanza--flow v-invert">
+  <p class="kicker">What it's like to work with us</p>
+  <h2 class="stanza__lead">The people you meet are the people who do the work</h2>
+  <p class="stanza__body">You'll have a senior consultant who knows your region, agreed activity levels, and quarterly reporting written so you can take it straight to your board without translating it first.</p>
+</section>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#022458"/>
+    <rect x="30" y="62" width="60" height="10" fill="#9dd5c0"/>
+    <rect x="30" y="84" width="44" height="6" fill="#f2f6f8" opacity="0.5"/>
+    <rect x="110" y="62" width="60" height="6" fill="#f2f6f8" opacity="0.5"/>
+    <rect x="110" y="76" width="52" height="6" fill="#f2f6f8" opacity="0.5"/>
+    <rect x="30" y="120" width="140" height="2" fill="#f2f6f8" opacity="0.25"/>
+  </svg>
+</template>
+</body>
+</html>

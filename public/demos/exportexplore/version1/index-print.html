@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ExportExplore — Homepage (Ink) — print</title>
+<meta name="omelette-print-source" content="v1786297307720018 export-1a/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=1786491386971">
+<script src="../doc-page.js"></script>
+<style>
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { animation-delay: -99s !important; animation-duration: .001s !important;
+      animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+      animation-play-state: running !important; transition-duration: 0s !important; }
+
+  :root { --gutter: 40px; }
+  body { background: var(--navy); }
+  doc-page { background: var(--navy); }
+
+  /* one flowing column at page width */
+  .p-hero {
+    background: var(--navy);
+    padding: 56px var(--gutter) 44px;
+    border-bottom: 2px solid var(--mint);
+  }
+  .hero__title { font-size: 64px; }
+  .hero__lede { font-size: 20px; max-width: none; }
+  .p-hero .hero__grid { display: block; }
+  .p-hero .hero__lede { margin-top: 22px; }
+
+  .section { padding: 40px var(--gutter); }
+  .h2 { font-size: 34px; }
+  .section__head { margin-bottom: 24px; }
+
+  .doors { grid-template-columns: repeat(3, 1fr); }
+  .door { min-height: 0; padding: 22px 20px 20px; break-inside: avoid; }
+  .door__title { font-size: 21px; }
+  .door__body { font-size: 15px; }
+  .door__link { font-size: 13px; }
+
+  .reason { grid-template-columns: 52px 1fr; gap: 18px; padding: 20px 0; break-inside: avoid; }
+  .reason__title { font-size: 20px; }
+  .reason__body { grid-column: 2; font-size: 15.5px; max-width: none; }
+
+  .sectors { grid-template-columns: repeat(4, 1fr); }
+  .sector { min-height: 0; gap: 12px; padding: 16px 14px 18px; break-inside: avoid; }
+  .sector__icon svg { width: 22px; height: 22px; }
+  .sector__name { font-size: 14px; }
+
+  .place { margin-top: 0; padding: 44px var(--gutter); break-inside: avoid; }
+  .place__inner { grid-template-columns: 1fr; gap: 26px; }
+  .place__title { font-size: 44px; }
+  .place__col { font-size: 17px; gap: 14px; }
+  .chain { margin-top: 34px; }
+  .chain__fill { width: 100%; }
+  .chain__steps { grid-template-columns: repeat(4, 1fr); }
+  .chain__step { padding: 16px 14px 18px; }
+  .chain__title { font-size: 21px; }
+  .chain__body { font-size: 14px; }
+
+  .team { grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .person__name { font-size: 16px; }
+  .person__role { font-size: 13px; }
+
+  .cta { padding: 40px var(--gutter); }
+  .cta__inner { grid-template-columns: 1fr 1fr; gap: 34px; }
+  .cta__title { font-size: 52px; }
+  .cta__col p { font-size: 16px; }
+  .field__input { font-size: 15px; }
+  .field__label { font-size: 12px; }
+  .form__note { font-size: 13px; }
+
+  .accreditations { padding: 26px var(--gutter) 22px; gap: 20px; }
+  .accreditations__grid span { font-size: 13px; padding: 6px 12px; }
+  .footer { padding: 30px var(--gutter) 36px; }
+  .footer__brand { font-size: 26px; }
+  .footer__address, .footer__contact, .footer__strapline { font-size: 14px; }
+  .footer__strapline { text-align: left; }
+
+  .reveal, .in-view { opacity: 1 !important; transform: none !important; }
+</style>
+</head>
+<body>
+
+<doc-page margin="0">
+
+  <section class="p-hero">
+    <p class="kicker kicker--dot">Belfast &middot; Europe &middot; North America</p>
+    <h1 class="hero__title">We open<br>international <em>markets</em></h1>
+    <div class="hero__grid">
+      <p class="hero__lede">For regions working to attract investment and grow exports. For companies selling into places they don't yet know. We're there where the decisions get made, and the communities behind our clients grow stronger with every deal.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2 class="h2">Where would you like to start?</h2>
+      <span class="kicker kicker--muted">Three routes</span>
+    </div>
+    <div class="doors">
+      <span class="door">
+        <span class="door__num">01</span>
+        <span class="door__title">I represent a region or agency</span>
+        <span class="door__body">We become your team in the UK and Ireland, attracting investment and helping your companies sell here.</span>
+        <span class="door__link">Agencies &rarr;</span>
+      </span>
+      <span class="door">
+        <span class="door__num">02</span>
+        <span class="door__title">I'm growing a company</span>
+        <span class="door__body">We help you choose the right markets and get in front of the right people.</span>
+        <span class="door__link">Companies &rarr;</span>
+      </span>
+      <span class="door">
+        <span class="door__num">03</span>
+        <span class="door__title">I advise or partner with businesses</span>
+        <span class="door__body">We do the one thing most firms don't hold in-house, and we'll never get between you and your client.</span>
+        <span class="door__link">Partners &rarr;</span>
+      </span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="h2 section__title">Why people work with us</h2>
+    <div class="reasons">
+      <div class="reason">
+        <span class="reason__num">i.</span>
+        <h3 class="reason__title">Our clients stay</h3>
+        <p class="reason__body">We've been doing this since 2018, and before that for fifteen years inside the industry. Our clients tend to renew, and several have grown what they do with us year after year. In this business, that's the measure that matters.</p>
+      </div>
+      <div class="reason">
+        <span class="reason__num">ii.</span>
+        <h3 class="reason__title">You get the people who do the work</h3>
+        <p class="reason__body">We're a small, impactful team. The person you meet is the person you work with. There's no pyramid of names you'll never speak to, and no overhead to pay for.</p>
+      </div>
+      <div class="reason reason--last">
+        <span class="reason__num">iii.</span>
+        <h3 class="reason__title">Local roots, global reach</h3>
+        <p class="reason__body">Rooted in Belfast and connected everywhere else. Through the IBG Global network and our specialist partners we deliver on the ground in most major markets, without you paying for a global office network.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2 class="h2">Sectors we work in</h2>
+      <span class="kicker kicker--muted">Eight specialisms</span>
+    </div>
+    <div class="sectors">
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16h.01"/><path d="M16 16h.01"/><path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9.5a.5.5 0 0 0-.769-.422l-4.462 2.844A.5.5 0 0 1 15 11.5v-2a.5.5 0 0 0-.769-.422L9.77 11.922A.5.5 0 0 1 9 11.5V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1z"/><path d="M8 16h.01"/></svg>
+        </span>
+        <span class="sector__name">Advanced manufacturing and engineering</span>
+      </span>
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91 0z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+        </span>
+        <span class="sector__name">Aerospace, defence and space</span>
+      </span>
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 16 1.5 1.5"/><path d="m14 8-1.5-1.5"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="m16.5 10.5 1 1"/><path d="m17 6-2.891-2.891"/><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="m20 9 .891.891"/><path d="M3.109 14.109 6 17"/><path d="m6.5 12.5 1 1"/><path d="m7 18 2.891 2.891"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
+        </span>
+        <span class="sector__name">Life sciences and medical technology</span>
+      </span>
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        </span>
+        <span class="sector__name">Technology and software</span>
+      </span>
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/></svg>
+        </span>
+        <span class="sector__name">Quantum and emerging technologies</span>
+      </span>
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+        </span>
+        <span class="sector__name">Clean energy and sustainability</span>
+      </span>
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
+        </span>
+        <span class="sector__name">Agri-food and drink</span>
+      </span>
+      <span class="sector">
+        <span class="sector__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18v-7"/><path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></svg>
+        </span>
+        <span class="sector__name">Financial and professional services</span>
+      </span>
+    </div>
+  </section>
+
+  <section class="place">
+    <div class="place__inner">
+      <div>
+        <p class="kicker">The Place Effect</p>
+        <h2 class="place__title">You can't harvest the fruit before you plant the tree</h2>
+      </div>
+      <div class="place__col">
+        <p>We believe economies grow from the ground up. Strong communities produce ambitious founders. Those founders build companies that trade across borders. And that's what finally makes a place worth investing in.</p>
+        <p>It's why we do this work, and it's why we put effort back into our own community at home.</p>
+      </div>
+    </div>
+    <div class="chain">
+      <div class="chain__track"><span class="chain__fill"></span></div>
+      <div class="chain__steps">
+        <div class="chain__step">
+          <span class="chain__num">01</span>
+          <h3 class="chain__title">Community</h3>
+          <p class="chain__body">Strong places give people the confidence, and the networks, to try something.</p>
+        </div>
+        <div class="chain__step">
+          <span class="chain__num">02</span>
+          <h3 class="chain__title">Founders</h3>
+          <p class="chain__body">Ambitious people start things, and a few of them start things that scale.</p>
+        </div>
+        <div class="chain__step">
+          <span class="chain__num">03</span>
+          <h3 class="chain__title">Companies</h3>
+          <p class="chain__body">Those businesses find customers abroad and bring the revenue home.</p>
+        </div>
+        <div class="chain__step">
+          <span class="chain__num">04</span>
+          <h3 class="chain__title">Place</h3>
+          <p class="chain__body">Which is what finally makes a region worth investing in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2 class="h2">Meet the team</h2>
+      <span class="team__note">All of whom, you'll actually deal with.</span>
+    </div>
+    <div class="team">
+      <span class="person"><span class="person__photo"><span>portrait</span></span><span class="person__name">Declan Barry</span><span class="person__role">Founder</span></span>
+      <span class="person"><span class="person__photo"><span>portrait</span></span><span class="person__name">Aaron Walker</span><span class="person__role">Insight &amp; strategy</span></span>
+      <span class="person"><span class="person__photo"><span>portrait</span></span><span class="person__name">Name here</span><span class="person__role">Trade development</span></span>
+      <span class="person"><span class="person__photo"><span>portrait</span></span><span class="person__name">Name here</span><span class="person__role">Investment</span></span>
+      <span class="person"><span class="person__photo"><span>portrait</span></span><span class="person__name">Name here</span><span class="person__role">Operations</span></span>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="cta__inner">
+      <div class="cta__col">
+        <p class="kicker">Get in touch</p>
+        <h2 class="cta__title">Let's explore</h2>
+        <p>Whether you're weighing a first move into a new market or rethinking how your region shows up in the world, we're happy to talk it through. No obligation, and no hard sell.</p>
+        <div class="cta__direct">
+          <span>team@exportexplore.com</span>
+          <span>028 9590 2810</span>
+        </div>
+      </div>
+
+      <div class="form">
+        <div class="form__row">
+          <span class="field"><span class="field__label">Name</span><span class="field__input">&nbsp;</span></span>
+          <span class="field"><span class="field__label">Organisation</span><span class="field__input">&nbsp;</span></span>
+        </div>
+        <div class="form__row">
+          <span class="field"><span class="field__label">Email</span><span class="field__input">&nbsp;</span></span>
+          <span class="field"><span class="field__label">You are</span><span class="field__input">An economic development agency</span></span>
+        </div>
+        <span class="field"><span class="field__label">What are you exploring?</span><span class="field__input" style="min-height:70px">&nbsp;</span></span>
+        <span class="btn btn--accent btn--wide"><span>Send it over</span><span>&rarr;</span></span>
+        <p class="form__note">We reply to everything within two working days.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="accreditations">
+    <span class="kicker kicker--muted">Members of</span>
+    <div class="accreditations__grid">
+      <span>IEDC</span><span>CIoEIT</span><span>ADS Group</span><span>IoD</span><span>CIM</span><span>NI Chamber</span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div>
+      <div class="footer__brand"><span>Export</span><strong>Explore</strong></div>
+      <p class="footer__address">Suite 3.02, Innovation Factory<br>385 Springfield Road, Belfast BT12 7DG</p>
+    </div>
+    <div class="footer__contact">
+      <span>team@exportexplore.com</span>
+      <span>028 9590 2810</span>
+    </div>
+    <p class="footer__strapline">Rooted in Belfast. Working across Europe and North America.</p>
+  </footer>
+
+</doc-page>
+
+</body>
+</html>
