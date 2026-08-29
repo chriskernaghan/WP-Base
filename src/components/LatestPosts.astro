@@ -30,12 +30,12 @@ function formatDate(date: Date): string {
         <span class="section-label">From the blog</span>
         <h2>Practical WordPress advice</h2>
       </div>
-      <a href="/blog" class="view-all-link">View all posts →</a>
+      <a href="/blog/" class="view-all-link">View all posts →</a>
     </div>
 
     <div class="posts-list">
       {latest.map((post) => (
-        <a href={`/posts/${post.slug}`} class="post-row">
+        <a href={`/posts/${post.slug}/`} class="post-row">
           {post.data.image ? (
             <img
               src={post.data.image}
