@@ -1,47 +1,48 @@
 ---
-// WhyLocal.astro — block unique to the local page (not on the homepage).
-// Gives Google genuinely different, locally-relevant content and gives NI
-// visitors a real reason to pick a local developer over a faceless agency.
-// Each card carries a simple inline line icon (no dependency).
+// WhyLocal.astro — the "why work with someone local" block on /northern-ireland/.
+// Merged from the old WhyLocal and WhyNewtownabbey components when the two
+// location pages were combined. The Newtownabbey copy was the stronger of the
+// two because it names real places instead of arguing about timezones, so that
+// specificity is kept and widened to cover the rest of Northern Ireland.
 const points = [
   {
     icon: 'pin',
-    title: 'Down the road, not overseas',
-    body: "Based in Newtownabbey, working with businesses across Belfast and the wider NI area. Same timezone, same working hours, a real person who picks up.",
-  },
-  {
-    icon: 'person',
-    title: 'You deal with me, not a ticket queue',
-    body: "No call centres, no account managers, no being passed around. The person auditing your site is the person fixing it.",
+    title: 'Based here, not just covering it',
+    body: "I work out of Newtownabbey, with clients across Belfast, Antrim, Ballyclare, Bangor and further afield. Plenty of web companies list Northern Ireland on a page of regions they serve. If you would rather talk something through in person, that is a short drive rather than a day out.",
   },
   {
     icon: 'shop',
-    title: 'Built for NI small businesses',
-    body: "Most of my clients are local firms who need their site to work and bring in enquiries, without paying agency rates for the privilege.",
+    title: 'Mallusk to the Abbey Centre',
+    body: 'A lot of the work comes from trade and manufacturing around Mallusk and Global Point, and from retail and service businesses closer to the Abbey Centre and Belfast city centre. Different businesses, same problem: a website that has to bring in enquiries and keep working.',
+  },
+  {
+    icon: 'person',
+    title: 'You deal with me',
+    body: 'No account managers, no call centre, no being handed between people. The person who audits your site is the person who fixes it and the person who answers when you ring.',
   },
 ];
 ---
 <section id="why-local" class="why-local-section">
   <div class="why-local-inner">
-    <span class="section-label">Why local</span>
-    <h2>A Northern Ireland developer, on hand when you need one</h2>
+    <span class="section-label">Actually here</span>
+    <h2>A Northern Ireland developer you can actually get hold of</h2>
     <p class="why-local-lead">
-      When your site goes down or an enquiry form stops working, you don't want
-      to wait days for a reply from an agency three counties or three countries
-      away. You want someone local who knows your site and answers quickly.
+      Working with small businesses across Northern Ireland from a base in
+      Newtownabbey, covering Glengormley, Whiteabbey, Jordanstown, Carnmoney,
+      Mallusk and Ballyclare, out to Belfast, Antrim and beyond.
     </p>
     <div class="why-local-grid">
       {points.map((point) => (
         <div class="why-local-card">
           <span class="why-local-icon" aria-hidden="true">
             {point.icon === 'pin' && (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-            )}
-            {point.icon === 'person' && (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
             )}
             {point.icon === 'shop' && (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4 4h16l1 5" /><path d="M4 9v11h16V9" /><path d="M3 9h18" /><path d="M9 20v-5h6v5" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-1.5-5H4.5L3 9Z" /><path d="M5 9v11h14V9" /><path d="M9 20v-6h6v6" /></svg>
+            )}
+            {point.icon === 'person' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
             )}
           </span>
           <h3>{point.title}</h3>
