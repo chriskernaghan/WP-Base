@@ -14,12 +14,46 @@ interface Props {
     intro: string;
     heroLogo?: string;
     heroLogoHtml?: string;
+    featuredImage?: string;
     cta: { heading: string; body: string };
     testimonial?: { quote: string; name: string; role: string };
   };
 }
 
 const { frontmatter } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const shareImage = frontmatter.featuredImage ?? '/og-image.png';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: frontmatter.title,
+    description: frontmatter.intro,
+    image: new URL(shareImage, Astro.site).href,
+    inLanguage: 'en-GB',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    about: { '@type': 'Organization', name: frontmatter.client },
+    author: { '@type': 'Person', name: 'Chris Kernaghan', url: 'https://wpbase.co.uk/' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'WP Base',
+      url: 'https://wpbase.co.uk/',
+      logo: { '@type': 'ImageObject', url: new URL('/og-image.png', Astro.site).href },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://wpbase.co.uk/' },
+      { '@type': 'ListItem', position: 2, name: 'Case studies', item: 'https://wpbase.co.uk/#clients' },
+      { '@type': 'ListItem', position: 3, name: frontmatter.client, item: canonical },
+    ],
+  },
+];
+
 const meta = [
   { label: 'Client', value: frontmatter.client },
   { label: 'Industry', value: frontmatter.industry },
@@ -31,6 +65,8 @@ const meta = [
 <BaseLayout
   title={`${frontmatter.title} — WP Base`}
   description={frontmatter.intro}
+  ogImage={shareImage}
+  schema={schema}
 >
   <div class="case-hero">
     <div class="case-hero-content">
