@@ -25,3 +25,9 @@
 # ===== Homepage =====
 # Old /index.html links coming in from anywhere should land at /
 /index.html                                                   /                                                        301
+
+# ===== Location page merge (Aug 2026) =====
+# /newtownabbey was close to a duplicate of /northern-ireland and never picked
+# up enough impressions to register. Its content was folded into the NI page.
+/newtownabbey                                                 /northern-ireland/                                       301
+/newtownabbey/                                                /northern-ireland/                                       301
