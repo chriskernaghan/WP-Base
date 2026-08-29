@@ -7,6 +7,10 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      // Keep noindex pages out of the sitemap entirely. Submitting a URL while
+      // also telling Google not to index it sends contradictory signals.
+      filter: (page) =>
+        !page.includes('/welcome') && !page.includes('/demos/'),
       // Set sensible priorities and change frequencies by route type.
       serialize(item) {
         if (item.url === 'https://wpbase.co.uk/') {
