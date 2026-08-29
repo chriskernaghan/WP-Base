@@ -1,0 +1,31 @@
+# _headers — Cloudflare Pages reads this file and applies the rules at the edge.
+# Same syntax as _redirects: a path pattern, then indented header lines beneath it.
+# Order matters, first match wins, so the specific rules sit above the general ones.
+
+# ===== Prospect and client demos: never index =====
+# These pages carry other companies' branding. They are built for sales
+# conversations, not for search. X-Robots-Tag is the header equivalent of a
+# noindex meta tag and works on any file type, which matters here because
+# these are raw HTML dropped into /public rather than Astro pages.
+
+/demos/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# Prospect demo sitting in the case-studies path. Not a client.
+/case-studies/rafferty-mcgrath.html
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# ===== Post-payment page: never index =====
+# Only ever reached after a Stripe checkout, no value in search results.
+/welcome
+  X-Robots-Tag: noindex, nofollow
+
+/welcome/*
+  X-Robots-Tag: noindex, nofollow
+
+# ===== Baseline security headers for the whole site =====
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
