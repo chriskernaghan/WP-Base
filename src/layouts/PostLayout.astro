@@ -32,6 +32,50 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-GB', {
   year: 'numeric',
 });
 
+// Absolute URLs for schema and Open Graph. Social platforms and Google both
+// reject relative paths here.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const heroImage = frontmatter.image
+  ? new URL(frontmatter.image, Astro.site).href
+  : new URL('/og-image.png', Astro.site).href;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    image: heroImage,
+    datePublished: new Date(frontmatter.date).toISOString(),
+    dateModified: new Date(frontmatter.date).toISOString(),
+    inLanguage: 'en-GB',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    author: {
+      '@type': 'Person',
+      name: 'Chris Kernaghan',
+      url: 'https://wpbase.co.uk/',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'WP Base',
+      url: 'https://wpbase.co.uk/',
+      logo: {
+        '@type': 'ImageObject',
+        url: new URL('/og-image.png', Astro.site).href,
+      },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://wpbase.co.uk/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://wpbase.co.uk/blog' },
+      { '@type': 'ListItem', position: 3, name: frontmatter.title, item: canonical },
+    ],
+  },
+];
+
 // Solo shop, so the author photo is a site-wide asset rather than per-post.
 // Drop a square headshot in /public/authors/ and set the path below; until then
 // the byline shows a lime initials circle.
@@ -39,7 +83,12 @@ const authorAvatar: string | null = null; // e.g. '/authors/chris.jpg'
 const authorInitials = 'CK';
 ---
 
-<BaseLayout title={`${frontmatter.title} — WP Base`} description={frontmatter.description}>
+<BaseLayout
+  title={`${frontmatter.title} — WP Base`}
+  description={frontmatter.description}
+  ogImage={frontmatter.image ?? '/og-image.png'}
+  schema={schema}
+>
   <div class="post-hero">
     <div class="post-header-grid">
       <div class="post-header-main">
