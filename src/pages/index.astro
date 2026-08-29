@@ -11,11 +11,82 @@ import Pricing from '../components/Pricing.astro';
 import LatestPosts from '../components/LatestPosts.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
+import { faqs } from '../data/faqs';
+
+// Two schema blocks emitted as one JSON-LD array.
+//
+// 1. ProfessionalService describes the business itself. This is the page Google
+//    ties to the Google Business Profile, so the name, address, phone and hours
+//    need to match GBP exactly or the signals work against each other.
+// 2. FAQPage is generated from the same array the accordion renders from, so
+//    the markup and the structured data can never disagree.
+//
+// Deliberately no aggregateRating. Google's guidelines disallow a business
+// marking up its own rating about itself, and it can trigger a manual action.
+// The 5.0 shows in search through the Google Business Profile instead.
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://wpbase.co.uk/#business',
+  name: 'WP Base',
+  url: 'https://wpbase.co.uk/',
+  email: 'hello@wpbase.co.uk',
+  telephone: '+447379334695',
+  image: 'https://wpbase.co.uk/og-image.png',
+  priceRange: '££',
+  description:
+    'WordPress maintenance, web design and managed hosting for small businesses across Northern Ireland and the UK. One person handling the work, on a rolling monthly plan.',
+  founder: {
+    '@type': 'Person',
+    name: 'Chris Kernaghan',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Newtownabbey',
+    addressRegion: 'Northern Ireland',
+    addressCountry: 'GB',
+  },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Northern Ireland' },
+    { '@type': 'Country', name: 'United Kingdom' },
+  ],
+  knowsAbout: [
+    'WordPress maintenance',
+    'WordPress security',
+    'Website performance',
+    'Managed WordPress hosting',
+    'Web design',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'WordPress care plans',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'WordPress Maintenance', url: 'https://wpbase.co.uk/wordpress-maintenance' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Design', url: 'https://wpbase.co.uk/web-design' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website Speed', url: 'https://wpbase.co.uk/website-speed' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Managed WordPress Hosting', url: 'https://wpbase.co.uk/hosting' } },
+    ],
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+
+const schema = [business, faqSchema];
 ---
 
 <BaseLayout
   title="WP Base — WordPress Maintenance for Small Businesses"
   description="WordPress care without the agency price. Maintenance, custom builds, migrations and ongoing support for small businesses in Northern Ireland."
+  schema={schema}
 >
   <Hero />
   <Marquee />
