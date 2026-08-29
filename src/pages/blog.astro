@@ -29,7 +29,7 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    '@id': 'https://wpbase.co.uk/blog',
+    '@id': 'https://wpbase.co.uk/blog/',
     name: 'WP Base Blog',
     description:
       'Plain-English WordPress advice for small business owners in Northern Ireland and the UK.',
@@ -40,7 +40,7 @@ const schema = [
       headline: post.data.title,
       description: post.data.description,
       datePublished: new Date(post.data.date).toISOString(),
-      url: `https://wpbase.co.uk/posts/${post.slug}`,
+      url: `https://wpbase.co.uk/posts/${post.slug}/`,
       author: { '@type': 'Person', name: 'Chris Kernaghan' },
     })),
   },
@@ -49,7 +49,7 @@ const schema = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://wpbase.co.uk/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://wpbase.co.uk/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://wpbase.co.uk/blog/' },
     ],
   },
 ];
@@ -90,7 +90,7 @@ function formatDate(date: Date): string {
 
       {featured && (
         <div class="blog-featured" id="blogFeatured">
-          <a href={`/posts/${featured.slug}`} class="feature-card">
+          <a href={`/posts/${featured.slug}/`} class="feature-card">
             {featured.data.image ? (
               <img
                 src={featured.data.image}
@@ -116,7 +116,7 @@ function formatDate(date: Date): string {
           <div class="latest-rail">
             <p class="latest-rail-label">Latest</p>
             {railPosts.map((post) => (
-              <a href={`/posts/${post.slug}`} class="rail-item">
+              <a href={`/posts/${post.slug}/`} class="rail-item">
                 <span class="rail-item-tag">{post.data.tag}</span>
                 <h2 class="rail-item-title">{post.data.title}</h2>
                 <div class="rail-item-meta">{formatDate(post.data.date)} · {post.data.readTime}</div>
@@ -133,7 +133,7 @@ function formatDate(date: Date): string {
           const inFeature = featuredSlugs.has(post.slug);
           return (
             <a
-              href={`/posts/${post.slug}`}
+              href={`/posts/${post.slug}/`}
               class="post-row"
               data-tag={post.data.tag}
               data-featured={inFeature ? 'true' : 'false'}
