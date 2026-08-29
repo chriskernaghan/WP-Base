@@ -4,6 +4,10 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://wpbase.co.uk',
+  // Canonical tags emit the trailing-slash form, so every internal link and the
+  // dev server need to agree. Without this, /blog and /blog/ were both getting
+  // indexed and splitting the signals between them.
+  trailingSlash: 'always',
   integrations: [
     mdx(),
     sitemap({
