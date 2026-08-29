@@ -1,8 +1,14 @@
 ---
-// FAQLocal.astro — local variant of the FAQ.
-// Same markup and classes as FAQ.astro. Questions are rewritten to target
-// local search intent (location, meeting in person, areas covered) which is
-// one of the stronger on-page signals for local ranking.
+// FAQLocal.astro — local variant of the FAQ, used on /northern-ireland/.
+// Same markup and classes as FAQ.astro. Questions target local search intent
+// (location, meeting in person, areas covered), which is one of the stronger
+// on-page signals for local ranking.
+//
+// The Newtownabbey-specific questions were folded in here when the two
+// location pages merged, so the town-level terms that page was targeting stay
+// on the site. Answers that duplicated the homepage FAQ word for word were
+// dropped, since a location page repeating the homepage is what gets it
+// treated as thin.
 const faqs = [
   {
     q: 'Where in Northern Ireland are you based?',
@@ -10,32 +16,32 @@ const faqs = [
     open: true,
   },
   {
+    q: 'Can you come out to see us?',
+    a: "If it's useful, yes. Mallusk, Glengormley, Ballyclare, the Abbey Centre area and Belfast city centre are all a short run. Most work happens remotely because that's faster for everyone, but I'm not going to tell you a face to face is impossible when it's fifteen minutes away.",
+  },
+  {
     q: 'Do you work with Belfast businesses?',
     a: "Yes, plenty. Belfast firms make up a good chunk of my clients. Whether you're in the city centre, the Titanic Quarter or out in the suburbs, the service is the same, quick responses and someone local who actually knows your site.",
   },
   {
-    q: 'Can we meet in person?',
-    a: "If it helps, yes. A lot of clients are happy to keep everything over email and phone, but if you'd rather sit down for a coffee to talk through your site, that's easy enough to arrange around Belfast.",
+    q: 'Do you only work with Northern Ireland businesses?',
+    a: 'No. Clients are spread across Northern Ireland and the wider UK. Being local just means you get the option of meeting in person and someone working your own hours.',
   },
   {
-    q: 'How quickly can you start?',
-    a: "Usually within a day or two. I'll run a free audit of your site, walk you through what I find, and if we're a good fit, I can start that same week. No onboarding decks, no kickoff meetings, just straight into the work.",
+    q: "What if my site isn't WordPress?",
+    a: "Still worth a conversation. I've moved sites off Squarespace, Wix and older custom builds onto WordPress before, and I'll give you an honest view on whether moving is worth the money in your case.",
   },
   {
-    q: 'What does the monthly retainer actually include?',
-    a: "Core, plugin and theme updates, daily backups, uptime monitoring, security scanning and a set number of support hours each month. If something breaks at 9pm on a Tuesday, I'll deal with it. You get a monthly report so you can see exactly what's been done.",
+    q: "Something's broken right now. How fast can you look?",
+    a: "Ring or email and I'll usually have eyes on it within the hour during working hours. Urgent things get dealt with urgently rather than scheduled in for next week.",
   },
   {
-    q: 'Am I locked into a contract?',
-    a: "No. It's a rolling monthly arrangement, you can cancel any time. I'd rather keep clients because the work speaks for itself, not because of a contract clause.",
+    q: 'How much does looking after a site cost?',
+    a: "Care plans start at £99 a month and go up depending on how much support you need. One off work is quoted separately once I've had a look at the site. Either way you get a price before anything starts.",
   },
   {
-    q: "I'm not very technical, is that a problem?",
-    a: "Not at all. Most of my clients aren't. I explain things in plain English and handle everything on the technical side. You just need to tell me what you need, I'll take care of how.",
-  },
-  {
-    q: "How do I get in touch if something's urgent?",
-    a: "Email or phone, whichever's easier. Response time is typically under an hour during working hours, and I keep an eye on things outside of them too. You're not going into a ticket queue.",
+    q: 'Am I tied into anything?',
+    a: "No. It's a rolling monthly arrangement and you can stop whenever you want. I'd rather keep clients on the strength of the work than on a contract clause.",
   },
 ];
 ---
