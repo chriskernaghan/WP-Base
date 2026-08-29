@@ -1,175 +1,788 @@
-<nav>
-  <div class="nav-inner">
-    <a href="/" class="logo">WP Base</a>
-    <div class="nav-links">
-      <div class="dropdown">
-        <a href="/wordpress-maintenance" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-          Services
-          <svg class="dropdown-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
-            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <div class="dropdown-menu mega-menu">
-          <a href="/wordpress-maintenance" class="mega-item">
-            <span class="mega-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-              </svg>
-            </span>
-            <span class="mega-text">
-              <span class="mega-title">WordPress Maintenance</span>
-              <span class="mega-desc">Updates, backups and security handled for you</span>
-            </span>
-          </a>
-          <a href="/website-speed" class="mega-item">
-            <span class="mega-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
-              </svg>
-            </span>
-            <span class="mega-text">
-              <span class="mega-title">Website Speed</span>
-              <span class="mega-desc">Faster load times that keep visitors around</span>
-            </span>
-          </a>
-          <a href="/web-design" class="mega-item">
-            <span class="mega-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <line x1="3" y1="9" x2="21" y2="9"/>
-                <line x1="9" y1="21" x2="9" y2="9"/>
-              </svg>
-            </span>
-            <span class="mega-text">
-              <span class="mega-title">Web Design</span>
-              <span class="mega-desc">Clean, modern websites built to win you work</span>
-            </span>
-          </a>
-          <a href="/hosting" class="mega-item">
-            <span class="mega-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="7" rx="1.5"/>
-                <rect x="2" y="14" width="20" height="7" rx="1.5"/>
-                <line x1="6" y1="6.5" x2="6.01" y2="6.5"/>
-                <line x1="6" y1="17.5" x2="6.01" y2="17.5"/>
-              </svg>
-            </span>
-            <span class="mega-text">
-              <span class="mega-title">Hosting</span>
-              <span class="mega-desc">Fast, managed hosting kept in your own account</span>
-            </span>
-          </a>
+---
+/**
+ * WP Base site header with full-width mega menu.
+ *
+ * Everything renders from the NAV array below.
+ *  - A column with `variant: "list"` renders compact text links (no icon, no description).
+ *  - A column without it renders icon cards.
+ *  - `feature` renders the dark rail on the right. Hidden below 1320px by design.
+ *  - `footer` renders the utility strip along the bottom of the panel.
+ *
+ * Every href below points at a page that exists in this repo today.
+ */
+
+const NAV = [
+  {
+    id: "services",
+    label: "Services",
+    columns: [
+      {
+        title: "Ongoing care",
+        items: [
+          { icon: "sliders", title: "WordPress Maintenance", desc: "Updates, backups and security", href: "/wordpress-maintenance" },
+          { icon: "server",  title: "Hosting",               desc: "Managed, in your own account", href: "/hosting" }
+        ]
+      },
+      {
+        title: "Build and improve",
+        items: [
+          { icon: "layout", title: "Web Design",    desc: "Built to win you work", href: "/web-design" },
+          { icon: "zap",    title: "Website Speed", desc: "Faster pages, fewer drop-offs", href: "/website-speed" }
+        ]
+      },
+      {
+        title: "Working locally",
+        variant: "list",
+        items: [
+          { title: "Newtownabbey", href: "/newtownabbey" },
+          { title: "Northern Ireland", href: "/northern-ireland" }
+        ]
+      }
+    ],
+    feature: {
+      eyebrow: "Free, no strings",
+      title: "Get a website health check",
+      body: "A short walkthrough of what is slowing your site down and what that costs you in enquiries.",
+      cta: { label: "Book your audit", href: "/#contact" }
+    },
+    footer: {
+      label: "Popular",
+      links: [
+        { label: "Compare care plans", href: "/#pricing" },
+        { label: "Common questions", href: "/#faq" },
+        { label: "Get in touch", href: "/#contact" }
+      ],
+      meta: "Newtownabbey, working across Northern Ireland"
+    }
+  },
+  {
+    id: "work",
+    label: "Case Studies",
+    columns: [
+      {
+        title: "Recent work",
+        items: [
+          { icon: "chart",  title: "Catagen",       desc: "Four years of maintenance for a Belfast cleantech scaleup", href: "/case-studies/catagen" },
+          { icon: "zap",    title: "ExportExplore", desc: "A rebuild that works properly on mobile", href: "/case-studies/exportexplore" },
+          { icon: "layout", title: "Inclusion IQ",  desc: "A clean site that keeps enquiries coming in", href: "/case-studies/inclusion-iq" }
+        ]
+      },
+      {
+        title: "Good to know",
+        variant: "list",
+        items: [
+          { title: "What a retainer covers", href: "/#pricing" },
+          { title: "Common questions", href: "/#faq" },
+          { title: "All clients", href: "/#clients" }
+        ]
+      }
+    ],
+    feature: {
+      eyebrow: "Client review",
+      title: "\u201COne person you can actually get on the phone.\u201D",
+      body: "Rated 5.0 on Google by the businesses looked after month to month.",
+      cta: { label: "See the work", href: "/#clients" }
+    },
+    footer: {
+      label: "More",
+      links: [
+        { label: "All case studies", href: "/#clients" },
+        { label: "Start a project", href: "/#contact" }
+      ],
+      meta: "5.0 on Google"
+    }
+  },
+  {
+    id: "resources",
+    label: "Resources",
+    columns: [
+      {
+        title: "Start here",
+        items: [
+          { icon: "doc",    title: "Blog",               desc: "Plain-English WordPress advice", href: "/blog" },
+          { icon: "search", title: "Free website audit", desc: "Send a URL, get a proper look", href: "/#contact" }
+        ]
+      },
+      {
+        title: "Popular posts",
+        variant: "list",
+        items: [
+          { title: "What is slowing your site down", href: "/posts/whats-slowing-your-wordpress-site-2026" },
+          { title: "Why maintenance matters", href: "/posts/why-wordpress-maintenance-matters" },
+          { title: "What a website costs in NI", href: "/posts/how-much-does-a-small-business-website-cost-northern-ireland" },
+          { title: "WordPress security basics", href: "/posts/wordpress-security-basics" }
+        ]
+      }
+    ],
+    feature: {
+      eyebrow: "Worth reading",
+      title: "Where to host your website in Northern Ireland",
+      body: "What actually matters when you pick a host, and the local options worth considering.",
+      cta: { label: "Read the post", href: "/posts/where-to-host-your-website-northern-ireland" }
+    },
+    footer: {
+      label: "Browse",
+      links: [
+        { label: "All posts", href: "/blog" },
+        { label: "Finding WordPress help locally", href: "/posts/finding-wordpress-help-northern-ireland" }
+      ],
+      meta: "New post most weeks"
+    }
+  },
+  { id: "pricing", label: "Pricing", href: "/#pricing" }
+];
+
+const ICONS = {
+  sliders: '<line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9" cy="8" r="2.2"/><circle cx="15" cy="16" r="2.2"/>',
+  server: '<rect x="3.5" y="4.5" width="17" height="6"/><rect x="3.5" y="13.5" width="17" height="6"/><line x1="7" y1="7.5" x2="7.01" y2="7.5"/><line x1="7" y1="16.5" x2="7.01" y2="16.5"/>',
+  layout: '<rect x="3.5" y="4.5" width="17" height="15"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><line x1="9.5" y1="9.5" x2="9.5" y2="19.5"/>',
+  zap: '<path d="M13 3 5 13h6l-1 8 8-10h-6z"/>',
+  shield: '<path d="M12 3.5 5 6.2v5.6c0 4 2.9 7 7 8.7 4.1-1.7 7-4.7 7-8.7V6.2z"/>',
+  swap: '<polyline points="7 4 3.5 7.5 7 11"/><line x1="3.5" y1="7.5" x2="20.5" y2="7.5"/><polyline points="17 13 20.5 16.5 17 20"/><line x1="20.5" y1="16.5" x2="3.5" y2="16.5"/>',
+  chart: '<line x1="3.5" y1="20" x2="20.5" y2="20"/><rect x="6" y="12" width="3.5" height="8"/><rect x="14.5" y="6.5" width="3.5" height="13.5"/>',
+  doc: '<path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="16.5" x2="14" y2="16.5"/>',
+  book: '<path d="M4 5h7v15H4z"/><path d="M13 5h7v15h-7z"/>',
+  search: '<circle cx="11" cy="11" r="6.2"/><line x1="15.6" y1="15.6" x2="20" y2="20"/>',
+  help: '<circle cx="12" cy="12" r="8.2"/><path d="M9.9 9.6a2.2 2.2 0 1 1 2.9 2.1v1.3"/><line x1="12.1" y1="16.2" x2="12.11" y2="16.2"/>'
+};
+---
+
+<header class="wpb-header" id="wpb-header">
+  <div class="wpb-bar">
+    <a class="wpb-brand" href="/">WP Base</a>
+
+    <div class="wpb-nav" role="navigation" aria-label="Main">
+      {NAV.map((entry) => (
+        entry.columns ? (
+          <div class="wpb-item" data-open="false" data-id={entry.id}>
+            <button class="wpb-trigger" aria-expanded="false" aria-controls={`mega-${entry.id}`}>
+              {entry.label}
+              <svg class="wpb-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 4 6 8.5 10.5 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <div class="wpb-mega" id={`mega-${entry.id}`}>
+              <div class={`wpb-mega-inner${entry.feature ? " has-rail" : ""}`} style={`--cols:${entry.columns.length}`}>
+                {entry.columns.map((col) => (
+                  <div class="wpb-col">
+                    <p class="wpb-col-title">{col.title}</p>
+
+                    {col.variant === "list"
+                      ? col.items.map((item) => (
+                          <a class="wpb-list-link" href={item.href}>
+                            <span>{item.title}</span>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+                          </a>
+                        ))
+                      : col.items.map((item) => (
+                          <a class="wpb-link" href={item.href}>
+                            <span class="wpb-ico">
+                              <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[item.icon]} />
+                            </span>
+                            <span class="wpb-link-text">
+                              <span class="wpb-link-title">{item.title}</span>
+                              <span class="wpb-link-desc">{item.desc}</span>
+                            </span>
+                          </a>
+                        ))}
+                  </div>
+                ))}
+
+                {entry.feature && (
+                  <div class="wpb-feature">
+                    <div class="wpb-feature-card">
+                      <p class="wpb-eyebrow">{entry.feature.eyebrow}</p>
+                      <p class="wpb-feature-title">{entry.feature.title}</p>
+                      <p class="wpb-feature-body">{entry.feature.body}</p>
+                      <a class="wpb-feature-cta" href={entry.feature.cta.href}>
+                        {entry.feature.cta.label}
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {entry.footer && (
+                <div class="wpb-foot">
+                  <div class="wpb-foot-inner">
+                    <span class="wpb-foot-label">{entry.footer.label}</span>
+                    <span class="wpb-foot-links">
+                      {entry.footer.links.map((l) => <a href={l.href}>{l.label}</a>)}
+                    </span>
+                    <span class="wpb-foot-meta"><span class="wpb-foot-dot"></span>{entry.footer.meta}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div class="wpb-item"><a class="wpb-trigger" href={entry.href}>{entry.label}</a></div>
+        )
+      ))}
+    </div>
+
+    <a class="wpb-cta" href="mailto:hello@wpbase.co.uk">Get in Touch</a>
+
+    <button class="wpb-burger" id="wpb-burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+  </div>
+
+  <div class="wpb-mobile" id="wpb-mobile">
+    {NAV.map((entry) => (
+      entry.columns ? (
+        <div class="wpb-acc" data-open="false">
+          <button class="wpb-acc-trigger" aria-expanded="false">
+            {entry.label}
+            <svg class="wpb-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 4 6 8.5 10.5 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="wpb-acc-panel">
+            {entry.columns.map((col) => (
+              <div class="wpb-col">
+                <p class="wpb-col-title">{col.title}</p>
+                {col.variant === "list"
+                  ? col.items.map((item) => (
+                      <a class="wpb-list-link" href={item.href}>
+                        <span>{item.title}</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+                      </a>
+                    ))
+                  : col.items.map((item) => (
+                      <a class="wpb-link" href={item.href}>
+                        <span class="wpb-ico">
+                          <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[item.icon]} />
+                        </span>
+                        <span class="wpb-link-text">
+                          <span class="wpb-link-title">{item.title}</span>
+                          <span class="wpb-link-desc">{item.desc}</span>
+                        </span>
+                      </a>
+                    ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <a href="/#clients">Case Studies</a>
-      <a href="/blog">Blog</a>
-      <a href="/#pricing">Pricing</a>
-      <a class="nav-cta" href="mailto:hello@wpbase.co.uk">Get in Touch</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <div class="hamburger-bars">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <span class="hamburger-label">Menu</span>
-    </button>
+      ) : (
+        <a class="wpb-acc-trigger" href={entry.href}>{entry.label}</a>
+      )
+    ))}
+    <a class="wpb-mobile-cta" href="/#contact">Get Your Free Audit</a>
   </div>
-</nav>
+</header>
 
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-accordion" id="mobileServicesAccordion">
-    <button class="mobile-accordion-toggle" id="mobileServicesToggle" aria-expanded="false" aria-controls="mobileServicesPanel">
-      Services
-      <svg class="mobile-accordion-caret" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
-        <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <div class="mobile-accordion-panel" id="mobileServicesPanel">
-      <div class="mobile-accordion-inner">
-        <a href="/wordpress-maintenance" class="mobile-sublink">WordPress Maintenance</a>
-        <a href="/website-speed" class="mobile-sublink">Website Speed</a>
-        <a href="/web-design" class="mobile-sublink">Web Design</a>
-        <a href="/hosting" class="mobile-sublink">Hosting</a>
-      </div>
-    </div>
-  </div>
+<div class="wpb-backdrop" id="wpb-backdrop"></div>
 
-  <a href="/#clients">Case Studies</a>
-  <a href="/blog">Blog</a>
-  <a href="/#pricing">Pricing</a>
-  <a href="/#contact" class="mobile-cta">Get Your Free Audit</a>
-</div>
+<style is:global>
+/* ==========================================================================
+   HEADER + MEGA MENU
+   Replaces the old nav / dropdown / mega-menu / hamburger / mobile-menu rules.
+   All classes are wpb- prefixed so nothing collides with existing styles.
+   ========================================================================== */
+:root {
+    --wpb-header-h: 78px;
+    --wpb-wash: #F7F7F3;
+    --wpb-line: #E5E5DF;
+    --wpb-grey: #636763;
+}
 
-<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+.wpb-header * { box-sizing: border-box; }
+.wpb-header a { text-decoration: none; color: inherit; }
+.wpb-header button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+.wpb-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--snow);
+    border-bottom: 1px solid var(--wpb-line);
+}
+
+.wpb-bar {
+    max-width: calc(var(--frame) + 8rem);
+    margin: 0 auto;
+    padding: 0 4rem;
+    height: var(--wpb-header-h);
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.wpb-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: -0.02em;
+    color: var(--midnight);
+}
+
+.wpb-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.wpb-item { position: static; }
+
+.wpb-trigger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 15px;
+    height: var(--wpb-header-h);
+    font-size: 0.97rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--midnight);
+}
+.wpb-trigger::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: -1px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+.wpb-item[data-open="true"] .wpb-trigger::after { transform: scaleX(1); }
+.wpb-chev { width: 9px; height: 9px; margin-top: 1px; transition: transform 0.2s ease; }
+.wpb-item[data-open="true"] .wpb-chev { transform: rotate(180deg); }
+
+.wpb-cta {
+    margin-left: 0.9rem;
+    padding: 0.8rem 1.4rem;
+    background: var(--accent);
+    color: var(--accent-text);
+    border: 1px solid var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+.wpb-cta:hover { background: var(--midnight); color: var(--accent); }
+
+/* ---------- panel ---------- */
+.wpb-mega {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--snow);
+    border-bottom: 1px solid var(--wpb-line);
+    box-shadow: 0 30px 46px -32px rgba(8, 16, 28, 0.32);
+    max-height: calc(100vh - var(--wpb-header-h));
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+}
+.wpb-item[data-open="true"] .wpb-mega {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+}
+
+.wpb-mega-inner {
+    max-width: calc(var(--frame) + 8rem);
+    margin: 0 auto;
+    padding: 2.2rem 4rem 2.4rem;
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+}
+.wpb-mega-inner.has-rail { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)) 320px; }
+
+.wpb-col { padding: 0 1.9rem; border-left: 1px solid var(--wpb-line); min-width: 0; }
+.wpb-col:first-child { padding-left: 0; border-left: 0; }
+.wpb-col-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.69rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wpb-grey);
+    margin: 0 0 0.9rem;
+}
+
+/* icon card rows */
+.wpb-link {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: start;
+    margin: 0 -12px;
+    padding: 0.7rem 12px;
+    transition: background 0.14s ease;
+}
+.wpb-link:hover { background: var(--wpb-wash); }
+.wpb-link:focus-visible { background: var(--wpb-wash); outline: none; box-shadow: inset 0 0 0 2px var(--midnight); }
+.wpb-ico {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    background: var(--wpb-wash);
+    border: 1px solid var(--wpb-line);
+    transition: background 0.14s ease, border-color 0.14s ease;
+}
+.wpb-link:hover .wpb-ico { background: var(--accent); border-color: var(--accent); }
+.wpb-ico svg {
+    width: 19px;
+    height: 19px;
+    stroke: var(--midnight);
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.wpb-link-text { min-width: 0; }
+.wpb-link-title {
+    display: block;
+    font-size: 0.94rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--midnight);
+}
+.wpb-link-desc {
+    display: block;
+    font-size: 0.81rem;
+    line-height: 1.5;
+    color: var(--wpb-grey);
+    margin-top: 4px;
+    max-width: 30ch;
+}
+
+/* compact list rows */
+.wpb-list-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0 -12px;
+    padding: 0.7rem 12px;
+    font-size: 0.94rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--midnight);
+    transition: background 0.14s ease;
+}
+.wpb-list-link + .wpb-list-link { border-top: 1px solid var(--wpb-line); }
+.wpb-list-link:hover { background: var(--wpb-wash); }
+.wpb-list-link:focus-visible { background: var(--wpb-wash); outline: none; box-shadow: inset 0 0 0 2px var(--midnight); }
+.wpb-list-link svg {
+    width: 13px;
+    height: 13px;
+    flex: none;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.14s ease, transform 0.14s ease;
+}
+.wpb-list-link:hover svg,
+.wpb-list-link:focus-visible svg { opacity: 1; transform: none; }
+
+/* feature rail */
+.wpb-feature { padding-left: 1.9rem; border-left: 1px solid var(--wpb-line); display: flex; }
+.wpb-feature-card {
+    background: var(--midnight);
+    color: var(--snow);
+    padding: 1.7rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.wpb-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.69rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+}
+.wpb-feature-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.22;
+    margin: 0.75rem 0 0.5rem;
+}
+.wpb-feature-body {
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 1.4rem;
+}
+.wpb-feature-cta {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: var(--accent);
+    color: var(--accent-text);
+    padding: 0.7rem 1.05rem;
+    font-size: 0.87rem;
+    font-weight: 600;
+    border: 1px solid var(--accent);
+    transition: background 0.16s ease, color 0.16s ease;
+}
+.wpb-feature-cta:hover { background: transparent; color: var(--accent); }
+.wpb-feature-cta svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* utility strip */
+.wpb-foot { border-top: 1px solid var(--wpb-line); background: var(--wpb-wash); }
+.wpb-foot-inner {
+    max-width: calc(var(--frame) + 8rem);
+    margin: 0 auto;
+    padding: 0 4rem;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+.wpb-foot-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.69rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wpb-grey);
+    padding-right: 1.6rem;
+    border-right: 1px solid var(--wpb-line);
+    line-height: 52px;
+}
+.wpb-foot-links { display: flex; align-items: center; gap: 1.6rem; min-width: 0; }
+.wpb-foot-links a {
+    font-size: 0.87rem;
+    font-weight: 500;
+    color: var(--midnight);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.15s ease;
+}
+.wpb-foot-links a:hover { border-bottom-color: var(--midnight); }
+.wpb-foot-meta {
+    margin-left: auto;
+    font-size: 0.81rem;
+    color: var(--wpb-grey);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+.wpb-foot-dot { width: 6px; height: 6px; background: var(--accent); flex: none; }
+
+/* ---------- mobile ---------- */
+.wpb-burger { display: none; width: 44px; height: 44px; margin-left: auto; place-items: center; }
+.wpb-burger span { display: block; width: 22px; height: 2px; background: var(--midnight); position: relative; }
+.wpb-burger span::before,
+.wpb-burger span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: var(--midnight);
+    transition: transform 0.2s ease, top 0.2s ease;
+}
+.wpb-burger span::before { top: -7px; }
+.wpb-burger span::after { top: 7px; }
+.wpb-header[data-mobile="true"] .wpb-burger span { background: transparent; }
+.wpb-header[data-mobile="true"] .wpb-burger span::before { top: 0; transform: rotate(45deg); }
+.wpb-header[data-mobile="true"] .wpb-burger span::after { top: 0; transform: rotate(-45deg); }
+
+.wpb-mobile {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--wpb-header-h);
+    bottom: 0;
+    background: var(--snow);
+    overflow-y: auto;
+    padding: 0.25rem 1.25rem 3rem;
+    z-index: 1001;
+}
+.wpb-header[data-mobile="true"] .wpb-mobile { display: block; }
+
+.wpb-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 16, 28, 0.35);
+    z-index: 999;
+}
+body[data-nav-open="true"] .wpb-backdrop { display: block; }
+
+.wpb-acc-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--wpb-line);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--midnight);
+}
+.wpb-acc-trigger .wpb-chev { width: 11px; height: 11px; }
+.wpb-acc-panel { display: none; padding: 0.4rem 0 1.1rem; border-bottom: 1px solid var(--wpb-line); }
+.wpb-acc[data-open="true"] .wpb-acc-panel { display: block; }
+.wpb-acc[data-open="true"] .wpb-acc-trigger { border-bottom-color: transparent; }
+.wpb-acc-panel .wpb-col { padding: 0; border: 0; margin-top: 1rem; }
+.wpb-mobile-cta {
+    display: block;
+    text-align: center;
+    margin-top: 1.6rem;
+    padding: 1rem;
+    background: var(--accent);
+    color: var(--accent-text);
+    font-weight: 600;
+}
+
+/* ---------- breakpoints ---------- */
+@media (max-width: 1320px) {
+    .wpb-mega-inner.has-rail { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
+    .wpb-feature { display: none; }
+}
+
+@media (max-width: 1140px) {
+    .wpb-bar { padding: 0 2rem; gap: 1.5rem; }
+    .wpb-mega-inner { padding: 1.8rem 2rem 2rem; }
+    .wpb-foot-inner { padding: 0 2rem; gap: 1.25rem; }
+    .wpb-col { padding: 0 1.4rem; }
+    .wpb-foot-links { gap: 1.25rem; }
+    .wpb-trigger { padding: 0 11px; font-size: 0.92rem; }
+    .wpb-trigger::after { left: 11px; right: 11px; }
+}
+
+@media (max-width: 1000px) {
+    :root { --wpb-header-h: 66px; }
+    .wpb-nav, .wpb-cta { display: none; }
+    .wpb-burger { display: grid; }
+    .wpb-bar { gap: 0; padding: 0 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wpb-header * { transition: none !important; }
+}
+</style>
 
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
-  const servicesToggle = document.getElementById('mobileServicesToggle');
-  const servicesAccordion = document.getElementById('mobileServicesAccordion');
+  const header = document.getElementById('wpb-header');
+  const items = Array.from(document.querySelectorAll('.wpb-item[data-id]'));
+  let hoverTimer: number | undefined;
+  let closeTimer: number | undefined;
 
-  function closeMobileMenu() {
-    hamburger?.classList.remove('open');
-    mobileMenu?.classList.remove('open');
-    mobileMenuBackdrop?.classList.remove('open');
+  const setOpen = (target: Element | null) => {
+    items.forEach((item) => {
+      const on = item === target;
+      (item as HTMLElement).dataset.open = String(on);
+      item.querySelector('.wpb-trigger')?.setAttribute('aria-expanded', String(on));
+    });
+  };
+  const closeAll = () => setOpen(null);
+
+  items.forEach((item) => {
+    item.addEventListener('mouseenter', () => {
+      window.clearTimeout(closeTimer);
+      window.clearTimeout(hoverTimer);
+      hoverTimer = window.setTimeout(() => setOpen(item), 70);
+    });
+    item.querySelector('.wpb-trigger')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if ((item as HTMLElement).dataset.open === 'true') closeAll();
+      else setOpen(item);
+    });
+  });
+
+  if (header) {
+    header.addEventListener('mouseenter', () => window.clearTimeout(closeTimer));
+    header.addEventListener('mouseleave', () => {
+      window.clearTimeout(hoverTimer);
+      closeTimer = window.setTimeout(closeAll, 160);
+    });
+    header.addEventListener('focusout', (e) => {
+      const next = (e as FocusEvent).relatedTarget as Node | null;
+      if (!next || !header.contains(next)) closeAll();
+    });
   }
 
-  // Pin the menu directly below the nav's real bottom edge. The nav's height
-  // varies (mobile padding, scroll state), so a hardcoded CSS top clips the
-  // first menu item. Measure it instead.
-  function positionMobileMenu() {
-    const navEl = document.querySelector('nav');
-    if (!navEl || !mobileMenu) return;
-    const navBottom = Math.round(navEl.getBoundingClientRect().bottom);
-    mobileMenu.style.top = navBottom + 'px';
-    mobileMenu.style.maxHeight = `calc(100vh - ${navBottom}px)`;
-    if (mobileMenuBackdrop) {
-      mobileMenuBackdrop.style.top = navBottom + 'px';
-      mobileMenuBackdrop.style.height = `calc(100vh - ${navBottom}px)`;
+  document.addEventListener('keydown', (e) => {
+    if ((e as KeyboardEvent).key === 'Escape') {
+      closeAll();
+      closeMobile();
     }
+  });
+
+  // Mobile menu
+  const burger = document.getElementById('wpb-burger');
+  const backdrop = document.getElementById('wpb-backdrop');
+
+  function closeMobile() {
+    if (!header) return;
+    header.dataset.mobile = 'false';
+    document.body.dataset.navOpen = 'false';
+    burger?.setAttribute('aria-expanded', 'false');
+    burger?.setAttribute('aria-label', 'Open menu');
+    document.body.style.overflow = '';
   }
 
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      positionMobileMenu();
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-      mobileMenuBackdrop?.classList.toggle('open');
+  burger?.addEventListener('click', () => {
+    if (!header) return;
+    const on = header.dataset.mobile !== 'true';
+    header.dataset.mobile = String(on);
+    document.body.dataset.navOpen = String(on);
+    burger.setAttribute('aria-expanded', String(on));
+    burger.setAttribute('aria-label', on ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = on ? 'hidden' : '';
+  });
+
+  backdrop?.addEventListener('click', closeMobile);
+
+  document.querySelectorAll('.wpb-acc .wpb-acc-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const acc = btn.parentElement as HTMLElement | null;
+      if (!acc) return;
+      const on = acc.dataset.open !== 'true';
+      acc.dataset.open = String(on);
+      btn.setAttribute('aria-expanded', String(on));
     });
+  });
 
-    window.addEventListener('resize', () => {
-      if (mobileMenu.classList.contains('open')) positionMobileMenu();
-    });
+  // Close the mobile menu when a real link is tapped
+  document.querySelectorAll('.wpb-mobile a').forEach((link) => {
+    link.addEventListener('click', closeMobile);
+  });
 
-    // Close the menu when a real navigation link is tapped, but NOT when the
-    // Services accordion toggle is tapped (that just expands sub-items).
-    document.querySelectorAll('.mobile-menu a, .nav-links a').forEach((link) => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-
-    mobileMenuBackdrop?.addEventListener('click', closeMobileMenu);
-  }
-
-  // Mobile Services accordion: tap to expand/collapse.
-  if (servicesToggle && servicesAccordion) {
-    servicesToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = servicesAccordion.classList.toggle('open');
-      servicesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  }
-
-  // Smooth scroll for on-page anchor links from the homepage
+  // Smooth scroll for homepage anchors, and close whichever menu is open
   document.querySelectorAll('a[href^="/#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
+      closeAll();
+      closeMobile();
       if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-        e.preventDefault();
         const href = link.getAttribute('href');
         if (!href) return;
         const target = document.querySelector(href.replace('/', ''));
         if (target) {
+          e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth' });
         }
       }
