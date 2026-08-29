@@ -23,10 +23,13 @@ const resources = [
   { label: 'Free site audit', href: '/#contact' },
 ];
 
+// One link, since there is one location page. The rest are plain text so the
+// footer is not repeating the same href under three different labels.
 const areas = [
   { label: 'Northern Ireland', href: '/northern-ireland/' },
-  { label: 'Belfast', href: '/northern-ireland/' },
-  { label: 'Newtownabbey', href: '/newtownabbey/' },
+  { label: 'Belfast' },
+  { label: 'Newtownabbey' },
+  { label: 'Antrim & Ballyclare' },
 ];
 ---
 <footer class="site-footer">
@@ -83,7 +86,11 @@ const areas = [
           <p class="footer-heading">Areas served</p>
           <ul>
             {areas.map((item) => (
-              <li><a href={item.href}>{item.label}</a></li>
+              <li>
+                {item.href
+                  ? <a href={item.href}>{item.label}</a>
+                  : <span class="footer-plain">{item.label}</span>}
+              </li>
             ))}
           </ul>
         </div>
