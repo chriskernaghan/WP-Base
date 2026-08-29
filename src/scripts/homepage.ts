@@ -1,35 +1,5 @@
 // homepage-scripts.ts — runs only on the homepage.
-// Two self-contained IIFEs: the marquee scroll, and the hero terminal feed.
-// Ported from the original index.html with minimal changes.
-
-// ============ MARQUEE ============
-(function() {
-  const strip = document.querySelector<HTMLElement>('.marquee-strip');
-  const track = document.querySelector<HTMLElement>('.marquee-track');
-  if (!strip || !track) return;
-
-  track.style.animation = 'none';
-
-  let pos = 0;
-  let speed = 1;
-  let target = 1;
-  const baseRate = 60;
-
-  function tick() {
-    if (!track) return;
-    speed += (target - speed) * 0.03;
-    pos -= speed * (baseRate / 60);
-    const half = track.scrollWidth / 2;
-    if (Math.abs(pos) >= half) pos += half;
-    track.style.transform = 'translateX(' + pos + 'px)';
-    requestAnimationFrame(tick);
-  }
-
-  strip.addEventListener('mouseenter', () => { target = 0; });
-  strip.addEventListener('mouseleave', () => { target = 1; });
-
-  requestAnimationFrame(tick);
-})();
+// Hero terminal feed. The testimonial rotator lives inside Marquee.astro.
 
 // ============ HERO TERMINAL FEED ============
 (function() {
