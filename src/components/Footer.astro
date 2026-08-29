@@ -4,9 +4,23 @@ const year = new Date().getFullYear();
 
 const services = [
   { label: 'WordPress Maintenance', href: '/wordpress-maintenance' },
-  { label: 'WordPress Hosting', href: '/hosting' },
+  { label: 'Web Design', href: '/web-design' },
   { label: 'Website Speed', href: '/website-speed' },
+  { label: 'WordPress Hosting', href: '/hosting' },
   { label: 'Care Plans & Pricing', href: '/#pricing' },
+];
+
+const work = [
+  { label: 'Catagen', href: '/case-studies/catagen' },
+  { label: 'ExportExplore', href: '/case-studies/exportexplore' },
+  { label: 'Inclusion IQ', href: '/case-studies/inclusion-iq' },
+  { label: 'All clients', href: '/#clients' },
+];
+
+const resources = [
+  { label: 'Blog', href: '/blog' },
+  { label: 'Common questions', href: '/#faq' },
+  { label: 'Free site audit', href: '/#contact' },
 ];
 
 const areas = [
@@ -19,7 +33,7 @@ const areas = [
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="footer-logo">WP Base</span>
+        <a href="/" class="footer-logo">WP Base</a>
         <p class="footer-pitch">
           Expert WordPress maintenance for small businesses across Northern Ireland
           and the UK. One person who does the work, looking after your site so you
@@ -29,11 +43,17 @@ const areas = [
           Get Your Free Audit
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
         </a>
+
+        <ul class="footer-contact">
+          <li><a href="mailto:hello@wpbase.co.uk">hello@wpbase.co.uk</a></li>
+          <li><a href="tel:+447379334695">+44 7379 334695</a></li>
+          <li><span class="footer-plain">Newtownabbey, Northern Ireland</span></li>
+        </ul>
       </div>
 
       <div class="footer-links" role="navigation" aria-label="Footer">
         <div class="footer-col">
-          <h2 class="footer-heading">Services</h2>
+          <p class="footer-heading">Services</p>
           <ul>
             {services.map((item) => (
               <li><a href={item.href}>{item.label}</a></li>
@@ -42,20 +62,29 @@ const areas = [
         </div>
 
         <div class="footer-col">
-          <h2 class="footer-heading">Areas served</h2>
+          <p class="footer-heading">Our work</p>
           <ul>
-            {areas.map((item) => (
+            {work.map((item) => (
               <li><a href={item.href}>{item.label}</a></li>
             ))}
           </ul>
         </div>
 
         <div class="footer-col">
-          <h2 class="footer-heading">Get in touch</h2>
+          <p class="footer-heading">Resources</p>
           <ul>
-            <li><a href="mailto:hello@wpbase.co.uk">hello@wpbase.co.uk</a></li>
-            <li><a href="tel:+447379334695">+44 7379 334695</a></li>
-            <li><span class="footer-plain">Newtownabbey, Northern Ireland</span></li>
+            {resources.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-heading">Areas served</p>
+          <ul>
+            {areas.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
           </ul>
         </div>
       </div>
@@ -92,13 +121,15 @@ const areas = [
 
   .footer-top {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
     gap: 3rem;
     padding-bottom: 3rem;
   }
 
   .footer-logo {
     display: block;
+    color: var(--snow);
+    text-decoration: none;
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 1.35rem;
@@ -130,10 +161,35 @@ const areas = [
     transform: translateY(-2px);
   }
 
+  .footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 1.6rem 0 0;
+  }
+  .footer-contact li {
+    margin-bottom: 0.55rem;
+  }
+  .footer-contact a,
+  .footer-contact .footer-plain {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.95rem;
+    color: var(--snow);
+    text-decoration: none;
+    opacity: 0.78;
+    transition: opacity 0.15s ease, color 0.15s ease;
+  }
+  .footer-contact a:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
+  .footer-contact .footer-plain {
+    opacity: 0.55;
+  }
+
   .footer-links {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
   }
   .footer-heading {
     font-family: 'Space Grotesk', sans-serif;
@@ -218,10 +274,17 @@ const areas = [
     border-radius: 3px;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1100px) {
     .footer-top {
       grid-template-columns: 1fr;
       gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .footer-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 1.5rem;
     }
   }
 
