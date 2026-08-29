@@ -1,7 +1,13 @@
 ---
 // Marquee.astro — testimonial strip between hero and clients.
-// The duplicate set of items is intentional, it's what makes the loop seamless.
-// Quotes pulled into a const so edits stay simple.
+// No longer a scrolling marquee. One quote at a time, crossfading, with arrows
+// and dots so a visitor can move at their own pace. Auto-advance pauses on
+// hover, on keyboard focus, when the tab is hidden, and is skipped entirely for
+// anyone with reduced motion turned on.
+//
+// Class names are prefixed tr- so nothing collides with the old .marquee-*
+// rules still sitting in global.css. Those are now dead and can be stripped
+// out in a later tidy-up.
 
 const quotes = [
   { quote: 'Couldn\'t recommend Chris enough, our site hasn\'t gone down once.', client: 'Catagen', href: '/case-studies/catagen', external: false },
@@ -9,25 +15,269 @@ const quotes = [
   { quote: 'We used to dread WordPress updates. Now we don\'t even think about them.', client: 'InclusionIQ', href: 'https://inclusioniq.co.uk', external: true },
   { quote: 'Fast, honest, and easy to work with. Exactly what we needed.', client: 'ClimaTech Green Flight', href: '#clients', external: false },
 ];
-
-// Duplicate the array for the seamless scroll loop.
-const items = [...quotes, ...quotes];
 ---
 
-<div class="marquee-strip">
-  <div class="marquee-track">
-    {items.map((item, i) => (
-      <>
-        <a
-          href={item.href}
-          class="marquee-item"
-          target={item.external ? '_blank' : undefined}
-          rel={item.external ? 'noopener' : undefined}
-        >
-          "{item.quote}" <strong>, {item.client}</strong>
-        </a>
-        <span class="marquee-sep">·</span>
-      </>
+<section class="tr-strip" aria-label="Client testimonials">
+  <div class="tr-inner">
+    <button type="button" class="tr-arrow" data-tr-prev aria-label="Previous testimonial">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="14 5 7 12 14 19" /></svg>
+    </button>
+
+    <div class="tr-viewport">
+      {quotes.map((item, i) => (
+        <figure class="tr-slide" data-tr-slide={i} data-active={i === 0 ? 'true' : 'false'}>
+          <blockquote class="tr-quote">
+            &ldquo;{item.quote}&rdquo;
+            <a
+              class="tr-client"
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener' : undefined}
+              tabindex={i === 0 ? undefined : '-1'}
+            >{item.client}</a>
+          </blockquote>
+        </figure>
+      ))}
+    </div>
+
+    <button type="button" class="tr-arrow" data-tr-next aria-label="Next testimonial">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="10 5 17 12 10 19" /></svg>
+    </button>
+  </div>
+
+  <div class="tr-dots" role="tablist" aria-label="Choose a testimonial">
+    {quotes.map((item, i) => (
+      <button
+        type="button"
+        class="tr-dot"
+        role="tab"
+        data-tr-dot={i}
+        data-active={i === 0 ? 'true' : 'false'}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-label={`Testimonial from ${item.client}`}
+      ></button>
     ))}
   </div>
-</div>
+</section>
+
+<style>
+  .tr-strip {
+    background: var(--midnight);
+    padding: 1.5rem 1.5rem 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .tr-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  /* All slides occupy the same grid cell, so the strip sizes itself to the
+     tallest quote and never jumps height as it rotates. */
+  .tr-viewport {
+    display: grid;
+    flex: 1;
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .tr-slide {
+    grid-area: 1 / 1;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+  }
+  .tr-slide[data-active='true'] {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .tr-quote {
+    margin: 0;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    color: rgba(245, 241, 232, 0.78);
+  }
+
+  .tr-client {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 0.45rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  .tr-client:hover {
+    border-bottom-color: var(--accent);
+  }
+  .tr-client:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .tr-arrow {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(245, 241, 232, 0.7);
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .tr-arrow:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .tr-arrow:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .tr-arrow svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .tr-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+  .tr-dot {
+    width: 18px;
+    height: 3px;
+    padding: 0;
+    border: 0;
+    background: rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .tr-dot[data-active='true'] {
+    background: var(--accent);
+  }
+  .tr-dot:hover {
+    background: rgba(212, 255, 58, 0.55);
+  }
+  .tr-dot:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 620px) {
+    .tr-strip {
+      padding: 1.25rem 1rem 1rem;
+    }
+    .tr-inner {
+      gap: 0.75rem;
+    }
+    .tr-quote {
+      font-size: 0.9rem;
+    }
+    .tr-arrow {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tr-slide {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const strip = document.querySelector<HTMLElement>('.tr-strip');
+    if (!strip) return;
+
+    const slides = Array.from(strip.querySelectorAll<HTMLElement>('[data-tr-slide]'));
+    const dots = Array.from(strip.querySelectorAll<HTMLElement>('[data-tr-dot]'));
+    const prev = strip.querySelector<HTMLButtonElement>('[data-tr-prev]');
+    const next = strip.querySelector<HTMLButtonElement>('[data-tr-next]');
+    if (slides.length < 2) return;
+
+    const INTERVAL = 7000;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let current = 0;
+    let timer: number | undefined;
+    let paused = false;
+
+    function show(index: number) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const on = i === current;
+        slide.dataset.active = String(on);
+        // Keep offscreen quotes out of the tab order.
+        slide.querySelector('a')?.setAttribute('tabindex', on ? '0' : '-1');
+      });
+      dots.forEach((dot, i) => {
+        const on = i === current;
+        dot.dataset.active = String(on);
+        dot.setAttribute('aria-selected', String(on));
+      });
+    }
+
+    function stop() {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    }
+
+    function start() {
+      if (reduced || paused) return;
+      stop();
+      timer = window.setInterval(() => show(current + 1), INTERVAL);
+    }
+
+    function step(delta: number) {
+      show(current + delta);
+      start();
+    }
+
+    prev?.addEventListener('click', () => step(-1));
+    next?.addEventListener('click', () => step(1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); start(); }));
+
+    // Pause while someone is reading or interacting.
+    strip.addEventListener('mouseenter', () => { paused = true; stop(); });
+    strip.addEventListener('mouseleave', () => { paused = false; start(); });
+    strip.addEventListener('focusin', () => { paused = true; stop(); });
+    strip.addEventListener('focusout', (e) => {
+      const nextEl = (e as FocusEvent).relatedTarget as Node | null;
+      if (!nextEl || !strip.contains(nextEl)) { paused = false; start(); }
+    });
+
+    // Do not rotate in a background tab.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    // Arrow keys when focus is inside the strip.
+    strip.addEventListener('keydown', (e) => {
+      const key = (e as KeyboardEvent).key;
+      if (key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+      if (key === 'ArrowRight') { e.preventDefault(); step(1); }
+    });
+
+    start();
+  })();
+</script>
