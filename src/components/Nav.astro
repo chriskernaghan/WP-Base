@@ -284,8 +284,28 @@ const ICONS = {
 }
 
 .wpb-header * { box-sizing: border-box; }
-.wpb-header a { text-decoration: none; color: inherit; }
-.wpb-header button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.wpb-header a { text-decoration: none; }
+.wpb-header button { font: inherit; background: none; border: 0; cursor: pointer; }
+
+/* Text colour is always stated explicitly and never inherited. `color: inherit`
+   on the reset above used to outrank the component's own rules, which turned the
+   dropdown triggers grey and dragged white text onto the accent buttons. */
+.wpb-header .wpb-brand,
+.wpb-header .wpb-trigger,
+.wpb-header .wpb-link-title,
+.wpb-header .wpb-list-link,
+.wpb-header .wpb-acc-trigger,
+.wpb-header .wpb-foot-links a { color: var(--midnight); }
+
+.wpb-header .wpb-link-desc,
+.wpb-header .wpb-col-title,
+.wpb-header .wpb-foot-label,
+.wpb-header .wpb-foot-meta { color: var(--wpb-grey); }
+
+/* Anything sitting on the accent takes dark text. No exceptions. */
+.wpb-header .wpb-cta,
+.wpb-header .wpb-feature-cta,
+.wpb-header .wpb-mobile-cta { color: var(--accent-text); }
 
 .wpb-header {
     position: fixed;
@@ -357,7 +377,7 @@ const ICONS = {
     letter-spacing: -0.01em;
     transition: background 0.18s ease, color 0.18s ease;
 }
-.wpb-cta:hover { background: var(--midnight); color: var(--accent); }
+.wpb-header .wpb-cta:hover { background: var(--midnight); color: var(--accent); }
 
 /* ---------- panel ---------- */
 .wpb-mega {
@@ -533,7 +553,7 @@ const ICONS = {
     border: 1px solid var(--accent);
     transition: background 0.16s ease, color 0.16s ease;
 }
-.wpb-feature-cta:hover { background: transparent; color: var(--accent); }
+.wpb-header .wpb-feature-cta:hover { background: transparent; color: var(--accent); }
 .wpb-feature-cta svg {
     width: 14px;
     height: 14px;
