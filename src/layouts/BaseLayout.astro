@@ -80,7 +80,9 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
   </head>
   <body>
     <Nav />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <Footer />
     <WhatsAppWidget />
     <CookieBanner />
