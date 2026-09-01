@@ -71,11 +71,53 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <!-- Consent defaults must run before gtag.js loads -->
     <ConsentDefaults />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FY9Q040Q9P"></script>
+    <!-- Google tag (gtag.js)
+         The gtag() shim and the dataLayer come from ConsentDefaults above, so
+         the two calls below run immediately and queue in order. gtag.js itself
+         replays that queue when it eventually loads, which means the session
+         timestamp and the config are both recorded as of page load rather than
+         as of the moment the script arrives.
+
+         The script file is deferred until the page has finished loading and the
+         browser is idle, so its parse and execution cost sits outside the window
+         that blocks interaction. Trade-off worth knowing: a visitor who leaves
+         inside the first second or so will not be counted. -->
     <script is:inline>
       gtag('js', new Date());
       gtag('config', 'G-FY9Q040Q9P');
+
+      (function () {
+        var loaded = false;
+
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-FY9Q040Q9P';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+
+        function whenIdle() {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGtag, { timeout: 2000 });
+          } else {
+            window.setTimeout(loadGtag, 500);
+          }
+        }
+
+        if (document.readyState === 'complete') {
+          whenIdle();
+        } else {
+          window.addEventListener('load', whenIdle, { once: true });
+        }
+
+        // If someone interacts before the page has settled, load it then instead
+        // of waiting. Clicking a nav link is exactly the moment worth recording.
+        ['pointerdown', 'keydown'].forEach(function (evt) {
+          window.addEventListener(evt, loadGtag, { once: true, passive: true });
+        });
+      })();
     </script>
   </head>
   <body>
