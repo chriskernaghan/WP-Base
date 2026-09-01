@@ -1,5 +1,15 @@
 ---
 // Contact.astro — Fillout-embedded audit form.
+//
+// The Fillout embed script is roughly 2 MB of JavaScript. Loading it inline
+// meant every visitor downloaded and parsed all of it during page load, for a
+// form that sits at the very bottom of the page. On mobile that was costing
+// about two seconds of blocking time before the page would respond to a tap.
+//
+// The script now loads only when the section gets close to the viewport. The
+// 800px margin means it has started downloading well before anyone can see it,
+// so scrolling down still lands on a ready form. Nobody who never reaches the
+// bottom pays for it at all.
 ---
 
 <section id="contact" class="contact-section">
@@ -17,7 +27,49 @@
         data-fillout-inherit-parameters
         data-fillout-dynamic-resize
       ></div>
-      <script is:inline src="https://server.fillout.com/embed/v1/"></script>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    var host = document.querySelector('.fillout-wrapper');
+    if (!host) return;
+
+    var loaded = false;
+    var observer = null;
+
+    function load() {
+      if (loaded) return;
+      loaded = true;
+      if (observer) observer.disconnect();
+
+      var s = document.createElement('script');
+      s.src = 'https://server.fillout.com/embed/v1/';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) {
+              load();
+              return;
+            }
+          }
+        },
+        { rootMargin: '800px 0px' }
+      );
+      observer.observe(host);
+    } else {
+      // Old browser with no observer support: load it the moment the page is
+      // done with everything else, rather than not at all.
+      window.addEventListener('load', load);
+    }
+
+    // Anyone landing on /#contact is already at the form, so don't wait.
+    if (window.location.hash === '#contact') load();
+  })();
+</script>
