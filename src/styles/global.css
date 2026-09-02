@@ -43,9 +43,15 @@
     --accent-dim: #C2EE26;
     --accent-text: #08101C;
     --text-dark: #2d3142;
+    /* Light text for dark sections only. 8.13:1 on midnight, but 2.34:1 on
+       white, so it must never be used on a light background. Use --text-muted
+       there instead. */
     --text-light: #a8a8b8;
+    /* The light-background counterpart. Same cool grey character, dark enough
+       to clear WCAG AA on both white (5.34:1) and cream (4.73:1). */
+    --text-muted: #6A6A76;
     --snow: #ffffff;
-    --muted: #8a8680;
+    --muted: #6B6862;  /* warm grey, 5.55:1 on white, 4.93:1 on cream */
     --frame: 1200px;
     --reading: 800px;
     --border: rgba(8, 16, 28, 0.08);
@@ -1046,7 +1052,7 @@ footer a:hover {
 
 .hero-terminal-clock {
     font-size: 0.7rem;
-    color: rgba(245, 241, 232, 0.45);
+    color: rgba(245, 241, 232, 0.55);
     font-variant-numeric: tabular-nums;
     flex-shrink: 0;
 }
@@ -1100,7 +1106,7 @@ footer a:hover {
 
 .hero-terminal-time {
     font-size: 0.7rem;
-    color: rgba(245, 241, 232, 0.4);
+    color: rgba(245, 241, 232, 0.55);
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.02em;
 }
@@ -1140,7 +1146,7 @@ footer a:hover {
 }
 
 .hero-terminal-detail {
-    color: rgba(245, 241, 232, 0.45);
+    color: rgba(245, 241, 232, 0.55);
     font-size: 0.72rem;
 }
 
@@ -1553,7 +1559,7 @@ footer a:hover {
     font-family: "Space Grotesk", sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--text-light);
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -1585,7 +1591,7 @@ footer a:hover {
 
 .pricing-period {
     font-size: 0.9rem;
-    color: var(--text-light);
+    color: var(--text-muted);
     margin-bottom: 2rem;
 }
 
@@ -1929,7 +1935,7 @@ footer a:hover {
 
 .post-date {
     font-size: 0.83rem;
-    color: var(--text-light);
+    color: var(--text-muted);
 }
 
 .post-card h3 {
@@ -2291,7 +2297,7 @@ footer a:hover {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 0.85rem;
     margin-top: 1.25rem;
 }
@@ -2351,7 +2357,7 @@ footer a:hover {
 }
 
 .rail-item-meta {
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 0.8rem;
 }
 
@@ -2439,7 +2445,7 @@ footer a:hover {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 0.85rem;
     white-space: nowrap;
     margin-top: auto;
@@ -2506,7 +2512,7 @@ footer a:hover {
 }
 
 .post-header-date {
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
@@ -2557,7 +2563,7 @@ footer a:hover {
 }
 
 .post-byline-label {
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 0.85rem;
 }
 
@@ -2600,7 +2606,7 @@ footer a:hover {
 .post-body figcaption {
     margin-top: 0.8rem;
     font-size: 0.9rem;
-    color: var(--text-light);
+    color: var(--text-muted);
     text-align: center;
 }
 
@@ -4002,7 +4008,7 @@ footer a:hover {
   max-width: 64ch;
   font-size: 1.125rem;
   line-height: 1.6;
-  color: var(--text-light);
+  color: var(--text-muted);
 }
 
 /* Why Local section */
@@ -4027,7 +4033,7 @@ footer a:hover {
   margin: 0 0 3rem;
   font-size: 1.125rem;
   line-height: 1.7;
-  color: var(--text-light);
+  color: var(--text-muted);
 }
 
 .why-local-grid {
@@ -4104,7 +4110,7 @@ footer a:hover {
     font-family: "Space Grotesk", sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--text-light);
+    color: var(--text-muted);
     background: transparent;
     border: none;
     border-radius: 0;
@@ -4155,7 +4161,7 @@ footer a:hover {
     font-family: "Epilogue", sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--text-light);
+    color: var(--text-muted);
     letter-spacing: 0;
 }
 
@@ -4165,7 +4171,7 @@ footer a:hover {
 
 .pricing-billed {
     font-size: 0.8rem;
-    color: var(--text-light);
+    color: var(--text-muted);
     margin-bottom: 1.25rem;
     visibility: hidden;
 }
