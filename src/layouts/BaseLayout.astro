@@ -8,6 +8,12 @@ import ConsentDefaults from '../components/ConsentDefaults.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import '../styles/global.css';
 
+// Imported for the URL only. Vite hands back the fingerprinted path it wrote
+// into dist/_astro/, which is what the preload tags below point at. The
+// @font-face rules themselves live at the top of global.css.
+import epilogueWoff2 from '@fontsource-variable/epilogue/files/epilogue-latin-wght-normal.woff2?url';
+import spaceGroteskWoff2 from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+
 interface Props {
   title: string;
   description?: string;
@@ -51,20 +57,13 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;600;700&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;600;700&display=swap"
-      />
-    </noscript>
+    <!-- Fonts are self-hosted and same-origin, so there is nothing to preconnect
+         to. Preloading both files means the browser starts fetching them
+         alongside the stylesheet rather than waiting to discover them inside
+         it, which is the difference between text painting once and text
+         painting in a fallback and then reflowing. -->
+    <link rel="preload" href={spaceGroteskWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={epilogueWoff2} as="font" type="font/woff2" crossorigin />
 
     {schema && <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />}
 
