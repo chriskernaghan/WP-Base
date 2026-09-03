@@ -4011,19 +4011,48 @@ footer a:hover {
   color: var(--text-muted);
 }
 
-/* Why Local section */
+/* ==========================================================================
+   NORTHERN IRELAND PAGE — WHY LOCAL (dark band) + LOCAL WORK (rows)
+   ==========================================================================
+   WhyLocal and LocalWork used to share the .why-local-* classes, which meant
+   two identical three-up grids of cream cards stacked directly on top of each
+   other in the middle of the page. WhyLocal now sits on a dark band and
+   LocalWork has its own row layout, so the page alternates light and dark the
+   way the homepage does.
+
+   The headings in both sections were also inheriting Epilogue at browser
+   default sizing, because .why-local-section h2 only ever set margin and
+   max-width. They now match the Space Grotesk sizing used everywhere else. */
+
 .why-local-section {
-  padding: 6rem 0;
-  background: var(--snow);
+  padding: 7rem 0;
+  background: var(--midnight);
+  position: relative;
+  overflow: hidden;
 }
 
 .why-local-inner {
-  max-width: 1200px;
+  max-width: var(--frame);
   margin: 0 auto;
   padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* The section label defaults to midnight, which is invisible here. Scoped
+   rather than adding section-label--light to the markup so the component
+   file does not need to change. */
+.why-local-section .section-label {
+  color: var(--accent);
 }
 
 .why-local-section h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   margin: 0.5rem 0 1.25rem;
   max-width: 20ch;
 }
@@ -4033,7 +4062,7 @@ footer a:hover {
   margin: 0 0 3rem;
   font-size: 1.125rem;
   line-height: 1.7;
-  color: var(--text-muted);
+  color: var(--text-light);
 }
 
 .why-local-grid {
@@ -4043,15 +4072,17 @@ footer a:hover {
 }
 
 .why-local-card {
-  padding: 2rem;
-  background: var(--cream);
+  padding: 2.25rem 2rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .why-local-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(212, 255, 58, 0.45);
 }
 
 /* Icon badge */
@@ -4073,14 +4104,128 @@ footer a:hover {
 }
 
 .why-local-card h3 {
-  margin: 0 0 0.75rem;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--snow);
+  margin: 0 0 0.75rem;
 }
 
 .why-local-card p {
   margin: 0;
   line-height: 1.65;
+  color: var(--text-light);
+}
+
+/* Local work rows */
+.local-jobs {
+  padding: 6rem 0 7rem;
+  background: var(--snow);
+}
+
+.local-jobs-inner {
+  max-width: var(--frame);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.local-jobs h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--midnight);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0.5rem 0 1.25rem;
+  max-width: 20ch;
+}
+
+.local-jobs-lead {
+  max-width: 60ch;
+  margin: 0 0 3rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.local-jobs-list {
+  max-width: 900px;
+}
+
+.local-job {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0 2rem;
+  align-items: start;
+  padding: 2.25rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.3s ease;
+}
+
+.local-job:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.local-job:hover {
+  padding-left: 1rem;
+}
+
+.local-job-num {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--midnight);
+  opacity: 0.5;
+  padding-top: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.local-job:hover .local-job-num {
+  opacity: 1;
+}
+
+.local-job-text h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--midnight);
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+
+.local-job-text p {
+  margin: 0;
+  max-width: 62ch;
+  line-height: 1.65;
   color: var(--text-dark);
+}
+
+.local-job-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+  padding-bottom: 3px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--midnight);
+  border-bottom: 2px solid var(--accent);
+}
+
+.local-job-link svg {
+  transition: transform 0.25s ease;
+}
+
+.local-job:hover .local-job-link svg {
+  transform: translateX(3px);
 }
 
 @media (max-width: 768px) {
@@ -4089,6 +4234,30 @@ footer a:hover {
   }
   .why-local-section {
     padding: 4rem 0;
+  }
+  .why-local-section h2,
+  .local-jobs h2 {
+    font-size: 2rem;
+  }
+  .local-jobs {
+    padding: 4rem 0 4.5rem;
+  }
+  .local-job {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 1.75rem 0;
+  }
+  .local-job:hover {
+    padding-left: 0;
+  }
+  .local-job-num {
+    display: block;
+    padding-top: 0;
+    margin-bottom: 0.6rem;
+    opacity: 1;
+  }
+  .local-job-text h3 {
+    font-size: 1.25rem;
   }
 }
 
