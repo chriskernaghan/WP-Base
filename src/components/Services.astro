@@ -1,11 +1,23 @@
 ---
 // Services.astro — list of services with from-prices.
+//
+// Every row used to point at #pricing, which meant four service names sitting
+// on the homepage with no route through to the pages that actually describe
+// them. Each row now links to its own service page, so the on-page links match
+// the hasOfferCatalog entries already declared in the homepage schema.
+//
+// Platform migrations has no page of its own, so it points at the Catagen case
+// study, which is a real Squarespace to WordPress migration and a stronger
+// destination than a pricing anchor. Analytics has no page either, so it goes
+// to the audit form.
 
 const services = [
-  { num: '01', name: 'Maintenance Retainers', from: 'From £99/mo' },
-  { num: '02', name: 'Custom WordPress Builds', from: 'From £1,500' },
-  { num: '03', name: 'Platform Migrations', from: 'Get a quote' },
-  { num: '04', name: 'Analytics & Tracking Setup', from: 'From £350' },
+  { num: '01', name: 'Maintenance Retainers', from: 'From £99/mo', href: '/wordpress-maintenance/' },
+  { num: '02', name: 'Custom WordPress Builds', from: 'From £1,500', href: '/web-design/' },
+  { num: '03', name: 'Speed & Performance', from: 'Get a quote', href: '/website-speed/' },
+  { num: '04', name: 'Managed Hosting', from: 'From £99/mo', href: '/hosting/' },
+  { num: '05', name: 'Platform Migrations', from: 'Get a quote', href: '/case-studies/catagen/' },
+  { num: '06', name: 'Analytics & Tracking Setup', from: 'From £350', href: '#contact' },
 ];
 ---
 
@@ -19,7 +31,7 @@ const services = [
     </div>
     <div class="services-rows">
       {services.map((service) => (
-        <a class="service-row" href="#pricing">
+        <a class="service-row" href={service.href}>
           <div class="service-row-left">
             <span class="service-row-num">{service.num}</span>
             <span class="service-row-name">{service.name}</span>
