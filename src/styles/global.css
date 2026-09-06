@@ -4392,7 +4392,10 @@ footer a:hover {
 
 .hero-v2.hero-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* Left panel runs a little past half. It matches the reference more
+       closely, and it keeps the nav group clear of the seam at laptop widths
+       where the four menu items are at their widest relative to the viewport. */
+    grid-template-columns: 1.12fr 1fr;
     align-items: stretch;
     padding: 0;
     background: var(--snow);
