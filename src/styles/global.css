@@ -4373,3 +4373,177 @@ footer a:hover {
         white-space: normal;
     }
 }
+
+/* ==========================================================================
+   HOMEPAGE — SPLIT HERO
+   Full-bleed two-column hero. The left column is a dark panel carrying the
+   copy, the right is a cream panel holding the terminal card.
+
+   Everything here is scoped to .hero-split, so the older .hero-v2 rules
+   further up the file stay where they are but no longer take effect on the
+   homepage. The .hero-v2.hero-split selector also outweighs the plain
+   .hero-v2 padding set in the responsive blocks above, which is why the
+   section padding does not need resetting at every breakpoint.
+
+   The left column's padding-left uses max() so the headline lines up with the
+   1200px frame the rest of the page sits on, falling back to a 4rem gutter on
+   viewports narrower than the frame.
+   ========================================================================== */
+
+.hero-v2.hero-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    padding: 0;
+    background: var(--snow);
+}
+
+.hero-split-left {
+    display: flex;
+    align-items: center;
+    background: var(--midnight);
+    padding: 9rem 3.5rem 7rem max(4rem, calc((100vw - var(--frame)) / 2));
+}
+
+.hero-split-content {
+    width: 100%;
+    max-width: 560px;
+}
+
+.hero-split-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    padding: 9rem 4rem 7rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-split-right::before {
+    content: "";
+    position: absolute;
+    top: -25%;
+    right: -15%;
+    width: 75%;
+    height: 130%;
+    background: radial-gradient(circle, rgba(212, 255, 58, 0.22) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.hero-split .hero-terminal {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 460px;
+}
+
+/* --------------------------------------------------------------------------
+   Type and controls on the dark panel
+   -------------------------------------------------------------------------- */
+
+.hero-split .hero-v2-headline {
+    color: var(--cream);
+}
+
+/* Highlighter treatment dropped in favour of accent-coloured text */
+.hero-split .hero-v2-headline .accent {
+    color: var(--accent);
+    background: none;
+    padding: 0;
+}
+
+.hero-split .hero-v2-left .hero-v2-desc {
+    color: var(--text-light);
+    max-width: 46ch;
+}
+
+.hero-split .hero-v2-rating {
+    background: rgba(212, 255, 58, 0.1);
+    border-color: rgba(212, 255, 58, 0.32);
+    color: var(--cream);
+}
+
+.hero-split .hero-v2-rating:hover {
+    background: rgba(212, 255, 58, 0.18);
+    border-color: rgba(212, 255, 58, 0.6);
+}
+
+.hero-split .hero-v2-rating-text,
+.hero-split .hero-v2-rating-text strong {
+    color: var(--cream);
+}
+
+.hero-split .hero-v2-cta-secondary {
+    color: var(--cream);
+}
+
+.hero-split .hero-v2-cta-secondary::after {
+    background: var(--cream);
+}
+
+/* Kept ready for the stats list if it comes back out of the comment */
+.hero-split .hero-v2-stats li {
+    color: var(--text-light);
+}
+
+.hero-split .hero-v2-stats li strong {
+    color: var(--cream);
+}
+
+.hero-split .hero-v2-tag {
+    color: var(--accent);
+}
+
+.hero-split .hero-v2-tag::before {
+    background: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+    .hero-v2.hero-split {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-split-left {
+        padding: 8rem 2.5rem 3.5rem;
+    }
+
+    .hero-split-right {
+        padding: 3.5rem 2.5rem 4.5rem;
+    }
+
+    .hero-split .hero-terminal {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-split-left {
+        padding: 7rem 1.25rem 3rem;
+    }
+
+    /* The terminal is already hidden at this width, so the panel would
+       otherwise be an empty cream band. */
+    .hero-split-right {
+        display: none;
+    }
+
+    .hero-split .hero-v2-headline {
+        font-size: 2.4rem;
+        line-height: 1.12;
+    }
+
+    .hero-split .hero-v2-headline .accent {
+        padding: 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-split .hero-v2-headline {
+        font-size: 2rem;
+    }
+}
