@@ -127,5 +127,109 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <Footer />
     <WhatsAppWidget />
     <CookieBanner />
+
+    <!-- Scroll reveal.
+
+         Inline and at the foot of the body on purpose. It marks its targets in
+         the same parse as the markup they sit in, so those blocks are hidden
+         before the first paint. A bundled module script would run after the
+         document had already been painted, which shows the page once and then
+         hides half of it.
+
+         Nothing is hidden until this runs. If it never runs, or the browser
+         has no IntersectionObserver, or the visitor asks for reduced motion,
+         every page renders as ordinary static markup.
+
+         Targets are worked out from the markup rather than listed by class, so
+         pages built later pick the effect up without anything being wired in.
+         For each top-level block in <main> it takes the block's content
+         children, and where one of those is a known card grid it takes the
+         cards instead so they arrive one after another. Blocks that already
+         run an entrance animation of their own, the homepage hero and the case
+         study and blog headers among them, are left alone. -->
+    <script is:inline>
+      (function () {
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        var main = document.querySelector('main');
+        if (!main) return;
+
+        /* Grids whose children come in one after another. */
+        var STAGGER = '.clients-grid-v2, .process-steps-v2, .pricing-grid, .posts-grid, .posts-list, .services-rows, .faq-list, .outcome-grid, .why-local-grid, .local-jobs-list, .timeline-items, .design-grid, .blog-featured, .case-meta';
+        /* Long-form prose stays put. Paragraphs sliding around while someone
+           is reading them is not the effect we are after. */
+        var SKIP = '.post-body';
+        var MAX_GROUP = 8;
+        var MAX_CARDS = 12;
+        var STEP = 60;
+        /* Tags that hold no layout. The Fillout embed and the consent scripts
+           sit inside content wrappers and would otherwise be counted. */
+        var IGNORE = { SCRIPT: 1, STYLE: 1, TEMPLATE: 1, NOSCRIPT: 1, LINK: 1, META: 1, BR: 1 };
+        var targets = [];
+
+        function usable(el) {
+          return el && el.nodeType === 1 && !IGNORE[el.tagName];
+        }
+
+        function animating(el) {
+          try { return el.getAnimations({ subtree: true }).length > 0; }
+          catch (e) { return false; }
+        }
+
+        function mark(el, i) {
+          if (!usable(el)) return;
+          el.setAttribute('data-reveal', '');
+          if (i > 0) el.style.setProperty('--reveal-delay', Math.min(i, 5) * STEP + 'ms');
+          targets.push(el);
+        }
+
+        function collect(block) {
+          if (!usable(block) || block.matches(SKIP) || animating(block)) return;
+
+          /* Walk past plain single-child wrappers so the stagger lands on the
+             content rather than on one container holding everything. */
+          var scope = block;
+          var depth = 0;
+          while (scope.children.length === 1 && depth < 3 && !scope.firstElementChild.matches(STAGGER)) {
+            scope = scope.firstElementChild;
+            depth++;
+          }
+
+          var kids = Array.prototype.slice.call(scope.children);
+          if (!kids.length || kids.length > MAX_GROUP) {
+            mark(block, 0);
+            return;
+          }
+
+          var n = 0;
+          kids.forEach(function (kid) {
+            if (!usable(kid) || kid.matches(SKIP) || animating(kid)) return;
+            if (kid.matches(STAGGER)) {
+              var cards = Array.prototype.slice.call(kid.children);
+              if (!cards.length || cards.length > MAX_CARDS) { mark(kid, n++); return; }
+              cards.forEach(function (card, i) { mark(card, i); });
+            } else {
+              mark(kid, n++);
+            }
+          });
+        }
+
+        Array.prototype.forEach.call(main.children, collect);
+        if (!targets.length) return;
+
+        document.documentElement.classList.add('has-reveal');
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.setAttribute('data-reveal', 'in');
+            io.unobserve(entry.target);
+          });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+
+        targets.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
 </html>
