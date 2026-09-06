@@ -4550,3 +4550,39 @@ footer a:hover {
         font-size: 2rem;
     }
 }
+
+/* ==========================================================================
+   SCROLL REVEAL
+   Site-wide fade-up, applied by the inline script at the foot of BaseLayout.
+   Nothing is hidden until that script has marked its targets, so a page with
+   the script blocked or broken renders as plain static markup.
+
+   Movement uses the independent `translate` property rather than `transform`.
+   Several blocks already carry a transform of their own, the case study
+   breakout furniture in particular (margin-left:50% plus translateX(-50%)),
+   and a transform declared here would overwrite that and throw them half a
+   column to the right. `translate` composes with an existing transform
+   instead of replacing it.
+   ========================================================================== */
+
+.has-reveal [data-reveal] {
+    opacity: 0;
+    translate: 0 22px;
+}
+
+.has-reveal [data-reveal="in"] {
+    opacity: 1;
+    translate: none;
+    transition: opacity 0.55s ease, translate 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* The script bails out under reduced motion, so this only catches a visitor
+   who changes the setting on an already-marked page. */
+@media (prefers-reduced-motion: reduce) {
+    .has-reveal [data-reveal] {
+        opacity: 1;
+        translate: none;
+        transition: none;
+    }
+}
