@@ -296,12 +296,17 @@ const ICONS = {
 /* Text colour is always stated explicitly and never inherited. `color: inherit`
    on the reset above used to outrank the component's own rules, which turned the
    dropdown triggers grey and dragged white text onto the accent buttons. */
-.wpb-header .wpb-brand,
-.wpb-header .wpb-trigger,
 .wpb-header .wpb-link-title,
 .wpb-header .wpb-list-link,
 .wpb-header .wpb-acc-trigger,
 .wpb-header .wpb-foot-links a { color: var(--midnight); }
+
+/* The brand and the top-level triggers follow the bar's own ink colour, which
+   flips to cream while the header is sitting clear over the dark hero panel.
+   Everything inside the mega panel keeps its own colours, because the panel
+   always has a solid background of its own. */
+.wpb-header .wpb-brand,
+.wpb-header .wpb-trigger { color: var(--hdr-ink); }
 
 .wpb-header .wpb-link-desc,
 .wpb-header .wpb-col-title,
@@ -314,13 +319,32 @@ const ICONS = {
 .wpb-header .wpb-mobile-cta { color: var(--accent-text); }
 
 .wpb-header {
+    --hdr-bg: var(--snow);
+    --hdr-line: var(--wpb-line);
+    --hdr-ink: var(--midnight);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    background: var(--snow);
-    border-bottom: 1px solid var(--wpb-line);
+    background: var(--hdr-bg);
+    border-bottom: 1px solid var(--hdr-line);
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+/* Clear header over the split homepage hero.
+
+   Scoped with :has(.hero-split) so no other page is affected, and switched off
+   again in the three cases where cream text would land on a light background:
+   once the page has scrolled away from the hero, while a mega panel is open,
+   and while the mobile menu is open. Written as a :not() chain rather than a
+   JS-applied class so the correct state paints on the first frame. The
+   data-scrolled attribute is the only part JS touches, and its absence means
+   "at the top", so there is no flash of the solid bar on load. */
+body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="true"]):not(:has(.wpb-item[data-open="true"])) {
+    --hdr-bg: transparent;
+    --hdr-line: transparent;
+    --hdr-ink: var(--cream);
 }
 
 .wpb-bar {
@@ -330,7 +354,7 @@ const ICONS = {
     height: var(--wpb-header-h);
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .wpb-brand {
@@ -338,10 +362,10 @@ const ICONS = {
     font-weight: 700;
     font-size: 1.45rem;
     letter-spacing: -0.02em;
-    color: var(--midnight);
+    color: var(--hdr-ink);
 }
 
-.wpb-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.wpb-nav { display: flex; align-items: center; gap: 2px; margin-left: 0; margin-right: auto; }
 .wpb-item { position: static; }
 
 .wpb-trigger {
@@ -349,18 +373,18 @@ const ICONS = {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding: 0 15px;
+    padding: 0 12px;
     height: var(--wpb-header-h);
     font-size: 0.97rem;
     font-weight: 500;
     letter-spacing: -0.01em;
-    color: var(--midnight);
+    color: var(--hdr-ink);
 }
 .wpb-trigger::after {
     content: "";
     position: absolute;
-    left: 15px;
-    right: 15px;
+    left: 12px;
+    right: 12px;
     bottom: -1px;
     height: 2px;
     background: var(--accent);
@@ -373,7 +397,7 @@ const ICONS = {
 .wpb-item[data-open="true"] .wpb-chev { transform: rotate(180deg); }
 
 .wpb-cta {
-    margin-left: 0.9rem;
+    margin-left: auto;
     padding: 0.8rem 1.4rem;
     background: var(--accent);
     color: var(--accent-text);
@@ -615,7 +639,7 @@ const ICONS = {
 
 /* ---------- mobile ---------- */
 .wpb-burger { display: none; width: 44px; height: 44px; margin-left: auto; place-items: center; }
-.wpb-burger span { display: block; width: 22px; height: 2px; background: var(--midnight); position: relative; }
+.wpb-burger span { display: block; width: 22px; height: 2px; background: var(--hdr-ink); position: relative; }
 .wpb-burger span::before,
 .wpb-burger span::after {
     content: "";
@@ -623,7 +647,7 @@ const ICONS = {
     left: 0;
     width: 22px;
     height: 2px;
-    background: var(--midnight);
+    background: var(--hdr-ink);
     transition: transform 0.2s ease, top 0.2s ease;
 }
 .wpb-burger span::before { top: -7px; }
@@ -689,7 +713,7 @@ body[data-nav-open="true"] .wpb-backdrop { display: block; }
     .wpb-feature { display: none; }
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1260px) {
     .wpb-bar { padding: 0 2rem; gap: 1.5rem; }
     .wpb-mega-inner { padding: 1.8rem 2rem 2rem; }
     .wpb-foot-inner { padding: 0 2rem; gap: 1.25rem; }
@@ -750,6 +774,14 @@ body[data-nav-open="true"] .wpb-backdrop { display: block; }
       if (!next || !header.contains(next)) closeAll();
     });
   }
+
+  // Only ever switches the clear header off. Absence of the attribute means
+  // "at the top of the page", which is what the CSS above assumes on load.
+  const syncScrolled = () => {
+    if (header) header.dataset.scrolled = String(window.scrollY > 24);
+  };
+  syncScrolled();
+  window.addEventListener('scroll', syncScrolled, { passive: true });
 
   document.addEventListener('keydown', (e) => {
     if ((e as KeyboardEvent).key === 'Escape') {
