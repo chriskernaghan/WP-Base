@@ -2,7 +2,7 @@
 // src/pages/blog.astro
 // Blog index, auto-generated from the posts content collection.
 // Add a new .mdx file to src/content/posts/ and it shows up here, sorted by date.
-// Layout: newest post = featured lead (page h1), next four = "Latest" rail, rest = grid.
+// Layout: newest post = featured lead (page h1), next five = "Latest" rail, rest = grid.
 // When a tag filter is active the featured/rail collapse and the grid shows every
 // matching post instead.
 
@@ -17,10 +17,13 @@ const sortedPosts = posts.sort(
 
 const allTags = ['all', ...new Set(sortedPosts.map((p) => p.data.tag))];
 
-// Featured = newest. Rail = next four. Both also live in the grid (hidden in the
-// default "all" view) so a tag filter can surface them without duplicating content.
+// Featured = newest. Rail = next five, which is roughly what it takes to fill the
+// lead card's height. The CSS distributes any remainder rather than relying on the
+// count alone, so this can change without leaving a gap. Both also live in the grid
+// (hidden in the default "all" view) so a tag filter can surface them without
+// duplicating content.
 const [featured, ...rest] = sortedPosts;
-const railPosts = rest.slice(0, 4);
+const railPosts = rest.slice(0, 5);
 const featuredSlugs = new Set([featured?.slug, ...railPosts.map((p) => p.slug)]);
 
 // Blog index schema: identifies the collection and lists the posts in order,
