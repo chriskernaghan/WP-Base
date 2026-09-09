@@ -4413,12 +4413,17 @@ footer a:hover {
     max-width: 560px;
 }
 
+/* The terminal is right-aligned to the same 1200px frame the rest of the page
+   sits on, mirroring the max() padding-left on .hero-split-left. That puts its
+   right edge on the header CTA's right edge at every width, instead of letting
+   it drift as the proportional column grows. The 3.5rem on the left matches the
+   left panel's padding-right so the gap either side of the seam is even. */
 .hero-split-right {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     background: var(--cream);
-    padding: 9rem 4rem 7rem;
+    padding: 9rem max(4rem, calc((100vw - var(--frame)) / 2)) 7rem 3.5rem;
     position: relative;
     overflow: hidden;
 }
