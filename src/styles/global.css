@@ -2196,11 +2196,18 @@ footer a:hover {
     animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
+/* The bottom margin matches .blog-featured's top margin, so in the default
+   view the two collapse and nothing moves. It earns its keep when a tag filter
+   is active: the script hides both .blog-featured and .posts-grid-label, and
+   all the space above the grid used to come from that label's margin, padding
+   and border-top. With the label gone the grid had nothing holding it off the
+   buttons. This gives the filtered grid the same gap the featured block gets. */
 .filter-bar {
     background: var(--snow);
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    margin-bottom: 2.5rem;
 }
 
 .filter-tag {
@@ -3815,6 +3822,9 @@ footer a:hover {
 
     .filter-bar {
         padding: 1.5rem 0;
+        /* .posts-list carries its own 2.5rem top padding at this width, so the
+           margin above would double up in the filtered view. */
+        margin-bottom: 0;
     }
 
     /* Blog page card grid — 1 col on mobile */
