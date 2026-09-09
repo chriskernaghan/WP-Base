@@ -54,6 +54,15 @@
     --muted: #6B6862;  /* warm grey, 5.55:1 on white, 4.93:1 on cream */
     --frame: 1200px;
     --reading: 800px;
+
+    /* Split-hero geometry. These two live here rather than in the hero block
+       because the header CTA is aligned off them, and the header's styles sit
+       in Nav.astro. --hero-seam mirrors the 1.12fr of the `1.12fr 1fr` grid on
+       .hero-v2.hero-split, expressed as a percentage so it can be used in
+       calc(). Change the grid ratio or the terminal width and you must change
+       these to match, or the CTA drifts off the terminal's right edge. */
+    --hero-seam: 52.8302%;
+    --hero-terminal-w: 460px;
     --border: rgba(8, 16, 28, 0.08);
 }
 
@@ -4413,17 +4422,12 @@ footer a:hover {
     max-width: 560px;
 }
 
-/* The terminal is right-aligned to the same 1200px frame the rest of the page
-   sits on, mirroring the max() padding-left on .hero-split-left. That puts its
-   right edge on the header CTA's right edge at every width, instead of letting
-   it drift as the proportional column grows. The 3.5rem on the left matches the
-   left panel's padding-right so the gap either side of the seam is even. */
 .hero-split-right {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     background: var(--cream);
-    padding: 9rem max(4rem, calc((100vw - var(--frame)) / 2)) 7rem 3.5rem;
+    padding: 9rem 4rem 7rem;
     position: relative;
     overflow: hidden;
 }
@@ -4443,7 +4447,7 @@ footer a:hover {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 460px;
+    max-width: var(--hero-terminal-w);
 }
 
 /* --------------------------------------------------------------------------
