@@ -347,10 +347,15 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     --hdr-ink: var(--cream);
 }
 
+/* Full-bleed with a frame-width gutter rather than a centred max-width box.
+   Both work out to the same 1200px measure, but the gutter version is computed
+   from 100vw exactly like the hero panels are, so the brand lands on the
+   headline and the CTA lands on the terminal. A centred box is measured against
+   the scrollbar-free content width, which left everything about 8px adrift. */
 .wpb-bar {
-    max-width: calc(var(--frame) + 8rem);
-    margin: 0 auto;
-    padding: 0 4rem;
+    max-width: none;
+    margin: 0;
+    padding: 0 max(4rem, calc((100vw - var(--frame)) / 2));
     height: var(--wpb-header-h);
     display: flex;
     align-items: center;
@@ -433,9 +438,9 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
 }
 
 .wpb-mega-inner {
-    max-width: calc(var(--frame) + 8rem);
-    margin: 0 auto;
-    padding: 2.2rem 4rem 2.4rem;
+    max-width: none;
+    margin: 0;
+    padding: 2.2rem max(4rem, calc((100vw - var(--frame)) / 2)) 2.4rem;
     display: grid;
     align-items: stretch;
     grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
@@ -597,9 +602,9 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
 /* utility strip */
 .wpb-foot { border-top: 1px solid var(--wpb-line); background: var(--wpb-wash); }
 .wpb-foot-inner {
-    max-width: calc(var(--frame) + 8rem);
-    margin: 0 auto;
-    padding: 0 4rem;
+    max-width: none;
+    margin: 0;
+    padding: 0 max(4rem, calc((100vw - var(--frame)) / 2));
     height: 52px;
     display: flex;
     align-items: center;
