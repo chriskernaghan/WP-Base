@@ -1,0 +1,384 @@
+---
+// src/pages/about.astro
+// About page. Deliberately built on the same scaffolding as the service pages
+// (dark hero, reading-width story section, card grid, testimonials, contact) so
+// it doesn't read as a page from a different site.
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Marquee from '../components/Marquee.astro';
+import Contact from '../components/Contact.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://wpbase.co.uk/about/',
+    name: 'About WP Base',
+    description:
+      'WP Base is a one-person WordPress maintenance, design and hosting business run by Chris Kernaghan from Newtownabbey, Northern Ireland.',
+    inLanguage: 'en-GB',
+    mainEntity: {
+      '@type': 'Person',
+      name: 'Chris Kernaghan',
+      jobTitle: 'WordPress Developer and Web Designer',
+      worksFor: {
+        '@type': 'ProfessionalService',
+        name: 'WP Base',
+        url: 'https://wpbase.co.uk/',
+        email: 'hello@wpbase.co.uk',
+        telephone: '+447440018091',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Newtownabbey',
+          addressRegion: 'Northern Ireland',
+          addressCountry: 'GB',
+        },
+      },
+      knowsAbout: ['WordPress', 'Web design', 'Website performance', 'WordPress hosting', 'Website maintenance'],
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://wpbase.co.uk/' },
+      { '@type': 'ListItem', position: 2, name: 'About', item: 'https://wpbase.co.uk/about/' },
+    ],
+  },
+];
+
+const facts = [
+  { label: 'Based in', value: 'Newtownabbey, working across Northern Ireland and the UK' },
+  { label: 'Longest client', value: 'Four years and counting' },
+  { label: 'Rated', value: '5.0 on Google' },
+  { label: 'Team size', value: 'One, and you already know who' },
+];
+
+const principles = [
+  {
+    title: 'You own everything',
+    body: "Your site, your hosting, your domain, all of it in accounts with your name on them. Nothing is held hostage on my side, and if you ever want to move on, any competent developer can pick the work up without a handover fight. I'd rather keep clients because they want to stay.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5 24.5 9 14 14.5 3.5 9 14 3.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 14.5 14 20l10.5-5.5" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Plain English, always',
+    body: "You don't need to know what a PHP version is, and you shouldn't have to pretend you do to get a straight answer. I'll tell you what the problem is, what it's costing you in enquiries or reputation, and what I'd do about it. If I ever start talking in acronyms, pull me up on it.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 6.5h20v13H12.5L6.5 24v-4.5H4v-13Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 11.5h10M9 15h6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>`,
+  },
+  {
+    title: 'Small on purpose',
+    body: "I look after a handful of sites on care plans rather than as many as I can sign. That's what makes it possible to answer the phone myself and to know your site well enough to spot something before you do. When it gets busy I bring in people I've worked with locally for years, and I'll tell you when I do.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="10" r="4.5" stroke="currentColor" stroke-width="2"/><path d="M5.5 23.5c0-4.4 3.8-7 8.5-7s8.5 2.6 8.5 7" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>`,
+  },
+  {
+    title: "Honest about what's worth doing",
+    body: "Plenty of website work isn't worth paying for, and I'll say so. If a redesign won't move the needle and a faster host will, I'll tell you to spend the money on the host. Turning down work I don't think will pay for itself has cost me a bit and earned me more, mostly in referrals.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5c3.5 2 7 3 9.5 3v8c0 5.5-4 8.9-9.5 10.5C8.5 23.4 4.5 20 4.5 14.5v-8c2.5 0 6-1 9.5-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m10 14 3 3 5.5-6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+];
+---
+
+<BaseLayout
+  title="About WP Base | Chris Kernaghan, Newtownabbey"
+  description="WP Base is one person. Chris Kernaghan builds and looks after WordPress sites for small businesses across Northern Ireland and the UK, from Newtownabbey."
+  schema={schema}
+>
+  <section class="about-hero-section">
+    <div class="about-inner about-hero-grid">
+      <div class="about-hero-copy">
+        <span class="section-label">About · WP Base</span>
+        <h1 class="about-headline">
+          Hi, I'm Chris.<br />
+          <span class="accent">WP Base is me.</span>
+        </h1>
+        <p class="about-lead">
+          I build and look after WordPress sites for small businesses in Northern
+          Ireland and across the UK. The person who picks up the phone is the same
+          person who does the work, which cuts out a lot of the waiting around that
+          people have come to expect from web agencies.
+        </p>
+        <div class="about-cta-row">
+          <a href="#contact" class="about-cta-primary">
+            Get Your Free Audit
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+          <a href="/#clients" class="about-cta-secondary">See the work</a>
+        </div>
+      </div>
+
+      <aside class="about-facts" aria-label="At a glance">
+        {facts.map((fact) => (
+          <div class="about-fact">
+            <span class="about-fact-label">{fact.label}</span>
+            <span class="about-fact-value">{fact.value}</span>
+          </div>
+        ))}
+      </aside>
+    </div>
+  </section>
+
+  <section class="about-story-section">
+    <div class="about-reading">
+      <span class="section-label">How this ended up being the job</span>
+      <h2>Most small business websites have nobody looking after them</h2>
+      <p>
+        The pattern is nearly always the same. Someone builds the site, it goes live,
+        it looks grand for about a year, and then it sits there. Plugins go out of
+        date, the contact form stops sending, the hosting gets slower as the company
+        you signed up with gets bought and sold, and nobody notices until an enquiry
+        that should have arrived doesn't.
+      </p>
+      <p>
+        I came into this from design rather than from IT support, and I've spent the
+        last several years building websites and doing the SEO work that decides
+        whether anyone ever sees them. That combination is why I care about the
+        boring end of it. A site that loads in four seconds or falls over after an
+        update isn't a technical problem, it's a business one, and it's usually
+        invisible until it costs you something.
+      </p>
+      <p>
+        So WP Base does the unglamorous part properly. Updates, backups, security,
+        speed, and someone paying attention. If you'd rather not think about your
+        website at all, that's the whole idea.
+      </p>
+      <p class="about-related-link">
+        You can see what that looks like in practice on the
+        <a href="/case-studies/catagen/">Catagen case study</a>, a site I've now
+        looked after for four years.
+      </p>
+    </div>
+  </section>
+
+  <section class="about-principles-section">
+    <div class="about-inner">
+      <span class="section-label">How I work</span>
+      <h2>Four things you can hold me to</h2>
+      <div class="about-grid">
+        {principles.map((item) => (
+          <div class="about-card">
+            <div class="about-card-icon" set:html={item.icon} />
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <section class="about-close-section">
+    <div class="about-reading">
+      <span class="section-label">Working together</span>
+      <h2>Whether I'm the right fit</h2>
+      <p>
+        I'm a good fit if you've got a WordPress site that matters to your business
+        and nobody responsible for it, and you'd rather deal with one person than a
+        ticket queue. I'm a poor fit if you need a large team, round-the-clock cover,
+        or a platform that isn't WordPress. I'll say so early rather than take the
+        work and hope.
+      </p>
+      <p>
+        The easiest first step is a free audit. Send me your address and I'll go
+        through the site properly and tell you what I find, including the parts that
+        are fine. There's no obligation attached, and if the honest answer is that
+        your site is in decent shape, that's what you'll get.
+      </p>
+    </div>
+  </section>
+
+  <Contact />
+</BaseLayout>
+
+<style>
+  .about-hero-section {
+    padding: 7rem 1.5rem 4rem;
+    background: var(--midnight);
+    color: var(--snow);
+    overflow: hidden;
+  }
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: center;
+  }
+  /* The eyebrow is dark by default, so lighten it where it sits on midnight. */
+  .about-hero-section .section-label {
+    color: var(--text-light);
+  }
+  .about-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin: 1rem 0 1.5rem;
+  }
+  .about-headline .accent {
+    color: var(--accent);
+  }
+  .about-lead {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    max-width: 34rem;
+    opacity: 0.85;
+    margin: 0 0 2rem;
+  }
+  .about-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .about-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.75rem;
+    background: var(--accent);
+    color: var(--accent-text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .about-cta-primary:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+  .about-cta-secondary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--snow);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 3px;
+  }
+
+  /* At-a-glance panel. Plain rows rather than a photo, so the page doesn't
+     depend on an image that doesn't exist yet. */
+  .about-facts {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem 1.75rem;
+  }
+  .about-fact {
+    padding: 1.4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .about-fact:first-child {
+    border-top: 0;
+  }
+  .about-fact-label {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+  .about-fact-value {
+    display: block;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--snow);
+    opacity: 0.9;
+  }
+
+  .about-story-section,
+  .about-close-section {
+    padding: 4rem 1.5rem;
+  }
+  .about-principles-section {
+    padding: 4rem 1.5rem;
+    background: var(--cream);
+  }
+  .about-reading {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .about-reading h2,
+  .about-principles-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0.75rem 0 1.5rem;
+    color: var(--midnight);
+  }
+  .about-reading p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    opacity: 0.85;
+  }
+  .about-related-link a {
+    color: var(--midnight);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .about-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(8, 16, 28, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .about-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    color: var(--midnight);
+    margin-bottom: 1rem;
+  }
+  .about-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.25;
+    margin: 0 0 0.75rem;
+    color: var(--midnight);
+  }
+  .about-card p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+    color: var(--text-dark);
+    opacity: 0.85;
+  }
+
+  @media (max-width: 900px) {
+    .about-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-hero-section {
+      padding-top: 5.5rem;
+    }
+  }
+</style>
