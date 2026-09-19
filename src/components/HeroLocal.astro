@@ -1,27 +1,26 @@
 ---
-// HeroLocal.astro — local variant of the homepage hero.
-// Same split markup and classes as Hero.astro, so the dark panel, the clear
-// header treatment and the terminal feed all behave identically. Only the
-// headline, supporting copy and proof points change for local SEO.
+// HeroLocal.astro — local variant of the homepage hero, used on /northern-ireland/.
+// Mirrors Hero.astro element for element: rating pill, three-line headline,
+// .hero-v2-desc paragraph, CTA row and terminal feed. Only the headline accent,
+// the rating pill's trailing text and the description change for local SEO.
+// If Hero.astro changes structurally, change this file to match.
 ---
 
 <section class="hero-v2 hero-split">
   <div class="hero-split-left">
     <div class="hero-v2-left hero-split-content">
+      <a href="https://share.google/HmqVC5OhdKakcRtS4" target="_blank" rel="noopener" class="hero-v2-rating">
+        <span class="hero-v2-rating-stars" aria-hidden="true">★★★★★</span>
+        <span class="hero-v2-rating-text"><strong>5.0</strong> on Google<span class="hero-v2-rating-extra"> · based in Newtownabbey</span></span>
+      </a>
       <h1 class="hero-v2-headline">
         WordPress care<br />
-        <span class="accent">for Northern Irish businesses</span>
+        <span class="accent">for Northern Irish<br />businesses</span>
       </h1>
-      <p class="hero-v2-sub">
+      <p class="hero-v2-desc">
         Maintenance, builds and ongoing support from a developer based in
-        Newtownabbey. Local, on hand, and without the agency price.
+        Newtownabbey, for a fixed monthly fee and without the agency price.
       </p>
-      <ul class="hero-v2-stats">
-        <li><span class="stat-tick" aria-hidden="true">✓</span><strong>4 years</strong> avg. client relationship</li>
-        <li><a href="https://share.google/HmqVC5OhdKakcRtS4" target="_blank" rel="noopener" class="stat-link"><span class="stat-tick" aria-hidden="true">✓</span><strong>5.0</strong> rated on Google</a></li>
-        <li><span class="stat-tick" aria-hidden="true">✓</span><strong>&lt;1 hour</strong> response time</li>
-        <li><span class="stat-tick" aria-hidden="true">✓</span><strong>0</strong> security breaches</li>
-      </ul>
       <div class="hero-v2-cta-row">
         <a href="#contact" class="hero-v2-cta-primary">
           Get Your Free Audit
