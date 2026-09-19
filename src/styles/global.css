@@ -2150,11 +2150,15 @@ footer a:hover {
     opacity: 0.9;
 }
 
+/* The form sits straight on the section gradient rather than in a white
+   box. The old white background showed through as specks at the corners of
+   the Fillout card, and the heavy shadow made the iframe read as a separate
+   widget dropped onto the page. The card's own colour, font and radius are
+   set in Fillout's theme editor, since page CSS can't reach inside the iframe. */
 .fillout-wrapper {
-    background: white;
+    background: transparent;
     border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
 }
 
 /* ==========================================================================
