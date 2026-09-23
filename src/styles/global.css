@@ -2813,7 +2813,7 @@ footer a:hover {
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
 }
-  .callout :global(a) {
+  .callout a {
     color: #d4f53c; /* or your lime variable */
     background: none;
     text-decoration: underline;
@@ -2821,7 +2821,7 @@ footer a:hover {
     text-underline-offset: 3px;
   }
 
-  .callout :global(a:hover) {
+  .callout a:hover {
     text-decoration-thickness: 2px;
   }
 
