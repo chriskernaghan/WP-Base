@@ -1,17 +1,3 @@
-/* ==========================================================================
-   FONTS
-   Self-hosted from the @fontsource-variable packages rather than Google Fonts.
-   Two reasons. First, it removes a DNS lookup and TLS handshake to
-   fonts.googleapis.com and a second one to fonts.gstatic.com before any text
-   can paint in its real typeface. Second, these are variable fonts, so one
-   file per family covers every weight the site uses instead of nine separate
-   downloads.
-
-   Vite fingerprints these files at build time and Cloudflare serves them from
-   the same origin as everything else, so they arrive on a connection that is
-   already open.
-   ========================================================================== */
-
 @font-face {
     font-family: "Epilogue";
     font-style: normal;
@@ -2827,6 +2813,17 @@ footer a:hover {
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
 }
+  .callout :global(a) {
+    color: #d4f53c; /* or your lime variable */
+    background: none;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .callout :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
 
 /* Signal cards */
 .signal-card {
