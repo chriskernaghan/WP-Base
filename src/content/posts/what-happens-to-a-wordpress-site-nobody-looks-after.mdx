@@ -1,0 +1,49 @@
+---
+title: "What Actually Happens to a WordPress Site Nobody Looks After"
+description: "A WordPress site that nobody looks after doesn't fail all at once. Here's how it drifts, what happens when it finally goes wrong, and what it costs to put right."
+tag: "Maintenance"
+date: 2026-09-23
+readTime: "5 min read"
+image: "/blog/wordpress-site-nobody-looks-after.webp"
+---
+
+import LabelCard from '../../components/LabelCard.astro';
+import Callout from '../../components/Callout.astro';
+
+Most small business owners don't think about their website very often, and honestly, that's fair enough. You had it built, it looked good, it did its job, and you've got a business to run. The website sits in the same mental folder as the boiler and the gutters, things that are fine until they very much aren't.
+
+The trouble is that a WordPress site isn't a finished object in the way a printed brochure is. It's software, made up of the WordPress core, a theme and usually a dozen or more plugins, all written by different people and all being updated regularly as bugs are found and security holes are patched. When nobody's applying those updates, the site doesn't stay the way it was on launch day. It slowly falls behind, and the further behind it gets, the more interesting it becomes to the wrong kind of visitor.
+
+Here's roughly how that tends to play out.
+
+<LabelCard variant="sign" number="1" title="The first year: everything's fine">
+For the first few months, a neglected site behaves exactly like a looked-after one. Pages load, the contact form works, and nobody notices any difference. This is what makes maintenance such a hard sell, because for a good while there's genuinely nothing to see. Behind the scenes, though, updates are stacking up. A plugin you use for your contact form has had three releases, one of which fixed a security issue that's now publicly documented, and WordPress itself has moved on a version or two. None of this is visible from the front of the site, but it's all visible to automated tools that scan the internet looking for sites running outdated software.
+</LabelCard>
+
+<LabelCard variant="sign" number="2" title="Years two and three: the drift">
+This is where things start to wobble in small, easy-to-ignore ways. A plugin gets abandoned by its developer and stops receiving updates altogether. Your hosting company upgrades the version of PHP on their servers, and something on your site starts throwing errors or a feature stops working. The site gets a bit slower, the contact form occasionally fails to send, and a page layout breaks on mobile in a way nobody mentions to you. By now, updating everything at once has become a job in itself, because jumping a site several major versions forward in one go is much more likely to break something than keeping it current bit by bit. The longer it's left, the more expensive the eventual catch-up becomes, even before anything has gone properly wrong.
+</LabelCard>
+
+<LabelCard variant="sign" number="3" title="The incident">
+Eventually, something does go properly wrong. It's rarely dramatic or targeted, and it almost never means someone has taken a personal interest in your business. Automated scripts find an outdated plugin with a known vulnerability, exploit it, and use your site for their own purposes. Sometimes visitors get redirected to spam or scam sites, often only on mobile or only when arriving from Google, so you might not see it yourself. Sometimes hidden pages get injected to sell counterfeit goods or worse, which does lovely things to your search rankings. Sometimes Google flags the site as unsafe and shows a red warning to anyone trying to visit, or your host suspends the account because it's sending spam and the site simply disappears. Usually the business finds out from a customer, which is about the worst way to find out.
+</LabelCard>
+
+<LabelCard variant="sign" number="4" title="The cleanup">
+Fixing a compromised WordPress site is a lot more involved than fixing a broken one. Malware tends to hide in multiple places and reinfect a site if it isn't completely removed, so it's a case of finding every trace, closing the hole it came in through, updating everything that's been left to rot, checking the database, resetting credentials, and then asking Google to review the site and lift any warnings, which can take days. If there's a clean, recent backup, this is a much shorter job. If the only backups are the ones the host keeps for a couple of weeks, and the site was compromised a month ago, there might not be a clean version to go back to at all.
+</LabelCard>
+
+Then there's the cost that doesn't show up on an invoice. Lost enquiries while the site was down or flagged, search rankings that take a while to recover, and customers who saw a warning screen and quite reasonably decided to go elsewhere.
+
+> A neglected WordPress site doesn't fail all at once. It drifts until it becomes an easy target, and the fix arrives at a time of someone else's choosing.
+
+## What looking after it actually involves
+
+None of this means your website needs constant attention. Most of what keeps a WordPress site healthy is unglamorous and routine: applying updates regularly and checking nothing's broken afterwards, keeping backups somewhere other than the server the site lives on, removing plugins that aren't being used or supported any more, and having something watching for downtime and suspicious changes so problems are caught in hours rather than months.
+
+You can do this yourself if you're comfortable with it and you'll genuinely remember to. Plenty of people aren't and won't, which isn't a failing, it's just not what they're in business to do.
+
+<Callout>
+**Would rather someone else kept an eye on it?** Our [maintenance plans](/maintenance/) cover updates, off-site backups and monitoring, so problems get caught long before your customers are the ones telling you about them.
+</Callout>
+
+A WordPress site that nobody looks after gets harder and more expensive to bring back up to date with every month that passes, and the fix almost always costs more than the maintenance would have. You don't need to care about your website. It just helps if someone does.
