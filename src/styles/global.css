@@ -826,7 +826,7 @@ footer a:hover {
 }
 
 .hero-v2-cta-primary:hover svg {
-    transform: translateX(3px);
+    transform: translateY(3px);
 }
 
 .hero-v2-cta-secondary {
