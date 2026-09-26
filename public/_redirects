@@ -1,26 +1,29 @@
 # _redirects — Cloudflare Pages reads this file and applies the rules at the edge.
 # Maps the old flat-HTML URLs to the new clean Astro URLs.
 # Status 301 = permanent redirect, which preserves SEO equity.
+# Targets use the trailing-slash form to match trailingSlash: 'always' in
+# astro.config.mjs. Without the slash, Cloudflare adds a second 308 hop to
+# reach the real page, and Google was indexing the slashless middle step.
 # Lines starting with # are comments. Order matters: first match wins.
 
 # ===== Blog index =====
-/blog.html                                                    /blog                                                    301
+/blog.html                                                    /blog/                                                   301
 
 # ===== Posts =====
-/posts/wordpress-security-basics.html                         /posts/wordpress-security-basics                         301
-/posts/speed-kills-slow-websites.html                         /posts/speed-kills-slow-websites                         301
-/posts/why-wordpress-maintenance-matters.html                 /posts/why-wordpress-maintenance-matters                 301
-/posts/losing-leads-bad-websites.html                         /posts/losing-leads-bad-websites                         301
-/posts/7-signs-your-small-business-website-needs-a-redesign.html  /posts/7-signs-your-small-business-website-needs-a-redesign  301
-/posts/does-your-side-hustle-need-a-website.html              /posts/does-your-side-hustle-need-a-website              301
-/posts/how-much-does-a-small-business-website-cost-northern-ireland.html  /posts/how-much-does-a-small-business-website-cost-northern-ireland  301
-/posts/wordpress-vs-squarespace-small-business.html           /posts/wordpress-vs-squarespace-small-business           301
-/posts/someone-bought-30-wordpress-plugins.html               /posts/someone-bought-30-wordpress-plugins               301
+/posts/wordpress-security-basics.html                         /posts/wordpress-security-basics/                        301
+/posts/speed-kills-slow-websites.html                         /posts/speed-kills-slow-websites/                        301
+/posts/why-wordpress-maintenance-matters.html                 /posts/why-wordpress-maintenance-matters/                301
+/posts/losing-leads-bad-websites.html                         /posts/losing-leads-bad-websites/                        301
+/posts/7-signs-your-small-business-website-needs-a-redesign.html  /posts/7-signs-your-small-business-website-needs-a-redesign/ 301
+/posts/does-your-side-hustle-need-a-website.html              /posts/does-your-side-hustle-need-a-website/             301
+/posts/how-much-does-a-small-business-website-cost-northern-ireland.html  /posts/how-much-does-a-small-business-website-cost-northern-ireland/ 301
+/posts/wordpress-vs-squarespace-small-business.html           /posts/wordpress-vs-squarespace-small-business/          301
+/posts/someone-bought-30-wordpress-plugins.html               /posts/someone-bought-30-wordpress-plugins/              301
 
 # ===== Case studies =====
-/case-studies/catagen.html                                    /case-studies/catagen                                    301
-/case-studies/exportexplore.html                              /case-studies/exportexplore                              301
-/case-studies/inclusion-iq.html                               /case-studies/inclusion-iq                               301
+/case-studies/catagen.html                                    /case-studies/catagen/                                   301
+/case-studies/exportexplore.html                              /case-studies/exportexplore/                             301
+/case-studies/inclusion-iq.html                               /case-studies/inclusion-iq/                              301
 
 # ===== Homepage =====
 # Old /index.html links coming in from anywhere should land at /
