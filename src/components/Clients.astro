@@ -62,5 +62,71 @@ const clients = [
         </a>
       ))}
     </div>
+
+    <div class="clients-partner">
+      <img
+        class="clients-partner-logo"
+        src="/partners/wp-engine-logo.webp"
+        alt="WP Engine"
+        width="240"
+        height="47"
+        loading="lazy"
+        decoding="async"
+      />
+      <p class="clients-partner-text">
+        <strong>Agency Partner</strong>, with client sites running on the platform.
+        <a href="/hosting/#recommendation">See how I handle hosting →</a>
+      </p>
+    </div>
   </div>
 </section>
+
+<style>
+  /* WP Engine partner line under the case study cards. Logo is the official
+     mark supplied through the Agency Partner Program, used as-is. */
+  .clients-partner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .clients-partner-logo {
+    display: block;
+    width: 160px;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .clients-partner-text {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin: 0;
+  }
+  .clients-partner-text strong {
+    font-weight: 600;
+    color: var(--midnight);
+  }
+  .clients-partner-text a {
+    color: var(--midnight);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 1px;
+    margin-left: 0.25rem;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .clients-partner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .clients-partner-text a {
+      white-space: normal;
+      margin-left: 0;
+    }
+  }
+</style>
