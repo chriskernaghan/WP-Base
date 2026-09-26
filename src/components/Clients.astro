@@ -75,8 +75,8 @@ const clients = [
       />
       <p class="clients-partner-text">
         <strong>Agency Partner</strong>, with client sites running on the platform.
-        <a href="/hosting/#recommendation">See how I handle hosting →</a>
       </p>
+      <a class="clients-partner-link" href="/hosting/#recommendation">See how I handle hosting →</a>
     </div>
   </div>
 </section>
@@ -109,13 +109,15 @@ const clients = [
     font-weight: 600;
     color: var(--midnight);
   }
-  .clients-partner-text a {
+  .clients-partner-link {
+    margin-left: auto;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
     color: var(--midnight);
     font-weight: 600;
     text-decoration: none;
     border-bottom: 2px solid var(--accent);
     padding-bottom: 1px;
-    margin-left: 0.25rem;
     white-space: nowrap;
   }
   @media (max-width: 720px) {
@@ -124,8 +126,7 @@ const clients = [
       align-items: flex-start;
       gap: 1rem;
     }
-    .clients-partner-text a {
-      white-space: normal;
+    .clients-partner-link {
       margin-left: 0;
     }
   }
