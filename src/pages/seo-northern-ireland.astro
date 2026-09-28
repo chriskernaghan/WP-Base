@@ -1,0 +1,455 @@
+---
+// seo-northern-ireland.astro — standalone SEO service page. Deliberately left
+// out of the main nav; it exists to rank for "SEO Northern Ireland" style
+// queries that were already showing up in Search Console. It gets into the
+// sitemap automatically and picks up internal links from the footer and the
+// Northern Ireland page.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Marquee from '../components/Marquee.astro';
+import Contact from '../components/Contact.astro';
+
+const faqs = [
+  {
+    q: 'How long does SEO take to work?',
+    a: "Technical fixes and better page titles can show up in Search Console within a few weeks, because Google is re-reading pages it already knows about. Ranking for competitive terms takes longer, usually a few months of steady work. Anyone promising overnight results is either guessing or doing something that will cost you later.",
+  },
+  {
+    q: 'Can you guarantee a first-page ranking?',
+    a: "No, and nobody honestly can. Google doesn't sell rankings and doesn't tell anyone exactly how it decides them. What I can do is fix the things holding your site back, target searches you've a realistic chance of winning, and show you the numbers so you can see whether it's working.",
+  },
+  {
+    q: 'Do I need a new website to improve my SEO?',
+    a: "Usually not. Most of the problems I find on small business sites are fixable in place: missing or duplicate titles, pages Google can't index, slow load times, thin service pages. A rebuild only makes sense when the site is fighting you on everything else as well.",
+  },
+  {
+    q: 'Do you only do SEO for WordPress sites?',
+    a: "Most of my work is on WordPress, because that's what most small businesses in Northern Ireland are running. The principles aren't tied to any platform though, so if your site is built on something else, get in touch and I'll tell you honestly whether I can help.",
+  },
+  {
+    q: 'What about ChatGPT and AI search?',
+    a: "You'll hear new acronyms for this, but Google's own guidance is that the same fundamentals apply: pages that are crawlable, clearly written and genuinely useful. The work that helps you rank in normal search is the same work that gets you mentioned in AI answers, so I don't sell it as a separate service.",
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Search Engine Optimisation',
+    name: 'SEO for small businesses in Northern Ireland',
+    url: 'https://wpbase.co.uk/seo-northern-ireland/',
+    provider: {
+      '@type': 'ProfessionalService',
+      '@id': 'https://wpbase.co.uk/#business',
+      name: 'WP Base',
+      url: 'https://wpbase.co.uk/',
+      email: 'hello@wpbase.co.uk',
+      telephone: '+447379334695',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Newtownabbey',
+        addressRegion: 'Northern Ireland',
+        addressCountry: 'GB',
+      },
+    },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Northern Ireland' },
+    description:
+      'Practical SEO for small businesses in Northern Ireland. Technical fixes, local search, Search Console analysis and content that answers what your customers are searching for.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+
+const offer = [
+  {
+    title: "Fix what's stopping Google",
+    body: "Pages that can't be indexed, missing or duplicated titles, broken redirects, a sitemap full of URLs you never meant to publish. These are the unglamorous problems that hold most small business sites back, and they're usually the quickest wins.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="2"/><path d="M17.5 17.5 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 12l2 2 4-4" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Show up when people search locally',
+    body: "For most Northern Ireland businesses, the searches that matter have a town or \"near me\" attached. That means a complete Google Business Profile, consistent contact details everywhere they appear, and location pages that say something real rather than swapping one town name for another.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 25s8-7.2 8-13.5a8 8 0 1 0-16 0C6 17.8 14 25 14 25Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="14" cy="11.5" r="3" stroke="var(--accent)" stroke-width="2"/></svg>`,
+  },
+  {
+    title: 'Work from your own Search Console data',
+    body: "Your site is often already appearing for useful searches, just on page two where nobody clicks. I dig through Search Console to find the pages sitting just short of the first page, then rework their titles and content so they have a proper chance of moving up.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 23h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="6" y="14" width="4" height="9" stroke="currentColor" stroke-width="2"/><rect x="12" y="10" width="4" height="13" stroke="currentColor" stroke-width="2"/><rect x="18" y="5" width="4" height="18" stroke="var(--accent)" stroke-width="2"/></svg>`,
+  },
+  {
+    title: 'Content that earns its place',
+    body: "Service pages that explain what you do in the words your customers actually search with, articles that answer the questions they ask before they pick up the phone, and sensible internal links so Google understands how it all fits together.",
+    icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="3" width="18" height="22" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 9h10M9 13h10M9 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="20" r="2.5" fill="var(--midnight)" stroke="var(--accent)" stroke-width="2"/></svg>`,
+  },
+];
+---
+<BaseLayout
+  title="SEO in Northern Ireland for Small Businesses — WP Base"
+  description="Practical SEO for Northern Ireland small businesses. Technical fixes, local search, Search Console analysis and useful content, from someone who does the work himself. Start with a free audit."
+  schema={schema}
+>
+  <section class="seo-hero-section">
+    <div class="seo-inner seo-hero-grid">
+      <div class="seo-hero-copy">
+        <span class="section-label">SEO · Northern Ireland</span>
+        <h1 class="seo-headline">
+          SEO that brings in<br />
+          <span class="accent">enquiries, not reports</span>
+        </h1>
+        <p class="seo-lead">
+          If customers in Northern Ireland can't find you on Google, they find whoever
+          ranks above you instead. I help small businesses fix what's holding their site
+          back, show up for the local searches that turn into work, and see plainly
+          whether it's paying off.
+        </p>
+        <div class="seo-cta-row">
+          <a href="#contact" class="seo-cta-primary">
+            Get Your Free Audit
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+          <a href="#what-you-get" class="seo-cta-secondary">What you get</a>
+        </div>
+      </div>
+
+      <div class="seo-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <g stroke="rgba(255,255,255,0.07)" stroke-width="1">
+            <line x1="60" y1="0" x2="60" y2="440"/>
+            <line x1="500" y1="0" x2="500" y2="440"/>
+            <line x1="0" y1="60" x2="560" y2="60"/>
+            <line x1="0" y1="380" x2="560" y2="380"/>
+          </g>
+          <g>
+            <rect x="90" y="40" width="380" height="310" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <path d="M90 54a14 14 0 0 1 14-14h352a14 14 0 0 1 14 14v20H90V54Z" fill="rgba(255,255,255,0.06)"/>
+            <circle cx="112" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
+            <circle cx="126" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
+            <circle cx="140" cy="57" r="4" fill="var(--accent)"/>
+            <!-- search bar -->
+            <rect x="114" y="92" width="332" height="30" rx="15" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)"/>
+            <circle cx="133" cy="107" r="6" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <path d="M137.5 111.5 141 115" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+            <rect x="152" y="103" width="120" height="8" rx="4" fill="rgba(255,255,255,0.45)"/>
+            <!-- top result, highlighted -->
+            <rect x="114" y="140" width="332" height="62" rx="8" fill="rgba(212,255,58,0.08)" stroke="var(--accent)" stroke-width="1.5"/>
+            <rect x="130" y="154" width="70" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+            <rect x="130" y="167" width="190" height="10" rx="5" fill="var(--accent)"/>
+            <rect x="130" y="184" width="240" height="6" rx="3" fill="rgba(255,255,255,0.35)"/>
+            <!-- other results -->
+            <rect x="130" y="222" width="60" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+            <rect x="130" y="235" width="170" height="9" rx="4.5" fill="rgba(255,255,255,0.3)"/>
+            <rect x="130" y="251" width="220" height="6" rx="3" fill="rgba(255,255,255,0.15)"/>
+            <rect x="130" y="280" width="60" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+            <rect x="130" y="293" width="150" height="9" rx="4.5" fill="rgba(255,255,255,0.3)"/>
+            <rect x="130" y="309" width="200" height="6" rx="3" fill="rgba(255,255,255,0.15)"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-a">
+            <rect x="410" y="170" width="132" height="56" rx="10" fill="var(--accent)"/>
+            <path d="M432 206s7-6 7-11.5a7 7 0 1 0-14 0c0 5.5 7 11.5 7 11.5Z" stroke="var(--midnight)" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+            <rect x="448" y="186" width="52" height="7" rx="3.5" fill="var(--midnight)"/>
+            <rect x="448" y="200" width="36" height="7" rx="3.5" fill="var(--midnight)" opacity="0.55"/>
+          </g>
+          <g class="hero-art-chip hero-art-chip-b">
+            <rect x="28" y="300" width="96" height="40" rx="10" fill="rgba(11,17,32,0.9)" stroke="rgba(255,255,255,0.16)"/>
+            <path d="M42 328 L52 318 L58 324 L68 312" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="78" y="316" width="34" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <section class="seo-problem-section">
+    <div class="seo-reading">
+      <span class="section-label">The usual story</span>
+      <h2>Your website exists, but Google doesn't seem to know it</h2>
+      <p>
+        Most small business owners I talk to don't have an SEO problem they can name.
+        They have a website that was built a few years ago, looks fine, and brings in
+        next to nothing from Google. When a customer searches for what they do in
+        Belfast, Lisburn or Newtownabbey, a competitor turns up first and gets the call.
+      </p>
+      <p>
+        When I look under the bonnet, the cause is rarely mysterious. Pages have the
+        same title as each other, the important ones aren't being indexed, the site is
+        slow on a phone, and the service pages don't use the words people actually
+        type into Google. None of that needs a big agency retainer to fix, but it does
+        need someone to look properly and then do the work.
+      </p>
+    </div>
+  </section>
+
+  <section id="what-you-get" class="seo-offer-section">
+    <div class="seo-inner">
+      <span class="section-label">What SEO with WP Base looks like</span>
+      <h2>Fix the foundations, then build on them</h2>
+      <div class="seo-grid">
+        {offer.map((item) => (
+          <div class="seo-card">
+            <div class="seo-card-icon" set:html={item.icon} />
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-honest-section">
+    <div class="seo-reading">
+      <span class="section-label">Worth saying plainly</span>
+      <h2>No guarantees, no shortcuts, no new acronyms</h2>
+      <p>
+        I won't promise you the top spot on Google, because nobody can, and I won't buy
+        links or stuff pages with keywords, because those shortcuts tend to cost more
+        than they earn once Google catches up. You also won't be sold a separate
+        package for AI search. The things that help you rank are the same things that
+        get you mentioned in AI answers, so it's all one job.
+      </p>
+      <p>
+        What you get instead is someone based in Newtownabbey who works on your site
+        directly, explains what's changed and why in plain English, and shows you the
+        Search Console numbers so you can judge the results for yourself. If your site
+        is already in decent shape, the free audit will say so.
+      </p>
+      <p class="seo-related-link">
+        SEO doesn't sit on its own. A slow site holds rankings back, which is where
+        <a href="/website-speed/">website speed work</a> comes in, and a site that's
+        kept updated and secure through <a href="/wordpress-maintenance/">WordPress
+        maintenance</a> gives Google fewer reasons to lose trust in it. If you're
+        starting from scratch, <a href="/web-design/">web design</a> is the place to
+        begin, and you can read more about <a href="/northern-ireland/">working with a
+        local developer in Northern Ireland</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="faq-inner">
+      <span class="section-label">Questions</span>
+      <h2>SEO questions I get asked a lot</h2>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <details class="faq-item" open={i === 0}>
+            <summary class="faq-question">
+              <span>{faq.q}</span>
+              <span class="faq-icon"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+</BaseLayout>
+
+<style>
+  .seo-hero-section {
+    padding: 7rem 1.5rem 4rem;
+    background: var(--midnight);
+    color: var(--snow);
+    overflow: hidden;
+  }
+  .seo-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .seo-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
+  }
+  /* eyebrow label sits on a dark background in the hero, so lighten it */
+  .seo-hero-section .section-label {
+    color: var(--text-light);
+  }
+  .seo-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin: 1rem 0 1.5rem;
+  }
+  .seo-headline .accent {
+    color: var(--accent);
+  }
+  .seo-lead {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    max-width: 640px;
+    opacity: 0.9;
+  }
+  .seo-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .seo-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--midnight);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    padding: 0.9rem 1.5rem;
+    border-radius: 0;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .seo-cta-primary:hover {
+    transform: translateY(-2px);
+  }
+  .seo-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 0;
+    text-decoration: none;
+    color: var(--snow);
+    transition: border-color 0.15s ease;
+  }
+  .seo-cta-secondary:hover {
+    border-color: var(--snow);
+  }
+
+  .seo-hero-art {
+    min-width: 0;
+  }
+  .seo-hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hero-art-chip-a {
+    animation: heroChipFloat 6s ease-in-out infinite;
+  }
+  .hero-art-chip-b {
+    animation: heroChipFloat 7s ease-in-out 1.2s infinite;
+  }
+  @keyframes heroChipFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-art-chip-a,
+    .hero-art-chip-b {
+      animation: none;
+    }
+  }
+
+  .seo-problem-section,
+  .seo-honest-section {
+    padding: 4rem 1.5rem;
+  }
+  .seo-reading {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .seo-reading h2,
+  .seo-offer-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0.75rem 0 1.5rem;
+  }
+  .seo-reading p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    opacity: 0.85;
+  }
+  .seo-related-link a {
+    color: var(--midnight);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .seo-offer-section {
+    padding: 4rem 1.5rem;
+  }
+  .seo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .seo-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(8, 16, 28, 0.1);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .seo-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(8, 16, 28, 0.12);
+    border-radius: 0;
+    margin-bottom: 1rem;
+    color: var(--midnight);
+  }
+  .seo-card-icon :global(svg) {
+    width: 26px;
+    height: 26px;
+  }
+  .seo-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+  }
+  .seo-card p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 960px) {
+    .seo-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .seo-hero-art {
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .seo-grid {
+      grid-template-columns: 1fr;
+    }
+    .seo-hero-section {
+      padding-top: 5.5rem;
+    }
+  }
+</style>
