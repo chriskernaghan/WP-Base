@@ -34,3 +34,12 @@
 # up enough impressions to register. Its content was folded into the NI page.
 /newtownabbey                                                 /northern-ireland/                                       301
 /newtownabbey/                                                /northern-ireland/                                       301
+
+# ===== Google review shortlink =====
+# Short, writable URL for handwritten notes and business cards.
+# 302 rather than 301: the g.page target can change, and a permanent
+# redirect would sit cached in browsers that had already followed it.
+/review                                                       https://g.page/r/CYwrbqOG8ubMEBM/review                  302
+/review/                                                      https://g.page/r/CYwrbqOG8ubMEBM/review                  302
+/reviews                                                      https://g.page/r/CYwrbqOG8ubMEBM/review                  302
+/reviews/                                                     https://g.page/r/CYwrbqOG8ubMEBM/review                  302
