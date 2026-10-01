@@ -1,0 +1,82 @@
+---
+title: "understandglp1.com: A Health Information Site Built to Be Trusted"
+client: "understandglp1.com"
+metaLabel: "Project"
+aboutType: "WebSite"
+builtWith: "Astro"
+industry: "Health Information (YMYL)"
+timeline: "X weeks initial build"
+ongoing: "Dependency updates, publishing and performance monitoring"
+intro: "How we built a fast, static health information site where authorship, medical disclaimers and cited sources are part of the structure rather than something an editor has to remember."
+featuredImage: "/case-studies/understandglp1-desktop.webp"
+order: 3
+cta:
+  heading: "Need a site that earns trust as well as traffic?"
+  body: "Whether it's WordPress, Astro or something else, let's talk about what actually suits your business."
+---
+
+import CaseSection from '../../components/CaseSection.astro';
+import Timeline from '../../components/Timeline.astro';
+import OutcomeGrid from '../../components/OutcomeGrid.astro';
+import CaseImage from '../../components/CaseImage.astro';
+
+<CaseSection label="The Brief" heading="Health Content Has a Higher Bar">
+understandglp1.com explains GLP-1 medications in plain English, which puts it in the category Google calls Your Money or Your Life. Readers make real decisions based on what they find, so search engines and people alike expect clear authorship, honest disclaimers and sources they can check for themselves.
+
+That shaped the brief more than any design preference did:
+
+- Every article needs a named author and a clear indication of who has reviewed it
+- Medical disclaimers have to appear consistently, not just when someone remembers to add them
+- Claims need citations that readers can follow to the original source
+- The site has to load quickly on a phone, because that's where most people will read it
+- It has to stay cheap and low-maintenance to run, so the effort goes into the content
+
+A site like this lives or dies on whether people believe it, and the build needed to support that from the first page.
+</CaseSection>
+
+<CaseSection label="The Solution" heading="Astro, With the Standards Built In">
+We built the site on Astro and host it on Cloudflare Pages, deploying from a Git repository. Astro ships static HTML with very little JavaScript by default, which suits a content-first site where nobody needs to log in or interact with anything beyond reading.
+
+<ul class="solution-tiles">
+<li><strong>Content collections</strong>Articles are written in MDX, with required frontmatter fields for author and reviewer, so a post can't be published without them.</li>
+<li><strong>Reusable components</strong>Medical disclaimers and citation blocks are components rather than copied text, so a wording change happens once and applies everywhere.</li>
+<li><strong>Structured data</strong>Article, author and breadcrumb schema are generated from the same frontmatter, keeping the markup consistent with what readers see.</li>
+<li><strong>Cloudflare Pages hosting</strong>Static files served from Cloudflare's edge network, with HTTPS, caching and preview deployments included.</li>
+<li><strong>Minimal JavaScript</strong>Pages are mostly plain HTML and CSS, which keeps them quick on slower connections and older phones.</li>
+</ul>
+
+The aim was a site where doing the right thing editorially is the easiest thing to do, because the structure won't let a post go out without its authorship and disclaimers.
+</CaseSection>
+
+<CaseImage src="/case-studies/understandglp1-desktop.webp" alt="understandglp1.com homepage on desktop, showing the article listing and medical disclaimer" />
+
+{/* TODO: replace the filler numbers below with real Lighthouse figures, and update the labels to match. */}
+<Timeline items={[
+  { number: "00", label: "Lighthouse performance score" },
+  { number: "00", label: "Lighthouse SEO and accessibility score" },
+  { number: "0", label: "Plugins to keep updated" },
+]} />
+
+<CaseSection label="The Outcome" heading="Fast, Consistent and Easy to Look After">
+The site does what a health information resource should do: it loads quickly, it's clear about who wrote what, and it gives readers a way to check the claims for themselves.
+
+<OutcomeGrid cards={[
+  { heading: "Fast by Default", body: "Static pages served from Cloudflare's edge, with very little JavaScript, keep load times low and Core Web Vitals comfortably in the green (replace with real figures)." },
+  { heading: "Trust Built Into the Structure", body: "Authorship, review details, disclaimers and citations are enforced by the content model, so every article meets the same standard without relying on memory." },
+  { heading: "Almost Nothing to Break", body: "With no database, no plugins and no admin login to defend, the attack surface is small and the day-to-day maintenance is light." },
+  { heading: "Search-Ready", body: "Clean markup, consistent schema and quick pages give the content the best chance of being understood and ranked fairly (replace with Search Console figures)." },
+]} />
+
+### How It's Maintained
+
+A static site needs a different kind of care from a WordPress one. There are no plugin updates to chase, so the routine is about dependencies, the build and deploy pipeline, and how content gets published.
+
+- Dependencies are reviewed and updated on a regular schedule, with each change checked in a preview deployment before it goes live
+- New articles are published through Git, which means every change has a history and can be rolled back
+- Performance, search visibility and broken links are monitored over time rather than checked once at launch
+- Citations are revisited so that a source that's moved or changed doesn't end up undermining an article
+
+### When WordPress Is Still the Better Choice
+
+Astro was the right tool here because the content is written by one team, changes at a steady pace and doesn't need anyone to edit pages through a visual editor. For many small businesses the opposite is true. If you want to update your own pages, manage a shop or lean on a mature plugin ecosystem, WordPress is usually the better fit, and it's what most of our work is built on. The skill is in picking the tool that suits the job, and we're happy to tell you when that isn't the one we'd normally reach for.
+</CaseSection>
