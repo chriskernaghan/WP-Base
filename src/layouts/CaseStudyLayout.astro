@@ -12,6 +12,9 @@ interface Props {
     timeline: string;
     ongoing: string;
     intro: string;
+    metaLabel?: string;
+    aboutType?: 'Organization' | 'WebSite';
+    builtWith?: string;
     heroLogo?: string;
     heroLogoHtml?: string;
     featuredImage?: string;
@@ -34,7 +37,7 @@ const schema = [
     image: new URL(shareImage, Astro.site).href,
     inLanguage: 'en-GB',
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-    about: { '@type': 'Organization', name: frontmatter.client },
+    about: { '@type': frontmatter.aboutType ?? 'Organization', name: frontmatter.client },
     author: { '@type': 'Person', name: 'Chris Kernaghan', url: 'https://wpbase.co.uk/' },
     publisher: {
       '@type': 'Organization',
@@ -55,10 +58,11 @@ const schema = [
 ];
 
 const meta = [
-  { label: 'Client', value: frontmatter.client },
+  { label: frontmatter.metaLabel ?? 'Client', value: frontmatter.client },
   { label: 'Industry', value: frontmatter.industry },
   { label: 'Timeline', value: frontmatter.timeline },
   { label: 'Ongoing', value: frontmatter.ongoing },
+  ...(frontmatter.builtWith ? [{ label: 'Built with', value: frontmatter.builtWith }] : []),
 ];
 ---
 
