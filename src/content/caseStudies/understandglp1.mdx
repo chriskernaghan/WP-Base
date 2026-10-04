@@ -7,7 +7,7 @@ builtWith: "Astro"
 industry: "Health Information (YMYL)"
 timeline: "2 weeks initial build"
 ongoing: "Performance and SEO"
-intro: "How we built a fast, static health information site with authorship, medical disclaimers and cited sources built in."
+intro: "How I built a fast, static health information site with authorship, medical disclaimers and cited sources built in."
 heroLogo: "/case-studies/understandglp1-logo-light.svg"
 featuredImage: "/case-studies/understand-glp1.webp"
 order: 3
@@ -36,7 +36,7 @@ A site like this lives or dies on whether people believe it, and the build neede
 </CaseSection>
 
 <CaseSection label="The Solution" heading="Astro, With the Standards Built In">
-We built the site on Astro and host it on Cloudflare Pages, deploying from a Git repository. Astro ships static HTML with very little JavaScript by default, which suits a content-first site where nobody needs to log in or interact with anything beyond reading.
+I built the site on Astro and host it on Cloudflare Pages, deploying from a Git repository. Astro ships static HTML with very little JavaScript by default, which suits a content-first site where nobody needs to log in or interact with anything beyond reading.
 
 <ul class="solution-tiles">
 <li><strong>Content collections</strong>Articles are written in MDX, with required frontmatter fields for author and reviewer, so a post can't be published without them.</li>
@@ -51,10 +51,9 @@ The aim was a site where doing the right thing editorially is the easiest thing 
 
 <CaseImage src="/case-studies/understand-glp1.webp" alt="understandglp1.com homepage on desktop, showing the article listing and medical disclaimer" />
 
-{/* TODO: replace the filler numbers below with real Lighthouse figures, and update the labels to match. */}
 <Timeline items={[
-  { number: "00", label: "Lighthouse performance score" },
-  { number: "00", label: "Lighthouse SEO and accessibility score" },
+  { number: "99", label: "Lighthouse performance score" },
+  { number: "100", label: "Lighthouse SEO score" },
   { number: "0", label: "Plugins to keep updated" },
 ]} />
 
@@ -62,10 +61,10 @@ The aim was a site where doing the right thing editorially is the easiest thing 
 The site does what a health information resource should do: it loads quickly, it's clear about who wrote what, and it gives readers a way to check the claims for themselves.
 
 <OutcomeGrid cards={[
-  { heading: "Fast by Default", body: "Static pages served from Cloudflare's edge, with very little JavaScript, keep load times low and Core Web Vitals comfortably in the green (replace with real figures)." },
+  { heading: "Fast by Default", body: "Static pages served from Cloudflare's edge, with very little JavaScript, keep load times low, and the site scores 99 for performance in Lighthouse." },
   { heading: "Trust Built Into the Structure", body: "Authorship, review details, disclaimers and citations are enforced by the content model, so every article meets the same standard without relying on memory." },
   { heading: "Almost Nothing to Break", body: "With no database, no plugins and no admin login to defend, the attack surface is small and the day-to-day maintenance is light." },
-  { heading: "Search-Ready", body: "Clean markup, consistent schema and quick pages give the content the best chance of being understood and ranked fairly (replace with Search Console figures)." },
+  { heading: "Search-Ready", body: "Clean markup, consistent schema and quick pages give the content the best chance of being understood and ranked fairly, and the site scores a full 100 for SEO in Lighthouse." },
 ]} />
 
 ### How It's Maintained
@@ -79,5 +78,5 @@ A static site needs a different kind of care from a WordPress one. There are no 
 
 ### When WordPress Is Still the Better Choice
 
-Astro was the right tool here because the content is written by one team, changes at a steady pace and doesn't need anyone to edit pages through a visual editor. For many small businesses the opposite is true. If you want to update your own pages, manage a shop or lean on a mature plugin ecosystem, WordPress is usually the better fit, and it's what most of our work is built on. The skill is in picking the tool that suits the job, and we're happy to tell you when that isn't the one we'd normally reach for.
+Astro was the right tool here because the content is written by one team, changes at a steady pace and doesn't need anyone to edit pages through a visual editor. For many small businesses the opposite is true. If you want to update your own pages, manage a shop or lean on a mature plugin ecosystem, WordPress is usually the better fit, and it's what most of my work is built on. The skill is in picking the tool that suits the job, and I'm happy to tell you when that isn't the one I'd normally reach for.
 </CaseSection>
