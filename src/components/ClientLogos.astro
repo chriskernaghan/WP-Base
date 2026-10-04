@@ -1,41 +1,49 @@
 ---
 // Client logo strip. Placeholder wordmarks, swap each <svg> for the real logo later.
-// Styles are scoped to this component, so nothing here can clash with the global CSS.
+// Each logo links to its case study. Styles are scoped to this component.
 ---
 
-<section class="client-logos" aria-label="Sites and businesses I work with">
+<section class="client-logos" aria-label="Case studies">
   <div class="client-logos__inner">
     <ul class="client-logos__row">
 
       <!-- CATAGEN -->
       <li>
-        <svg viewBox="0 0 190 32" role="img" aria-label="CATAGEN">
-          <text x="32" y="23" class="t-sans" font-weight="700" font-size="21" letter-spacing="3" fill="currentColor">CATAGEN</text>
-        </svg>
+        <a href="/case-studies/catagen/" aria-label="CATAGEN case study">
+          <svg viewBox="0 0 135 32" role="img" aria-hidden="true">
+            <text x="0" y="23" class="t-sans" font-weight="700" font-size="21" letter-spacing="3" fill="currentColor">CATAGEN</text>
+          </svg>
+        </a>
       </li>
 
       <!-- Understand GLP1 -->
       <li>
-        <svg viewBox="0 0 190 32" role="img" aria-label="Understand GLP1">
-          <text x="0" y="23" class="t-serif" font-size="26" fill="currentColor">understand<tspan font-style="italic" fill="currentColor" opacity=".7">GLP1</tspan></text>
-        </svg>
+        <a href="/case-studies/understandglp1/" aria-label="Understand GLP1 case study">
+          <svg viewBox="0 0 190 32" role="img" aria-hidden="true">
+            <text x="0" y="23" class="t-serif" font-size="26" fill="currentColor">understand<tspan font-style="italic" opacity=".7">GLP1</tspan></text>
+          </svg>
+        </a>
       </li>
 
       <!-- ExportExplore -->
       <li>
-        <svg viewBox="0 0 200 32" role="img" aria-label="ExportExplore">
-          <path d="M4 22L22 6M22 6H10M22 6v12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="34" y="23" class="t-sans" font-size="20" fill="currentColor"><tspan font-weight="700">Export</tspan><tspan font-weight="300">Explore</tspan></text>
-        </svg>
+        <a href="/case-studies/exportexplore/" aria-label="ExportExplore case study">
+          <svg viewBox="0 0 200 32" role="img" aria-hidden="true">
+            <path d="M4 22L22 6M22 6H10M22 6v12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="34" y="23" class="t-sans" font-size="20" fill="currentColor"><tspan font-weight="700">Export</tspan><tspan font-weight="300">Explore</tspan></text>
+          </svg>
+        </a>
       </li>
 
       <!-- Inclusion IQ -->
       <li>
-        <svg viewBox="0 0 170 32" role="img" aria-label="Inclusion IQ">
-          <circle cx="14" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/>
-          <circle cx="14" cy="16" r="3.2" fill="currentColor"/>
-          <text x="32" y="23" class="t-sans" font-size="21" fill="currentColor"><tspan font-weight="400">Inclusion</tspan><tspan font-weight="800" dx="4">IQ</tspan></text>
-        </svg>
+        <a href="/case-studies/inclusion-iq/" aria-label="Inclusion IQ case study">
+          <svg viewBox="0 0 170 32" role="img" aria-hidden="true">
+            <circle cx="14" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/>
+            <circle cx="14" cy="16" r="3.2" fill="currentColor"/>
+            <text x="32" y="23" class="t-sans" font-size="21" fill="currentColor"><tspan font-weight="400">Inclusion</tspan><tspan font-weight="800" dx="4">IQ</tspan></text>
+          </svg>
+        </a>
       </li>
 
     </ul>
@@ -71,6 +79,11 @@
     margin: 0;
     padding: 0;
   }
+  .client-logos__row a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
   .client-logos__row svg {
     height: 30px;
     width: auto;
@@ -80,7 +93,8 @@
     opacity: .5;
     transition: opacity .2s ease;
   }
-  .client-logos__row li:hover svg {
+  .client-logos__row a:hover svg,
+  .client-logos__row a:focus-visible svg {
     opacity: .9;
   }
   .t-sans {
