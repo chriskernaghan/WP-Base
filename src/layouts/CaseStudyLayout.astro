@@ -1,6 +1,6 @@
 ---
 // CaseStudyLayout.astro — wraps every case study.
-// Hero with meta, optional testimonial + image break, then MDX body, then CTA.
+// Hero with meta, then MDX body, then optional testimonial + image break, then CTA.
 
 import BaseLayout from './BaseLayout.astro';
 
@@ -30,8 +30,9 @@ const { frontmatter } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const shareImage = frontmatter.featuredImage ?? '/og-image.png';
 
-// When a case study supplies a breakImage, the testimonial moves up into the
-// break under the hero instead of repeating at the foot of the page.
+// When a case study supplies a breakImage, the testimonial is shown as a
+// two-column break with that image, just above the CTA. Without one it falls
+// back to the plain centred testimonial at the foot of the body.
 const hasBreak = Boolean(frontmatter.testimonial && frontmatter.breakImage);
 
 const schema = [
@@ -100,6 +101,20 @@ const meta = [
     </div>
   </div>
 
+  <div class="case-content">
+    <slot />
+
+    {frontmatter.testimonial && !hasBreak && (
+      <div class="case-testimonial">
+        <p>"{frontmatter.testimonial.quote}"</p>
+        <div class="case-testimonial-attribution">
+          <div class="case-testimonial-name">{frontmatter.testimonial.name}</div>
+          <div class="case-testimonial-role">{frontmatter.testimonial.role}</div>
+        </div>
+      </div>
+    )}
+  </div>
+
   {hasBreak && frontmatter.testimonial && (
     <section class="case-break">
       <div class="case-break-text">
@@ -119,25 +134,12 @@ const meta = [
           alt={frontmatter.breakImageAlt ?? ''}
           width="1000"
           height="1250"
+          loading="lazy"
           decoding="async"
         />
       </div>
     </section>
   )}
-
-  <div class="case-content">
-    <slot />
-
-    {frontmatter.testimonial && !hasBreak && (
-      <div class="case-testimonial">
-        <p>"{frontmatter.testimonial.quote}"</p>
-        <div class="case-testimonial-attribution">
-          <div class="case-testimonial-name">{frontmatter.testimonial.name}</div>
-          <div class="case-testimonial-role">{frontmatter.testimonial.role}</div>
-        </div>
-      </div>
-    )}
-  </div>
 
   <div class="case-cta">
     <h2>{frontmatter.cta.heading}</h2>
