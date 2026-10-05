@@ -45,6 +45,11 @@ const caseStudies = defineCollection({
     heroLogoHtml: z.string().optional(),
     // Featured image used on the homepage clients section and listings
     featuredImage: z.string().optional(),
+    // Atmosphere image for the testimonial break under the hero. When set,
+    // the testimonial moves up beside it and no longer repeats at the foot
+    // of the page. Path lives in /public, e.g. "/case-studies/catagen-atmosphere-fuel.webp".
+    breakImage: z.string().optional(),
+    breakImageAlt: z.string().optional(),
     // Closing CTA below the testimonial
     cta: z.object({
       heading: z.string(),
