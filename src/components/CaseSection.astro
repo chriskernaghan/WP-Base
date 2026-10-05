@@ -1,6 +1,8 @@
 ---
 // CaseSection.astro — section wrapper for case study bodies.
-// Handles the label + heading; MDX body goes in the slot.
+// Label and heading sit in a head block on the left (stacked above the body
+// on narrower screens); the MDX body goes in the slot, in the right-hand
+// column. Wide furniture placed inside the slot spans both columns.
 //
 // Usage:
 //   <CaseSection label="The Challenge" heading="Hitting the Limits of Squarespace">
@@ -16,7 +18,9 @@ const { label, heading } = Astro.props;
 ---
 
 <div class="case-section">
-  <div class="case-section-label">{label}</div>
-  <h2>{heading}</h2>
+  <div class="case-section-head">
+    <div class="case-section-label">{label}</div>
+    <h2>{heading}</h2>
+  </div>
   <slot />
 </div>
