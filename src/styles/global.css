@@ -3393,6 +3393,20 @@ footer a:hover {
     grid-column: 1 / -1;
 }
 
+/* No rule under the last row. The list already has its own rule along the
+   top, and the section spacing below does the separating. With an even count
+   the last row holds two items, so on the two-column layout the second-to-last
+   odd item loses its rule as well. */
+.case-section ul.solution-tiles li:last-child {
+    border-bottom: none;
+}
+
+@media (min-width: 769px) {
+    .case-section ul.solution-tiles li:nth-last-child(2):nth-child(odd) {
+        border-bottom: none;
+    }
+}
+
 .case-section ul.solution-tiles li::before,
 .solution-tiles li::before {
     content: counter(solution, decimal-leading-zero);
