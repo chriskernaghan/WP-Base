@@ -4634,3 +4634,110 @@ footer a:hover {
         transition: none;
     }
 }
+
+.case-break {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--cream);
+}
+ 
+.case-break-text {
+    display: flex;
+    align-items: center;
+    padding: 5rem 4rem 5rem max(4rem, calc((100vw - var(--frame)) / 2));
+}
+ 
+.case-break-quote {
+    max-width: 34rem;
+    margin: 0;
+}
+ 
+.case-break-quote blockquote {
+    margin: 0 0 2rem;
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--midnight);
+}
+ 
+.case-break-quote blockquote p {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--midnight);
+}
+ 
+.case-break-quote figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-left: calc(1.5rem + 4px);
+}
+ 
+.case-break-name {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--midnight);
+}
+ 
+.case-break-role {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+ 
+.case-break-media {
+    position: relative;
+    min-height: 28rem;
+    overflow: hidden;
+}
+ 
+.case-break-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 35%;
+    display: block;
+}
+ 
+/* A light midnight wash pulls the photo towards the palette and keeps it
+   quieter than the project screenshots further down. */
+.case-break-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(8, 16, 28, 0.35), rgba(8, 16, 28, 0) 45%);
+    pointer-events: none;
+}
+ 
+@media (max-width: 1024px) {
+    .case-break {
+        grid-template-columns: 1fr;
+    }
+ 
+    .case-break-text {
+        padding: 3.5rem 2.5rem;
+    }
+ 
+    .case-break-media {
+        min-height: 0;
+        height: 18rem;
+    }
+ 
+    .case-break-media::after {
+        background: linear-gradient(to bottom, rgba(8, 16, 28, 0.25), rgba(8, 16, 28, 0) 50%);
+    }
+}
+ 
+@media (max-width: 768px) {
+    .case-break-text {
+        padding: 3rem 1.25rem;
+    }
+ 
+    .case-break-media {
+        height: 14rem;
+    }
+}
