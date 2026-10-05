@@ -50,6 +50,9 @@ const caseStudies = defineCollection({
     // of the page. Path lives in /public, e.g. "/case-studies/catagen-atmosphere-fuel.webp".
     breakImage: z.string().optional(),
     breakImageAlt: z.string().optional(),
+    // Optional focus point for the break image, as a CSS object-position value
+    // such as "50% 25%". Defaults to 50% 70% in the stylesheet.
+    breakImagePosition: z.string().optional(),
     // Closing CTA below the testimonial
     cta: z.object({
       heading: z.string(),
