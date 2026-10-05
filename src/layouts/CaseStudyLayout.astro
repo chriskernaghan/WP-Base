@@ -30,11 +30,12 @@ const { frontmatter } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const shareImage = frontmatter.featuredImage ?? '/og-image.png';
 
-// Any case study with a testimonial gets the break above the CTA. With a
-// breakImage it is two columns (quote and image); without one it is a single
-// full-width quote band in the same style.
+// The break sits above the CTA and adapts to what the case study supplies:
+// testimonial + breakImage gives two columns, a testimonial alone gives a
+// single quote band, and a breakImage alone gives a full-width image banner.
 const hasTestimonial = Boolean(frontmatter.testimonial);
 const hasBreakImage = Boolean(frontmatter.breakImage);
+const breakVariant = hasTestimonial && hasBreakImage ? '' : hasTestimonial ? ' case-break--text' : ' case-break--image';
 
 const schema = [
   {
@@ -106,19 +107,21 @@ const meta = [
     <slot />
   </div>
 
-  {hasTestimonial && frontmatter.testimonial && (
-    <section class={`case-break${hasBreakImage ? '' : ' case-break--text'}`}>
-      <div class="case-break-text">
-        <figure class="case-break-quote">
-          <blockquote>
-            <p>“{frontmatter.testimonial.quote}”</p>
-          </blockquote>
-          <figcaption>
-            <span class="case-break-name">{frontmatter.testimonial.name}</span>
-            <span class="case-break-role">{frontmatter.testimonial.role}</span>
-          </figcaption>
-        </figure>
-      </div>
+  {(hasTestimonial || hasBreakImage) && (
+    <section class={`case-break${breakVariant}`}>
+      {frontmatter.testimonial && (
+        <div class="case-break-text">
+          <figure class="case-break-quote">
+            <blockquote>
+              <p>“{frontmatter.testimonial.quote}”</p>
+            </blockquote>
+            <figcaption>
+              <span class="case-break-name">{frontmatter.testimonial.name}</span>
+              <span class="case-break-role">{frontmatter.testimonial.role}</span>
+            </figcaption>
+          </figure>
+        </div>
+      )}
       {hasBreakImage && (
         <div class="case-break-media">
           <img
@@ -131,6 +134,8 @@ const meta = [
           />
         </div>
       )}
+    </section>
+  )}
     </section>
   )}
 
