@@ -4192,7 +4192,7 @@ footer a:hover {
 
 .case-break--image .case-break-media {
     min-height: 0;
-    height: clamp(14rem, 28vw, 24rem);
+    height: clamp(16rem, 30vw, 28rem);
 }
 
 .case-break--image .case-break-media::after {
