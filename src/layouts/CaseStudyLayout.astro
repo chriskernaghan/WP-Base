@@ -1,6 +1,6 @@
 ---
 // CaseStudyLayout.astro — wraps every case study.
-// Hero with meta, then MDX body, then optional testimonial + image break, then CTA.
+// Hero with meta, then MDX body, then optional testimonial break, then CTA.
 
 import BaseLayout from './BaseLayout.astro';
 
@@ -30,10 +30,11 @@ const { frontmatter } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const shareImage = frontmatter.featuredImage ?? '/og-image.png';
 
-// When a case study supplies a breakImage, the testimonial is shown as a
-// two-column break with that image, just above the CTA. Without one it falls
-// back to the plain centred testimonial at the foot of the body.
-const hasBreak = Boolean(frontmatter.testimonial && frontmatter.breakImage);
+// Any case study with a testimonial gets the break above the CTA. With a
+// breakImage it is two columns (quote and image); without one it is a single
+// full-width quote band in the same style.
+const hasTestimonial = Boolean(frontmatter.testimonial);
+const hasBreakImage = Boolean(frontmatter.breakImage);
 
 const schema = [
   {
@@ -103,20 +104,10 @@ const meta = [
 
   <div class="case-content">
     <slot />
-
-    {frontmatter.testimonial && !hasBreak && (
-      <div class="case-testimonial">
-        <p>"{frontmatter.testimonial.quote}"</p>
-        <div class="case-testimonial-attribution">
-          <div class="case-testimonial-name">{frontmatter.testimonial.name}</div>
-          <div class="case-testimonial-role">{frontmatter.testimonial.role}</div>
-        </div>
-      </div>
-    )}
   </div>
 
-  {hasBreak && frontmatter.testimonial && (
-    <section class="case-break">
+  {hasTestimonial && frontmatter.testimonial && (
+    <section class={`case-break${hasBreakImage ? '' : ' case-break--text'}`}>
       <div class="case-break-text">
         <figure class="case-break-quote">
           <blockquote>
@@ -128,16 +119,18 @@ const meta = [
           </figcaption>
         </figure>
       </div>
-      <div class="case-break-media">
-        <img
-          src={frontmatter.breakImage}
-          alt={frontmatter.breakImageAlt ?? ''}
-          width="1000"
-          height="1250"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+      {hasBreakImage && (
+        <div class="case-break-media">
+          <img
+            src={frontmatter.breakImage}
+            alt={frontmatter.breakImageAlt ?? ''}
+            width="1000"
+            height="1250"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
     </section>
   )}
 
