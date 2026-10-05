@@ -4172,6 +4172,19 @@ footer a:hover {
     color: var(--text-light);
 }
 
+/* No image: a single full-width quote band, aligned to the same frame */
+.case-break--text {
+    grid-template-columns: 1fr;
+}
+
+.case-break--text .case-break-quote {
+    max-width: 52rem;
+}
+
+.case-break--text .case-break-quote blockquote p {
+    font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+}
+
 .case-break-media {
     position: relative;
     min-height: 28rem;
