@@ -53,9 +53,11 @@ const { quote, name, role, src, alt } = Astro.props;
 
   .case-break blockquote {
     margin: 0 0 1.75rem;
-    font-family: 'DM Serif Display', Georgia, serif;
-    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    font-family: inherit;
+    font-weight: 500;
+    font-size: clamp(1.35rem, 2.2vw, 1.85rem);
     line-height: 1.4;
+    letter-spacing: -0.01em;
     border-left: 3px solid var(--accent, #e8751a);
     padding-left: 1.25rem;
   }
@@ -65,7 +67,7 @@ const { quote, name, role, src, alt } = Astro.props;
     flex-direction: column;
     gap: 0.15rem;
     padding-left: calc(1.25rem + 3px);
-    font-family: 'Epilogue', system-ui, sans-serif;
+    font-family: inherit;
     font-size: 0.95rem;
   }
 
@@ -109,11 +111,11 @@ const { quote, name, role, src, alt } = Astro.props;
     }
 
     .case-break__text {
-      padding: 4rem clamp(2rem, 5vw, 5rem);
+      padding: 4rem 4rem 4rem max(1.5rem, calc((100vw - 1200px) / 2));
     }
 
     .case-break__text figure {
-      margin-inline: 0 auto;
+      margin: 0;
     }
 
     .case-break__media {
