@@ -21,6 +21,15 @@ import CaseSection from '../../components/CaseSection.astro';
 import Timeline from '../../components/Timeline.astro';
 import OutcomeGrid from '../../components/OutcomeGrid.astro';
 import CaseImage from '../../components/CaseImage.astro';
+import CaseBreak from '../../components/CaseBreak.astro';
+
+<CaseBreak
+  quote={frontmatter.testimonial.quote}
+  name={frontmatter.testimonial.name}
+  role={frontmatter.testimonial.role}
+  src="/case-studies/catagen-atmosphere-fuel.webp"
+  alt="A forecourt canopy lit with green strip lighting at dusk, with a car parked in the foreground"
+/>
 
 <CaseSection label="The Challenge" heading="Hitting the Limits of Squarespace">
 Catagen came to me with a problem many growing businesses face: they had outgrown their website platform. Their Squarespace site had served them well in the early days, but as their team expanded and their technical requirements became more sophisticated, the limitations became clear.
