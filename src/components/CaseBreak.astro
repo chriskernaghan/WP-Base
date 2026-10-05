@@ -1,0 +1,132 @@
+---
+// Full-width break that sits directly under the case study hero.
+// Testimonial on the left, atmosphere image on the right.
+interface Props {
+  quote: string;
+  name: string;
+  role?: string;
+  src: string;
+  alt: string;
+}
+
+const { quote, name, role, src, alt } = Astro.props;
+---
+
+<section class="case-break">
+  <div class="case-break__text">
+    <figure>
+      <blockquote>{quote}</blockquote>
+      <figcaption>
+        <strong>{name}</strong>
+        {role && <span>{role}</span>}
+      </figcaption>
+    </figure>
+  </div>
+  <div class="case-break__media">
+    <img src={src} alt={alt} width="1000" height="1250" loading="eager" decoding="async" />
+  </div>
+</section>
+
+<style>
+  /* Breaks out of whatever width the layout gives the content column */
+  .case-break {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-block: 0 3rem;
+    background: var(--midnight, #14213d);
+    color: var(--cream, #faf6ee);
+  }
+
+  .case-break__text {
+    display: flex;
+    align-items: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .case-break__text figure {
+    margin: 0;
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+
+  .case-break blockquote {
+    margin: 0 0 1.75rem;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    line-height: 1.4;
+    border-left: 3px solid var(--accent, #e8751a);
+    padding-left: 1.25rem;
+  }
+
+  .case-break figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-left: calc(1.25rem + 3px);
+    font-family: 'Epilogue', system-ui, sans-serif;
+    font-size: 0.95rem;
+  }
+
+  .case-break figcaption span {
+    color: var(--sand, #d9cbb0);
+  }
+
+  .case-break__media {
+    position: relative;
+    min-height: 16rem;
+    max-height: 26rem;
+    overflow: hidden;
+  }
+
+  .case-break__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 35%;
+    display: block;
+  }
+
+  /* Soft midnight wash so the photo sits inside the palette and stays quieter than the screenshots */
+  .case-break__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(20, 33, 61, 0.35),
+      rgba(20, 33, 61, 0.15)
+    );
+    pointer-events: none;
+  }
+
+  @media (min-width: 860px) {
+    .case-break {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .case-break__text {
+      padding: 4rem clamp(2rem, 5vw, 5rem);
+    }
+
+    .case-break__text figure {
+      margin-inline: 0 auto;
+    }
+
+    .case-break__media {
+      min-height: 30rem;
+      max-height: none;
+    }
+
+    .case-break__media::after {
+      background: linear-gradient(
+        to right,
+        rgba(20, 33, 61, 0.55),
+        rgba(20, 33, 61, 0.1) 35%
+      );
+    }
+  }
+</style>
