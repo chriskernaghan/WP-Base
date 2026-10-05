@@ -3177,35 +3177,78 @@ footer a:hover {
     font-weight: 500;
 }
 
+/* ==========================================================================
+   CASE STUDY BODY — TWO-COLUMN SECTIONS
+   The frame is the full 1200px, the same width the hero content sits on. Each
+   section is a two-column grid: the head (label and heading) on the left,
+   prose on the right. Wide furniture spans both columns, and any prose that
+   follows a piece of furniture runs flush left at reading width, so the
+   right-hand column never sits beside an empty left one.
+   ========================================================================== */
+
 .case-content {
-    max-width: var(--reading);
+    max-width: calc(var(--frame) + 8rem);
     margin: 0 auto;
     padding: 6rem 4rem;
 }
 
-/* Lets wide furniture (images, timeline, outcome grid) break out of the
-   800px reading column up to the 1200px frame, while prose stays readable.
-   margin-left:50% + translateX(-50%) centres the element on the content
-   column's centre line, which is also the frame's centre line because
-   .case-content is itself centred. width is capped so it never exceeds the
-   frame or spills past the viewport gutter. */
-
-.case-breakout,
-.case-content .solution-tiles,
-.case-content .timeline,
-.case-content .outcome-grid,
-.case-content .responsive-grid,
-.case-content .case-testimonial,
-.case-content > .case-placeholder,
-.case-content .case-section > .case-placeholder {
-    width: min(var(--frame), calc(100vw - 3rem));
-    max-width: none;
-    margin-left: 50%;
-    transform: translateX(-50%);
+/* Sections are divided by a hairline rule, with the same space either side of
+   it. Furniture that sits between sections (screenshot, timeline) gets the
+   same spacing, so every block on the page is held apart by one measure. */
+.case-section {
+    display: grid;
+    grid-template-columns: 20rem minmax(0, 1fr);
+    column-gap: 4rem;
+    margin-bottom: 6rem;
+    padding-top: 6rem;
+    border-top: 1px solid rgba(8, 16, 28, 0.12);
 }
 
-.case-section {
-    margin-bottom: 5rem;
+/* The first section sits straight under the break, which has its own edge,
+   and the last one sits above the CTA band, which has its own padding. */
+.case-content > .case-section:first-child {
+    padding-top: 0;
+    border-top: none;
+}
+
+.case-content > .case-section:last-child {
+    margin-bottom: 0;
+}
+
+.case-content > .case-image,
+.case-content > .timeline {
+    margin-block: 6rem;
+}
+
+/* Everything goes in the right-hand column unless it says otherwise */
+.case-section > * {
+    grid-column: 2;
+}
+
+.case-section > .case-section-head {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* Furniture spans the full frame */
+.case-section > .solution-tiles,
+.case-section > .timeline,
+.case-section > .outcome-grid,
+.case-section > .responsive-grid,
+.case-section > .case-image,
+.case-section > .case-placeholder,
+.case-section > .case-testimonial {
+    grid-column: 1 / -1;
+}
+
+/* Prose that comes after a piece of furniture drops back to the full width,
+   flush left, instead of sitting in the right column beside an empty left one. */
+.case-section > :is(.solution-tiles, .timeline, .outcome-grid, .responsive-grid, .case-image, .case-placeholder) ~ * {
+    grid-column: 1 / -1;
+}
+
+.case-section > :is(.solution-tiles, .timeline, .outcome-grid, .responsive-grid, .case-image, .case-placeholder) ~ :is(p, h3, ul, ol) {
+    max-width: 50rem;
 }
 
 .case-section-label {
@@ -3220,12 +3263,23 @@ footer a:hover {
 
 .case-section h2 {
     font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
     font-weight: 600;
     color: var(--midnight);
-    line-height: 1.05;
+    line-height: 1.1;
     letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
+    margin: 0;
+}
+
+/* Sub-headings inside a section (the "Built for Every Device" kind) */
+.case-section > h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--midnight);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 4rem 0 1.25rem;
 }
 
 .case-section p {
@@ -3233,6 +3287,32 @@ footer a:hover {
     line-height: 1.8;
     color: var(--text-dark);
     margin-bottom: 1.5rem;
+}
+
+/* Below this the left column would squeeze the prose, so the head stacks
+   above the body and the heading returns to its larger size. */
+@media (max-width: 1100px) {
+    .case-section {
+        display: block;
+    }
+
+    .case-section h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .case-section {
+        margin-bottom: 3.5rem;
+        padding-top: 3.5rem;
+    }
+
+    .case-content > .case-image,
+    .case-content > .timeline {
+        margin-block: 3.5rem;
+    }
 }
 
 .case-list,
@@ -3940,22 +4020,6 @@ footer a:hover {
         top: 1.9rem;
     }
 
-    /* On mobile the reading column already fills the screen, so the
-       breakout would push furniture wider than the viewport. Reset it. */
-
-.case-breakout,
-    .case-content .solution-tiles,
-    .case-content .timeline,
-    .case-content .outcome-grid,
-    .case-content .responsive-grid,
-    .case-content .case-testimonial,
-    .case-content > .case-placeholder,
-    .case-content .case-section > .case-placeholder {
-        width: 100%;
-        margin-left: 0;
-        transform: none;
-    }
-
     .case-logo {
         max-width: 200px;
     }
@@ -4026,6 +4090,123 @@ footer a:hover {
 }
 .case-testimonial-role {
     font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   CASE STUDY — TESTIMONIAL + IMAGE BREAK
+   Sits directly under .case-hero. Rendered by CaseStudyLayout when a case
+   study sets breakImage in its frontmatter. The text column's left padding
+   mirrors .hero-split-left, so the quote lines up with the 1200px frame.
+   ========================================================================== */
+
+.case-break {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--midnight);
+    border-top: 1px solid rgba(245, 241, 232, 0.08);
+}
+
+.case-break-text {
+    display: flex;
+    align-items: center;
+    padding: 5rem 4rem 5rem max(4rem, calc((100vw - var(--frame)) / 2));
+}
+
+.case-break-quote {
+    max-width: 34rem;
+    margin: 0;
+}
+
+.case-break-quote blockquote {
+    margin: 0 0 2rem;
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--accent);
+}
+
+.case-break-quote blockquote p {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+}
+
+.case-break-quote figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-left: calc(1.5rem + 4px);
+}
+
+.case-break-name {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+}
+
+.case-break-role {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.case-break-media {
+    position: relative;
+    min-height: 28rem;
+    overflow: hidden;
+}
+
+.case-break-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Wide slice of a portrait photo: this shows the pumps and the car rather
+       than just the canopy. Raise towards 100% for more of the bottom. */
+    object-position: 50% 70%;
+    display: block;
+}
+
+/* A light midnight wash pulls the photo towards the palette and keeps it
+   quieter than the project screenshots further down. */
+.case-break-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(8, 16, 28, 0.35), rgba(8, 16, 28, 0) 45%);
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .case-break {
+        grid-template-columns: 1fr;
+    }
+
+    .case-break-text {
+        padding: 3.5rem 2.5rem;
+    }
+
+    .case-break-media {
+        min-height: 0;
+        height: 18rem;
+    }
+
+    .case-break-media::after {
+        background: linear-gradient(to bottom, rgba(8, 16, 28, 0.25), rgba(8, 16, 28, 0) 50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .case-break-text {
+        padding: 3rem 1.25rem;
+    }
+
+    .case-break-media {
+        height: 14rem;
+    }
 }
 
 /* ============================================
@@ -4599,6 +4780,20 @@ footer a:hover {
     }
 }
 
+/* ==========================================================================
+   SCROLL REVEAL
+   Site-wide fade-up, applied by the inline script at the foot of BaseLayout.
+   Nothing is hidden until that script has marked its targets, so a page with
+   the script blocked or broken renders as plain static markup.
+
+   Movement uses the independent `translate` property rather than `transform`.
+   Several blocks already carry a transform of their own, the case study
+   breakout furniture in particular (margin-left:50% plus translateX(-50%)),
+   and a transform declared here would overwrite that and throw them half a
+   column to the right. `translate` composes with an existing transform
+   instead of replacing it.
+   ========================================================================== */
+
 .has-reveal [data-reveal] {
     opacity: 0;
     translate: 0 22px;
@@ -4618,274 +4813,5 @@ footer a:hover {
         opacity: 1;
         translate: none;
         transition: none;
-    }
-}
-
-.case-break {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--midnight);
-    border-top: 1px solid rgba(245, 241, 232, 0.08);
-}
-
-.case-break-text {
-    display: flex;
-    align-items: center;
-    padding: 5rem 4rem 5rem max(4rem, calc((100vw - var(--frame)) / 2));
-}
-
-.case-break-quote {
-    max-width: 34rem;
-    margin: 0;
-}
-
-.case-break-quote blockquote {
-    margin: 0 0 2rem;
-    padding-left: 1.5rem;
-    border-left: 4px solid var(--accent);
-}
-
-.case-break-quote blockquote p {
-    margin: 0;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-    font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-}
-
-.case-break-quote figcaption {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding-left: calc(1.5rem + 4px);
-}
-
-.case-break-name {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--cream);
-}
-
-.case-break-role {
-    font-size: 0.9rem;
-    color: var(--text-light);
-}
-
-.case-break-media {
-    position: relative;
-    min-height: 28rem;
-    overflow: hidden;
-}
-
-.case-break-media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Wide slice of a portrait photo: this shows the pumps and the car rather
-       than just the canopy. Raise towards 100% for more of the bottom. */
-    object-position: 50% 70%;
-    display: block;
-}
-
-/* A light midnight wash pulls the photo towards the palette and keeps it
-   quieter than the project screenshots further down. */
-.case-break-media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(8, 16, 28, 0.35), rgba(8, 16, 28, 0) 45%);
-    pointer-events: none;
-}
-
-@media (max-width: 1024px) {
-    .case-break {
-        grid-template-columns: 1fr;
-    }
-
-    .case-break-text {
-        padding: 3.5rem 2.5rem;
-    }
-
-    .case-break-media {
-        min-height: 0;
-        height: 18rem;
-    }
-
-    .case-break-media::after {
-        background: linear-gradient(to bottom, rgba(8, 16, 28, 0.25), rgba(8, 16, 28, 0) 50%);
-    }
-}
-
-@media (max-width: 768px) {
-    .case-break-text {
-        padding: 3rem 1.25rem;
-    }
-
-    .case-break-media {
-        height: 14rem;
-    }
-}
-
-.case-content {
-    max-width: calc(var(--frame) + 8rem);
-    margin: 0 auto;
-    padding: 6rem 4rem;
-}
-
-.case-section {
-    display: grid;
-    grid-template-columns: 20rem minmax(0, 1fr);
-    column-gap: 4rem;
-    margin-bottom: 5rem;
-}
-
-/* Everything goes in the right-hand column unless it says otherwise */
-.case-section > * {
-    grid-column: 2;
-}
-
-.case-section > .case-section-head {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-/* Furniture spans the full frame */
-.case-section > .solution-tiles,
-.case-section > .timeline,
-.case-section > .outcome-grid,
-.case-section > .responsive-grid,
-.case-section > .case-image,
-.case-section > .case-placeholder,
-.case-section > .case-testimonial {
-    grid-column: 1 / -1;
-}
-
-.case-section-label {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--midnight);
-    margin-bottom: 1rem;
-}
-
-.case-section h2 {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(1.6rem, 2.4vw, 2rem);
-    font-weight: 600;
-    color: var(--midnight);
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin: 0;
-}
-
-.case-section p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-}
-
-/* Below this the left column would squeeze the prose, so the head stacks
-   above the body and the heading returns to its larger size. */
-@media (max-width: 1100px) {
-    .case-section {
-        display: block;
-    }
-
-    .case-section h2 {
-        font-size: clamp(2rem, 4vw, 3rem);
-        line-height: 1.05;
-        margin-bottom: 1.5rem;
-    }
-}
-
-.case-content {
-    max-width: calc(var(--frame) + 8rem);
-    margin: 0 auto;
-    padding: 6rem 4rem;
-}
- 
-.case-section {
-    display: grid;
-    grid-template-columns: 20rem minmax(0, 1fr);
-    column-gap: 4rem;
-    margin-bottom: 4rem;
-    padding-top: 4rem;
-    border-top: 1px solid rgba(8, 16, 28, 0.12);
-}
- 
-/* The first section sits straight under the break, which already has its own
-   edge, so it drops the rule and the extra padding. */
-.case-content > .case-section:first-child {
-    padding-top: 0;
-    border-top: none;
-}
- 
-/* Everything goes in the right-hand column unless it says otherwise */
-.case-section > * {
-    grid-column: 2;
-}
- 
-.case-section > .case-section-head {
-    grid-column: 1;
-    grid-row: 1;
-}
- 
-/* Furniture spans the full frame */
-.case-section > .solution-tiles,
-.case-section > .timeline,
-.case-section > .outcome-grid,
-.case-section > .responsive-grid,
-.case-section > .case-image,
-.case-section > .case-placeholder,
-.case-section > .case-testimonial {
-    grid-column: 1 / -1;
-}
- 
-.case-section-label {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--midnight);
-    margin-bottom: 1rem;
-}
- 
-.case-section h2 {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(1.6rem, 2.4vw, 2rem);
-    font-weight: 600;
-    color: var(--midnight);
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin: 0;
-}
- 
-.case-section p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-}
- 
-/* Below this the left column would squeeze the prose, so the head stacks
-   above the body and the heading returns to its larger size. */
-@media (max-width: 1100px) {
-    .case-section {
-        display: block;
-    }
- 
-    .case-section h2 {
-        font-size: clamp(2rem, 4vw, 3rem);
-        line-height: 1.05;
-        margin-bottom: 1.5rem;
     }
 }
