@@ -4185,6 +4185,20 @@ footer a:hover {
     font-size: clamp(1.5rem, 2.6vw, 2.25rem);
 }
 
+/* Image only: a full-width atmosphere banner with no quote beside it */
+.case-break--image {
+    grid-template-columns: 1fr;
+}
+
+.case-break--image .case-break-media {
+    min-height: 0;
+    height: clamp(14rem, 28vw, 24rem);
+}
+
+.case-break--image .case-break-media::after {
+    background: linear-gradient(to bottom, rgba(8, 16, 28, 0.2), rgba(8, 16, 28, 0));
+}
+
 .case-break-media {
     position: relative;
     min-height: 28rem;
