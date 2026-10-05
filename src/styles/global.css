@@ -3204,8 +3204,8 @@ footer a:hover {
     border-top: 1px solid rgba(8, 16, 28, 0.12);
 }
 
-/* The first section sits straight under the break, which has its own edge,
-   and the last one sits above the CTA band, which has its own padding. */
+/* The first section opens the page body, so it drops the rule and padding,
+   and the last one sits above the break or CTA, which have their own padding. */
 .case-content > .case-section:first-child {
     padding-top: 0;
     border-top: none;
@@ -4094,15 +4094,21 @@ footer a:hover {
 
 /* ==========================================================================
    CASE STUDY — TESTIMONIAL + IMAGE BREAK
-   Sits directly under .case-hero. Rendered by CaseStudyLayout when a case
-   study sets breakImage in its frontmatter. The text column's left padding
-   mirrors .hero-split-left, so the quote lines up with the 1200px frame.
+   Sits between the page body and the CTA. Rendered by CaseStudyLayout when a
+   case study sets breakImage in its frontmatter. The text column's left
+   padding mirrors .hero-split-left, so the quote lines up with the 1200px
+   frame.
    ========================================================================== */
 
 .case-break {
     display: grid;
     grid-template-columns: 1fr 1fr;
     background: var(--midnight);
+}
+
+/* Both this band and the CTA below it are dark, so a hairline keeps them
+   reading as two blocks. */
+.case-break + .case-cta {
     border-top: 1px solid rgba(245, 241, 232, 0.08);
 }
 
