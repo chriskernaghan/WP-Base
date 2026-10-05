@@ -4741,3 +4741,92 @@ footer a:hover {
         height: 14rem;
     }
 }
+
+/* ==========================================================================
+   CASE STUDY BODY — TWO-COLUMN SECTIONS
+   Replaces everything from `.case-content {` down to and including
+   `.case-section p {...}` in global.css. That is one contiguous run: it takes
+   in the old breakout block and its long comment, `.case-section`,
+   `.case-section-label`, `.case-section h2` and `.case-section p`.
+   Leave `.case-list, .case-section ul` and everything after it as it is.
+
+   The frame is now the full 1200px, the same width the hero content sits on,
+   so the left column lines up with the hero and the breakout transform is no
+   longer needed. Each section is a two-column grid: the head (label and
+   heading) on the left, prose on the right. Wide furniture spans both.
+   ========================================================================== */
+
+.case-content {
+    max-width: calc(var(--frame) + 8rem);
+    margin: 0 auto;
+    padding: 6rem 4rem;
+}
+
+.case-section {
+    display: grid;
+    grid-template-columns: 20rem minmax(0, 1fr);
+    column-gap: 4rem;
+    margin-bottom: 5rem;
+}
+
+/* Everything goes in the right-hand column unless it says otherwise */
+.case-section > * {
+    grid-column: 2;
+}
+
+.case-section > .case-section-head {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* Furniture spans the full frame */
+.case-section > .solution-tiles,
+.case-section > .timeline,
+.case-section > .outcome-grid,
+.case-section > .responsive-grid,
+.case-section > .case-image,
+.case-section > .case-placeholder,
+.case-section > .case-testimonial {
+    grid-column: 1 / -1;
+}
+
+.case-section-label {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--midnight);
+    margin-bottom: 1rem;
+}
+
+.case-section h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    font-weight: 600;
+    color: var(--midnight);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+.case-section p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+}
+
+/* Below this the left column would squeeze the prose, so the head stacks
+   above the body and the heading returns to its larger size. */
+@media (max-width: 1100px) {
+    .case-section {
+        display: block;
+    }
+
+    .case-section h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+    }
+}
