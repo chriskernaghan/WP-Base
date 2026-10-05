@@ -1,6 +1,6 @@
 ---
 // CaseStudyLayout.astro — wraps every case study.
-// Hero with meta, then MDX body, then optional testimonial, then CTA.
+// Hero with meta, optional testimonial + image break, then MDX body, then CTA.
 
 import BaseLayout from './BaseLayout.astro';
 
@@ -18,6 +18,8 @@ interface Props {
     heroLogo?: string;
     heroLogoHtml?: string;
     featuredImage?: string;
+    breakImage?: string;
+    breakImageAlt?: string;
     cta: { heading: string; body: string };
     testimonial?: { quote: string; name: string; role: string };
   };
@@ -27,6 +29,10 @@ const { frontmatter } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const shareImage = frontmatter.featuredImage ?? '/og-image.png';
+
+// When a case study supplies a breakImage, the testimonial moves up into the
+// break under the hero instead of repeating at the foot of the page.
+const hasBreak = Boolean(frontmatter.testimonial && frontmatter.breakImage);
 
 const schema = [
   {
@@ -94,10 +100,35 @@ const meta = [
     </div>
   </div>
 
+  {hasBreak && frontmatter.testimonial && (
+    <section class="case-break">
+      <div class="case-break-text">
+        <figure class="case-break-quote">
+          <blockquote>
+            <p>“{frontmatter.testimonial.quote}”</p>
+          </blockquote>
+          <figcaption>
+            <span class="case-break-name">{frontmatter.testimonial.name}</span>
+            <span class="case-break-role">{frontmatter.testimonial.role}</span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="case-break-media">
+        <img
+          src={frontmatter.breakImage}
+          alt={frontmatter.breakImageAlt ?? ''}
+          width="1000"
+          height="1250"
+          decoding="async"
+        />
+      </div>
+    </section>
+  )}
+
   <div class="case-content">
     <slot />
 
-    {frontmatter.testimonial && (
+    {frontmatter.testimonial && !hasBreak && (
       <div class="case-testimonial">
         <p>"{frontmatter.testimonial.quote}"</p>
         <div class="case-testimonial-attribution">
