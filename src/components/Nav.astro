@@ -229,7 +229,7 @@ const ICONS = {
 
     <a class="wpb-cta" href="mailto:hello@wpbase.co.uk">Get in Touch</a>
 
-    <button class="wpb-burger" id="wpb-burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <button class="wpb-burger" id="wpb-burger" aria-label="Open menu" aria-expanded="false" aria-controls="wpb-mobile"><span></span></button>
   </div>
 
   <div class="wpb-mobile" id="wpb-mobile">
@@ -302,11 +302,14 @@ const ICONS = {
 .wpb-header .wpb-foot-links a { color: var(--midnight); }
 
 /* The brand and the top-level triggers follow the bar's own ink colour, which
-   flips to cream while the header is sitting clear over the dark hero panel.
-   Everything inside the mega panel keeps its own colours, because the panel
-   always has a solid background of its own. */
+   flips to cream while the header is sitting clear over a dark hero. Everything
+   inside the mega panel keeps its own colours, because the panel always has a
+   solid background of its own. */
 .wpb-header .wpb-brand,
-.wpb-header .wpb-trigger { color: var(--hdr-ink); }
+.wpb-header .wpb-trigger {
+    color: var(--hdr-ink);
+    transition: color 0.25s ease;
+}
 
 .wpb-header .wpb-link-desc,
 .wpb-header .wpb-col-title,
@@ -332,18 +335,35 @@ const ICONS = {
     transition: background 0.25s ease, border-color 0.25s ease;
 }
 
-/* Clear header over the split homepage hero.
+/* ---------- clear header at the top of every page ----------
 
-   Scoped with :has(.hero-split) so no other page is affected, and switched off
-   again in the three cases where cream text would land on a light background:
-   once the page has scrolled away from the hero, while a mega panel is open,
-   and while the mobile menu is open. Written as a :not() chain rather than a
-   JS-applied class so the correct state paints on the first frame. The
-   data-scrolled attribute is the only part JS touches, and its absence means
-   "at the top", so there is no flash of the solid bar on load. */
+   The bar is transparent while the page sits at the top, then fades to solid
+   white once it has scrolled. Three things force it solid regardless: a mega
+   panel being open, the mobile menu being open, and having scrolled. Each
+   needs it, because the panel and the menu are white and the ink would
+   otherwise be cream on white.
+
+   Which ink to use depends on what is painted underneath the brand. The script
+   at the foot of this file looks at that and sets data-over="dark" or
+   data-over="light" on the header. Until it has, the header stays solid, so a
+   page never shows unreadable text, only a short fade as the script runs.
+
+   The homepage keeps its own CSS-only rule so its first frame paints clear
+   without waiting for the script. The split hero is dark behind the brand by
+   construction, so it can be stated outright. */
+
 body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="true"]):not(:has(.wpb-item[data-open="true"])) {
     --hdr-bg: transparent;
     --hdr-line: transparent;
+    --hdr-ink: var(--cream);
+}
+
+.wpb-header[data-over]:not([data-scrolled="true"]):not([data-mobile="true"]):not(:has(.wpb-item[data-open="true"])) {
+    --hdr-bg: transparent;
+    --hdr-line: transparent;
+}
+
+.wpb-header[data-over="dark"]:not([data-scrolled="true"]):not([data-mobile="true"]):not(:has(.wpb-item[data-open="true"])) {
     --hdr-ink: var(--cream);
 }
 
@@ -413,6 +433,39 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     transition: background 0.18s ease, color 0.18s ease;
 }
 .wpb-header .wpb-cta:hover { background: var(--midnight); color: var(--accent); }
+
+/* ---------- keyboard focus ----------
+   currentColor follows the bar's ink, so the ring is cream over a dark hero and
+   midnight over a light one, and never disappears into the background. */
+.wpb-header .wpb-brand:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+.wpb-header .wpb-trigger:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -8px;
+}
+.wpb-header .wpb-burger:focus-visible {
+    outline: 2px solid var(--hdr-ink);
+    outline-offset: 2px;
+}
+.wpb-header .wpb-cta:focus-visible {
+    outline: 2px solid var(--hdr-ink);
+    outline-offset: 3px;
+}
+.wpb-header .wpb-feature-cta:focus-visible,
+.wpb-header .wpb-mobile-cta:focus-visible {
+    outline: 2px solid var(--midnight);
+    outline-offset: 3px;
+}
+.wpb-header .wpb-acc-trigger:focus-visible {
+    outline: 2px solid var(--midnight);
+    outline-offset: -2px;
+}
+.wpb-header .wpb-foot-links a:focus-visible {
+    outline: 2px solid var(--midnight);
+    outline-offset: 3px;
+}
 
 /* ---------- panel ---------- */
 .wpb-mega {
@@ -643,8 +696,22 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
 .wpb-foot-dot { width: 6px; height: 6px; background: var(--accent); flex: none; }
 
 /* ---------- mobile ---------- */
-.wpb-burger { display: none; width: 44px; height: 44px; margin-left: auto; place-items: center; }
-.wpb-burger span { display: block; width: 22px; height: 2px; background: var(--hdr-ink); position: relative; }
+.wpb-burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    place-items: center;
+    color: var(--hdr-ink);
+}
+.wpb-burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--hdr-ink);
+    position: relative;
+    transition: background 0.25s ease;
+}
 .wpb-burger span::before,
 .wpb-burger span::after {
     content: "";
@@ -653,7 +720,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     width: 22px;
     height: 2px;
     background: var(--hdr-ink);
-    transition: transform 0.2s ease, top 0.2s ease;
+    transition: transform 0.2s ease, top 0.2s ease, background 0.25s ease;
 }
 .wpb-burger span::before { top: -7px; }
 .wpb-burger span::after { top: 7px; }
@@ -738,6 +805,16 @@ body[data-nav-open="true"] .wpb-backdrop { display: block; }
 @media (prefers-reduced-motion: reduce) {
     .wpb-header * { transition: none !important; }
 }
+
+/* Visitors who ask for less transparency get the solid bar at all times, so
+   legibility never depends on what happens to be behind it. */
+@media (prefers-reduced-transparency: reduce) {
+    .wpb-header {
+        --hdr-bg: var(--snow) !important;
+        --hdr-line: var(--wpb-line) !important;
+        --hdr-ink: var(--midnight) !important;
+    }
+}
 </style>
 
 <script>
@@ -780,18 +857,84 @@ body[data-nav-open="true"] .wpb-backdrop { display: block; }
     });
   }
 
-  // Only ever switches the clear header off. Absence of the attribute means
-  // "at the top of the page", which is what the CSS above assumes on load.
-  const syncScrolled = () => {
-    if (header) header.dataset.scrolled = String(window.scrollY > 24);
+  // ---------------------------------------------------------------------------
+  // Clear header: work out whether the page is dark or light behind the bar.
+  //
+  // Samples what is actually painted under the brand and walks down the stack of
+  // elements at that point until it finds a real background. A gradient counts
+  // too, using its first solid colour, because several heroes are gradients with
+  // no background-color at all. Nothing is keyed to a class name, so any page
+  // built later works without being wired in.
+  //
+  // Only meaningful at the top of the page, since that is the only place the bar
+  // is clear. Once the page has scrolled the bar is solid and this does nothing.
+  // ---------------------------------------------------------------------------
+  type Over = 'dark' | 'light';
+
+  const channel = (value: number) => {
+    const s = value / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
   };
+
+  // First colour in a computed background value that is at least half opaque.
+  const solidColour = (value: string): number[] | null => {
+    for (const match of value.matchAll(/rgba?\(([^)]+)\)/g)) {
+      const parts = match[1].split(/[\s,\/]+/).filter(Boolean).map(parseFloat);
+      if (parts.length < 3 || parts.slice(0, 3).some((n) => Number.isNaN(n))) continue;
+      const alpha = parts.length > 3 ? parts[3] : 1;
+      if (alpha >= 0.5) return parts.slice(0, 3);
+    }
+    return null;
+  };
+
+  const updateOver = () => {
+    if (!header || window.scrollY > 24) return;
+
+    const brand = header.querySelector('.wpb-brand');
+    const x = brand ? brand.getBoundingClientRect().left + 8 : 24;
+    const y = header.offsetHeight / 2;
+
+    let over: Over = 'light';
+    for (const el of document.elementsFromPoint(x, y)) {
+      if (header.contains(el)) continue;
+      const style = getComputedStyle(el);
+      const rgb = solidColour(style.backgroundColor) || solidColour(style.backgroundImage);
+      if (!rgb) continue;
+      const luminance = 0.2126 * channel(rgb[0]) + 0.7152 * channel(rgb[1]) + 0.0722 * channel(rgb[2]);
+      over = luminance < 0.35 ? 'dark' : 'light';
+      break;
+    }
+    header.dataset.over = over;
+  };
+
+  // Only ever flips the bar between clear and solid. Absence of data-scrolled
+  // means "at the top", which is what the CSS assumes on first paint.
+  let lastScrolled: boolean | null = null;
+  const syncScrolled = () => {
+    if (!header) return;
+    const scrolled = window.scrollY > 24;
+    if (scrolled === lastScrolled) return;
+    lastScrolled = scrolled;
+    header.dataset.scrolled = String(scrolled);
+    // Back at the top: re-read the page in case it was reloaded part-way down.
+    if (!scrolled) updateOver();
+  };
+
   syncScrolled();
+  updateOver();
   window.addEventListener('scroll', syncScrolled, { passive: true });
+  window.addEventListener('load', updateOver);
+  window.addEventListener('pageshow', updateOver);
+  window.addEventListener('resize', () => window.requestAnimationFrame(updateOver));
 
   document.addEventListener('keydown', (e) => {
     if ((e as KeyboardEvent).key === 'Escape') {
       closeAll();
-      closeMobile();
+      if (header?.dataset.mobile === 'true') {
+        closeMobile();
+        // Hand focus back to the button that opened the menu.
+        (document.getElementById('wpb-burger') as HTMLElement | null)?.focus();
+      }
     }
   });
 
