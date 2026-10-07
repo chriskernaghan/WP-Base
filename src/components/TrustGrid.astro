@@ -1,21 +1,3 @@
----
-// TrustGrid.astro — "trusted by" client grid with a hover testimonial panel.
-// Sits directly under the hero. Data lives here so adding a client is one entry.
-
-// "Trusted by" grid. One cell per client.
-//
-//  - `logo`        optional. Path to a logo file in /public. Without it the
-//                  cell shows the name as a typographic wordmark.
-//  - `style`       wordmark treatment used when there is no logo.
-//  - `testimonial` optional. A cell with one gets the lime quote badge and
-//                  opens the full-width panel on hover, focus or tap. A cell
-//                  without one stays a plain logo cell, so leave it as null
-//                  until the client has actually said something you can use.
-//  - `photo`       optional headshot for the panel. Initials show without it.
-//  - `href`        optional link shown in the panel (usually the case study).
-//
-// To add another testimonial later, fill in `testimonial` for that client.
-// Leave it as null and the badge and hover panel disappear for that cell.
 const trusted = [
   {
     id: 'catagen',
@@ -48,7 +30,13 @@ const trusted = [
     name: 'InclusionIQ',
     style: 'grotesk',
     logo: null,
-    testimonial: null,
+    testimonial: {
+      quote: "Chris helped us bring everything InclusionIQ offers together in a website that feels like us. It gives people a clearer picture of what we do and makes it easier to take the next step.",
+      person: 'Laura Kearney',
+      role: 'Owner & Founder, InclusionIQ',
+      photo: null,
+      href: '/case-studies/inclusion-iq/',
+    },
   },
   {
     id: 'plotroom',
@@ -160,7 +148,18 @@ const initials = (name: string) =>
   .trust {
     --trust-rule: rgba(8, 16, 28, 0.16);
     --trust-gutter: 28px;
-    padding: 4.5rem 4rem 5rem;
+    padding: 4.5rem 4rem 0;
+  }
+
+  /* The Clients section brings its own 7rem of top padding, which on top of
+     this section's bottom padding left a very large gap under the grid. When
+     it comes after the grid it takes a shorter top instead. (A general
+     sibling selector, because Astro puts this component's script tag between
+     the two sections.) */
+  @media (min-width: 769px) {
+    .trust ~ :global(.clients-section) {
+      padding-top: 5rem;
+    }
   }
 
   .trust-wrap {
@@ -453,7 +452,7 @@ const initials = (name: string) =>
      and the panel opens under the whole grid. */
   @media (max-width: 768px) {
     .trust {
-      padding: 3rem 1.25rem 3.5rem;
+      padding: 3rem 1.25rem 0;
     }
 
     .trust-heading {
