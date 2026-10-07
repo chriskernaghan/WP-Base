@@ -14,9 +14,8 @@
 //  - `photo`       optional headshot for the panel. Initials show without it.
 //  - `href`        optional link shown in the panel (usually the case study).
 //
-// The three quotes below are PLACEHOLDERS. Replace the quote, person and role
-// before merging, or set `testimonial: null` for any client you don't have a
-// quote from yet and the badge and hover panel disappear for that cell.
+// To add another testimonial later, fill in `testimonial` for that client.
+// Leave it as null and the badge and hover panel disappear for that cell.
 const trusted = [
   {
     id: 'catagen',
@@ -24,9 +23,9 @@ const trusted = [
     style: 'tracked',
     logo: null,
     testimonial: {
-      quote: 'TODO: replace with the real testimonial. Two or three plain sentences about what changed for them works best.',
-      person: 'Client name',
-      role: 'Role, CATAGEN',
+      quote: "Chris handled our migration seamlessly and has been invaluable ever since. His technical expertise and responsiveness gave us confidence to focus on our business while he managed everything WordPress-related.",
+      person: 'Sonya Kerr',
+      role: 'Chief Commercialisation Officer, CATAGEN',
       photo: null,
       href: '/case-studies/catagen/',
     },
@@ -37,9 +36,9 @@ const trusted = [
     style: 'plain',
     logo: null,
     testimonial: {
-      quote: 'TODO: replace with the real testimonial. Two or three plain sentences about what changed for them works best.',
-      person: 'Client name',
-      role: 'Role, Export Explore',
+      quote: "Chris delivered exactly what we needed, a professional website that finally reflects the business we've built. The rebuild was smooth, and his ongoing support has been invaluable.",
+      person: 'Declan Barry',
+      role: 'Founder, ExportExplore',
       photo: null,
       href: '/case-studies/exportexplore/',
     },
@@ -57,9 +56,9 @@ const trusted = [
     style: 'tight',
     logo: null,
     testimonial: {
-      quote: 'TODO: replace with the real testimonial. Two or three plain sentences about what changed for them works best.',
-      person: 'Client name',
-      role: 'Role, PlotRoom',
+      quote: "Chris was incredibly helpful, always available, and gave us very clear and accurate guidance! Thank you so much, Chris! We highly recommend him!",
+      person: 'Tengo Tadumadze',
+      role: 'Founder, PlotRoom',
       photo: null,
       href: null,
     },
@@ -366,7 +365,7 @@ const initials = (name: string) =>
     margin: 0;
     padding-left: 1.5rem;
     border-left: 4px solid var(--accent);
-    max-width: 40rem;
+    max-width: 46rem;
   }
 
   .trust-quote blockquote p {
@@ -377,6 +376,7 @@ const initials = (name: string) =>
     line-height: 1.4;
     letter-spacing: -0.02em;
     color: var(--cream);
+    text-wrap: pretty;
   }
 
   .trust-who {
