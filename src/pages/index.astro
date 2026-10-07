@@ -1,11 +1,10 @@
 ---
-// Homepage - composes the hero, marquee, and seven section components.
+// Homepage - composes the hero, trust grid, and section components.
 // All section copy lives in the component files, edit those, not this file.
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import Marquee from '../components/Marquee.astro';
-import ClientLogos from '../components/ClientLogos.astro';
+import TrustGrid from '../components/TrustGrid.astro';
 import Clients from '../components/Clients.astro';
 import Process from '../components/Process.astro';
 import Pricing from '../components/Pricing.astro';
@@ -90,8 +89,7 @@ const schema = [business, faqSchema];
   schema={schema}
 >
   <Hero />
-  <Marquee />
-  <ClientLogos />
+  <TrustGrid />
   <Clients />
   <Process />
   <Pricing />
