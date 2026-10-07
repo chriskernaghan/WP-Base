@@ -1,5 +1,6 @@
 ---
-// Clients.astro — case study cards. Data here so adding a client is one entry.
+// Clients.astro — case study cards, then the "trusted by" grid, then the WP Engine partner line.
+// Data lives here so adding a client is one entry.
 
 const clients = [
   {
@@ -27,6 +28,85 @@ const clients = [
     href: '/case-studies/inclusion-iq/',
   },
 ];
+
+// "Trusted by" grid. One cell per client.
+//
+//  - `logo`        optional. Path to a logo file in /public. Without it the
+//                  cell shows the name as a typographic wordmark.
+//  - `style`       wordmark treatment used when there is no logo.
+//  - `testimonial` optional. A cell with one gets the lime quote badge and
+//                  opens the full-width panel on hover, focus or tap. A cell
+//                  without one stays a plain logo cell, so leave it as null
+//                  until the client has actually said something you can use.
+//  - `photo`       optional headshot for the panel. Initials show without it.
+//  - `href`        optional link shown in the panel (usually the case study).
+//
+// The three quotes below are PLACEHOLDERS. Replace the quote, person and role
+// before merging, or set `testimonial: null` for any client you don't have a
+// quote from yet and the badge and hover panel disappear for that cell.
+const trusted = [
+  {
+    id: 'catagen',
+    name: 'CATAGEN',
+    style: 'tracked',
+    logo: null,
+    testimonial: {
+      quote: 'TODO: replace with the real testimonial. Two or three plain sentences about what changed for them works best.',
+      person: 'Client name',
+      role: 'Role, CATAGEN',
+      photo: null,
+      href: '/case-studies/catagen/',
+    },
+  },
+  {
+    id: 'exportexplore',
+    name: 'Export Explore',
+    style: 'plain',
+    logo: null,
+    testimonial: {
+      quote: 'TODO: replace with the real testimonial. Two or three plain sentences about what changed for them works best.',
+      person: 'Client name',
+      role: 'Role, Export Explore',
+      photo: null,
+      href: '/case-studies/exportexplore/',
+    },
+  },
+  {
+    id: 'inclusioniq',
+    name: 'InclusionIQ',
+    style: 'grotesk',
+    logo: null,
+    testimonial: null,
+  },
+  {
+    id: 'plotroom',
+    name: 'PlotRoom',
+    style: 'tight',
+    logo: null,
+    testimonial: {
+      quote: 'TODO: replace with the real testimonial. Two or three plain sentences about what changed for them works best.',
+      person: 'Client name',
+      role: 'Role, PlotRoom',
+      photo: null,
+      href: null,
+    },
+  },
+  {
+    id: 'gortmerron',
+    name: 'Gortmerron',
+    style: 'light',
+    logo: null,
+    testimonial: null,
+  },
+];
+
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 ---
 
 <section id="clients" class="clients-section">
@@ -63,6 +143,72 @@ const clients = [
       ))}
     </div>
 
+    <div class="trust">
+      <h3 class="trust-heading">The sites I look after, and the people who rely on them.</h3>
+
+      <div class="trust-frame" data-trust-frame>
+        <div class="trust-inner">
+          <div class="trust-row">
+            {trusted.map((c) => {
+              const inner = c.logo ? (
+                <img class="trust-logo" src={c.logo} alt={c.testimonial ? '' : c.name} width="140" height="40" loading="lazy" decoding="async" />
+              ) : (
+                <span class={`trust-wordmark wm-${c.style}`}>{c.name}</span>
+              );
+
+              return c.testimonial ? (
+                <button
+                  type="button"
+                  class="trust-cell"
+                  data-trust-id={c.id}
+                  aria-expanded="false"
+                  aria-controls="trust-panel"
+                  aria-label={`Show testimonial from ${c.name}`}
+                >
+                  {inner}
+                  <span class="trust-badge" aria-hidden="true">&ldquo;</span>
+                </button>
+              ) : (
+                <div class="trust-cell trust-cell--static">{inner}</div>
+              );
+            })}
+          </div>
+
+          <div class="trust-panel" id="trust-panel" data-trust-panel>
+            <div class="trust-panel-inner">
+              {trusted.map((c) =>
+                c.testimonial ? (
+                  <figure class="trust-quote" data-trust-quote={c.id} hidden>
+                    <blockquote>
+                      <p>&ldquo;{c.testimonial.quote}&rdquo;</p>
+                    </blockquote>
+                    <figcaption class="trust-who">
+                      {c.testimonial.photo ? (
+                        <img class="trust-avatar" src={c.testimonial.photo} alt="" width="44" height="44" loading="lazy" decoding="async" />
+                      ) : (
+                        <span class="trust-avatar trust-avatar--initials" aria-hidden="true">
+                          {initials(c.testimonial.person)}
+                        </span>
+                      )}
+                      <span class="trust-who-text">
+                        <span class="trust-who-name">{c.testimonial.person}</span>
+                        <span class="trust-who-role">{c.testimonial.role}</span>
+                      </span>
+                    </figcaption>
+                    {c.testimonial.href && (
+                      <a class="trust-link" href={c.testimonial.href}>
+                        Read the case study &rarr;
+                      </a>
+                    )}
+                  </figure>
+                ) : null
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="clients-partner">
       <img
         class="clients-partner-logo"
@@ -82,6 +228,361 @@ const clients = [
 </section>
 
 <style>
+  /* ----------------------------------------------------------------------
+     "Trusted by" grid
+     A single row of client cells framed by diagonal hatching. Cells with a
+     testimonial open a full-width midnight panel directly beneath the row;
+     the row itself never moves, so the cursor can slide across it to switch
+     between clients.
+     ---------------------------------------------------------------------- */
+  .trust {
+    --trust-rule: rgba(8, 16, 28, 0.16);
+    --trust-gutter: 28px;
+    margin-top: 4.5rem;
+  }
+
+  .trust-heading {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-align: center;
+    margin: 0 0 1.5rem;
+  }
+
+  .trust-frame {
+    position: relative;
+    padding-inline: var(--trust-gutter);
+    border-block: 1px solid var(--trust-rule);
+  }
+
+  .trust-frame::before,
+  .trust-frame::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--trust-gutter);
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0 6px,
+      var(--trust-rule) 6px 7px
+    );
+    pointer-events: none;
+  }
+
+  .trust-frame::before { left: 0; }
+  .trust-frame::after  { right: 0; }
+
+  .trust-inner {
+    border-inline: 1px solid var(--trust-rule);
+  }
+
+  .trust-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .trust-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    padding: 0 1rem;
+    background: transparent;
+    border: 0;
+    border-left: 1px solid var(--trust-rule);
+    color: var(--midnight);
+    font: inherit;
+    text-align: center;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .trust-cell:first-child { border-left: 0; }
+
+  button.trust-cell { cursor: pointer; }
+
+  .trust-cell:hover {
+    background: var(--cream);
+  }
+
+  .trust-cell:focus-visible {
+    outline: 2px solid var(--midnight);
+    outline-offset: -4px;
+  }
+
+  /* The open cell turns midnight so it reads as the top of the panel below. */
+  .trust-cell.is-active,
+  .trust-cell.is-active:hover {
+    background: var(--midnight);
+    color: var(--cream);
+  }
+
+  .trust-logo {
+    display: block;
+    max-width: 100%;
+    max-height: 2.5rem;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: filter 0.25s ease;
+  }
+
+  .trust-cell.is-active .trust-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  /* Wordmark fallbacks, built from the two site fonts */
+  .trust-wordmark {
+    color: inherit;
+    line-height: 1.1;
+  }
+
+  .wm-tracked {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .wm-plain {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .wm-grotesk {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .wm-tight {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.05em;
+  }
+
+  .wm-light {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  /* Lime badge marking the cells that have something to say */
+  .trust-badge {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.1rem;
+    background: var(--accent);
+    color: var(--accent-text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 0.8;
+  }
+
+  /* Testimonial panel. Height animates with the grid-rows trick used by the
+     mobile nav accordion, so no fixed pixel height is needed. Visibility
+     keeps the closed panel's link out of the tab order. */
+  .trust-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+      visibility 0s linear 0.32s;
+  }
+
+  .trust-panel.is-open {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition:
+      grid-template-rows 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+      visibility 0s;
+  }
+
+  .trust-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  .trust-quote {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'quote link'
+      'who   link';
+    gap: 1.75rem 3rem;
+    align-items: end;
+    margin: 0;
+    padding: 2.5rem 3rem;
+  }
+
+  .trust-quote[hidden] { display: none; }
+
+  .trust-quote blockquote {
+    grid-area: quote;
+    margin: 0;
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--accent);
+    max-width: 40rem;
+  }
+
+  .trust-quote blockquote p {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+  }
+
+  .trust-who {
+    grid-area: who;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding-left: calc(1.5rem + 4px);
+  }
+
+  .trust-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    display: block;
+  }
+
+  .trust-avatar--initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: var(--accent-text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .trust-who-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .trust-who-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .trust-who-role {
+    font-size: 0.88rem;
+    color: var(--text-light);
+  }
+
+  .trust-link {
+    grid-area: link;
+    align-self: end;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 1px;
+    white-space: nowrap;
+  }
+
+  .trust-link:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 1024px) {
+    .trust-quote {
+      padding: 2rem 2rem;
+      gap: 1.5rem 2rem;
+    }
+  }
+
+  /* Phones: no hatching, cells go two-up with the last one spanning the row,
+     and the panel opens under the whole grid. */
+  @media (max-width: 768px) {
+    .trust {
+      margin-top: 3rem;
+    }
+
+    .trust-heading {
+      text-align: left;
+    }
+
+    .trust-frame {
+      padding-inline: 0;
+    }
+
+    .trust-frame::before,
+    .trust-frame::after {
+      display: none;
+    }
+
+    .trust-inner {
+      border-inline: 0;
+    }
+
+    .trust-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .trust-cell {
+      height: 6rem;
+      border-left: 0;
+      border-top: 1px solid var(--trust-rule);
+    }
+
+    .trust-cell:nth-child(-n + 2) { border-top: 0; }
+    .trust-cell:nth-child(even)   { border-left: 1px solid var(--trust-rule); }
+    .trust-cell:last-child        { grid-column: 1 / -1; border-left: 0; }
+
+    .trust-quote {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'quote'
+        'who'
+        'link';
+      padding: 2rem 1.25rem;
+      gap: 1.5rem;
+    }
+
+    .trust-link {
+      justify-self: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trust-cell,
+    .trust-logo,
+    .trust-panel,
+    .trust-panel.is-open {
+      transition: none;
+    }
+  }
+
   /* WP Engine partner line under the case study cards. Logo is the official
      mark supplied through the Agency Partner Program, used as-is. */
   .clients-partner {
@@ -131,3 +632,76 @@ const clients = [
     }
   }
 </style>
+
+<script>
+  // Hover or focus a cell with a quote badge to open the testimonial panel.
+  // On touch devices a tap opens it and a second tap closes it.
+  const frame = document.querySelector('[data-trust-frame]');
+
+  if (frame) {
+    const cells = Array.from(frame.querySelectorAll('[data-trust-id]'));
+    const staticCells = Array.from(frame.querySelectorAll('.trust-cell--static'));
+    const quotes = Array.from(frame.querySelectorAll('[data-trust-quote]'));
+    const panel = frame.querySelector('[data-trust-panel]');
+    const hoverCapable = window.matchMedia('(hover: hover)');
+
+    const close = () => {
+      panel.classList.remove('is-open');
+      cells.forEach((cell) => {
+        cell.classList.remove('is-active');
+        cell.setAttribute('aria-expanded', 'false');
+      });
+    };
+
+    const open = (id) => {
+      quotes.forEach((quote) => {
+        quote.hidden = quote.dataset.trustQuote !== id;
+      });
+      cells.forEach((cell) => {
+        const active = cell.dataset.trustId === id;
+        cell.classList.toggle('is-active', active);
+        cell.setAttribute('aria-expanded', active ? 'true' : 'false');
+      });
+      panel.classList.add('is-open');
+    };
+
+    cells.forEach((cell) => {
+      const id = cell.dataset.trustId;
+
+      cell.addEventListener('mouseenter', () => {
+        if (hoverCapable.matches) open(id);
+      });
+
+      cell.addEventListener('focus', () => open(id));
+
+      cell.addEventListener('click', () => {
+        const isOpen = cell.getAttribute('aria-expanded') === 'true';
+        if (!hoverCapable.matches && isOpen) close();
+        else open(id);
+      });
+    });
+
+    // Sliding across a cell with no testimonial closes the panel again.
+    staticCells.forEach((cell) => {
+      cell.addEventListener('mouseenter', () => {
+        if (hoverCapable.matches) close();
+      });
+    });
+
+    frame.addEventListener('mouseleave', () => {
+      if (hoverCapable.matches) close();
+    });
+
+    frame.addEventListener('focusout', (event) => {
+      if (!frame.contains(event.relatedTarget)) close();
+    });
+
+    frame.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!frame.contains(event.target)) close();
+    });
+  }
+</script>
