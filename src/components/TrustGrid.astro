@@ -1,3 +1,21 @@
+---
+// TrustGrid.astro — "trusted by" client grid with a hover testimonial panel.
+// Sits directly under the hero. Data lives here so adding a client is one entry.
+
+// "Trusted by" grid. One cell per client.
+//
+//  - `logo`        optional. Path to a logo file in /public. Without it the
+//                  cell shows the name as a typographic wordmark.
+//  - `style`       wordmark treatment used when there is no logo.
+//  - `testimonial` optional. A cell with one gets the lime quote badge and
+//                  opens the full-width panel on hover, focus or tap. A cell
+//                  without one stays a plain logo cell, so leave it as null
+//                  until the client has actually said something you can use.
+//  - `photo`       optional headshot for the panel. Initials show without it.
+//  - `href`        optional link shown in the panel (usually the case study).
+//
+// To add another testimonial later, fill in `testimonial` for that client.
+// Leave it as null and the badge and hover panel disappear for that cell.
 const trusted = [
   {
     id: 'catagen',
