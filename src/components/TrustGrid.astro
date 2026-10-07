@@ -2,11 +2,23 @@
 // TrustGrid.astro — "trusted by" client grid with a hover testimonial panel.
 // Sits directly under the hero. Data lives here so adding a client is one entry.
 
+// Logos are real SVG files kept in src/assets/logos and pulled in as raw
+// markup, so they are inlined into the page and take the cell's text colour
+// (white when the cell is open). Add a client's logo the same way.
+import exportexplore from '../assets/logos/exportexplore.svg?raw';
+import inclusioniq from '../assets/logos/inclusioniq.svg?raw';
+import plotroom from '../assets/logos/plotroom.svg?raw';
+import gortmerron from '../assets/logos/gortmerron.svg?raw';
+
 // "Trusted by" grid. One cell per client.
 //
-//  - `logo`        optional. Path to a logo file in /public. Without it the
-//                  cell shows the name as a typographic wordmark.
-//  - `style`       wordmark treatment used when there is no logo.
+//  - `logo`        optional. Raw SVG markup, imported above. Draw it with
+//                  fill="currentColor" so it flips to white when the cell is
+//                  open (a fixed fill, like the InclusionIQ "IQ", stays put).
+//                  Without one the cell shows the name as a plain wordmark.
+//  - `logoHeight`  optional. Rendered height of the logo, tuned per logo so
+//                  they read at the same visual size.
+//  - `style`       wordmark treatment, only used when there is no logo.
 //  - `testimonial` optional. A cell with one gets the lime quote badge and
 //                  opens the full-width panel on hover, focus or tap. A cell
 //                  without one stays a plain logo cell, so leave it as null
@@ -32,9 +44,9 @@ const trusted = [
   },
   {
     id: 'exportexplore',
-    name: 'Export Explore',
-    style: 'plain',
-    logo: null,
+    name: 'ExportExplore',
+    logo: exportexplore,
+    logoHeight: '1.45rem',
     testimonial: {
       quote: "Chris delivered exactly what we needed, a professional website that finally reflects the business we've built. The rebuild was smooth, and his ongoing support has been invaluable.",
       person: 'Declan Barry',
@@ -46,8 +58,8 @@ const trusted = [
   {
     id: 'inclusioniq',
     name: 'InclusionIQ',
-    style: 'grotesk',
-    logo: null,
+    logo: inclusioniq,
+    logoHeight: '1.5rem',
     testimonial: {
       quote: "Chris helped us bring everything InclusionIQ offers together in a website that feels like us. It gives people a clearer picture of what we do and makes it easier to take the next step.",
       person: 'Laura Kearney',
@@ -59,8 +71,8 @@ const trusted = [
   {
     id: 'plotroom',
     name: 'PlotRoom',
-    style: 'tight',
-    logo: null,
+    logo: plotroom,
+    logoHeight: '1.45rem',
     testimonial: {
       quote: "Chris was incredibly helpful, always available, and gave us very clear and accurate guidance! Thank you so much, Chris! We highly recommend him!",
       person: 'Tengo Tadumadze',
@@ -72,8 +84,8 @@ const trusted = [
   {
     id: 'gortmerron',
     name: 'Gortmerron',
-    style: 'light',
-    logo: null,
+    logo: gortmerron,
+    logoHeight: '1.75rem',
     testimonial: null,
   },
 ];
@@ -96,7 +108,7 @@ const initials = (name: string) =>
         <div class="trust-row">
           {trusted.map((c) => {
             const inner = c.logo ? (
-              <img class="trust-logo" src={c.logo} alt={c.testimonial ? '' : c.name} width="140" height="40" loading="lazy" decoding="async" />
+              <span class="trust-logo" role="img" aria-label={c.name} style={`--logo-h:${c.logoHeight ?? '1.5rem'}`} set:html={c.logo} />
             ) : (
               <span class={`trust-wordmark wm-${c.style}`}>{c.name}</span>
             );
@@ -266,18 +278,18 @@ const initials = (name: string) =>
   .trust-logo {
     display: block;
     max-width: 100%;
-    max-height: 2.5rem;
+    line-height: 0;
+    color: inherit;
+  }
+
+  .trust-logo :global(svg) {
+    display: block;
+    height: var(--logo-h, 1.5rem);
     width: auto;
-    height: auto;
-    object-fit: contain;
-    transition: filter 0.25s ease;
+    max-width: 100%;
   }
 
-  .trust-cell.is-active .trust-logo {
-    filter: brightness(0) invert(1);
-  }
-
-  /* Wordmark fallbacks, built from the two site fonts */
+  /* Plain text wordmark, shown for a client that has no logo SVG yet */
   .trust-wordmark {
     color: inherit;
     line-height: 1.1;
@@ -288,34 +300,6 @@ const initials = (name: string) =>
     font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.1em;
-  }
-
-  .wm-plain {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-
-  .wm-grotesk {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-  }
-
-  .wm-tight {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: -0.05em;
-  }
-
-  .wm-light {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
   }
 
   /* Lime badge marking the cells that have something to say */
