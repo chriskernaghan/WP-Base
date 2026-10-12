@@ -1,0 +1,58 @@
+---
+title: "Your Website Is Down and Your Host Says It's a Server Issue: What to Ask Them"
+description: "Hosts often give vague answers when a site goes down. Here's how to tell whether the problem really is on their side, what to ask for, and how to avoid waiting days without a plan."
+tag: "Maintenance"
+date: 2026-10-11
+readTime: "5 min read"
+image: "/blog/server-farm.webp"
+imageAlt: "Rows of blue server hardware in a data centre"
+---
+
+import Callout from '../../components/Callout.astro';
+
+You ring your hosting company, someone tells you they're aware of an issue and they're investigating, and then nothing more happens. Meanwhile your website is down, enquiries aren't arriving, and nobody can tell you when it's coming back. It's a maddening position to be in, particularly when you aren't sure whether the problem belongs to them or to you.
+
+Sometimes it really is their side. Sometimes it's your site, and the host is simply the first place anyone notices. Either way, you'll get a much better answer by asking better questions.
+
+## Work out whose problem it is
+
+A few quick checks will tell you a surprising amount, and they only take about five minutes.
+
+- **Is the whole site down, or just parts of it?** If the homepage loads but the admin area doesn't, or the other way round, that points somewhere different from a total outage.
+- **Does it fail on another device?** Try your phone on mobile data rather than wifi, which rules out your own connection and anything saved in your browser.
+- **What exactly does it say?** A WordPress message such as "There has been a critical error" or "Error establishing a database connection" means the server itself is reachable and the problem is in the site or its database. A browser message saying the site can't be reached usually points at the domain, the DNS settings or the server being completely unavailable.
+- **Has your host posted a status page or sent an email?** Most do, and the notices name the services affected. If it mentions web hosting or database (MySQL) maintenance, that's very relevant, because WordPress can't build a single page without its database. A database under maintenance takes the site down even though all your files are perfectly fine.
+- **Has your hosting or domain lapsed?** A failed card payment or an expired domain is easy to miss and looks exactly like an outage from the outside.
+
+## What to ask them for
+
+When you're back on the phone or writing to support, ask for specifics.
+
+- A ticket or reference number, so there's a record of the conversation.
+- Whether the problem affects your account specifically or everyone on that server or service.
+- A time for the next update, and an estimated time for the fix. "Soon" isn't an estimate.
+- What the error log says for your site around the time it went down.
+- Whether anything was changed on your account recently, such as a server migration or a PHP version upgrade.
+- Whether there's a recent backup they could restore, and where.
+
+Try to get the answers in writing, through the ticket system or by email, rather than only on a call. That gives you something to point to if you need to escalate, ask for compensation or decide to move.
+
+## Why "all WordPress sites are having issues" isn't an answer
+
+It might even be true. If the web servers or database servers that your sites run on are being worked on, every site using them will be affected, and WordPress sites tend to be hit hard because they depend so heavily on the database. But as an explanation it leaves out everything that matters: when it started, when it's expected to end and whether your site has a separate problem of its own on top. A vague answer isn't proof they're hiding something, but it's a good reason to ask for something more concrete.
+
+## How long is too long
+
+A planned maintenance window of a few hours is normal. A site that's been down for days with no timescale isn't, and at that point I'd start escalating through the official ticket route, asking for a senior member of the support team and getting a named time for the next update.
+
+It's also the point where it helps enormously to have a fallback. If you've got a recent backup of the site stored somewhere other than your host, such as a downloaded copy or one held by whoever looks after it, the site can often be restored on a different host without waiting for the first one to sort itself out. If the only backups are on the same server that's down, you're waiting on them whether you like it or not. It's one of the less obvious arguments for keeping backups somewhere separate.
+
+## When it's worth having someone look
+
+If your site is how customers find you, a few days of being offline gets expensive quickly, and it's reasonable to have someone independent check what the host is telling you against what's actually happening to the site. I don't host client sites myself, so I've no reason to take the host's side or yours. I'll tell you whether it looks like them or like you, and what I'd do next.
+
+<Callout>
+**Site down and not getting straight answers?** Send me your website address, the name of your host and what you're seeing. I'll tell you what I think is happening and what your options are, before anything is agreed. There's a plain-English checklist in the [website down guide](/website-down/) while you wait.
+</Callout>
+
+Whether it's a host problem or a site problem, you'll feel a lot better knowing which one it is, and having the answers written down. Then at least you can make the next decision with some facts in front of you. If you'd like to avoid ending up here again, [regular maintenance and off-site backups](/wordpress-maintenance/) are what turn a few days offline into a few hours.

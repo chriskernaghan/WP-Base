@@ -1,0 +1,57 @@
+---
+title: "There Has Been a Critical Error on This Website: What It Means and What to Do"
+description: "That message looks alarming, but it usually means one plugin or theme has failed, not that your site is gone. Here's what's going on, what to check first and when to ask for help."
+tag: "Maintenance"
+date: 2026-10-12
+readTime: "5 min read"
+image: "/blog/wordpress-glitch.png"
+imageAlt: "A man at a desktop computer with the screen breaking up into glitches and a warning symbol"
+---
+
+import Callout from '../../components/Callout.astro';
+
+You open your own website and instead of the homepage there's a plain page saying "There has been a critical error on this website", sometimes with a link offering to "learn more about troubleshooting WordPress". It looks final, and it's a horrible thing to see when you've got customers who are probably trying to find you at the same moment.
+
+It's usually less dramatic than it sounds. Your pages, photos and posts are almost certainly still there, safe in the site's files and database. What's happened is that something in the site's code failed badly enough that WordPress stopped altogether rather than carrying on and showing a half-broken page.
+
+## What's actually going wrong
+
+A WordPress site is made up of WordPress itself, a theme and usually a handful of plugins, all written by different people. When one of those pieces hits an error it can't recover from, WordPress shows this message instead of your page. The usual causes are:
+
+- A plugin or theme update that didn't go through cleanly, or two plugins that don't get along after one of them changed.
+- Your host moving the server to a newer version of PHP, the language WordPress runs on. Newer versions are stricter, so an older plugin or theme that worked for years can suddenly fall over.
+- A plugin or theme that was abandoned by its developer a long time ago and has finally stopped working.
+- The site running out of the memory your host allows it to use.
+- An update that was interrupted halfway, leaving files half written.
+
+The message itself doesn't tell you which of these it is. That information lives in the site's error log, which is why a proper diagnosis starts there and not with guesswork.
+
+## Check your email first
+
+Since WordPress 5.2, a site that hits this kind of error will usually send an email to its admin address with the subject "Your Site is Experiencing a Technical Issue". It names the plugin or theme that caused the problem and includes a special link that lets you log in with that piece switched off, which is often all it takes to get you back in.
+
+Have a look in your inbox and your spam folder. It's also worth remembering that the admin address might not be yours. If someone else built the site, the email may have gone to them, or to an old address nobody checks any more.
+
+## Think about what changed
+
+The most useful thing you can bring to anyone helping you is a list of what changed before it broke. Had anything been updated, including automatically? Did you or someone else install or delete a plugin? Did your host send an email about a server change or a PHP upgrade? Was anyone else working on the site that day? Even a vague answer can save a good chunk of diagnosis time.
+
+## What not to do
+
+It's tempting to start deleting plugins or reinstalling things at random, and that can turn a small problem into a bigger one. I'd also be careful about restoring an old backup over the top without knowing what it will wipe out, because anything added since that backup was taken, such as new orders, form entries or blog posts, goes with it. And please don't email your passwords to anyone, including me. There are better ways to give someone access, and a good developer will suggest one.
+
+## What a fix usually looks like
+
+Someone with access to your hosting looks at the error log, finds the file that's failing and works out which plugin, theme or setting is responsible. From there it's usually a case of switching that piece off, rolling it back to the version that worked or changing the PHP version, then testing that everything else is fine before turning things back on. Once somebody has the log in front of them it's often a short job. If it turns out the files themselves are damaged, a clean backup is the fallback, which is one more reason to have backups stored somewhere other than the same server.
+
+## Ask your host for the log
+
+Your hosting company can see the error log for your site, and it's perfectly reasonable to ask them what it says around the time the site went down. If they say it's a wider problem on their side, I've written about [what to ask when your host says it's a server issue](/posts/website-down-host-says-server-issue/), because the right questions get you a much better answer than "we're investigating".
+
+A different message that's easy to mix up with this one is "Error establishing a database connection". That means WordPress can't reach its database, which is a separate problem with a separate set of causes, and it's covered in the [website down guide](/website-down/).
+
+<Callout>
+**Not sure what you're looking at?** Send me your website address and a screenshot of what you see. I'll tell you in plain English what I think is going on, and what it would involve to put right, before anything is agreed. Start with the [website down guide](/website-down/) or just get in touch.
+</Callout>
+
+If your site brings in enquiries or sales, a critical error is worth getting looked at the same day, even if it only turns out to be one stubborn plugin. And if it keeps happening, that's a sign the site isn't being looked after, which is exactly what [a maintenance plan](/wordpress-maintenance/) is there to prevent.
