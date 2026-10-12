@@ -1,0 +1,207 @@
+---
+// website-down.astro
+// Problem-led hub for people whose site is down or showing an error right now.
+// Reuses the blog post styles (post-hero, post-body, callout), so no new CSS.
+// The FAQ array below feeds both the visible answers and the FAQPage schema,
+// so the two can't drift apart.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Callout from '../components/Callout.astro';
+
+const title = 'Website Down or Showing an Error? Start Here';
+const description =
+  "Website down, a white screen or a 'critical error'? A plain-English guide to what's gone wrong, what to check yourself and when to ask for help.";
+const canonical = 'https://wpbase.co.uk/website-down/';
+
+const faqs = [
+  {
+    q: 'Has my website been deleted?',
+    a: "Almost certainly not. When a site goes down, your pages, photos and posts are nearly always still sitting in the site's files and database. The problem is usually that something is stopping them from being displayed, which is a very different thing from them being gone.",
+  },
+  {
+    q: 'How long should a fix take?',
+    a: "It depends entirely on the cause. A faulty plugin can often be sorted quickly once someone has the error log in front of them. If the problem is on your host's side, such as a server or database under maintenance, the timescale is theirs, and the best you can do is ask for a ticket number and a firm time for the next update.",
+  },
+  {
+    q: 'Should I just restore a backup?',
+    a: "Only if you know what you'll lose. Anything added after the backup was taken, such as orders, form entries and new posts, disappears with it. It's worth finding out what's actually wrong first, because the fix is often smaller than a full restore.",
+  },
+  {
+    q: 'Will being down hurt my Google rankings?',
+    a: "Google generally copes with a short outage and tends to come back and check again. It's prolonged downtime, measured in weeks rather than days, where pages can start to drop out of the results, which is a good reason not to leave a broken site sitting there.",
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: canonical,
+    inLanguage: 'en-GB',
+    isPartOf: { '@type': 'WebSite', name: 'WP Base', url: 'https://wpbase.co.uk/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://wpbase.co.uk/' },
+      { '@type': 'ListItem', position: 2, name: 'Website down', item: canonical },
+    ],
+  },
+];
+---
+
+<BaseLayout title={`${title} — WP Base`} description={description} schema={schema}>
+  <div class="post-hero">
+    <div class="post-header-grid">
+      <div class="post-header-main">
+        <div class="post-header-meta">
+          <span class="post-tag">Website problems</span>
+        </div>
+        <h1>Website down or showing an error? Start here</h1>
+      </div>
+      <div class="post-header-aside">
+        <p class="post-standfirst">
+          A plain-English guide to working out what's gone wrong with your website, what you
+          can check yourself in ten minutes, and when it's time to ask someone for help.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <p>
+      First, the reassuring bit. When a website stops working, the content is almost always
+      still there. It's rarely deleted, and most of the time the cause is one specific thing
+      that can be found and put right. The hard part is working out which thing, so here's how
+      I'd go about it, in the order I'd do it.
+    </p>
+
+    <h2>First, is it just you?</h2>
+    <p>These checks take a few minutes and rule out the most common false alarms.</p>
+    <ol>
+      <li>Load the site on your phone using mobile data rather than wifi. If it works there, the problem is probably your connection or something saved in your browser.</li>
+      <li>Check whether the whole site is affected, or only certain pages or the admin area.</li>
+      <li>Look at your hosting company's status page, or any recent emails from them. Maintenance notices naming web hosting or database services are the ones to look for.</li>
+      <li>Make sure your hosting and your domain name are both paid up and haven't expired. A failed card payment looks exactly like an outage from the outside.</li>
+      <li>Take a screenshot of whatever you can see, and note roughly when it started. Both will save a lot of time later.</li>
+    </ol>
+
+    <h2>What are you seeing?</h2>
+    <p>The message on the screen narrows down the cause more than anything else, so match yours to the closest one below.</p>
+
+    <h3>"There has been a critical error on this website"</h3>
+    <p>
+      This means something in the site's code, usually a plugin or theme, has failed badly enough
+      that WordPress stopped altogether. It's often fixable quickly once someone looks at the error
+      log. Check your inbox for an email from WordPress with the subject "Your Site is Experiencing
+      a Technical Issue", which can get you back in. The full explanation is in
+      <a href="/posts/wordpress-critical-error-what-to-do/">what to do about the critical error message</a>.
+    </p>
+
+    <h3>"Error establishing a database connection"</h3>
+    <p>
+      WordPress keeps everything you've written in a database, and this message means it can't reach
+      it. Often that's on the hosting side, such as a database server being down or under maintenance,
+      so check your host's status page first. It can also happen after a move or a change of login
+      details, or when the database is overloaded. If your host's status looks fine, ask them directly
+      whether your database is running. There's a list of questions to put to them in
+      <a href="/posts/website-down-host-says-server-issue/">what to ask when your host says it's a server issue</a>.
+    </p>
+
+    <h3>A blank white page</h3>
+    <p>
+      This is the older, less dramatic cousin of the critical error message and has much the same causes: a
+      plugin or theme that has failed, or a site running out of the memory your host allows. The same
+      steps apply.
+    </p>
+
+    <h3>"Briefly unavailable for scheduled maintenance" that never goes away</h3>
+    <p>
+      WordPress shows this while it's installing updates, and it should disappear within a minute or two.
+      If it's still there an hour later, an update was probably interrupted and left a small temporary
+      file behind. It's usually a quick fix for someone with access to the site's files.
+    </p>
+
+    <h3>A 500 or 503 error</h3>
+    <p>
+      Both are errors from the server rather than the website itself. A 503 can be a temporary overload,
+      and a 500 can be a fault in the site or its setup. Check your host's status page, and ask them for
+      the error log for your site around the time it began.
+    </p>
+
+    <h3>"This site can't be reached", or a parked or default page from your host</h3>
+    <p>
+      That points at the domain, the DNS settings or the hosting account rather than WordPress. Check that
+      your domain hasn't expired and that your hosting is paid up, and ask whoever manages your domain
+      whether anything was changed recently.
+    </p>
+
+    <h3>You can't log in</h3>
+    <p>
+      Try the "Lost your password" link on the login page first. If the reset email never arrives, the
+      site's email may be broken, or the admin address may belong to someone else, such as a developer
+      who built it years ago. Someone with access to your hosting can reset it from there. Please don't
+      send your password over email.
+    </p>
+
+    <h3>It redirects to strange sites, or Google says it's unsafe</h3>
+    <p>
+      That's a sign the site may have been hacked. Don't keep trying things yourself, as that can make a
+      cleanup harder. Get someone to look at it promptly, and have a read of
+      <a href="/posts/what-happens-to-a-wordpress-site-nobody-looks-after/">what happens to a site nobody looks after</a>
+      and the <a href="/posts/wordpress-security-basics/">security basics</a> for what's likely to be involved.
+    </p>
+
+    <h3>It's just very slow</h3>
+    <p>
+      That's a different problem with a different set of causes, and it's covered in
+      <a href="/posts/whats-slowing-your-wordpress-site-2026/">what's slowing your WordPress site down</a>.
+    </p>
+
+    <h2>What to have ready when you ask for help</h2>
+    <p>
+      Your website address, the name of your hosting company, a screenshot of what you're seeing, roughly
+      when it started and anything that changed beforehand, such as an update, a new plugin or an email
+      from your host. Knowing who holds the logins helps too.
+    </p>
+    <p>
+      If I need access to look properly, I'll ask you to add me as a separate user or set up a temporary
+      login, so your own password never has to change hands. I'll look first, tell you what I find and
+      what I'd recommend, and nothing gets changed until you've agreed to it.
+    </p>
+
+    <Callout>
+      <p>
+        <strong>Site down and want a second pair of eyes?</strong>
+        Email <a href="mailto:hello@wpbase.co.uk">hello@wpbase.co.uk</a> with your website address
+        and what you can see, or ring <a href="tel:+447440018091">+44 7440 018091</a>. I'll tell you in
+        plain English what I think is happening and what your options are.
+      </p>
+    </Callout>
+
+    <h2>Common questions</h2>
+    {faqs.map((f) => (
+      <>
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </>
+    ))}
+
+    <p>
+      Once it's back up, the sensible next step is making it less likely to happen again. Regular updates,
+      off-site backups and someone watching for downtime are what turn a long outage into a short one, and
+      they're exactly what <a href="/wordpress-maintenance/">a maintenance plan</a> covers.
+    </p>
+  </div>
+</BaseLayout>
