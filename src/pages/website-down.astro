@@ -2,8 +2,8 @@
 // website-down.astro
 // Problem-led hub for people whose site is down or showing an error right now.
 // Reuses the blog post styles (post-hero, post-body, callout), so no new CSS.
-// The FAQ array below feeds both the visible answers and the FAQPage schema,
-// so the two can't drift apart.
+// The FAQ array below feeds both the accordion (same markup and styles as the
+// homepage FAQ) and the FAQPage schema, so the two can't drift apart.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Callout from '../components/Callout.astro';
 
@@ -190,18 +190,30 @@ const schema = [
       </p>
     </Callout>
 
-    <h2>Common questions</h2>
-    {faqs.map((f) => (
-      <>
-        <h3>{f.q}</h3>
-        <p>{f.a}</p>
-      </>
-    ))}
-
     <p>
       Once it's back up, the sensible next step is making it less likely to happen again. Regular updates,
       off-site backups and someone watching for downtime are what turn a long outage into a short one, and
       they're exactly what <a href="/wordpress-maintenance/">a maintenance plan</a> covers.
     </p>
   </div>
+
+  <section id="faq" class="faq-section">
+    <div class="faq-inner">
+      <span class="section-label">Questions</span>
+      <h2>Common questions</h2>
+      <div class="faq-list">
+        {faqs.map((f, i) => (
+          <details class="faq-item" open={i === 0}>
+            <summary class="faq-question">
+              <span>{f.q}</span>
+              <span class="faq-icon"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
