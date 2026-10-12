@@ -6,6 +6,7 @@
 // homepage FAQ) and the FAQPage schema, so the two can't drift apart.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Callout from '../components/Callout.astro';
+import LabelCard from '../components/LabelCard.astro';
 
 const title = 'Website Down or Showing an Error? Start Here';
 const description =
@@ -98,76 +99,83 @@ const schema = [
     </ol>
 
     <h2>What are you seeing?</h2>
-    <p>The message on the screen narrows down the cause more than anything else, so match yours to the closest one below.</p>
+    <p>The message on the screen narrows down the cause more than anything else, so find the closest match below.</p>
 
-    <h3>"There has been a critical error on this website"</h3>
-    <p>
-      This means something in the site's code, usually a plugin or theme, has failed badly enough
-      that WordPress stopped altogether. It's often fixable quickly once someone looks at the error
-      log. Check your inbox for an email from WordPress with the subject "Your Site is Experiencing
-      a Technical Issue", which can get you back in. The full explanation is in
-      <a href="/posts/wordpress-critical-error-what-to-do/">what to do about the critical error message</a>.
-    </p>
+    <LabelCard variant="signal" badge="WordPress error" title="There has been a critical error on this website">
+      <p>
+        Something in the site's code, usually a plugin or theme, has failed badly enough that WordPress
+        stopped altogether. It's often fixable quickly once someone looks at the error log. Check your inbox
+        for an email from WordPress headed "Your Site is Experiencing a Technical Issue", which can get you
+        back in. Full guide: <a href="/posts/wordpress-critical-error-what-to-do/">the critical error explained</a>.
+      </p>
+    </LabelCard>
 
-    <h3>"Error establishing a database connection"</h3>
-    <p>
-      WordPress keeps everything you've written in a database, and this message means it can't reach
-      it. Often that's on the hosting side, such as a database server being down or under maintenance,
-      so check your host's status page first. It can also happen after a move or a change of login
-      details, or when the database is overloaded. If your host's status looks fine, ask them directly
-      whether your database is running. There's a list of questions to put to them in
-      <a href="/posts/website-down-host-says-server-issue/">what to ask when your host says it's a server issue</a>.
-    </p>
+    <LabelCard variant="signal" badge="Database error" title="Error establishing a database connection">
+      <p>
+        WordPress keeps everything you've written in a database, and this means it can't reach it. That's
+        often on the hosting side, such as a database server being down or under maintenance, so check your
+        host's status page first. It can also follow a move or a change of login details. If the status looks
+        fine, ask your host whether your database is running. Full guide:
+        <a href="/posts/website-down-host-says-server-issue/">what to ask your host</a>.
+      </p>
+    </LabelCard>
 
-    <h3>A blank white page</h3>
-    <p>
-      This is the older, less dramatic cousin of the critical error message and has much the same causes: a
-      plugin or theme that has failed, or a site running out of the memory your host allows. The same
-      steps apply.
-    </p>
+    <LabelCard variant="signal" badge="White screen" title="A blank white page">
+      <p>
+        This is the older, less dramatic cousin of the critical error message and has much the same causes: a
+        plugin or theme that has failed, or a site running out of the memory your host allows. The same steps
+        apply.
+      </p>
+    </LabelCard>
 
-    <h3>"Briefly unavailable for scheduled maintenance" that never goes away</h3>
-    <p>
-      WordPress shows this while it's installing updates, and it should disappear within a minute or two.
-      If it's still there an hour later, an update was probably interrupted and left a small temporary
-      file behind. It's usually a quick fix for someone with access to the site's files.
-    </p>
+    <LabelCard variant="signal" badge="Stuck update" title="A maintenance message that never goes away">
+      <p>
+        WordPress shows "Briefly unavailable for scheduled maintenance" while it installs updates, and it should
+        clear within a minute or two. If it's still there an hour later, an update was probably interrupted and
+        left a small temporary file behind. It's usually a quick fix for someone with access to the site's files.
+      </p>
+    </LabelCard>
 
-    <h3>A 500 or 503 error</h3>
-    <p>
-      Both are errors from the server rather than the website itself. A 503 can be a temporary overload,
-      and a 500 can be a fault in the site or its setup. Check your host's status page, and ask them for
-      the error log for your site around the time it began.
-    </p>
+    <LabelCard variant="signal" badge="Server error" title="A 500 or 503 error">
+      <p>
+        Both come from the server rather than the website itself. A 503 can be a temporary overload, and a 500
+        can be a fault in the site or its setup. Check your host's status page, and ask them for the error log
+        for your site around the time it began.
+      </p>
+    </LabelCard>
 
-    <h3>"This site can't be reached", or a parked or default page from your host</h3>
-    <p>
-      That points at the domain, the DNS settings or the hosting account rather than WordPress. Check that
-      your domain hasn't expired and that your hosting is paid up, and ask whoever manages your domain
-      whether anything was changed recently.
-    </p>
+    <LabelCard variant="signal" badge="Domain issue" title="The site can't be reached, or your host's default page appears">
+      <p>
+        That points at the domain, the DNS settings or the hosting account rather than WordPress. Check that your
+        domain hasn't expired and that your hosting is paid up, and ask whoever manages your domain whether
+        anything was changed recently.
+      </p>
+    </LabelCard>
 
-    <h3>You can't log in</h3>
-    <p>
-      Try the "Lost your password" link on the login page first. If the reset email never arrives, the
-      site's email may be broken, or the admin address may belong to someone else, such as a developer
-      who built it years ago. Someone with access to your hosting can reset it from there. Please don't
-      send your password over email.
-    </p>
+    <LabelCard variant="signal" badge="Login problem" title="You can't log in">
+      <p>
+        Try the "Lost your password" link on the login page first. If the reset email never arrives, the site's
+        email may be broken, or the admin address may belong to someone else, such as a developer who built it
+        years ago. Someone with access to your hosting can reset it from there. Please don't send your password
+        over email.
+      </p>
+    </LabelCard>
 
-    <h3>It redirects to strange sites, or Google says it's unsafe</h3>
-    <p>
-      That's a sign the site may have been hacked. Don't keep trying things yourself, as that can make a
-      cleanup harder. Get someone to look at it promptly, and have a read of
-      <a href="/posts/what-happens-to-a-wordpress-site-nobody-looks-after/">what happens to a site nobody looks after</a>
-      and the <a href="/posts/wordpress-security-basics/">security basics</a> for what's likely to be involved.
-    </p>
+    <LabelCard variant="signal" badge="Possible hack" title="Strange redirects, or Google says the site is unsafe">
+      <p>
+        That's a sign the site may have been hacked. Don't keep trying things yourself, as that can make a cleanup
+        harder, and get someone to look at it promptly. For what's usually involved, see
+        <a href="/posts/what-happens-to-a-wordpress-site-nobody-looks-after/">a neglected site</a> and the
+        <a href="/posts/wordpress-security-basics/">security basics</a>.
+      </p>
+    </LabelCard>
 
-    <h3>It's just very slow</h3>
-    <p>
-      That's a different problem with a different set of causes, and it's covered in
-      <a href="/posts/whats-slowing-your-wordpress-site-2026/">what's slowing your WordPress site down</a>.
-    </p>
+    <LabelCard variant="signal" badge="Slow site" title="It's working, just very slow">
+      <p>
+        That's a different problem with a different set of causes. See
+        <a href="/posts/whats-slowing-your-wordpress-site-2026/">what's slowing your site down</a>.
+      </p>
+    </LabelCard>
 
     <h2>What to have ready when you ask for help</h2>
     <p>
