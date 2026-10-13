@@ -1,0 +1,60 @@
+---
+// Conversion page. Visitors only land here after a successful form submission,
+// so a page-load conversion on this URL counts real enquiries and nothing else.
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Thanks, we've got your message | WP Base"
+  description="Your enquiry has been sent to WP Base."
+  noindex
+>
+  <section class="thanks">
+    <div class="thanks-inner">
+      <h1>Thanks, that's with us now.</h1>
+      <p>
+        Your message has landed and we'll be in touch soon. If it's urgent, you
+        can always reach us on WhatsApp using the button in the corner.
+      </p>
+      <a class="thanks-link" href="/">Back to the homepage</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 6rem 1.5rem;
+  }
+
+  .thanks-inner {
+    max-width: 36rem;
+    text-align: center;
+  }
+
+  .thanks h1 {
+    margin: 0 0 1rem;
+  }
+
+  .thanks p {
+    margin: 0 0 2rem;
+    line-height: 1.6;
+  }
+
+  .thanks-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid currentColor;
+    border-radius: 0.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .thanks-link:hover,
+  .thanks-link:focus-visible {
+    text-decoration: underline;
+  }
+</style>
