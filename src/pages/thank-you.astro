@@ -5,16 +5,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Thanks, we've got your message | WP Base"
+  title="Thanks, I've got your message | WP Base"
   description="Your enquiry has been sent to WP Base."
   noindex
 >
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { dataLayer.push(arguments); };
+
+    try {
+      if (!sessionStorage.getItem('wpbase_purchase_sent')) {
+        gtag('event', 'conversion_event_purchase');
+        sessionStorage.setItem('wpbase_purchase_sent', '1');
+      }
+    } catch (e) {}
+  </script>
+
   <section class="thanks">
     <div class="thanks-inner">
-      <h1>Thanks, that's with us now.</h1>
+      <h1>Thanks, I've got your message.</h1>
       <p>
-        Your message has landed and we'll be in touch soon. If it's urgent, you
-        can always reach us on WhatsApp using the button in the corner.
+        Your enquiry has landed and I'll be in touch soon. If it's urgent, you
+        can reach me on WhatsApp using the button in the corner.
       </p>
       <a class="thanks-link" href="/">Back to the homepage</a>
     </div>
