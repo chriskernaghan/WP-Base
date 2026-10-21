@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Cleaning Website Example</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:opsz,wght@9..40,400..600&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: full-bleed hero photo, then a calm run of image-led sections (services grid, booking with live price, price table, area, about, review). Sharp-edged photography, one teal accent, soap-bubble motif in the image placeholders. */
+:root{
+  --font-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --font-body:"DM Sans","Helvetica Neue",Arial,sans-serif;
+
+  --bg:#FBFDFD;
+  --surface:#FFFFFF;
+  --mist:#EAF4F4;
+  --ink:#0D2B33;
+  --muted:#4F6B72;
+  --line:#D3E3E5;
+  --sea:#0A7487;
+  --sea-ink:#FFFFFF;
+  --sea-soft:#CDEBEC;
+  --star:#F2A900;
+  --ok:#1B7A4D;
+  --err:#B3361F;
+  --ph-ink:#0D2B33;
+
+  --hero-a:#082C36;
+  --hero-b:#0A7487;
+  --hero-c:#6CC6CF;
+  --hero-ink:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#081A1F;--surface:#0E2329;--mist:#0C2328;--ink:#E6F3F4;--muted:#9DB8BD;--line:#1F3D44;
+    --sea:#3CC0D3;--sea-ink:#06242A;--sea-soft:#14414A;--star:#F5B82E;--ok:#5ED39A;--err:#F08A73;--ph-ink:#E6F3F4;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#081A1F;--surface:#0E2329;--mist:#0C2328;--ink:#E6F3F4;--muted:#9DB8BD;--line:#1F3D44;
+  --sea:#3CC0D3;--sea-ink:#06242A;--sea-soft:#14414A;--star:#F5B82E;--ok:#5ED39A;--err:#F08A73;--ph-ink:#E6F3F4;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);font-size:16px;line-height:1.6;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-display);line-height:1.08;letter-spacing:-.015em;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+section[id]{scroll-margin-top:84px}
+:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+
+.wrap{max-width:1200px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:clamp(56px,8vw,104px)}
+.band.alt{background:var(--mist)}
+.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--sea)}
+.sec-head{display:grid;gap:12px;max-width:640px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-head h2{font-size:clamp(30px,4.2vw,48px);font-weight:700}
+.sec-head p{color:var(--muted);font-size:17px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:4px;border:1px solid transparent;font:600 15px/1 var(--font-body);text-decoration:none;cursor:pointer;transition:background-color .15s,border-color .15s}
+.btn-primary{background:var(--sea);color:var(--sea-ink)}
+.btn-primary:hover{background:color-mix(in srgb,var(--sea) 88%,var(--ink))}
+.btn-ghost{border-color:currentColor;background:transparent}
+.btn-light{background:var(--bg);color:var(--ink)}
+.btn-light:hover{background:var(--mist)}
+.link{font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--sea);color:var(--ink)}
+
+/* Header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:34px;height:34px;flex:none}
+.brand b{display:block;font:700 19px/1 var(--font-display);letter-spacing:-.01em}
+.brand small{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;gap:28px}
+.nav a{font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;font-weight:500}
+.nav a:hover{color:var(--sea)}
+@media (max-width:860px){.nav{display:none}}
+
+/* Image placeholders: swap a .ph for an <img> or drop an <img> inside it */
+.ph{position:relative;overflow:hidden;color:var(--ph-ink);
+  background:
+    radial-gradient(circle at 17% 24%,color-mix(in srgb,var(--bg) 60%,transparent) 0 8%,transparent 8.4%),
+    radial-gradient(circle at 81% 70%,color-mix(in srgb,var(--bg) 42%,transparent) 0 15%,transparent 15.4%),
+    radial-gradient(circle at 63% 18%,color-mix(in srgb,var(--bg) 50%,transparent) 0 4.5%,transparent 4.9%),
+    radial-gradient(circle at 30% 82%,color-mix(in srgb,var(--bg) 35%,transparent) 0 6%,transparent 6.4%),
+    linear-gradient(155deg,color-mix(in srgb,var(--sea) var(--t,20%),var(--mist)),color-mix(in srgb,var(--sea-soft) 85%,var(--mist)))}
+.ph::before{content:"";position:absolute;left:50%;top:44%;width:36px;height:36px;transform:translate(-50%,-50%);background:currentColor;opacity:.45;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2v8.6l3.5-3.5 3 3 4-5L19 15V7H5zm10 1.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2v8.6l3.5-3.5 3 3 4-5L19 15V7H5zm10 1.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z'/%3E%3C/svg%3E") center/contain no-repeat}
+.ph::after{content:attr(data-label);position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:6px 10px;border-radius:3px;font-size:12px;line-height:1.35;letter-spacing:.01em;background:color-mix(in srgb,var(--surface) 86%,transparent);color:var(--ink)}
+.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph:has(>img)::before,.ph:has(>img)::after{display:none}
+.r-45{aspect-ratio:4/5}.r-43{aspect-ratio:4/3}.r-169{aspect-ratio:16/9}.r-34{aspect-ratio:3/4}
+
+/* Hero */
+.hero{position:relative;isolation:isolate;color:var(--hero-ink);overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:-2;color:var(--hero-ink);
+  background:
+    radial-gradient(circle at 12% 30%,color-mix(in srgb,#fff 12%,transparent) 0 7%,transparent 7.3%),
+    radial-gradient(circle at 84% 24%,color-mix(in srgb,#fff 10%,transparent) 0 11%,transparent 11.3%),
+    radial-gradient(circle at 70% 78%,color-mix(in srgb,#fff 12%,transparent) 0 5%,transparent 5.3%),
+    radial-gradient(circle at 92% 88%,color-mix(in srgb,#fff 8%,transparent) 0 14%,transparent 14.3%),
+    linear-gradient(115deg,var(--hero-a) 0%,var(--hero-b) 62%,var(--hero-c) 100%)}
+.hero-media::before{top:36%;left:auto;right:18%;transform:none}
+.hero-media::after{left:auto;right:max(16px,env(safe-area-inset-right,0px));top:16px;bottom:auto;background:color-mix(in srgb,#000 35%,transparent);color:var(--hero-ink)}
+.hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,color-mix(in srgb,var(--hero-a) 80%,transparent) 0%,transparent 70%)}
+.hero .wrap{padding-block:clamp(72px,11vw,140px) clamp(36px,5vw,56px);display:grid;gap:clamp(36px,6vw,64px)}
+.hero-copy{display:grid;gap:22px;max-width:660px}
+.hero .eyebrow{color:var(--hero-ink);opacity:.85}
+.hero h1{font-size:clamp(40px,6.4vw,76px);font-weight:700;letter-spacing:-.025em}
+.hero-copy p{font-size:clamp(17px,1.6vw,20px);max-width:52ch;opacity:.92}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero .btn-primary{background:var(--hero-ink);color:var(--hero-a)}
+.hero .btn-primary:hover{background:color-mix(in srgb,#fff 88%,var(--hero-c))}
+.hero .btn-ghost{color:var(--hero-ink)}
+.hero .btn-ghost:hover{background:color-mix(in srgb,#fff 14%,transparent)}
+.hero-facts{display:flex;flex-wrap:wrap;gap:12px 36px;padding-top:22px;border-top:1px solid color-mix(in srgb,#fff 28%,transparent);font-size:14.5px;list-style:none;margin:0;padding-left:0}
+.hero-facts li{display:flex;align-items:center;gap:9px}
+.hero-facts svg{width:18px;height:18px;flex:none}
+.stars{display:inline-flex;gap:2px;vertical-align:middle}
+.star{width:18px;height:18px;fill:var(--star)}
+
+/* Services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 24px}
+.svc{display:grid;gap:14px;align-content:start}
+.svc-body{display:grid;gap:8px}
+.svc h3{font-size:20px;font-weight:650}
+.svc p{color:var(--muted);font-size:15px}
+.svc-foot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:4px;padding-top:12px;border-top:1px solid var(--line)}
+.from{font-size:14px;color:var(--muted)}
+.from b{font:700 20px/1 var(--font-display);color:var(--ink);font-variant-numeric:tabular-nums}
+@media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.svc-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Booking */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 28px;list-style:none;margin:0 0 clamp(28px,4vw,44px);padding:0}
+.steps li{display:flex;gap:14px;align-items:flex-start}
+.steps .n{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--sea);color:var(--sea-ink);font:700 15px/1 var(--font-display)}
+.steps b{display:block;font-family:var(--font-display);font-size:17px;margin-bottom:2px}
+.steps span{color:var(--muted);font-size:14.5px}
+@media (max-width:760px){.steps{grid-template-columns:minmax(0,1fr)}}
+.book-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(24px,4vw,56px);align-items:start}
+@media (max-width:900px){.book-grid{grid-template-columns:minmax(0,1fr)}}
+.form{display:grid;gap:22px;padding:clamp(20px,3vw,32px);background:var(--surface);border:1px solid var(--line)}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}}
+.field{display:grid;gap:7px;min-width:0;border:0;padding:0;margin:0}
+.field>label,.field>legend{font-size:14px;font-weight:600;padding:0}
+.input{width:100%;min-height:46px;padding:0 14px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);font:400 16px/1.2 var(--font-body)}
+.input:focus-visible{outline:2px solid var(--sea);outline-offset:1px;border-color:var(--sea)}
+.input:disabled{opacity:.55}
+.hint{font-size:13.5px;color:var(--muted);min-height:1.4em}
+.hint.ok{color:var(--ok)}.hint.err{color:var(--err)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border:1px solid var(--line);border-radius:4px;background:var(--bg);font-size:14.5px;font-weight:500}
+.chip input:checked+span{background:var(--sea);border-color:var(--sea);color:var(--sea-ink)}
+.chip input:focus-visible+span{outline:2px solid var(--sea);outline-offset:2px}
+.form-status{font-size:15px;font-weight:500;min-height:1.5em}
+.form-status.ok{color:var(--ok)}.form-status.err{color:var(--err)}
+.summary{position:sticky;top:92px;background:var(--surface);border:1px solid var(--line)}
+@media (max-width:900px){.summary{position:static}}
+.summary dl{margin:0;padding:6px 20px}
+.summary .li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+.summary dt{color:var(--muted)}
+.summary dd{margin:0;font-weight:600;text-align:right}
+.est{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 20px 6px}
+.est span{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.est output{font:700 clamp(34px,4vw,44px)/1 var(--font-display);font-variant-numeric:tabular-nums}
+.summary small{display:block;padding:0 20px 18px;color:var(--muted);font-size:13px}
+
+/* Pricing */
+.price-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+@media (max-width:900px){.price-grid{grid-template-columns:minmax(0,1fr)}}
+.table-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:460px}
+th,td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:15.5px}
+thead th{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;vertical-align:bottom}
+thead th small{display:block;text-transform:none;letter-spacing:0;font-weight:400;font-size:12.5px;margin-top:2px}
+tbody th{font-weight:600}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+td.num{font-weight:600}
+.price-notes{display:grid;gap:18px}
+.note{display:grid;gap:4px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.note:last-of-type{border-bottom:0}
+.note h3{font-size:18px}
+.note p{color:var(--muted);font-size:15px}
+.note b{color:var(--ink)}
+.draft{font-size:13px;color:var(--muted);padding:10px 12px;border:1px dashed var(--line);border-radius:4px}
+
+/* Area */
+.area-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+@media (max-width:900px){.area-grid{grid-template-columns:minmax(0,1fr)}}
+.area-copy{display:grid;gap:22px}
+.area-copy h2{font-size:clamp(30px,4.2vw,48px);font-weight:700}
+.area-copy>p{color:var(--muted);font-size:17px;max-width:52ch}
+.areas{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.areas li{padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-size:14.5px;background:var(--surface)}
+.checker{display:grid;gap:8px;max-width:420px}
+.checker label{font-size:14px;font-weight:600}
+.checker .inline{display:flex;gap:8px}
+.checker .inline .input{flex:1;min-width:0}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,80px);align-items:center}
+@media (max-width:900px){.about-grid{grid-template-columns:minmax(0,1fr)}.about-grid .ph{max-width:420px}}
+.about-copy{display:grid;gap:18px;max-width:58ch}
+.about-copy h2{font-size:clamp(30px,4.2vw,48px);font-weight:700}
+.about-copy p{font-size:17px;color:var(--muted)}
+.about-copy p:first-of-type{color:var(--ink)}
+.sign{display:flex;flex-wrap:wrap;gap:10px 28px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px;list-style:none;margin:0;padding-left:0}
+.sign b{font:700 22px/1 var(--font-display);display:block;margin-bottom:4px}
+
+/* Review */
+.review-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(24px,5vw,72px);align-items:center}
+@media (max-width:900px){.review-grid{grid-template-columns:minmax(0,1fr)}}
+.score{display:grid;gap:8px}
+.score .big{font:700 clamp(64px,9vw,104px)/0.9 var(--font-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.score .stars .star{width:26px;height:26px}
+.score p{color:var(--muted);font-size:15px}
+.quote{position:relative;padding:clamp(22px,3vw,36px);background:var(--surface);border:1px solid var(--line);display:grid;gap:18px}
+.quote blockquote{margin:0;font:500 clamp(19px,2.2vw,25px)/1.45 var(--font-display);letter-spacing:-.005em;text-wrap:pretty}
+.quote footer{display:flex;align-items:center;gap:12px;font-size:14.5px}
+.avatar{flex:none;width:40px;height:40px;border-radius:50%;background:var(--sea-soft);display:grid;place-items:center;font:700 15px/1 var(--font-display);color:var(--ink)}
+.tag{position:absolute;top:-11px;right:16px;padding:3px 10px;border-radius:3px;background:var(--ink);color:var(--bg);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+
+/* CTA + footer */
+.cta{background:var(--ink);color:var(--bg)}
+.cta .wrap{padding-block:clamp(44px,6vw,72px);display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
+.cta h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;max-width:18ch}
+.cta p{opacity:.8;margin-top:8px;max-width:46ch}
+footer.site{border-top:1px solid var(--line)}
+footer.site .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:10px 32px;justify-content:space-between;font-size:14px;color:var(--muted)}
+
+/* Hero video */
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-shade{background:
+  linear-gradient(90deg,color-mix(in srgb,var(--hero-a) 93%,transparent) 0%,color-mix(in srgb,var(--hero-a) 76%,transparent) 42%,color-mix(in srgb,var(--hero-a) 38%,transparent) 100%),
+  linear-gradient(0deg,color-mix(in srgb,var(--hero-a) 70%,transparent) 0%,transparent 50%)}
+@media (max-width:760px){.hero-shade{background:color-mix(in srgb,var(--hero-a) 80%,transparent)}}
+.hero h1,.hero-copy p{text-shadow:0 1px 22px color-mix(in srgb,var(--hero-a) 55%,transparent)}
+.vid-toggle{position:absolute;z-index:1;right:max(16px,env(safe-area-inset-right,0px));bottom:16px;min-height:36px;padding:0 12px;border-radius:4px;border:1px solid color-mix(in srgb,#fff 40%,transparent);background:color-mix(in srgb,#000 32%,transparent);color:var(--hero-ink);font:500 13px/1 var(--font-body);cursor:pointer}
+.vid-toggle:hover{background:color-mix(in srgb,#000 50%,transparent)}
+.vid-toggle:focus-visible{outline-color:var(--hero-ink)}
+@media (max-width:760px){.hero .wrap{padding-bottom:72px}}
+textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5}
+.fromlbl{font:500 14px/1 var(--font-body);color:var(--muted);margin-right:6px;letter-spacing:0}
+
+/* Team */
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 20px;margin-bottom:clamp(28px,4vw,44px)}
+@media (max-width:1000px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.team{grid-template-columns:minmax(0,1fr)}}
+.member{display:grid;gap:6px;align-content:start}
+.member .ph{margin-bottom:8px}
+.member h3{font-size:20px;font-weight:650}
+.member p{color:var(--muted);font-size:15px}
+.member .link{justify-self:start;margin-top:6px}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.5l-5.9 3.2 1.2-6.6L2.5 9.5l6.6-.9L12 2.5z"/></symbol>
+  <symbol id="tick" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Your Business, home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="17" cy="23" r="13" fill="var(--sea)"/><circle cx="29" cy="11" r="6" fill="var(--sea-soft)" stroke="var(--sea)" stroke-width="2"/><circle cx="12" cy="18" r="3" fill="var(--sea-ink)" opacity=".6"/></svg>
+      <span><b>Your Business</b><small>Cleaning Services</small></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#area">Area</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+    <a class="btn btn-primary" href="#book">Book online</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg"><source src="hero.mp4" type="video/mp4"></video>
+    </div>
+    <div class="hero-shade"></div>
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Cleaners across Greater Belfast</span>
+        <h1 id="hero-title">Book a trusted cleaner for your home or workplace.</h1>
+        <p>Choose a package, pick a day and we'll match you with a cleaner from our team. We talk through the property at your first visit and agree the final price together.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#book">Book a cleaner</a>
+          <a class="btn btn-ghost" href="#pricing">See starting prices</a>
+        </div>
+      </div>
+      <ul class="hero-facts">
+        <li><svg aria-hidden="true"><use href="#tick"/></svg>DBS checked cleaners</li>
+        <li><svg aria-hidden="true"><use href="#tick"/></svg>Ten years in business</li>
+        <li><svg aria-hidden="true"><use href="#tick"/></svg>Price agreed at your first visit</li>
+        <li><span class="stars" aria-hidden="true"><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg></span>5 stars on Google</li>
+      </ul>
+    </div>
+    <button class="vid-toggle" id="vidToggle" type="button">Pause video</button>
+  </section>
+
+  <section class="band" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Services</span>
+        <h2 id="services-title">What we clean</h2>
+        <p>A team of cleaners for the house, the rental and the workplace, with the same standard on every job.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc">
+          <div class="ph r-45" data-label="Photo: bright, freshly cleaned living room" style="--t:24%"></div>
+          <div class="svc-body">
+            <h3>Regular home cleaning</h3>
+            <p>Weekly or fortnightly visits to keep the house ticking over.</p>
+            <div class="svc-foot"><span class="from">from <b>£38</b></span><a class="link" href="#book" data-service="regular">Book this</a></div>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="ph r-45" data-label="Photo: kitchen deep clean in progress" style="--t:32%"></div>
+          <div class="svc-body">
+            <h3>Deep cleaning</h3>
+            <p>Top to bottom, including the places a normal clean skips.</p>
+            <div class="svc-foot"><span class="from">from <b>£120</b></span><a class="link" href="#book" data-service="deep">Book this</a></div>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="ph r-45" data-label="Photo: empty rental, spotless bathroom" style="--t:18%"></div>
+          <div class="svc-body">
+            <h3>End of tenancy</h3>
+            <p>Cleaned to the standard letting agents expect, ready for handover.</p>
+            <div class="svc-foot"><span class="from">from <b>£150</b></span><a class="link" href="#book" data-service="tenancy">Book this</a></div>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="ph r-45" data-label="Photo: oven before and after" style="--t:28%"></div>
+          <div class="svc-body">
+            <h3>Oven cleaning</h3>
+            <p>Baked-on grease and burnt-on spills removed, inside and out.</p>
+            <div class="svc-foot"><span class="from">flat <b>£55</b></span><a class="link" href="#book" data-service="oven">Book this</a></div>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="ph r-45" data-label="Photo: tidy open-plan office" style="--t:22%"></div>
+          <div class="svc-body">
+            <h3>Office cleaning</h3>
+            <p>Out-of-hours cleaning so your team arrives to a tidy workplace.</p>
+            <div class="svc-foot"><span class="from">tailored <b>quote</b></span><a class="link" href="#book" data-service="office">Ask for a quote</a></div>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="ph r-45" data-label="Photo: shop or salon floor being cleaned" style="--t:30%"></div>
+          <div class="svc-body">
+            <h3>Commercial cleaning</h3>
+            <p>Shops, salons and other commercial premises, on a schedule that suits you.</p>
+            <div class="svc-foot"><span class="from">tailored <b>quote</b></span><a class="link" href="#book" data-service="commercial">Ask for a quote</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="book" aria-labelledby="book-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Online booking</span>
+        <h2 id="book-title">Book a cleaner</h2>
+        <p>Choose a package and, if you like, a cleaner from the team. The starting price updates as you go.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Choose a package</b><span>Pick the clean you need and roughly how big the property is.</span></div></li>
+        <li><span class="n">2</span><div><b>Pick a day and a cleaner</b><span>Book a favourite or let us match you with whoever is free.</span></div></li>
+        <li><span class="n">3</span><div><b>First visit</b><span>We look at the property and the work involved, then agree the final price.</span></div></li>
+      </ol>
+
+      <div class="book-grid">
+        <form class="form" id="bookform" novalidate>
+          <div class="row">
+            <div class="field">
+              <label for="svc">Package</label>
+              <select class="input" id="svc" name="service">
+                <option value="regular">Regular home cleaning</option>
+                <option value="deep" selected>Deep cleaning</option>
+                <option value="tenancy">End of tenancy</option>
+                <option value="oven">Oven cleaning</option>
+                <option value="office">Office cleaning</option>
+                <option value="commercial">Commercial cleaning</option>
+              </select>
+            </div>
+            <div class="field" id="sizeField">
+              <label for="size">Property size</label>
+              <select class="input" id="size" name="size">
+                <option value="0">Studio or 1 bed</option>
+                <option value="1">2 bed</option>
+                <option value="2" selected>3 bed</option>
+                <option value="3">4+ bed</option>
+              </select>
+            </div>
+          </div>
+
+          <fieldset class="field" id="freqField" hidden>
+            <legend>How often</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="freq" value="once" checked><span>One-off</span></label>
+              <label class="chip"><input type="radio" name="freq" value="fortnightly"><span>Fortnightly</span></label>
+              <label class="chip"><input type="radio" name="freq" value="weekly"><span>Weekly</span></label>
+            </div>
+          </fieldset>
+
+          <div class="row">
+            <div class="field">
+              <label for="cleaner">Cleaner</label>
+              <select class="input" id="cleaner" name="cleaner">
+                <option value="any" selected>Any available cleaner</option>
+                <option value="aoife">Aoife</option>
+                <option value="ciaran">Ciaran</option>
+                <option value="niamh">Niamh</option>
+                <option value="ryan">Ryan</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="date">Preferred date</label>
+              <input class="input" type="date" id="date" name="date">
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend>Time</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="time" value="Morning" checked><span>Morning</span></label>
+              <label class="chip"><input type="radio" name="time" value="Afternoon"><span>Afternoon</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="pc">Postcode</label>
+            <input class="input" type="text" id="pc" name="postcode" autocomplete="postal-code" placeholder="BT15 1AA" maxlength="8">
+            <p class="hint" id="pcmsg" aria-live="polite">Enter your postcode to check we cover you.</p>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input class="input" type="text" id="name" name="name" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input class="input" type="email" id="email" name="email" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Anything we should know? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+            <textarea class="input" id="notes" name="notes" rows="3" placeholder="Pets, parking, areas that need extra attention"></textarea>
+          </div>
+
+          <div>
+            <button class="btn btn-primary" type="submit">Request this booking</button>
+          </div>
+          <p class="form-status" id="status" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="summary" aria-label="Your booking">
+          <div class="ph r-169" data-label="Photo: a finished room, light and fresh" style="--t:26%"></div>
+          <dl>
+            <div class="li"><dt>Package</dt><dd id="sSvc"></dd></div>
+            <div class="li" id="sSizeRow"><dt>Property</dt><dd id="sSize"></dd></div>
+            <div class="li" id="sFreqRow" hidden><dt>How often</dt><dd id="sFreq"></dd></div>
+            <div class="li"><dt>Cleaner</dt><dd id="sCleaner"></dd></div>
+            <div class="li"><dt>Date</dt><dd id="sDate"></dd></div>
+            <div class="li"><dt>Time</dt><dd id="sTime"></dd></div>
+          </dl>
+          <div class="est"><span>Starting price</span><output id="sPrice" for="svc size date"></output></div>
+          <small id="sNote"></small>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Pricing</span>
+        <h2 id="pricing-title">Packages with a clear starting price</h2>
+        <p>Every property is different, so each package starts at a set price and the final figure depends on the size of the property and the work involved. We talk it through at your first visit.</p>
+      </div>
+      <div class="price-grid">
+        <div class="table-scroll">
+          <table id="ptable">
+            <thead>
+              <tr>
+                <th scope="col">Property</th>
+                <th scope="col">Regular clean<small>from, per visit</small></th>
+                <th scope="col">Deep clean<small>from, one visit</small></th>
+                <th scope="col">End of tenancy<small>from, one visit</small></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="price-notes">
+          <div class="note"><h3>Agreed at your first visit</h3><p>We look at the property, talk through what you need and agree the final price together.</p></div>
+          <div class="note"><h3>Regular visits cost less</h3><p>Fortnightly cleans take <b>5% off</b> each visit and weekly cleans take <b>10% off</b>.</p></div>
+          <div class="note"><h3>Oven cleaning</h3><p>Starts from <b>£55</b> for a standard oven.</p></div>
+          <div class="note"><h3>Offices and commercial</h3><p>Tell us the size and how often you need us, and we'll quote after a visit.</p></div>
+          <p class="draft">Design preview: these are example prices only. Real figures to be agreed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="area" aria-labelledby="area-title">
+    <div class="wrap">
+      <div class="area-grid">
+        <div class="area-copy">
+          <span class="eyebrow">Service area</span>
+          <h2 id="area-title">Across Greater Belfast</h2>
+          <p>We clean in and around the city, from the north shore of Belfast Lough to Lisburn and out towards Bangor. Check your postcode and we'll tell you straight away.</p>
+          <ul class="areas">
+            <li>Belfast</li><li>Newtownabbey</li><li>Carrickfergus</li><li>Holywood</li><li>Bangor</li><li>Dundonald</li><li>Newtownards</li><li>Dunmurry</li><li>Lisburn</li>
+          </ul>
+          <div class="checker">
+            <label for="pc2">Do you cover me?</label>
+            <div class="inline">
+              <input class="input" type="text" id="pc2" placeholder="Your postcode" autocomplete="postal-code" maxlength="8">
+              <a class="btn btn-primary" href="#book">Book</a>
+            </div>
+            <p class="hint" id="pcmsg2" aria-live="polite">Try BT15 or BT37.</p>
+          </div>
+        </div>
+        <div class="ph r-43" data-label="Photo or map: Belfast skyline, or a simple service area map" style="--t:20%"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">About us</span>
+        <h2 id="about-title">Meet the cleaners</h2>
+        <p>We've been cleaning homes and workplaces across Greater Belfast for ten years. Every cleaner on the team is DBS checked and trained, and you can book the one you like.</p>
+      </div>
+      <div class="team">
+        <article class="member">
+          <div class="ph r-45" data-label="Portrait: Aoife" style="--t:24%"></div>
+          <h3>Aoife</h3>
+          <p>Regular and home cleaning</p>
+          <a class="link" href="#book" data-cleaner="aoife">Book Aoife</a>
+        </article>
+        <article class="member">
+          <div class="ph r-45" data-label="Portrait: Ciaran" style="--t:30%"></div>
+          <h3>Ciaran</h3>
+          <p>Deep cleans and end of tenancy</p>
+          <a class="link" href="#book" data-cleaner="ciaran">Book Ciaran</a>
+        </article>
+        <article class="member">
+          <div class="ph r-45" data-label="Portrait: Niamh" style="--t:20%"></div>
+          <h3>Niamh</h3>
+          <p>Kitchens and ovens</p>
+          <a class="link" href="#book" data-cleaner="niamh">Book Niamh</a>
+        </article>
+        <article class="member">
+          <div class="ph r-45" data-label="Portrait: Ryan" style="--t:27%"></div>
+          <h3>Ryan</h3>
+          <p>Offices and commercial</p>
+          <a class="link" href="#book" data-cleaner="ryan">Book Ryan</a>
+        </article>
+      </div>
+      <ul class="sign">
+        <li><b>10 years</b>cleaning in Greater Belfast</li>
+        <li><b>DBS checked</b>every cleaner</li>
+        <li><b>Your choice</b>book a favourite or any available cleaner</li>
+      </ul>
+      <p class="draft" style="margin-top:20px;max-width:520px">Names and portraits are placeholders.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="reviews" aria-labelledby="reviews-title">
+    <div class="wrap">
+      <div class="review-grid">
+        <div class="score">
+          <span class="eyebrow" id="reviews-title">Google reviews</span>
+          <span class="big">5.0</span>
+          <span class="stars" role="img" aria-label="5 out of 5 stars"><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg></span>
+          <p>Rated 5 stars by customers on Google.</p>
+        </div>
+        <figure class="quote" style="margin:0">
+          <span class="tag">Placeholder review</span>
+          <span class="stars" aria-hidden="true"><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg><svg class="star"><use href="#star"/></svg></span>
+          <blockquote>The team left the house spotless and were easy to deal with from start to finish. I'll be booking them again.</blockquote>
+          <footer><span class="avatar" aria-hidden="true">A</span><span><b>Customer name</b><br><span style="color:var(--muted)">Google review, to be replaced with a real one</span></span></footer>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div>
+        <h2 id="cta-title">Ready for a cleaner week?</h2>
+        <p>Choose a service and a day, and see your price before you commit to anything.</p>
+      </div>
+      <a class="btn btn-light" href="#book">Book a clean</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Your Business Name · Cleaning across Greater Belfast</span>
+    <span>Design preview. Images, prices and review are placeholders.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var PRICES={
+    regular:{label:'Regular home cleaning',p:[38,48,60,75]},
+    deep:{label:'Deep cleaning',p:[120,150,190,240]},
+    tenancy:{label:'End of tenancy',p:[150,190,240,300]},
+    oven:{label:'Oven cleaning',flat:55},
+    office:{label:'Office cleaning',quote:true},
+    commercial:{label:'Commercial cleaning',quote:true}
+  };
+  var SIZES=['Studio or 1 bed','2 bed','3 bed','4+ bed'];
+  var FREQ={once:{label:'One-off',d:0},fortnightly:{label:'Fortnightly',d:0.05},weekly:{label:'Weekly',d:0.10}};
+  var COVERED={};[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,23,27,28,29,36,37,38].forEach(function(n){COVERED[n]=true});
+
+  function $(id){return document.getElementById(id)}
+  function money(n){return '£'+Math.round(n).toLocaleString('en-GB')}
+  function checked(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:''}
+
+  // Hero video: respect reduced motion, and let people pause it
+  var vid=$('heroVideo'),tog=$('vidToggle');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setTog(){tog.textContent=vid.paused?'Play video':'Pause video'}
+  if(reduce){vid.removeAttribute('autoplay');vid.pause()}
+  tog.addEventListener('click',function(){
+    if(vid.paused){var pr=vid.play();if(pr&&pr.catch){pr.catch(function(){})}}else{vid.pause()}
+  });
+  vid.addEventListener('play',setTog);vid.addEventListener('pause',setTog);
+  setTog();
+
+  // Price table
+  var tbody=document.querySelector('#ptable tbody');
+  SIZES.forEach(function(s,i){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<th scope="row">'+s+'</th><td class="num">'+money(PRICES.regular.p[i])+'</td><td class="num">'+money(PRICES.deep.p[i])+'</td><td class="num">'+money(PRICES.tenancy.p[i])+'</td>';
+    tbody.appendChild(tr);
+  });
+
+  // Postcode check
+  function checkPostcode(value){
+    var v=value.trim().toUpperCase();
+    if(v.length<2) return {state:'empty'};
+    var m=v.match(/^([A-Z]{1,2})(\d{1,2})/);
+    if(!m||m[1]!=='BT') return {state:'bad'};
+    var n=parseInt(m[2],10);
+    return COVERED[n]?{state:'in',code:'BT'+n}:{state:'out',code:'BT'+n};
+  }
+  function bindCheck(input,msg,empty){
+    input.addEventListener('input',function(){
+      var r=checkPostcode(input.value);
+      msg.className='hint';
+      if(r.state==='empty'){msg.textContent=empty}
+      else if(r.state==='bad'){msg.textContent='That doesn’t look like a Northern Ireland postcode yet.'}
+      else if(r.state==='in'){msg.textContent='Good news, we cover '+r.code+'.';msg.className='hint ok'}
+      else{msg.textContent=r.code+' is outside our usual area. Get in touch and we’ll see what we can do.';msg.className='hint err'}
+    });
+  }
+  bindCheck($('pc'),$('pcmsg'),'Enter your postcode to check we cover you.');
+  bindCheck($('pc2'),$('pcmsg2'),'Try BT15 or BT37.');
+
+  // Booking summary
+  var svc=$('svc'),size=$('size'),date=$('date'),cleaner=$('cleaner');
+  function iso(x){var m=String(x.getMonth()+1).padStart(2,'0'),dd=String(x.getDate()).padStart(2,'0');return x.getFullYear()+'-'+m+'-'+dd}
+  var today=new Date(),d=new Date();d.setDate(d.getDate()+7);
+  date.min=iso(today);
+  date.value=iso(d);
+
+  function update(){
+    var cfg=PRICES[svc.value];
+    var needsSize=!(cfg.flat||cfg.quote);
+    var isRegular=svc.value==='regular';
+    $('sizeField').hidden=!needsSize;
+    $('freqField').hidden=!isRegular;
+    $('sSizeRow').hidden=!needsSize;
+    $('sFreqRow').hidden=!isRegular;
+    $('sSvc').textContent=cfg.label;
+    $('sSize').textContent=SIZES[size.selectedIndex];
+    $('sFreq').textContent=FREQ[checked('freq')||'once'].label;
+    $('sCleaner').textContent=cleaner.options[cleaner.selectedIndex].text;
+    var t=date.value?new Date(date.value+'T12:00:00'):null;
+    $('sDate').textContent=t&&!isNaN(t)?t.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}):'Choose a date';
+    $('sTime').textContent=checked('time');
+    var out,note='This is a starting price. We agree the final price at your first visit, once we’ve seen the property and the work involved.';
+    if(cfg.quote){out='Quote';note='Offices and commercial premises are priced after we talk through the work and visit.'}
+    else if(cfg.flat){out='<span class="fromlbl">from</span>'+money(cfg.flat)}
+    else{
+      var base=cfg.p[size.selectedIndex];
+      if(isRegular){base=base*(1-FREQ[checked('freq')||'once'].d)}
+      out='<span class="fromlbl">from</span>'+money(base);
+      if(isRegular&&checked('freq')!=='once'){note='Includes your '+Math.round(FREQ[checked('freq')].d*100)+'% regular visit saving. This is a starting price, agreed at your first visit.'}
+    }
+    $('sPrice').innerHTML=out;
+    $('sNote').textContent=note;
+  }
+  ['change','input'].forEach(function(ev){$('bookform').addEventListener(ev,update)});
+  update();
+
+  // Package and cleaner links preselect the form
+  Array.prototype.forEach.call(document.querySelectorAll('[data-service]'),function(a){
+    a.addEventListener('click',function(){svc.value=a.getAttribute('data-service');update()});
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cleaner]'),function(a){
+    a.addEventListener('click',function(){cleaner.value=a.getAttribute('data-cleaner');update()});
+  });
+
+  // Submit (design preview only)
+  $('bookform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var st=$('status'),name=$('name').value.trim(),email=$('email').value.trim();
+    var pc=checkPostcode($('pc').value);
+    var okEmail=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+    if(!name||!okEmail||pc.state!=='in'){
+      st.className='form-status err';
+      st.textContent='Add your name, a valid email and a postcode we cover to continue.';
+      return;
+    }
+    st.className='form-status ok';
+    st.textContent='Thanks, '+name.split(' ')[0]+'. This is a design preview, so nothing has been sent. On the live site this request would go straight to the team.';
+  });
+})();
+</script>
+
+</body>
+</html>
