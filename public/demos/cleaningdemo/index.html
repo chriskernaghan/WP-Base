@@ -11,6 +11,7 @@ img{max-width:100%}
 </style>
 <title>Cleaning Website Example</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<script>try{if("IntersectionObserver" in window&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-reveal")}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:opsz,wght@9..40,400..600&display=swap" rel="stylesheet">
@@ -272,6 +273,14 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
 .member p{color:var(--muted);font-size:15px}
 .member .link{justify-self:start;margin-top:6px}
 
+/* Photos and scroll reveal */
+.ph.has-img::before,.ph.has-img::after{display:none}
+.ph>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.svc:hover .ph>img{transform:scale(1.035)}
+.js-reveal .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
+.js-reveal .reveal.in{opacity:1;transform:none}
+@media print{.js-reveal .reveal{opacity:1;transform:none}}
+
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
@@ -334,7 +343,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
       </div>
       <div class="svc-grid">
         <article class="svc">
-          <div class="ph r-45" data-label="Photo: bright, freshly cleaned living room" style="--t:24%"></div>
+          <div class="ph has-img r-45"><img src="img/service-regular.jpg" alt="Bright living room with a sofa, armchair and lit fireplace" loading="lazy" decoding="async" style="object-position:55% 50%"></div>
           <div class="svc-body">
             <h3>Regular home cleaning</h3>
             <p>Weekly or fortnightly visits to keep the house ticking over.</p>
@@ -342,7 +351,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
           </div>
         </article>
         <article class="svc">
-          <div class="ph r-45" data-label="Photo: kitchen deep clean in progress" style="--t:32%"></div>
+          <div class="ph has-img r-45"><img src="img/service-deep.jpg" alt="Cleaner in gloves and a face mask wiping down a kitchen shelf" loading="lazy" decoding="async" style="object-position:66% 50%"></div>
           <div class="svc-body">
             <h3>Deep cleaning</h3>
             <p>Top to bottom, including the places a normal clean skips.</p>
@@ -350,7 +359,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
           </div>
         </article>
         <article class="svc">
-          <div class="ph r-45" data-label="Photo: empty rental, spotless bathroom" style="--t:18%"></div>
+          <div class="ph has-img r-45"><img src="img/service-tenancy.jpg" alt="Freshly cleaned bathroom with a bath, toilet and white vanity" loading="lazy" decoding="async" style="object-position:45% 50%"></div>
           <div class="svc-body">
             <h3>End of tenancy</h3>
             <p>Cleaned to the standard letting agents expect, ready for handover.</p>
@@ -358,7 +367,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
           </div>
         </article>
         <article class="svc">
-          <div class="ph r-45" data-label="Photo: oven before and after" style="--t:28%"></div>
+          <div class="ph has-img r-45"><img src="img/service-oven.jpg" alt="Person using a built-in oven in a clean kitchen" loading="lazy" decoding="async" style="object-position:60% 50%"></div>
           <div class="svc-body">
             <h3>Oven cleaning</h3>
             <p>Baked-on grease and burnt-on spills removed, inside and out.</p>
@@ -366,7 +375,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
           </div>
         </article>
         <article class="svc">
-          <div class="ph r-45" data-label="Photo: tidy open-plan office" style="--t:22%"></div>
+          <div class="ph has-img r-45"><img src="img/service-office.jpg" alt="Tidy open-plan office with desks and plants" loading="lazy" decoding="async" style="object-position:45% 50%"></div>
           <div class="svc-body">
             <h3>Office cleaning</h3>
             <p>Out-of-hours cleaning so your team arrives to a tidy workplace.</p>
@@ -374,7 +383,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
           </div>
         </article>
         <article class="svc">
-          <div class="ph r-45" data-label="Photo: shop or salon floor being cleaned" style="--t:30%"></div>
+          <div class="ph has-img r-45"><img src="img/service-commercial.jpg" alt="Clean salon floor with styling stations and mirrors" loading="lazy" decoding="async" style="object-position:35% 50%"></div>
           <div class="svc-body">
             <h3>Commercial cleaning</h3>
             <p>Shops, salons and other commercial premises, on a schedule that suits you.</p>
@@ -486,7 +495,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
         </form>
 
         <aside class="summary" aria-label="Your booking">
-          <div class="ph r-169" data-label="Photo: a finished room, light and fresh" style="--t:26%"></div>
+          <div class="ph has-img r-169"><img src="img/booking.jpg" alt="Two cleaners vacuuming and mopping a modern living room" loading="lazy" decoding="async" style="object-position:50% 55%"></div>
           <dl>
             <div class="li"><dt>Package</dt><dd id="sSvc"></dd></div>
             <div class="li" id="sSizeRow"><dt>Property</dt><dd id="sSize"></dd></div>
@@ -553,7 +562,7 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
             <p class="hint" id="pcmsg2" aria-live="polite">Try BT15 or BT37.</p>
           </div>
         </div>
-        <div class="ph r-43" data-label="Photo or map: Belfast skyline, or a simple service area map" style="--t:20%"></div>
+        <div class="ph has-img r-43"><img src="img/area.jpg" alt="Cleaner spraying and wiping a window" loading="lazy" decoding="async" style="object-position:35% 50%"></div>
       </div>
     </div>
   </section>
@@ -755,6 +764,27 @@ textarea.input{padding:12px 14px;min-height:92px;resize:vertical;line-height:1.5
     st.className='form-status ok';
     st.textContent='Thanks, '+name.split(' ')[0]+'. This is a design preview, so nothing has been sent. On the live site this request would go straight to the team.';
   });
+  // Fade elements in as they scroll into view
+  if(document.documentElement.classList.contains('js-reveal')&&'IntersectionObserver' in window){
+    var groups=['.sec-head','.svc','.steps li','.form','.summary','.table-scroll','.price-notes .note','.area-copy','#area .ph','.member','.sign','.score','.quote','.cta .wrap > *'];
+    var items=[];
+    groups.forEach(function(sel){
+      Array.prototype.forEach.call(document.querySelectorAll(sel),function(el){if(items.indexOf(el)<0)items.push(el)});
+    });
+    items.forEach(function(el){
+      var sibs=Array.prototype.filter.call(el.parentNode.children,function(c){return items.indexOf(c)>-1});
+      var i=sibs.indexOf(el);
+      el.style.setProperty('--d',Math.min(i,5)*90+'ms');
+      el.classList.add('reveal');
+    });
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+    items.forEach(function(el){io.observe(el)});
+    window.addEventListener('beforeprint',function(){items.forEach(function(el){el.classList.add('in')})});
+  }
 })();
 </script>
 
