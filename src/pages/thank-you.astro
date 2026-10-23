@@ -21,52 +21,263 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     } catch (e) {}
   </script>
 
-  <section class="thanks">
+  <section class="thanks-hero">
     <div class="thanks-inner">
+      <div class="thanks-tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12.5l4.5 4.5L19 7.5" />
+        </svg>
+      </div>
       <h1>Thanks, I've got your message.</h1>
-      <p>
-        Your enquiry has landed and I'll be in touch soon. If it's urgent, you
-        can reach me on WhatsApp using the button in the corner.
+      <p class="thanks-lead">
+        Your enquiry has landed. I read every one myself and I'll reply within
+        one working day.
       </p>
-      <a class="thanks-link" href="/">Back to the homepage</a>
+    </div>
+  </section>
+
+  <section class="thanks-body">
+    <div class="thanks-wrap">
+      <h2>What happens next</h2>
+      <ol class="thanks-steps">
+        <li>
+          <span class="step-num">1</span>
+          <div>
+            <h3>I read your message</h3>
+            <p>I'll look at your site and what you've told me before I reply, so I'm not asking questions you've already answered.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div>
+            <h3>I reply with next steps</h3>
+            <p>You'll get a straight answer, with any questions I need answered and a rough idea of what's involved.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div>
+            <h3>We talk, only if it helps</h3>
+            <p>If a call would be useful we'll arrange one. If email does the job, that's fine too.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="thanks-urgent">
+        <p>
+          In a hurry? Email <a href="mailto:hello@wpbase.co.uk">hello@wpbase.co.uk</a>,
+          call <a href="tel:+447379334695">+44 7379 334695</a>, or use the
+          WhatsApp button in the corner.
+        </p>
+      </div>
+
+      <h2 class="thanks-more-title">While you wait</h2>
+      <div class="thanks-cards">
+        <a class="thanks-card" href="/case-studies/catagen/">
+          <span class="card-label">Case study</span>
+          <span class="card-title">CATAGEN</span>
+          <span class="card-text">See how I look after a long-running WordPress site.</span>
+        </a>
+        <a class="thanks-card" href="/case-studies/exportexplore/">
+          <span class="card-label">Case study</span>
+          <span class="card-title">ExportExplore</span>
+          <span class="card-text">A recent project, from first look to finished site.</span>
+        </a>
+        <a class="thanks-card" href="/free-site-audit/">
+          <span class="card-label">Free</span>
+          <span class="card-title">Site audit</span>
+          <span class="card-text">Get an honest look at where your site stands today.</span>
+        </a>
+      </div>
+
+      <p class="thanks-home"><a href="/">Back to the homepage</a></p>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .thanks {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
-    padding: 6rem 1.5rem;
-  }
-
-  .thanks-inner {
-    max-width: 36rem;
+  .thanks-hero {
+    background: var(--midnight, #0a0f1c);
+    color: var(--snow, #f5f7fa);
+    padding: 5rem 1.5rem 4.5rem;
     text-align: center;
   }
 
-  .thanks h1 {
-    margin: 0 0 1rem;
+  .thanks-inner {
+    max-width: 38rem;
+    margin: 0 auto;
   }
 
-  .thanks p {
-    margin: 0 0 2rem;
+  .thanks-tick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--accent, #d4ff3a);
+    border-radius: 50%;
+    color: var(--accent, #d4ff3a);
+  }
+
+  .thanks-hero h1 {
+    margin: 0 0 1rem;
+    color: var(--snow, #f5f7fa);
+  }
+
+  .thanks-lead {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--muted, #a3adc2);
+  }
+
+  .thanks-body {
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .thanks-wrap {
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+
+  .thanks-wrap h2 {
+    margin: 0 0 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .thanks-steps {
+    display: grid;
+    gap: 1.5rem;
+    margin: 0 0 3rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .thanks-steps li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--midnight, #0a0f1c);
+    color: var(--accent, #d4ff3a);
+    font-weight: 700;
+  }
+
+  .thanks-steps h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.0625rem;
+  }
+
+  .thanks-steps p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--muted, #5b6478);
+  }
+
+  .thanks-urgent {
+    margin: 0 0 3.5rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 4px solid var(--accent, #d4ff3a);
+    border-radius: 0.25rem;
+    background: rgba(10, 15, 28, 0.04);
+  }
+
+  .thanks-urgent p {
+    margin: 0;
     line-height: 1.6;
   }
 
-  .thanks-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border: 1px solid currentColor;
-    border-radius: 0.5rem;
+  .thanks-urgent a {
     color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
-  .thanks-link:hover,
-  .thanks-link:focus-visible {
-    text-decoration: underline;
+  .thanks-more-title {
+    margin-bottom: 1.25rem;
+  }
+
+  .thanks-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .thanks-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+    border: 1px solid rgba(10, 15, 28, 0.15);
+    border-radius: 0.75rem;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  .thanks-card:hover,
+  .thanks-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--midnight, #0a0f1c);
+  }
+
+  .card-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted, #5b6478);
+  }
+
+  .card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .card-text {
+    line-height: 1.5;
+    color: var(--muted, #5b6478);
+  }
+
+  .thanks-home {
+    margin: 0;
+    text-align: center;
+  }
+
+  .thanks-home a {
+    color: inherit;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 720px) {
+    .thanks-hero {
+      padding: 3.5rem 1.5rem 3rem;
+    }
+
+    .thanks-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thanks-card {
+      transition: none;
+    }
+
+    .thanks-card:hover,
+    .thanks-card:focus-visible {
+      transform: none;
+    }
   }
 </style>
