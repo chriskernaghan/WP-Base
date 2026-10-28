@@ -19,9 +19,10 @@ interface Props {
   description?: string;
   schema?: object;
   ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, schema, ogImage = '/og-image.png' } = Astro.props;
+const { title, description, schema, ogImage = '/og-image.png', noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageURL = new URL(ogImage, Astro.site).href;
 ---
@@ -34,6 +35,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -220,6 +222,26 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
 
         targets.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
+
+    <script is:inline>
+      // Fillout embeds post a message to the parent page when a form is submitted.
+      // Sending the visitor to /thank-you/ gives the conversion page a real page
+      // load, which is what the Google Ads conversion on that URL is waiting for.
+      // The message also carries the visitor's answers, so nothing here reads,
+      // logs or forwards it.
+      (function () {
+        var redirected = false;
+        window.addEventListener('message', function (e) {
+          if (e.origin !== 'https://embed.fillout.com') return;
+          if (!e.data || e.data.type !== 'form_submit') return;
+          if (redirected) return;
+          redirected = true;
+          setTimeout(function () {
+            window.location.href = '/thank-you/';
+          }, 300);
+        });
       })();
     </script>
   </body>
