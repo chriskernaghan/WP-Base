@@ -41,12 +41,10 @@
     --frame: 1200px;
     --reading: 800px;
 
-    /* Split-hero geometry. These two live here rather than in the hero block
-       because the header CTA is aligned off them, and the header's styles sit
-       in Nav.astro. --hero-seam mirrors the 1.12fr of the `1.12fr 1fr` grid on
-       .hero-v2.hero-split, expressed as a percentage so it can be used in
-       calc(). Change the grid ratio or the terminal width and you must change
-       these to match, or the CTA drifts off the terminal's right edge. */
+    /* Split-hero geometry. The terminal's right edge and the header CTA both sit
+       on the frame gutter, so they line up whatever the terminal width is.
+       --hero-seam is no longer used for alignment and is kept only in case
+       something else still reads it. */
     --hero-seam: 52.8302%;
     --hero-terminal-w: 460px;
     --border: rgba(8, 16, 28, 0.08);
@@ -4673,12 +4671,15 @@ footer a:hover {
     max-width: 560px;
 }
 
+/* The terminal sits against the right-hand frame edge, using the same gutter as
+   the header bar, so its right edge lines up with the Get in Touch button.
+   Centring it in the panel left it about 40px past the button. */
 .hero-split-right {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     background: var(--cream);
-    padding: 9rem 4rem 7rem;
+    padding: 9rem max(4rem, calc((100vw - var(--frame)) / 2)) 7rem 4rem;
     position: relative;
     overflow: hidden;
 }
@@ -4782,6 +4783,13 @@ footer a:hover {
    Responsive
    -------------------------------------------------------------------------- */
 
+/* The header bar drops to a 2rem gutter at this width, so the terminal does too. */
+@media (max-width: 1260px) {
+    .hero-split-right {
+        padding-right: 2rem;
+    }
+}
+
 @media (max-width: 1024px) {
     .hero-v2.hero-split {
         grid-template-columns: 1fr;
@@ -4792,6 +4800,7 @@ footer a:hover {
     }
 
     .hero-split-right {
+        justify-content: center;
         padding: 3.5rem 2.5rem 4.5rem;
     }
 
