@@ -1,8 +1,8 @@
 ---
-// Hero.astro — split homepage hero. The dark panel on the left carries the
-// rating pill, headline, description and CTAs. The cream panel on the right
-// holds the terminal status feed, which still initialises from the homepage
-// script via #hero-terminal-feed and #hero-terminal-clock.
+// Hero.astro: split homepage hero. The dark panel on the left carries the
+// rating pill, headline, description, CTAs and phone line. The cream panel on
+// the right holds an example message thread with Chris. Swap the placeholder
+// thread below for a real (anonymised, with permission) exchange when you have one.
 ---
 
 <section class="hero-v2 hero-split">
@@ -13,12 +13,13 @@
         <span class="hero-v2-rating-text"><strong>5.0</strong> on Google<span class="hero-v2-rating-extra"> · clients love working with me</span></span>
       </a>
       <h1 class="hero-v2-headline">
-        WordPress care<br />
-        <span class="accent">without the<br />agency price</span>
+        A WordPress site<br />
+        <span class="accent">you never have to<br />worry about</span>
       </h1>
       <p class="hero-v2-desc">
-        Maintenance, updates, backups and security handled for a fixed monthly
-        fee, by one person you can actually get on the phone.
+        I handle the updates, backups and security for a fixed monthly fee, so
+        your site stays fast and safe and you can get on with running your
+        business.
       </p>
       <!--<ul class="hero-v2-stats">
         <li><span class="stat-tick" aria-hidden="true">✓</span><strong>4 years</strong> avg. client relationship</li>
@@ -28,27 +29,165 @@
       </ul>-->
       <div class="hero-v2-cta-row">
         <a href="#contact" class="hero-v2-cta-primary">
-          Get Your Free Audit
+          Get a free site health check
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
         </a>
-        <a href="#clients" class="hero-v2-cta-secondary">See our work</a>
+        <a href="#clients" class="hero-v2-cta-secondary">See my work</a>
       </div>
+      <p class="hero-v2-phone">
+        Prefer to talk? <a href="tel:+447440018091">07440 018091</a>
+      </p>
     </div>
   </div>
 
   <div class="hero-split-right">
-    <div class="hero-terminal" aria-hidden="true">
-      <div class="hero-terminal-bar">
-        <div class="hero-terminal-dots">
-          <span></span><span></span><span></span>
+    <div class="hero-chat" role="group" aria-label="Example of a message exchange with a client">
+      <div class="hero-chat-bar">
+        <span class="hero-chat-avatar" aria-hidden="true">C</span>
+        <div class="hero-chat-who">
+          <span class="hero-chat-name">Chris</span>
+          <span class="hero-chat-sub">WP Base</span>
         </div>
-        <div class="hero-terminal-status">
-          <span class="hero-terminal-pulse"></span>
-          <span class="hero-terminal-status-text">All systems operational</span>
-        </div>
-        <div class="hero-terminal-clock" id="hero-terminal-clock">--:--:--</div>
       </div>
-      <div class="hero-terminal-feed" id="hero-terminal-feed"></div>
+      <div class="hero-chat-thread">
+        <div class="hero-chat-msg hero-chat-msg--client">
+          <p>Hi Chris, my phone is showing a security warning when I open our website. Have we been hacked?</p>
+          <span class="hero-chat-time">09:12</span>
+        </div>
+        <div class="hero-chat-msg hero-chat-msg--chris">
+          <p>Not hacked. Your SSL certificate expired overnight. I've renewed it, so have another look and the warning should be gone.</p>
+          <span class="hero-chat-time">09:16</span>
+        </div>
+        <div class="hero-chat-msg hero-chat-msg--client">
+          <p>All fine now. Thanks, that was quick!</p>
+          <span class="hero-chat-time">09:17</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-v2-phone {
+    margin-block: 1.25rem 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .hero-v2-phone a {
+    color: var(--snow);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hero-v2-phone a:hover {
+    color: var(--accent);
+  }
+
+  .hero-chat {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+    background: var(--midnight);
+    color: var(--snow);
+    border-radius: 2px;
+    box-shadow: 0 30px 60px rgba(8, 12, 24, 0.25);
+    overflow: hidden;
+  }
+
+  .hero-chat-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .hero-chat-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--midnight);
+    font-weight: 700;
+  }
+
+  .hero-chat-who {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .hero-chat-name {
+    font-weight: 600;
+  }
+
+  .hero-chat-sub {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .hero-chat-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+
+  .hero-chat-msg {
+    max-width: 85%;
+    padding: 0.7rem 0.9rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .hero-chat-msg p {
+    margin: 0;
+  }
+
+  .hero-chat-msg--client {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.09);
+    border-bottom-left-radius: 2px;
+  }
+
+  .hero-chat-msg--chris {
+    align-self: flex-end;
+    background: var(--accent);
+    color: var(--midnight);
+    border-bottom-right-radius: 2px;
+  }
+
+  .hero-chat-time {
+    display: block;
+    margin-block-start: 0.3rem;
+    font-size: 0.7rem;
+    text-align: right;
+    opacity: 0.65;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-chat-msg {
+      animation: hero-chat-in 0.45s ease-out both;
+    }
+
+    .hero-chat-msg:nth-child(1) { animation-delay: 0.3s; }
+    .hero-chat-msg:nth-child(2) { animation-delay: 1.2s; }
+    .hero-chat-msg:nth-child(3) { animation-delay: 2.1s; }
+  }
+
+  @keyframes hero-chat-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
