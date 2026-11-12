@@ -1,0 +1,268 @@
+---
+// HeroChat.astro: the paged example message threads shown in the right-hand
+// panel of both Hero.astro (homepage) and HeroLocal.astro (/northern-ireland/).
+// Keeping it in one place means the threads, styles and paging script only
+// need editing once. The threads are placeholders: swap them for real
+// (anonymised, with permission) exchanges when you have them. Without
+// JavaScript all three threads simply stack, so nothing is hidden from anyone.
+---
+
+<div class="hero-chat" role="group" aria-label="Examples of message exchanges with clients">
+  <div class="hero-chat-bar">
+    <span class="hero-chat-avatar" aria-hidden="true">C</span>
+    <div class="hero-chat-who">
+      <span class="hero-chat-name">Chris</span>
+      <span class="hero-chat-sub">WP Base</span>
+    </div>
+  </div>
+
+  <div class="hero-chat-screens">
+    <div class="hero-chat-screen is-active">
+      <div class="hero-chat-msg hero-chat-msg--client">
+        <p>Hi Chris, my phone is showing a security warning when I open our website. Have we been hacked?</p>
+        <span class="hero-chat-time">09:12</span>
+      </div>
+      <div class="hero-chat-msg hero-chat-msg--chris">
+        <p>Not hacked. Your SSL certificate expired overnight. I've renewed it, so have another look and the warning should be gone.</p>
+        <span class="hero-chat-time">09:16</span>
+      </div>
+      <div class="hero-chat-msg hero-chat-msg--client">
+        <p>All fine now. Thanks, that was quick!</p>
+        <span class="hero-chat-time">09:17</span>
+      </div>
+    </div>
+
+    <div class="hero-chat-screen">
+      <div class="hero-chat-msg hero-chat-msg--client">
+        <p>I saw a news story about a WordPress plugin getting hacked. Is that one of ours?</p>
+        <span class="hero-chat-time">08:41</span>
+      </div>
+      <div class="hero-chat-msg hero-chat-msg--chris">
+        <p>It was, but I patched it first thing this morning and checked the site over afterwards. Nothing for you to do.</p>
+        <span class="hero-chat-time">08:47</span>
+      </div>
+      <div class="hero-chat-msg hero-chat-msg--client">
+        <p>Brilliant. I'll go back to pretending I never saw the headline.</p>
+        <span class="hero-chat-time">08:48</span>
+      </div>
+    </div>
+
+    <div class="hero-chat-screen">
+      <div class="hero-chat-msg hero-chat-msg--client">
+        <p>I think I've just deleted our Services page by mistake. Please tell me it's backed up.</p>
+        <span class="hero-chat-time">14:03</span>
+      </div>
+      <div class="hero-chat-msg hero-chat-msg--chris">
+        <p>It is. I've restored last night's version and the page is back live now.</p>
+        <span class="hero-chat-time">14:09</span>
+      </div>
+      <div class="hero-chat-msg hero-chat-msg--client">
+        <p>You've just saved my afternoon. Thank you!</p>
+        <span class="hero-chat-time">14:10</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-chat-pager" role="group" aria-label="Choose an example conversation">
+    <button type="button" class="hero-chat-dot is-active" aria-label="Show example 1 of 3" aria-current="true"></button>
+    <button type="button" class="hero-chat-dot" aria-label="Show example 2 of 3"></button>
+    <button type="button" class="hero-chat-dot" aria-label="Show example 3 of 3"></button>
+  </div>
+</div>
+
+<script>
+  const chat = document.querySelector<HTMLElement>('.hero-chat');
+
+  if (chat) {
+    const screens = Array.from(chat.querySelectorAll<HTMLElement>('.hero-chat-screen'));
+    const dots = Array.from(chat.querySelectorAll<HTMLButtonElement>('.hero-chat-dot'));
+
+    chat.classList.add('is-js');
+
+    const show = (index: number) => {
+      screens.forEach((screen, i) => screen.classList.toggle('is-active', i === index));
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === index);
+        if (i === index) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+  }
+</script>
+
+<style>
+  .hero-chat {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+    position: relative;
+    z-index: 1;
+    background: var(--midnight);
+    color: var(--snow);
+    border-radius: 2px;
+    box-shadow: 0 30px 60px rgba(8, 12, 24, 0.25);
+    overflow: hidden;
+  }
+
+  .hero-chat-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .hero-chat-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--midnight);
+    font-weight: 700;
+  }
+
+  .hero-chat-who {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .hero-chat-name {
+    font-weight: 600;
+  }
+
+  .hero-chat-sub {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Without JavaScript the screens just stack. With it, they share one grid
+     cell so the card keeps the height of the tallest thread and never jumps. */
+  .hero-chat-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .hero-chat.is-js .hero-chat-screens {
+    display: grid;
+  }
+
+  .hero-chat.is-js .hero-chat-screen {
+    grid-area: 1 / 1;
+    visibility: hidden;
+  }
+
+  .hero-chat.is-js .hero-chat-screen.is-active {
+    visibility: visible;
+  }
+
+  .hero-chat-msg {
+    max-width: 85%;
+    padding: 0.7rem 0.9rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .hero-chat-msg p {
+    margin: 0;
+  }
+
+  .hero-chat-msg--client {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.09);
+    border-bottom-left-radius: 2px;
+  }
+
+  .hero-chat-msg--chris {
+    align-self: flex-end;
+    background: var(--accent);
+    color: var(--midnight);
+    border-bottom-right-radius: 2px;
+  }
+
+  .hero-chat-time {
+    display: block;
+    margin-block-start: 0.3rem;
+    font-size: 0.7rem;
+    text-align: right;
+    opacity: 0.65;
+  }
+
+  .hero-chat-pager {
+    display: none;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .hero-chat.is-js .hero-chat-pager {
+    display: flex;
+  }
+
+  .hero-chat-dot {
+    position: relative;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .hero-chat-dot::before {
+    content: "";
+    position: absolute;
+    inset-block: calc(50% - 4px);
+    inset-inline: calc(50% - 4px);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    transition: background 0.2s ease, inset-inline 0.2s ease;
+  }
+
+  .hero-chat-dot:hover::before {
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .hero-chat-dot.is-active::before {
+    inset-inline: calc(50% - 10px);
+    background: var(--accent);
+  }
+
+  .hero-chat-dot:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-chat:not(.is-js) .hero-chat-msg,
+    .hero-chat.is-js .hero-chat-screen.is-active .hero-chat-msg {
+      animation: hero-chat-in 0.45s ease-out both;
+    }
+
+    .hero-chat-msg:nth-child(1) { animation-delay: 0.3s; }
+    .hero-chat-msg:nth-child(2) { animation-delay: 1.2s; }
+    .hero-chat-msg:nth-child(3) { animation-delay: 2.1s; }
+  }
+
+  @keyframes hero-chat-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
