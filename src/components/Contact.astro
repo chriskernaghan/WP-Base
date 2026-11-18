@@ -1,22 +1,8 @@
----
-// Contact.astro — Fillout-embedded audit form.
-//
-// The Fillout embed script is roughly 2 MB of JavaScript. Loading it inline
-// meant every visitor downloaded and parsed all of it during page load, for a
-// form that sits at the very bottom of the page. On mobile that was costing
-// about two seconds of blocking time before the page would respond to a tap.
-//
-// The script now loads only when the section gets close to the viewport. The
-// 800px margin means it has started downloading well before anyone can see it,
-// so scrolling down still lands on a ready form. Nobody who never reaches the
-// bottom pays for it at all.
----
-
 <section id="contact" class="contact-section">
   <div class="contact-inner">
     <div class="contact-header">
       <span class="section-label section-label--light">Get in touch</span>
-      <h2>Get your free site audit</h2>
+      <h2>Get a free site health check</h2>
       <p>Four quick questions and a written summary back within two working days, with no obligation and no sales call.</p>
     </div>
     <div class="fillout-wrapper">
