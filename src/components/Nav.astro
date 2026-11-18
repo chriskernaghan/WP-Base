@@ -20,6 +20,7 @@ const NAV = [
         title: "Ongoing care",
         items: [
           { icon: "sliders", title: "WordPress Maintenance", desc: "Updates, backups and security", href: "/wordpress-maintenance/" },
+          { icon: "search",  title: "Technical SEO",         desc: "Search health and AI readiness", href: "/technical-seo/" },
           { icon: "server",  title: "Hosting",               desc: "Managed, in your own account", href: "/hosting/" }
         ]
       },
@@ -48,7 +49,7 @@ const NAV = [
     ],
     feature: {
       eyebrow: "Free, no strings",
-      title: "Get a website health check",
+      title: "Get a site health check",
       body: "A short walkthrough of what is slowing your site down and what that costs you in enquiries.",
       cta: { label: "Get started", href: "/#contact" }
     },
@@ -106,8 +107,8 @@ const NAV = [
       {
         title: "Start here",
         items: [
-          { icon: "doc",    title: "Blog",               desc: "Plain-English WordPress advice", href: "/blog/" },
-          { icon: "search", title: "Free website audit", desc: "Send a URL, get a proper look", href: "/#contact" }
+          { icon: "doc",    title: "Blog",                   desc: "Plain-English WordPress advice", href: "/blog/" },
+          { icon: "search", title: "Free site health check", desc: "Send a URL, get a proper look", href: "/#contact" }
         ]
       },
       {
@@ -271,7 +272,7 @@ const ICONS = {
         <a class="wpb-acc-trigger" href={entry.href}>{entry.label}</a>
       )
     ))}
-    <a class="wpb-mobile-cta" href="/#contact">Get Your Free Audit</a>
+    <a class="wpb-mobile-cta" href="/#contact">Get a free site health check</a>
   </div>
 </header>
 
