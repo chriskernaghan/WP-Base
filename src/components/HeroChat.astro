@@ -110,3 +110,175 @@
     dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
   }
 </script>
+
+<style>
+  .hero-chat {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+    position: relative;
+    z-index: 1;
+    background: var(--midnight);
+    color: var(--snow);
+    border-radius: 2px;
+    box-shadow: 0 30px 60px rgba(8, 12, 24, 0.25);
+    overflow: hidden;
+  }
+
+  .hero-chat-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .hero-chat-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--midnight);
+    font-weight: 700;
+  }
+
+  .hero-chat-who {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .hero-chat-name {
+    font-weight: 600;
+  }
+
+  .hero-chat-sub {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Without JavaScript the screens just stack. With it, they share one grid
+     cell so the card keeps the height of the tallest thread and never jumps. */
+  .hero-chat-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .hero-chat.is-js .hero-chat-screens {
+    display: grid;
+  }
+
+  .hero-chat.is-js .hero-chat-screen {
+    grid-area: 1 / 1;
+    visibility: hidden;
+  }
+
+  .hero-chat.is-js .hero-chat-screen.is-active {
+    visibility: visible;
+  }
+
+  .hero-chat-msg {
+    max-width: 85%;
+    padding: 0.7rem 0.9rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .hero-chat-msg p {
+    margin: 0;
+  }
+
+  .hero-chat-msg--client {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.09);
+    border-bottom-left-radius: 2px;
+  }
+
+  .hero-chat-msg--chris {
+    align-self: flex-end;
+    background: var(--accent);
+    color: var(--midnight);
+    border-bottom-right-radius: 2px;
+  }
+
+  .hero-chat-time {
+    display: block;
+    margin-block-start: 0.3rem;
+    font-size: 0.7rem;
+    text-align: right;
+    opacity: 0.65;
+  }
+
+  .hero-chat-pager {
+    display: none;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .hero-chat.is-js .hero-chat-pager {
+    display: flex;
+  }
+
+  .hero-chat-dot {
+    position: relative;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .hero-chat-dot::before {
+    content: "";
+    position: absolute;
+    inset-block: calc(50% - 4px);
+    inset-inline: calc(50% - 4px);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    transition: background 0.2s ease, inset-inline 0.2s ease;
+  }
+
+  .hero-chat-dot:hover::before {
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .hero-chat-dot.is-active::before {
+    inset-inline: calc(50% - 10px);
+    background: var(--accent);
+  }
+
+  .hero-chat-dot:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-chat:not(.is-js) .hero-chat-msg,
+    .hero-chat.is-js .hero-chat-screen.is-active .hero-chat-msg {
+      animation: hero-chat-in 0.45s ease-out both;
+    }
+
+    .hero-chat-msg:nth-child(1) { animation-delay: 0.3s; }
+    .hero-chat-msg:nth-child(2) { animation-delay: 1.2s; }
+    .hero-chat-msg:nth-child(3) { animation-delay: 2.1s; }
+  }
+
+  @keyframes hero-chat-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
