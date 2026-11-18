@@ -12,12 +12,16 @@ export interface Faq {
 export const faqs: Faq[] = [
   {
     q: 'How quickly can you start?',
-    a: "Usually within a day or two. I'll run a free audit of your site, walk you through what I find, and if we're a good fit, I can start that same week. No onboarding decks, no kickoff meetings, just straight into the work.",
+    a: "Usually within a day or two. I'll run a free health check on your site, walk you through what I find, and if we're a good fit, I can start that same week. No onboarding decks, no kickoff meetings, just straight into the work.",
     open: true,
   },
   {
     q: 'What does the monthly retainer actually include?',
-    a: "Core, plugin and theme updates, daily backups, uptime monitoring, security scanning and a set number of support hours each month. If something breaks at 9pm on a Tuesday, I'll deal with it. You get a monthly report so you can see exactly what's been done.",
+    a: "Every plan covers core, plugin and theme updates, daily backups, uptime monitoring and a monthly report with search stats, plus a set number of support hours each month. Gold and Platinum add things like performance work and security scanning. If something breaks at 9pm on a Tuesday, I'll deal with it. The monthly report lets you see exactly what's been done.",
+  },
+  {
+    q: 'Is SEO included in the care plans?',
+    a: "Yes, the technical side of it is. Silver adds search stats to your monthly report, Gold adds Search Console monitoring and fixes for things like indexing errors, broken links and redirects, and Platinum adds a quarterly SEO review. The work comes out of the hours included in your plan. I can't guarantee rankings or position changes, because search results depend on things nobody controls, including Google's algorithm and what your competitors are doing. What I can do is make sure nothing technical is holding your site back and show you the numbers each month.",
   },
   {
     q: 'Am I locked into a contract?',
