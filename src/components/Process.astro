@@ -2,10 +2,10 @@
 // Process.astro — four-step process explanation.
 
 const steps = [
-  { num: '01', title: 'Free Audit', body: "I review your site for performance, security and UX issues, and send you an honest assessment." },
-  { num: '02', title: 'Clear Plan', body: "A prioritised action list. What needs doing now, what can wait, and what it'll cost. No surprises." },
-  { num: '03', title: 'Get It Done', body: "I work directly in the codebase. Updates, fixes and improvements, handled properly the first time." },
-  { num: '04', title: 'Ongoing Care', body: "Monthly retainer keeps everything running. Security, updates, support, one message away." },
+  { num: '01', title: 'Free Site Health Check', body: "I review your site for performance, security and usability problems and send you an honest written assessment, with no obligation to take it any further." },
+  { num: '02', title: 'A Clear Plan', body: "You get a prioritised list of what needs doing now, what can wait and what each item will cost, so there are no surprises later." },
+  { num: '03', title: 'Fixes Done Properly', body: "I work directly on the site using a temporary login or delegated access rather than your passwords, and you keep ownership of your hosting and accounts throughout." },
+  { num: '04', title: 'Ongoing Care', body: "A monthly plan covers updates, backups and security, and you get a report each month showing exactly what I've done. If something looks wrong in between, you can message me directly." },
 ];
 ---
 
@@ -13,7 +13,7 @@ const steps = [
   <div class="process-inner">
     <div class="process-header">
       <span class="section-label section-label--light">How it works</span>
-      <h2>No agencies. No layers.<br />Just results.</h2>
+      <h2>What happens when you get in touch</h2>
     </div>
     <div class="process-steps-v2">
       {steps.map((step) => (
@@ -24,5 +24,29 @@ const steps = [
         </div>
       ))}
     </div>
+    <div class="process-cta">
+      <a class="process-cta-button" href="#contact">Get a free site health check</a>
+    </div>
   </div>
 </section>
+
+<style>
+  .process-cta {
+    margin-block: 3rem 0;
+  }
+
+  .process-cta-button {
+    display: inline-block;
+    padding: 1.1rem 1.75rem;
+    background: var(--accent);
+    color: var(--midnight);
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .process-cta-button:hover,
+  .process-cta-button:focus-visible {
+    opacity: 0.88;
+  }
+</style>
