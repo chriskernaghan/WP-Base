@@ -171,14 +171,13 @@ const initials = (name: string) =>
 <style>
   /* ----------------------------------------------------------------------
      "Trusted by" grid
-     A single row of client cells framed by diagonal hatching. Cells with a
+     A single row of client cells in one rounded frame. Cells with a
      testimonial open a full-width midnight panel directly beneath the row;
      the row itself never moves, so the cursor can slide across it to switch
      between clients.
      ---------------------------------------------------------------------- */
   .trust {
-    --trust-rule: rgba(8, 16, 28, 0.16);
-    --trust-gutter: 28px;
+    --trust-rule: rgba(8, 16, 28, 0.12);
     padding: 4.5rem 4rem 0;
   }
 
@@ -209,30 +208,9 @@ const initials = (name: string) =>
 
   .trust-frame {
     position: relative;
-    padding-inline: var(--trust-gutter);
-    border-block: 1px solid var(--trust-rule);
-  }
-
-  .trust-frame::before,
-  .trust-frame::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: var(--trust-gutter);
-    background-image: repeating-linear-gradient(
-      135deg,
-      transparent 0 6px,
-      var(--trust-rule) 6px 7px
-    );
-    pointer-events: none;
-  }
-
-  .trust-frame::before { left: 0; }
-  .trust-frame::after  { right: 0; }
-
-  .trust-inner {
-    border-inline: 1px solid var(--trust-rule);
+    border: 1px solid var(--trust-rule);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
 
   .trust-row {
@@ -308,6 +286,7 @@ const initials = (name: string) =>
     position: absolute;
     right: 0.6rem;
     bottom: 0.6rem;
+    border-radius: 6px;
     width: 1.35rem;
     height: 1.35rem;
     display: flex;
@@ -392,6 +371,7 @@ const initials = (name: string) =>
   .trust-avatar {
     width: 2.75rem;
     height: 2.75rem;
+    border-radius: 50%;
     flex-shrink: 0;
     object-fit: cover;
     display: block;
@@ -460,19 +440,6 @@ const initials = (name: string) =>
 
     .trust-heading {
       text-align: left;
-    }
-
-    .trust-frame {
-      padding-inline: 0;
-    }
-
-    .trust-frame::before,
-    .trust-frame::after {
-      display: none;
-    }
-
-    .trust-inner {
-      border-inline: 0;
     }
 
     .trust-row {
