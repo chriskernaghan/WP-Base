@@ -1,6 +1,7 @@
 ---
 // BaseLayout.astro — every page wraps itself in this.
 // Handles <head>, fonts, consent, gtag, nav, footer. One file to rule them all.
+import AnnouncementBar from '../components/AnnouncementBar.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppWidget from '../components/WhatsAppWidget.astro';
@@ -113,6 +114,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
       <script id="vtag-ai-js" async src="https://r2.leadsy.ai/tag.js" data-pid="8tWJJlwwjeJ6ULnt" data-version="062024"></script>
   </head>
   <body>
+    <AnnouncementBar />
     <Nav />
     <main>
       <slot />
