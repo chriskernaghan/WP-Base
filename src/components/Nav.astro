@@ -328,7 +328,7 @@ const ICONS = {
     --hdr-line: var(--wpb-line);
     --hdr-ink: var(--midnight);
     position: fixed;
-    top: 0;
+    top: var(--bar-offset, 0px);
     left: 0;
     right: 0;
     z-index: 1000;
@@ -741,7 +741,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     position: fixed;
     left: 0;
     right: 0;
-    top: var(--wpb-header-h);
+    top: calc(var(--bar-offset, 0px) + var(--wpb-header-h));
     bottom: 0;
     background: var(--snow);
     overflow-y: auto;
@@ -901,7 +901,7 @@ body[data-nav-open="true"] .wpb-backdrop { display: block; }
 
     const brand = header.querySelector('.wpb-brand');
     const x = brand ? brand.getBoundingClientRect().left + 8 : 24;
-    const y = header.offsetHeight / 2;
+    const y = header.getBoundingClientRect().top + header.offsetHeight / 2;
 
     let over: Over = 'light';
     for (const el of document.elementsFromPoint(x, y)) {
