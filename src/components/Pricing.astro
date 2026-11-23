@@ -1,5 +1,5 @@
 ---
-// Pricing.astro — three tiers plus custom card, monthly/annual toggle, condensed layout.
+// Pricing.astro — three tiers plus a slim custom banner, monthly/annual toggle.
 // Annual = 10 months' price (two months free), shown as monthly equivalent.
 // CTAs link to Stripe Payment Links; the billing toggle swaps both price and href.
 const tiers = [
@@ -85,12 +85,13 @@ const tiers = [
         <a href={tier.monthlyUrl} class="pricing-cta" data-monthly-url={tier.monthlyUrl} data-annual-url={tier.annualUrl}>Get Started</a>
       </div>
     ))}
-    <div class="pricing-card pricing-custom">
-      <div class="pricing-tier">Custom</div>
+  </div>
+  <div class="pricing-custom">
+    <div class="pricing-custom-text">
       <h3>Need something bespoke?</h3>
       <p>Flexible retainers for agencies and businesses with specific requirements.</p>
-      <a href="#contact" class="pricing-cta">Let's Talk</a>
     </div>
+    <a href="#contact" class="pricing-cta">Let's Talk</a>
   </div>
 </section>
 <script>
