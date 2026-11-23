@@ -28,11 +28,6 @@ import HeroChat from './HeroChat.astro';
 
   <div class="hero-calm-inner">
     <div class="hero-calm-copy">
-      <a href="https://share.google/HmqVC5OhdKakcRtS4" target="_blank" rel="noopener" class="hero-calm-rating">
-        <span class="hero-calm-stars" aria-hidden="true">★★★★★</span>
-        <span><strong>5.0</strong> on Google</span>
-      </a>
-
       <h1 class="hero-calm-headline" id="hero-heading">
         A WordPress site you never have <span class="hero-calm-accent">to worry about</span>
       </h1>
@@ -108,34 +103,6 @@ import HeroChat from './HeroChat.astro';
     max-width: 36rem;
   }
 
-  .hero-calm-rating {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-size: 0.9rem;
-    line-height: 1;
-    color: rgba(245, 241, 232, 0.78);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .hero-calm-rating strong {
-    font-weight: 600;
-    color: var(--cream);
-  }
-
-  .hero-calm-rating:hover {
-    color: var(--cream);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .hero-calm-stars {
-    color: #e5a000;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-  }
-
   .hero-calm-headline {
     margin: 0;
     font-family: 'Space Grotesk', sans-serif;
@@ -198,8 +165,7 @@ import HeroChat from './HeroChat.astro';
   }
 
   .hero-calm-button:focus-visible,
-  .hero-calm-phone a:focus-visible,
-  .hero-calm-rating:focus-visible {
+  .hero-calm-phone a:focus-visible {
     outline: 2px solid var(--cream);
     outline-offset: 4px;
   }
