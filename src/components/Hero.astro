@@ -132,10 +132,11 @@ import HeroChat from './HeroChat.astro';
     background: var(--accent);
     color: var(--accent-text);
     border-radius: var(--radius-pill);
-    font-size: 0.95rem;
-    font-weight: 700;
     text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: var(--cta-font);
+    font-weight: var(--cta-weight);
+    font-size: var(--cta-size);
   }
 
   .hero-calm-button:hover {
@@ -163,10 +164,11 @@ import HeroChat from './HeroChat.astro';
     border: 1.5px solid rgba(245, 241, 232, 0.55);
     border-radius: var(--radius-pill);
     color: var(--cream);
-    font-size: 0.95rem;
-    font-weight: 600;
     text-decoration: none;
     transition: border-color 0.2s ease, background 0.2s ease;
+    font-family: var(--cta-font);
+    font-weight: var(--cta-weight);
+    font-size: var(--cta-size);
   }
 
   .hero-calm-call:hover {
