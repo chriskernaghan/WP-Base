@@ -1,0 +1,129 @@
+---
+// Slim bar above the header. It sits in normal flow at the top of the page and
+// scrolls away, while the fixed header follows it up using --bar-offset (set by
+// the script below). Without JavaScript the header simply stays one bar-height
+// down from the top, which is still a correct layout.
+const reviews = 'https://share.google/HmqVC5OhdKakcRtS4';
+---
+
+<div class="announce" id="announce" role="region" aria-label="Announcement">
+  <p class="announce-text">
+    <span class="announce-stars" aria-hidden="true">★★★★★</span>
+    <strong>5.0 on Google</strong>
+    <span class="announce-msg">
+      <span class="announce-sep" aria-hidden="true">·</span>
+      WordPress care for Northern Ireland businesses, from £99 a month
+    </span>
+    <a href={reviews} target="_blank" rel="noopener" class="announce-link">Read the reviews<span aria-hidden="true"> →</span></a>
+  </p>
+</div>
+
+<style is:global>
+  :root {
+    --bar-h: 40px;
+    --bar-offset: var(--bar-h);
+  }
+
+  .announce {
+    height: var(--bar-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    background: var(--slate);
+    color: rgba(245, 241, 232, 0.82);
+    border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+  }
+
+  .announce-text {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .announce-stars {
+    color: #e5a000;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .announce-text strong {
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .announce-msg {
+    display: none;
+  }
+
+  .announce-sep {
+    margin-right: 0.6rem;
+    color: rgba(245, 241, 232, 0.4);
+  }
+
+  .announce-link {
+    color: var(--cream);
+    text-decoration: underline;
+    text-decoration-color: rgba(245, 241, 232, 0.35);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .announce-link:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .announce-link:focus-visible {
+    outline: 2px solid var(--cream);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (min-width: 960px) {
+    .announce-msg {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --bar-h: 36px;
+    }
+    .announce-text {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+
+<script>
+  const bar = document.getElementById('announce');
+  const root = document.documentElement;
+
+  if (bar) {
+    let ticking = false;
+
+    const sync = () => {
+      ticking = false;
+      const offset = Math.max(0, bar.offsetHeight - window.scrollY);
+      root.style.setProperty('--bar-offset', offset + 'px');
+    };
+
+    const queue = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(sync);
+    };
+
+    sync();
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    window.addEventListener('pageshow', queue);
+  }
+</script>
