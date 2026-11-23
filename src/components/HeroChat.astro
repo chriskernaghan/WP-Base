@@ -120,7 +120,7 @@
     z-index: 1;
     background: var(--midnight);
     color: var(--snow);
-    border-radius: 2px;
+    border-radius: var(--radius-lg);
     box-shadow: 0 30px 60px rgba(8, 12, 24, 0.25);
     overflow: hidden;
   }
@@ -185,7 +185,7 @@
   .hero-chat-msg {
     max-width: 85%;
     padding: 0.7rem 0.9rem 0.5rem;
-    border-radius: 10px;
+    border-radius: 14px;
     font-size: 0.95rem;
     line-height: 1.5;
   }
@@ -197,14 +197,14 @@
   .hero-chat-msg--client {
     align-self: flex-start;
     background: rgba(255, 255, 255, 0.09);
-    border-bottom-left-radius: 2px;
+    border-bottom-left-radius: 4px;
   }
 
   .hero-chat-msg--chris {
     align-self: flex-end;
     background: var(--accent);
     color: var(--midnight);
-    border-bottom-right-radius: 2px;
+    border-bottom-right-radius: 4px;
   }
 
   .hero-chat-time {
