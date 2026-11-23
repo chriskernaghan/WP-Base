@@ -426,6 +426,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
 .wpb-cta {
     margin-left: auto;
     padding: 0.8rem 1.4rem;
+    border-radius: var(--radius-pill);
     background: var(--accent);
     color: var(--accent-text);
     border: 1px solid var(--accent);
@@ -522,6 +523,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     align-items: start;
     margin: 0 -12px;
     padding: 0.7rem 12px;
+    border-radius: var(--radius);
     transition: background 0.14s ease;
 }
 .wpb-link:hover { background: var(--wpb-wash); }
@@ -529,6 +531,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
 .wpb-ico {
     width: 38px;
     height: 38px;
+    border-radius: 10px;
     display: grid;
     place-items: center;
     background: var(--wpb-wash);
@@ -571,6 +574,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     gap: 0.75rem;
     margin: 0 -12px;
     padding: 0.7rem 12px;
+    border-radius: var(--radius-sm);
     font-size: 0.94rem;
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -599,6 +603,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
 /* feature rail */
 .wpb-feature { padding-left: 1.9rem; border-left: 1px solid var(--wpb-line); display: flex; }
 .wpb-feature-card {
+    border-radius: var(--radius-lg);
     background: var(--midnight);
     color: var(--snow);
     padding: 1.7rem 1.5rem;
@@ -638,6 +643,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     background: var(--accent);
     color: var(--accent-text);
     padding: 0.7rem 1.05rem;
+    border-radius: var(--radius-pill);
     font-size: 0.87rem;
     font-weight: 600;
     border: 1px solid var(--accent);
@@ -695,7 +701,7 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     align-items: center;
     gap: 0.55rem;
 }
-.wpb-foot-dot { width: 6px; height: 6px; background: var(--accent); flex: none; }
+.wpb-foot-dot { width: 6px; height: 6px; background: var(--accent); flex: none; border-radius: 50%; }
 
 /* ---------- mobile ---------- */
 .wpb-burger {
@@ -776,6 +782,7 @@ body[data-nav-open="true"] .wpb-backdrop { display: block; }
     text-align: center;
     margin-top: 1.6rem;
     padding: 1rem;
+    border-radius: var(--radius-pill);
     background: var(--accent);
     color: var(--accent-text);
     font-weight: 600;
