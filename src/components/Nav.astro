@@ -430,10 +430,10 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     background: var(--accent);
     color: var(--accent-text);
     border: 1px solid var(--accent);
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: -0.01em;
     transition: background 0.18s ease, color 0.18s ease;
+  font-family: var(--cta-font);
+  font-weight: var(--cta-weight);
+  font-size: var(--cta-size);
 }
 .wpb-header .wpb-cta:hover { background: var(--midnight); color: var(--accent); }
 
@@ -645,9 +645,10 @@ body:has(.hero-split) .wpb-header:not([data-scrolled="true"]):not([data-mobile="
     padding: 0.7rem 1.05rem;
     border-radius: var(--radius-pill);
     font-size: 0.87rem;
-    font-weight: 600;
     border: 1px solid var(--accent);
     transition: background 0.16s ease, color 0.16s ease;
+  font-family: var(--cta-font);
+  font-weight: var(--cta-weight);
 }
 .wpb-header .wpb-feature-cta:hover { background: transparent; color: var(--accent); }
 .wpb-feature-cta svg {
@@ -785,7 +786,9 @@ body[data-nav-open="true"] .wpb-backdrop { display: block; }
     border-radius: var(--radius-pill);
     background: var(--accent);
     color: var(--accent-text);
-    font-weight: 600;
+  font-family: var(--cta-font);
+  font-weight: var(--cta-weight);
+  font-size: var(--cta-size);
 }
 
 /* ---------- breakpoints ---------- */
