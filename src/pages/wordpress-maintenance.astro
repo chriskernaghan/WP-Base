@@ -258,12 +258,13 @@ const included = [
     gap: 0.5rem;
     background: var(--accent);
     color: var(--midnight);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
     padding: 0.9rem 1.5rem;
     border-radius: var(--radius-pill);
     text-decoration: none;
     transition: transform 0.15s ease;
+    font-family: var(--cta-font);
+    font-weight: var(--cta-weight);
+    font-size: var(--cta-size);
   }
   .maint-cta-primary:hover {
     transform: translateY(-2px);
@@ -271,14 +272,15 @@ const included = [
   .maint-cta-secondary {
     display: inline-flex;
     align-items: center;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 500;
     padding: 0.9rem 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: var(--radius-pill);
     text-decoration: none;
     color: var(--snow);
     transition: border-color 0.15s ease;
+    font-family: var(--cta-font);
+    font-weight: var(--cta-weight);
+    font-size: var(--cta-size);
   }
   .maint-cta-secondary:hover {
     border-color: var(--snow);
