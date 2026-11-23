@@ -48,6 +48,24 @@
     --hero-seam: 52.8302%;
     --hero-terminal-w: 460px;
     --border: rgba(8, 16, 28, 0.08);
+
+    /* Shape scale. Every soft corner on the site reads from these four values,
+       so the whole look can be tightened or loosened from here. Buttons, tags
+       and toggles are pills, cards and panels are --radius-lg, smaller panels
+       and images are --radius, and small icon tiles are --radius-sm. */
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --radius-pill: 999px;
+
+    /* Vertical padding shared by the homepage sections. */
+    --section-y: 6rem;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-y: 3.5rem;
+    }
 }
 
 * {
@@ -610,7 +628,7 @@ nav {
     text-decoration: none;
     font-weight: bold !important;
     font-size: 0.95rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -708,7 +726,7 @@ footer a:hover {
     color: var(--midnight);
     text-decoration: none;
     padding: 0.5rem 0.9rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     font-size: 0.82rem;
     line-height: 1;
     opacity: 0;
@@ -804,7 +822,7 @@ footer a:hover {
     background: var(--accent);
     color: var(--accent-text);
     padding: 0.9rem 2rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     font-size: 0.9rem;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -1220,7 +1238,7 @@ footer a:hover {
    ========================================================================== */
 
 .clients-section {
-    padding: 7rem 4rem;
+    padding: var(--section-y) 4rem;
 }
 
 .clients-inner {
@@ -1231,27 +1249,26 @@ footer a:hover {
 .clients-grid-v2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 0;
-    overflow: hidden;
+    gap: 1.25rem;
 }
 
 .client-card-v2 {
     background: var(--snow);
-    padding: 2.75rem 2.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2.25rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 300px;
-    transition: background 0.3s ease;
+    min-height: 280px;
+    transition: background 0.3s ease, border-color 0.3s ease;
     text-decoration: none;
     color: inherit;
 }
 
 .client-card-v2:hover {
-    background: rgba(0, 0, 0, 0.015);
+    background: rgba(8, 16, 28, 0.02);
+    border-color: rgba(8, 16, 28, 0.2);
 }
 
 .client-card-name {
@@ -1403,7 +1420,7 @@ footer a:hover {
    ========================================================================== */
 
 .process {
-    padding: 7rem 4rem 8rem;
+    padding: var(--section-y) 4rem;
     background: var(--midnight);
     position: relative;
     overflow: hidden;
@@ -1450,8 +1467,9 @@ footer a:hover {
 
 .process-step-v2 {
     padding: 2.5rem 2rem;
+    background: rgba(245, 241, 232, 0.03);
     border: 1px solid rgba(245, 241, 232, 0.06);
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     transition: border-color 0.3s ease;
 }
 
@@ -1461,12 +1479,12 @@ footer a:hover {
 
 .step-number-v2 {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 2.5rem;
-    font-weight: 500;
+    font-size: 1.05rem;
+    font-weight: 600;
     color: var(--accent);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.04em;
 }
 
 .process-step-v2 h3 {
@@ -1479,9 +1497,9 @@ footer a:hover {
 }
 
 .process-step-v2 p {
-    font-size: 0.85rem;
-    line-height: 1.75;
-    color: rgba(245, 241, 232, 0.5);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(245, 241, 232, 0.72);
 }
 
 /* ==========================================================================
@@ -1489,7 +1507,7 @@ footer a:hover {
    ========================================================================== */
 
 .pricing {
-    padding: 8rem 4rem;
+    padding: var(--section-y) 4rem;
     background: white;
 }
 
@@ -1499,8 +1517,8 @@ footer a:hover {
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
     max-width: var(--frame);
     margin: 0 auto;
     align-items: stretch;
@@ -1508,7 +1526,7 @@ footer a:hover {
 
 .pricing-card {
     background: white;
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     padding: 2.5rem;
     border: 1px solid var(--sand);
     transition: all 0.35s ease;
@@ -1519,19 +1537,14 @@ footer a:hover {
 }
 
 .pricing-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
     border-color: var(--midnight);
 }
 
 .pricing-card.featured {
     background: var(--midnight);
-    border-color: var(--accent);
-    transform: scale(1.03);
-}
-
-.pricing-card.featured:hover {
-    transform: scale(1.03) translateY(-6px);
+    border-color: var(--midnight);
 }
 
 .featured-label {
@@ -1543,7 +1556,7 @@ footer a:hover {
     font-size: 0.7rem;
     font-weight: 700;
     padding: 0.3rem 0.8rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
@@ -1592,9 +1605,9 @@ footer a:hover {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(212, 255, 58, 0.18);
+    background: rgba(8, 16, 28, 0.05);
     padding: 0.5rem 1rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     font-size: 0.88rem;
     font-weight: 600;
     color: var(--midnight);
@@ -1655,7 +1668,7 @@ footer a:hover {
     display: block;
     text-align: center;
     padding: 1rem 2rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 700;
     font-size: 0.93rem;
@@ -1680,51 +1693,41 @@ footer a:hover {
 }
 
 .pricing-custom {
-    background: transparent;
-    border: 2px dashed rgba(0, 0, 0, 0.2);
-    justify-content: center;
-    text-align: center;
-    gap: 1rem;
-}
-
-.pricing-custom:hover {
-    border-color: var(--midnight);
-    border-style: solid;
-}
-
-.pricing-custom .pricing-cta {
-    border: 2px solid var(--midnight);
-    background: transparent;
-    color: var(--midnight);
-    display: inline-block;
-    width: auto;
-    padding: 1rem 2.5rem;
-    margin-top: auto;
-}
-
-.pricing-custom .pricing-cta:hover {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--accent-text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: var(--frame);
+    margin: 1.75rem auto 0;
+    padding: 1.75rem 2.25rem;
+    background: var(--cream);
+    border-radius: var(--radius-lg);
 }
 
 .pricing-custom h3 {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--midnight);
-    line-height: 1.15;
+    line-height: 1.2;
     letter-spacing: -0.02em;
-    margin-bottom: 1rem;
+    margin: 0 0 0.35rem;
 }
 
 .pricing-custom p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: var(--text-dark);
-    opacity: 0.7;
-    font-size: 0.93rem;
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
-    flex: unset;
+    opacity: 0.75;
+}
+
+.pricing-custom .pricing-cta {
+    flex-shrink: 0;
+    display: inline-block;
+    width: auto;
+    margin-top: 0;
+    padding: 0.9rem 2rem;
 }
 
 /* ==========================================================================
@@ -1732,7 +1735,7 @@ footer a:hover {
    ========================================================================== */
 
 .latest-posts {
-    padding: 8rem 4rem;
+    padding: calc(var(--section-y) * 0.6) 4rem var(--section-y);
     background: var(--snow);
 }
 
@@ -1786,7 +1789,7 @@ footer a:hover {
 
 .post-card {
     background: var(--snow);
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     text-decoration: none;
     color: inherit;
     transition: all 0.35s ease;
@@ -1914,13 +1917,13 @@ footer a:hover {
 }
 
 .post-tag {
-    background: var(--accent);
-    color: var(--accent-text);
+    background: rgba(8, 16, 28, 0.06);
+    color: var(--midnight);
     padding: 0.2rem 0.75rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     font-family: "Space Grotesk", sans-serif;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     flex-shrink: 0;
@@ -1980,7 +1983,7 @@ footer a:hover {
    ========================================================================== */
 
 .faq-section {
-    padding: 8rem 4rem;
+    padding: calc(var(--section-y) * 0.6) 4rem var(--section-y);
     background: var(--snow);
 }
 
@@ -2000,11 +2003,11 @@ footer a:hover {
 }
 
 .faq-list {
-    border-top: 1px dashed rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(8, 16, 28, 0.1);
 }
 
 .faq-item {
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(8, 16, 28, 0.1);
 }
 
 .faq-question {
@@ -2089,7 +2092,7 @@ footer a:hover {
    ========================================================================== */
 
 .contact-section {
-    padding: 8rem 4rem;
+    padding: var(--section-y) 4rem;
     background: linear-gradient(135deg, var(--slate) 0%, var(--midnight) 100%);
     position: relative;
     overflow: hidden;
@@ -2200,7 +2203,7 @@ footer a:hover {
 
 .filter-tag {
     padding: 0.5rem 1.2rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -2249,7 +2252,7 @@ footer a:hover {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: 0;
+    border-radius: var(--radius);
     display: block;
     background: var(--cream);
 }
@@ -2264,13 +2267,13 @@ footer a:hover {
 
 .feature-card-tag {
     display: inline-block;
-    background: var(--accent);
-    color: var(--accent-text);
+    background: rgba(8, 16, 28, 0.06);
+    color: var(--midnight);
     padding: 0.25rem 0.85rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     font-family: "Space Grotesk", sans-serif;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .feature-card-title {
@@ -2353,13 +2356,13 @@ footer a:hover {
 
 .rail-item-tag {
     display: inline-block;
-    background: var(--accent);
-    color: var(--accent-text);
+    background: rgba(8, 16, 28, 0.06);
+    color: var(--midnight);
     padding: 0.15rem 0.6rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     font-family: "Space Grotesk", sans-serif;
     font-size: 0.65rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .rail-item-title {
@@ -2394,16 +2397,16 @@ footer a:hover {
     padding: 1.25rem;
     background: var(--snow);
     border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     text-decoration: none;
     color: inherit;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .post-row:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-    border-color: var(--midnight);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    border-color: rgba(8, 16, 28, 0.2);
 }
 
 .post-row:hover .post-row-arrow {
@@ -2414,7 +2417,7 @@ footer a:hover {
     width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    border-radius: 0;
+    border-radius: var(--radius);
     display: block;
     margin-bottom: 1.25rem;
     background: var(--cream);
@@ -2427,12 +2430,12 @@ footer a:hover {
 .post-row-tag {
     display: inline-block;
     width: fit-content;
-    background: var(--accent);
-    color: var(--accent-text);
-    padding: 0.2rem 0.8rem;
-    border-radius: 0;
-    font-size: 0.75rem;
-    font-weight: 700;
+    background: rgba(8, 16, 28, 0.06);
+    color: var(--midnight);
+    padding: 0.25rem 0.8rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 600;
     margin-bottom: 0.9rem;
 }
 
@@ -2594,7 +2597,7 @@ footer a:hover {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     display: block;
     margin-top: 3.5rem;
     background: var(--cream);
@@ -2611,7 +2614,7 @@ footer a:hover {
 
 .post-body img {
     width: 100%;
-    border-radius: 0;
+    border-radius: var(--radius);
     display: block;
 }
 
@@ -2647,7 +2650,7 @@ footer a:hover {
     }
 
     .post-hero-image {
-        border-radius: 0;
+        border-radius: var(--radius-lg);
         margin-top: 2rem;
         aspect-ratio: 16 / 10;
     }
@@ -2741,7 +2744,7 @@ footer a:hover {
 
 .post-cta-inner {
     background: var(--midnight);
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     padding: 3rem;
     text-align: center;
 }
@@ -2791,7 +2794,7 @@ footer a:hover {
 .callout {
     background: var(--midnight);
     color: var(--cream);
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 2rem 2.5rem;
     margin: 2.5rem 0;
 }
@@ -2832,7 +2835,7 @@ footer a:hover {
     background: white;
     border: 1px solid var(--sand);
     border-left: 4px solid var(--midnight);
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 1.75rem;
     margin: 2rem 0;
 }
@@ -2844,7 +2847,7 @@ footer a:hover {
     font-size: 0.9rem;
     font-weight: 600;
     padding: 0.4rem 0.8rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     white-space: nowrap;
     line-height: 1.4;
     text-align: center;
@@ -2877,7 +2880,7 @@ footer a:hover {
 .tip-card,
 .sign-card {
     background: white;
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 2rem 2rem 2rem 2.5rem;
     margin: 2rem 0;
     border-left: 5px solid var(--midnight);
@@ -2925,7 +2928,7 @@ footer a:hover {
 /* Stat callout */
 .stat-callout {
     background: var(--midnight);
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 2.5rem;
     margin: 2.5rem 0;
     display: grid;
@@ -2960,7 +2963,7 @@ footer a:hover {
     background: white;
     border: 1px solid var(--sand);
     border-left: 4px solid var(--midnight);
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 1.75rem;
     margin: 2rem 0;
 }
@@ -2972,7 +2975,7 @@ footer a:hover {
     font-size: 0.9rem;
     font-weight: 600;
     padding: 0.4rem 0.8rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     white-space: nowrap;
     line-height: 1.4;
     text-align: center;
@@ -3047,7 +3050,7 @@ footer a:hover {
     background: white;
     border: 1px solid var(--sand);
     border-left: 4px solid var(--midnight);
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 1.75rem;
     margin: 2rem 0;
 }
@@ -3059,7 +3062,7 @@ footer a:hover {
     font-size: 0.9rem;
     font-weight: 600;
     padding: 0.4rem 0.8rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     white-space: nowrap;
     text-align: center;
     line-height: 1.4;
@@ -3445,7 +3448,7 @@ footer a:hover {
 .case-placeholder {
     width: 100%;
     aspect-ratio: 16 / 9;
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     background: rgba(212, 255, 58, 0.18);
     border: 1px dashed rgba(8, 16, 28, 0.18);
     display: flex;
@@ -3479,7 +3482,7 @@ footer a:hover {
 .outcome-card {
     background: var(--snow);
     border: 1px solid rgba(8, 16, 28, 0.08);
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 1.75rem;
 }
 
@@ -3502,7 +3505,7 @@ footer a:hover {
 
 .timeline {
     background: var(--midnight);
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     padding: 3rem;
     margin-block: 3.5rem;
 }
@@ -3544,7 +3547,7 @@ footer a:hover {
 }
 
 .case-image {
-    border-radius: 0;
+    border-radius: var(--radius-lg);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     margin-block: 3.5rem;
     overflow: hidden;
@@ -3790,7 +3793,15 @@ footer a:hover {
 
     /* Clients responsive */
     .clients-section {
-        padding: 3rem 1.25rem;
+        padding: var(--section-y) 1.25rem;
+    }
+
+    .client-card-v2 {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .client-card-bottom {
+        margin-top: 1.25rem;
     }
 
     .clients-grid-v2 {
@@ -3863,7 +3874,12 @@ footer a:hover {
 
     /* Blog responsive */
     .latest-posts {
-        padding: 0rem 1.25rem;
+        padding: 1rem 1.25rem var(--section-y);
+    }
+
+    /* Two posts are enough on a phone; the blog page has the rest. */
+    .latest-posts .post-row:nth-child(n + 3) {
+        display: none;
     }
 
     .posts-header {
@@ -3889,7 +3905,7 @@ footer a:hover {
 
     /* FAQ responsive */
     .faq-section {
-        padding: 0 1.25rem;
+        padding: 1rem 1.25rem var(--section-y);
     }
 
     .faq-inner > h2 {
@@ -4333,7 +4349,7 @@ footer a:hover {
   padding: 2.25rem 2rem;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 0;
+  border-radius: var(--radius);
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -4351,7 +4367,7 @@ footer a:hover {
   width: 48px;
   height: 48px;
   margin-bottom: 1.25rem;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   background: var(--accent);
   color: var(--midnight);
 }
@@ -4527,7 +4543,7 @@ footer a:hover {
     gap: 0.4rem;
     background: var(--snow);
     border: 1px solid var(--sand);
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     padding: 0.35rem;
     width: fit-content;
     margin: 0 auto 3rem;
@@ -4540,7 +4556,7 @@ footer a:hover {
     color: var(--text-muted);
     background: transparent;
     border: none;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     padding: 0.55rem 1.4rem;
     cursor: pointer;
     display: inline-flex;
@@ -4564,7 +4580,7 @@ footer a:hover {
     font-size: 0.65rem;
     font-weight: 700;
     padding: 0.2rem 0.6rem;
-    border-radius: 0;
+    border-radius: var(--radius-pill);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -4573,7 +4589,7 @@ footer a:hover {
 /* Condensed card overrides */
 
 .pricing-card {
-    padding: 2rem;
+    padding: 2.25rem;
 }
 
 .pricing-price {
@@ -4617,8 +4633,14 @@ footer a:hover {
 }
 
 .pricing-features li {
-    line-height: 1.35;
-    white-space: nowrap;
+    line-height: 1.4;
+}
+
+@media (max-width: 960px) {
+    .pricing-grid {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 520px;
+    }
 }
 
 @media (max-width: 768px) {
