@@ -21,6 +21,10 @@
    ========================================================================== */
 
 :root {
+    /* One type spec for every button, primary or secondary. */
+    --cta-font: "Epilogue", sans-serif;
+    --cta-weight: 600;
+    --cta-size: 0.95rem;
     --midnight: #08101C;
     --slate: #111A2B;
     --cream: #f5f1e8;
@@ -626,10 +630,11 @@ nav {
     background: var(--accent);
     color: var(--accent-text);
     text-decoration: none;
-    font-weight: bold !important;
-    font-size: 0.95rem;
     border-radius: var(--radius-pill);
     transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: var(--cta-font);
+  font-weight: var(--cta-weight) !important;
+  font-size: var(--cta-size);
 }
 
 .cta-button:hover {
@@ -823,10 +828,11 @@ footer a:hover {
     color: var(--accent-text);
     padding: 0.9rem 2rem;
     border-radius: var(--radius-pill);
-    font-size: 0.9rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    font-weight: bold !important;
+  font-family: var(--cta-font);
+  font-weight: var(--cta-weight) !important;
+  font-size: var(--cta-size);
 }
 
 .hero-v2-cta-primary:hover {
@@ -846,12 +852,13 @@ footer a:hover {
 }
 
 .hero-v2-cta-secondary {
-    font-size: 0.9rem;
-    font-weight: 500;
     color: var(--midnight);
     text-decoration: none;
     padding-bottom: 2px;
     position: relative;
+  font-family: var(--cta-font);
+  font-weight: var(--cta-weight);
+  font-size: var(--cta-size);
 }
 
 .hero-v2-cta-secondary::after {
@@ -1670,12 +1677,13 @@ footer a:hover {
     padding: 1rem 2rem;
     border-radius: var(--radius-pill);
     text-decoration: none;
-    font-weight: 700;
-    font-size: 0.93rem;
     transition: all 0.3s ease;
     background: var(--midnight);
     color: var(--cream);
     margin-top: auto;
+  font-family: var(--cta-font);
+  font-weight: var(--cta-weight);
+  font-size: var(--cta-size);
 }
 
 .pricing-cta:hover {
