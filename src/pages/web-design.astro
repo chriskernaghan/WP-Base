@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
 import Marquee from '../components/Marquee.astro';
 import Pricing from '../components/Pricing.astro';
 import Contact from '../components/Contact.astro';
@@ -29,22 +30,22 @@ const serviceSchema = {
 const offer = [
   {
     title: 'Designed around what you want it to do',
-    body: "Before anything gets built, we work out what the site is actually for. More enquiries, more bookings, looking credible to bigger clients. Every page then earns its place by moving a visitor towards that, rather than existing because other sites have one.",
+    body: 'Every page earns its place by moving a visitor towards more enquiries, more bookings or a more credible look.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="5" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="1.75" fill="var(--accent)"/></svg>`,
   },
   {
     title: 'Built properly, not bolted together',
-    body: 'Built on WordPress with clean, fast foundations, so it loads quickly on a phone and doesn\'t fall over the first time a plugin updates. You own it outright, it lives in your accounts, and any developer could pick it up after me.',
+    body: 'Clean, fast WordPress foundations that you own outright, in your own accounts, so any developer could pick it up.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5 24.5 9 14 14.5 3.5 9 14 3.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 14.5 14 20l10.5-5.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 19.5 14 25l10.5-5.5" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Easy for you to update',
-    body: "You shouldn't need to ring a developer to change your opening hours or add a news post. I set the site up so the everyday edits are genuinely doable by you, with a walkthrough when we hand over so nothing feels like a mystery.",
+    body: 'Opening hours and news posts are easy to change yourself, with a walkthrough when we hand over.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.5 5.5 22.5 10.5 10 23H5v-5L17.5 5.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M15 8l5 5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>`,
   },
   {
     title: 'Looked after once it\u2019s live',
-    body: "Launch day isn't the finish line. Sites need updates, backups and a bit of attention to stay fast and secure. Most of my design clients move onto a care plan afterwards, so the site keeps working as well in year three as it did in week one.",
+    body: 'Most clients move onto a care plan, so the site works as well in year three as it did in week one.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5c3.5 2 7 3 9.5 3v8c0 5.5-4 8.9-9.5 10.5C8.5 23.4 4.5 20 4.5 14.5v-8c2.5 0 6-1 9.5-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m10 14 3 3 5.5-6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
 ];
@@ -54,84 +55,20 @@ const offer = [
   description="Web design for small businesses in Northern Ireland. Clean, fast websites built to win you enquiries, built properly on WordPress, and looked after once they're live."
   schema={serviceSchema}
 >
-  <section class="design-hero-section">
-    <div class="design-inner design-hero-grid">
-      <div class="design-hero-copy">
-        <span class="section-label">Web Design · Northern Ireland</span>
-        <h1 class="design-headline">
-          Web Design that<br />
-          <span class="accent">wins you work</span>
-        </h1>
-        <p class="design-lead">
-          Your website is usually the first look someone gets at your business, and
-          they make their mind up fast. I design and build clean, quick websites for
-          small businesses in Northern Ireland that make that first impression count,
-          and turn more of your visitors into enquiries.
-        </p>
-        <div class="design-cta-row">
-          <a href="#contact" class="design-cta-primary">
-            Get Your Free Audit
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
-          </a>
-          <a href="#what-you-get" class="design-cta-secondary">What you get</a>
-        </div>
-      </div>
-
-      <div class="design-hero-art" aria-hidden="true">
-        <svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
-          <g stroke="rgba(255,255,255,0.07)" stroke-width="1">
-            <line x1="60" y1="0" x2="60" y2="440"/>
-            <line x1="500" y1="0" x2="500" y2="440"/>
-            <line x1="0" y1="60" x2="560" y2="60"/>
-            <line x1="0" y1="380" x2="560" y2="380"/>
-          </g>
-          <g class="hero-art-browser">
-            <rect x="90" y="40" width="380" height="310" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-            <path d="M90 54a14 14 0 0 1 14-14h352a14 14 0 0 1 14 14v20H90V54Z" fill="rgba(255,255,255,0.06)"/>
-            <circle cx="112" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
-            <circle cx="126" cy="57" r="4" fill="rgba(255,255,255,0.22)"/>
-            <circle cx="140" cy="57" r="4" fill="var(--accent)"/>
-            <rect x="116" y="94" width="54" height="8" rx="4" fill="rgba(255,255,255,0.85)"/>
-            <rect x="346" y="92" width="30" height="10" rx="5" fill="rgba(255,255,255,0.22)"/>
-            <rect x="384" y="90" width="62" height="14" rx="7" fill="var(--accent)"/>
-            <rect x="116" y="134" width="232" height="16" rx="6" fill="rgba(255,255,255,0.85)"/>
-            <rect x="116" y="158" width="170" height="16" rx="6" fill="var(--accent)"/>
-            <rect x="116" y="190" width="250" height="7" rx="3.5" fill="rgba(255,255,255,0.3)"/>
-            <rect x="116" y="204" width="212" height="7" rx="3.5" fill="rgba(255,255,255,0.3)"/>
-            <rect x="116" y="230" width="106" height="28" rx="14" fill="var(--accent)"/>
-            <rect x="138" y="242" width="62" height="5" rx="2.5" fill="var(--midnight)"/>
-            <g>
-              <rect x="116" y="280" width="100" height="52" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-              <circle cx="132" cy="296" r="6" fill="var(--accent)"/>
-              <rect x="126" y="310" width="66" height="6" rx="3" fill="rgba(255,255,255,0.28)"/>
-            </g>
-            <g>
-              <rect x="230" y="280" width="100" height="52" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-              <circle cx="246" cy="296" r="6" fill="rgba(255,255,255,0.6)"/>
-              <rect x="240" y="310" width="66" height="6" rx="3" fill="rgba(255,255,255,0.28)"/>
-            </g>
-            <g>
-              <rect x="344" y="280" width="100" height="52" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-              <circle cx="360" cy="296" r="6" fill="rgba(255,255,255,0.6)"/>
-              <rect x="354" y="310" width="66" height="6" rx="3" fill="rgba(255,255,255,0.28)"/>
-            </g>
-          </g>
-          <g class="hero-art-chip hero-art-chip-a">
-            <rect x="410" y="118" width="132" height="56" rx="10" fill="var(--accent)"/>
-            <path d="M426 154 L438 140 L448 148 L464 130" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M464 130 L464 140 M464 130 L454 130" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round"/>
-            <rect x="476" y="132" width="52" height="7" rx="3.5" fill="var(--midnight)"/>
-            <rect x="476" y="146" width="36" height="7" rx="3.5" fill="var(--midnight)" opacity="0.55"/>
-          </g>
-          <g class="hero-art-chip hero-art-chip-b">
-            <rect x="28" y="300" width="96" height="40" rx="10" fill="rgba(11,17,32,0.9)" stroke="rgba(255,255,255,0.16)"/>
-            <path d="M42 320 L48 326 L60 312" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="70" y="316" width="42" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </section>
+  <ServiceHero
+    headline="Web design that"
+    accent="wins you work"
+    lead="Clean, fast websites for Northern Ireland businesses, built to turn visitors into enquiries."
+    primary={{ label: 'Get Your Free Audit', href: '#contact' }}
+    secondary={{ label: "What you get", href: '#what-you-get' }}
+    image="web-design"
+    alt="A small business owner looking at their new website on a tablet"
+    chips={[
+      { label: 'Mobile friendly', sub: 'Looks right on any screen', pos: 'a' },
+      { label: 'Contact form working', sub: 'Tested before launch', pos: 'b' },
+      { label: 'Loads quickly', sub: 'Built on clean foundations', pos: 'c' },
+    ]}
+  />
 
   <Marquee />
 
@@ -140,18 +77,7 @@ const offer = [
       <span class="section-label">The uncomfortable truth</span>
       <h2>People judge your business by your website, fair or not</h2>
       <p>
-        You might do brilliant work. But if someone lands on a site that looks ten
-        years old, loads slowly on their phone, or has a contact form that doesn't
-        work, a fair few of them will assume the business behind it is the same.
-        They won't tell you. They'll just click back and ring the next result on
-        Google instead.
-      </p>
-      <p>
-        The frustrating part is that you never see it happen. There's no bounced
-        email, no missed call, no feedback. Just enquiries that end up with a
-        competitor who made a better first impression. A well-built website doesn't need
-        to be flashy to fix this. It needs to look credible, load fast, work on a
-        phone, and make it obvious how to get in touch.
+        You might do brilliant work, but if someone lands on a site that looks ten years old, loads slowly or has a contact form that doesn't work, plenty will assume the business is the same. They won't tell you. They'll just click back and ring the next result on Google. A good website doesn't need to be flashy, only credible, quick on a phone and clear about how to get in touch.
       </p>
     </div>
   </section>
@@ -177,17 +103,10 @@ const offer = [
       <span class="section-label">Worth saying plainly</span>
       <h2>Built to bring in enquiries, not to win design awards</h2>
       <p>
-        Plenty of agencies will sell you something beautiful that takes months,
-        costs a fortune, and leaves you dependent on them for every small change.
-        That's not what I do. I build sites for small businesses that need to look
-        the part, load fast, and bring in work, delivered by one person you can
-        actually get on the phone.
+        Plenty of agencies will sell you something beautiful that takes months and leaves you dependent on them for every small change. I build sites for small businesses that need to look the part and bring in work, delivered by one person you can get on the phone.
       </p>
       <p>
-        And if your current site is closer than you think, I'll say so. Sometimes a
-        business doesn't need a rebuild, it needs a tidy-up, a speed fix, or a bit
-        of care. The free audit tells you which camp you're in, honestly, before
-        anyone talks about money.
+        Not sure whether you need a rebuild? The free audit tells you honestly, before anyone talks about money.
       </p>
       <p class="design-related-link">
         <a href="/#clients">
@@ -195,9 +114,7 @@ const offer = [
         </a>
       </p>
       <p class="design-related-link">
-        A good build is only the start. Keeping it fast is
-        <a href="/website-speed/">website speed</a> work, and keeping it secure and
-        up to date is ongoing <a href="/wordpress-maintenance/">WordPress maintenance</a>.
+        A good build is only the start. See <a href="/website-speed/">website speed</a> and <a href="/wordpress-maintenance/">WordPress maintenance</a>.
       </p>
     </div>
   </section>
@@ -207,111 +124,13 @@ const offer = [
 </BaseLayout>
 
 <style>
-  .design-hero-section {
-    padding: 7rem 1.5rem 4rem;
-    background: var(--midnight);
-    color: var(--snow);
-    overflow: hidden;
-  }
-  .design-inner {
+    .design-inner {
     max-width: 1200px;
     margin: 0 auto;
   }
-  .design-hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 3rem;
-    align-items: center;
-  }
-  /* eyebrow label sits on a dark background in the hero, so lighten it */
-  .design-hero-section .section-label {
-    color: var(--text-light);
-  }
-  .design-headline {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.05;
-    margin: 1rem 0 1.5rem;
-  }
-  .design-headline .accent {
-    color: var(--accent);
-  }
-  .design-lead {
-    font-family: 'Epilogue', sans-serif;
-    font-size: clamp(1.05rem, 2vw, 1.3rem);
-    line-height: 1.6;
-    max-width: 640px;
-    opacity: 0.9;
-  }
-  .design-cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  .design-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--accent);
-    color: var(--midnight);
-    padding: 0.9rem 1.5rem;
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    transition: transform 0.15s ease;
-    font-family: var(--cta-font);
-    font-weight: var(--cta-weight);
-    font-size: var(--cta-size);
-  }
-  .design-cta-primary:hover {
-    transform: translateY(-2px);
-  }
-  .design-cta-secondary {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.9rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    color: var(--snow);
-    transition: border-color 0.15s ease;
-    font-family: var(--cta-font);
-    font-weight: var(--cta-weight);
-    font-size: var(--cta-size);
-  }
-  .design-cta-secondary:hover {
-    border-color: var(--snow);
-  }
-
-  .design-hero-art {
-    min-width: 0;
-  }
-  .design-hero-art svg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .hero-art-chip-a {
-    animation: heroChipFloat 6s ease-in-out infinite;
-  }
-  .hero-art-chip-b {
-    animation: heroChipFloat 7s ease-in-out 1.2s infinite;
-  }
-  @keyframes heroChipFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-art-chip-a,
-    .hero-art-chip-b {
-      animation: none;
-    }
-  }
-
   .design-problem-section,
   .design-honest-section {
-    padding: 4rem 1.5rem;
+    padding: 5rem 1.5rem;
   }
   .design-reading {
     max-width: 800px;
@@ -341,7 +160,7 @@ const offer = [
   }
 
   .design-offer-section {
-    padding: 4rem 1.5rem;
+    padding: 5rem 1.5rem;
   }
   .design-grid {
     display: grid;
@@ -384,24 +203,9 @@ const offer = [
     opacity: 0.85;
   }
 
-  @media (max-width: 960px) {
-    .design-hero-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    .design-hero-art {
-      max-width: 480px;
-      margin: 0 auto;
-      width: 100%;
-    }
-  }
-
   @media (max-width: 720px) {
     .design-grid {
       grid-template-columns: 1fr;
-    }
-    .design-hero-section {
-      padding-top: 5.5rem;
     }
   }
 </style>
