@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceHero from '../components/ServiceHero.astro';
 import Marquee from '../components/Marquee.astro';
 import Pricing from '../components/Pricing.astro';
 import Contact from '../components/Contact.astro';
@@ -28,32 +29,32 @@ const serviceSchema = {
 const included = [
   {
     title: 'Core, theme and plugin updates',
-    body: "WordPress and its plugins put out updates constantly, and skipping them is how sites break or get hacked. I apply them carefully, check nothing broke afterwards, and roll back if anything does. You never see the faff, just a site that stays current.",
+    body: 'Core, theme and plugin updates applied carefully, checked afterwards and rolled back if anything breaks.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23 14a9 9 0 1 1-2.6-6.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M23 4v5h-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Backups that actually work',
-    body: 'Regular backups, stored off your server, tested so they restore when it counts. Plenty of sites have backups running that nobody has ever checked. The first time you need one is the worst time to find out it was broken.',
+    body: 'Regular backups stored off your server and tested, so they restore when you need them.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="14" cy="7" rx="8" ry="3.5" stroke="currentColor" stroke-width="2"/><path d="M6 7v13.5c0 1.9 3.6 3.5 8 3.5s8-1.6 8-3.5V7" stroke="currentColor" stroke-width="2"/><path d="M6 14c0 1.9 3.6 3.5 8 3.5s8-1.6 8-3.5" stroke="var(--accent)" stroke-width="2"/></svg>`,
   },
   {
     title: 'Security and uptime monitoring',
-    body: "I keep an eye on the site so problems get caught early, not when a customer emails to say it is down. SSL kept valid, login locked down sensibly, and an alert to me rather than a nasty surprise to you.",
+    body: 'Uptime monitoring, valid SSL and sensible login protection, so I hear about problems before your customers do.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5c3.5 2 7 3 9.5 3v8c0 5.5-4 8.9-9.5 10.5C8.5 23.4 4.5 20 4.5 14.5v-8c2.5 0 6-1 9.5-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m10 14 3 3 5.5-6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
   {
     title: 'Performance kept in check',
-    body: 'Sites get slower over time as content and images build up. I keep load times honest, so the site stays quick for the people landing on it from a search, not just for you on your own connection.',
+    body: 'Load times kept honest as content and images build up, so the site stays quick for visitors.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 19a9 9 0 0 1 18 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 19l4.5-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="19" r="2" fill="var(--accent)"/></svg>`,
   },
   {
     title: 'Small fixes and changes',
-    body: "The bits that pile up: a new page, updated opening hours, a broken link, a form that stopped sending. Your plan hours cover the small jobs, so they get done rather than sitting on a list for months.",
+    body: 'New pages, opening hours, broken links and forms that stopped sending, all covered by your plan hours.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21.5 3.8a5.2 5.2 0 0 0-6.7 6.7L4.6 20.7a2.1 2.1 0 1 0 3 3L17.8 13.5a5.2 5.2 0 0 0 6.7-6.7l-3.3 3.3-3.3-3.3 3.6-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="6.4" cy="21.9" r="1" fill="var(--accent)"/></svg>`,
   },
   {
     title: 'A real person to ask',
-    body: "No ticketing system, no account manager relaying messages. You email me, I answer, I do the thing. For a small business that just wants the website handled, that direct line is most of the value.",
+    body: 'You email me, I answer and I do the thing. No tickets and no account manager in between.',
     icon: `<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5.5 5.5h17a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H13.5l-5 4.5V18.5h-3a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="10" cy="12" r="1.25" fill="var(--accent)"/><circle cx="14.5" cy="12" r="1.25" fill="var(--accent)"/><circle cx="19" cy="12" r="1.25" fill="var(--accent)"/></svg>`,
   },
 ];
@@ -63,78 +64,20 @@ const included = [
   description="Ongoing WordPress maintenance for small businesses. Updates, backups, security, performance and a real person to call. A simple care plan that keeps your site working so you do not have to think about it."
   schema={serviceSchema}
 >
-  <section class="maint-hero-section">
-    <div class="maint-inner maint-hero-grid">
-      <div class="maint-hero-copy">
-        <span class="section-label">WordPress Maintenance · Northern Ireland</span>
-        <h1 class="maint-headline">
-          WordPress maintenance,<br />
-          <span class="accent">handled</span>
-        </h1>
-        <p class="maint-lead">
-          A WordPress site is never finished. It needs updating, watching and the
-          occasional fix to stay fast, secure and working. A care plan covers all of
-          that for a fixed monthly fee, so the website is one less thing on your plate
-          and there is always someone to call when you need something done.
-        </p>
-        <div class="maint-cta-row">
-          <a href="#contact" class="maint-cta-primary">
-            Get Your Free Audit
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
-          </a>
-          <a href="#whats-included" class="maint-cta-secondary">What's included</a>
-        </div>
-      </div>
-
-      <div class="maint-hero-art" aria-hidden="true">
-        <svg viewBox="0 0 560 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
-          <g stroke="rgba(255,255,255,0.07)" stroke-width="1">
-            <line x1="60" y1="0" x2="60" y2="440"/>
-            <line x1="500" y1="0" x2="500" y2="440"/>
-            <line x1="0" y1="60" x2="560" y2="60"/>
-            <line x1="0" y1="380" x2="560" y2="380"/>
-          </g>
-          <g>
-            <rect x="110" y="48" width="340" height="304" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-            <rect x="134" y="76" width="120" height="9" rx="4.5" fill="rgba(255,255,255,0.85)"/>
-            <rect x="134" y="100" width="292" height="8" rx="4" fill="rgba(255,255,255,0.12)"/>
-            <rect x="134" y="100" width="218" height="8" rx="4" fill="var(--accent)"/>
-            <g>
-              <rect x="134" y="132" width="292" height="44" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-              <circle cx="156" cy="154" r="9" fill="var(--accent)"/>
-              <path d="m152 154 3 3 5.5-6" stroke="var(--midnight)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="176" y="150" width="150" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
-            </g>
-            <g>
-              <rect x="134" y="188" width="292" height="44" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-              <circle cx="156" cy="210" r="9" fill="var(--accent)"/>
-              <path d="m152 210 3 3 5.5-6" stroke="var(--midnight)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="176" y="206" width="118" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
-            </g>
-            <g>
-              <rect x="134" y="244" width="292" height="44" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-              <circle cx="156" cy="266" r="9" stroke="rgba(255,255,255,0.35)" stroke-width="2" fill="none"/>
-              <rect x="176" y="262" width="136" height="7" rx="3.5" fill="rgba(255,255,255,0.3)"/>
-            </g>
-            <rect x="134" y="308" width="104" height="26" rx="13" fill="var(--accent)"/>
-            <rect x="154" y="319" width="64" height="5" rx="2.5" fill="var(--midnight)"/>
-          </g>
-          <g class="hero-art-chip hero-art-chip-a">
-            <rect x="404" y="112" width="132" height="56" rx="10" fill="var(--accent)"/>
-            <path d="M442 128a10 10 0 1 1-8 4" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <path d="M433 126v6h6" stroke="var(--midnight)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <rect x="462" y="128" width="52" height="7" rx="3.5" fill="var(--midnight)"/>
-            <rect x="462" y="142" width="36" height="7" rx="3.5" fill="var(--midnight)" opacity="0.55"/>
-          </g>
-          <g class="hero-art-chip hero-art-chip-b">
-            <rect x="32" y="296" width="96" height="40" rx="10" fill="rgba(11,17,32,0.9)" stroke="rgba(255,255,255,0.16)"/>
-            <path d="M46 316 L52 322 L64 308" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="74" y="312" width="42" height="7" rx="3.5" fill="rgba(255,255,255,0.5)"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </section>
+  <ServiceHero
+    headline="WordPress maintenance,"
+    accent="handled"
+    lead="Updates, backups, security and a real person to call, for one fixed monthly fee."
+    primary={{ label: 'Get Your Free Audit', href: '#contact' }}
+    secondary={{ label: "What's included", href: '#whats-included' }}
+    image="maintenance"
+    alt="A small business owner checking their website on a laptop"
+    chips={[
+      { label: 'Updates applied', sub: 'Core, themes and plugins', pos: 'a' },
+      { label: 'Backup complete', sub: 'Stored off your server', pos: 'b' },
+      { label: 'Site online', sub: 'Uptime monitored', pos: 'c' },
+    ]}
+  />
 
   <Marquee />
 
@@ -143,17 +86,10 @@ const included = [
       <span class="section-label">Why it matters</span>
       <h2>A site left alone is a site slowly breaking</h2>
       <p>
-        Most small business websites get built, launched, and then left. No updates,
-        no backups, nobody watching. It looks fine for a while, so it is easy to
-        assume it is fine. Then a plugin update is missed, a form stops sending
-        enquiries without anyone noticing, the software falls years behind, and one
-        day something gives way at the worst possible moment.
-      </p>
-      <p>
-        Maintenance is the unglamorous work that stops all of that. It is not
-        exciting, which is exactly why it gets skipped, and exactly why a site that
-        has someone looking after it pulls ahead of one that does not. The point of a
-        care plan is that you stop thinking about any of this, because it is handled.
+        Most small business websites get built and then left alone. Updates get
+        missed, forms stop sending enquiries and nobody notices until something
+        gives way at the worst moment. A care plan means someone is watching, so
+        you don't have to.
       </p>
     </div>
   </section>
@@ -179,17 +115,10 @@ const included = [
       <span class="section-label">Worth saying plainly</span>
       <h2>Built for small businesses, not agencies</h2>
       <p>
-        I am one person who looks after a small number of sites properly, rather than
-        a big shop juggling hundreds. That means you deal with me directly, you are
-        not paying for layers of overhead, and your site actually gets attention
-        rather than sitting in a queue. For most small businesses that is the right
-        fit, and it costs a fraction of an agency retainer.
-      </p>
-      <p>
-        Not sure what state your site is in? That is what the free audit is for. I
-        take a proper look, tell you plainly what needs doing and what does not, and
-        there is no obligation to take a plan afterwards. If the site is in good shape,
-        I will say so.
+        I'm one person looking after a small number of sites properly, so you deal
+        with me directly and don't pay for layers of overhead. Not sure what state
+        your site is in? The free audit tells you plainly what needs doing, with no
+        obligation.
       </p>
       <p class="maint-related-link">
         <a href="/posts/why-wordpress-maintenance-matters/">
@@ -197,8 +126,7 @@ const included = [
         </a>
       </p>
       <p class="maint-related-link">
-        A care plan also covers the things that have their own pages here:
-        keeping your site <a href="/website-speed/">fast</a> and on
+        See also <a href="/website-speed/">site speed</a> and
         <a href="/hosting/">the right hosting</a>.
       </p>
     </div>
@@ -209,111 +137,14 @@ const included = [
 </BaseLayout>
 
 <style>
-  .maint-hero-section {
-    padding: 7rem 1.5rem 4rem;
-    background: var(--midnight);
-    color: var(--snow);
-    overflow: hidden;
-  }
   .maint-inner {
     max-width: 1200px;
     margin: 0 auto;
   }
-  .maint-hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 3rem;
-    align-items: center;
-  }
-  /* eyebrow label sits on a dark background in the hero, so lighten it */
-  .maint-hero-section .section-label {
-    color: var(--text-light);
-  }
-  .maint-headline {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.05;
-    margin: 1rem 0 1.5rem;
-  }
-  .maint-headline .accent {
-    color: var(--accent);
-  }
-  .maint-lead {
-    font-family: 'Epilogue', sans-serif;
-    font-size: clamp(1.05rem, 2vw, 1.3rem);
-    line-height: 1.6;
-    max-width: 640px;
-    opacity: 0.9;
-  }
-  .maint-cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  .maint-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--accent);
-    color: var(--midnight);
-    padding: 0.9rem 1.5rem;
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    transition: transform 0.15s ease;
-    font-family: var(--cta-font);
-    font-weight: var(--cta-weight);
-    font-size: var(--cta-size);
-  }
-  .maint-cta-primary:hover {
-    transform: translateY(-2px);
-  }
-  .maint-cta-secondary {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.9rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    color: var(--snow);
-    transition: border-color 0.15s ease;
-    font-family: var(--cta-font);
-    font-weight: var(--cta-weight);
-    font-size: var(--cta-size);
-  }
-  .maint-cta-secondary:hover {
-    border-color: var(--snow);
-  }
-
-  .maint-hero-art {
-    min-width: 0;
-  }
-  .maint-hero-art svg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .hero-art-chip-a {
-    animation: heroChipFloat 6s ease-in-out infinite;
-  }
-  .hero-art-chip-b {
-    animation: heroChipFloat 7s ease-in-out 1.2s infinite;
-  }
-  @keyframes heroChipFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-art-chip-a,
-    .hero-art-chip-b {
-      animation: none;
-    }
-  }
 
   .maint-problem-section,
   .maint-honest-section {
-    padding: 4rem 1.5rem;
+    padding: 5rem 1.5rem;
   }
   .maint-reading {
     max-width: 800px;
@@ -343,7 +174,7 @@ const included = [
   }
 
   .maint-offer-section {
-    padding: 4rem 1.5rem;
+    padding: 5rem 1.5rem;
   }
   .maint-grid {
     display: grid;
@@ -391,24 +222,9 @@ const included = [
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  @media (max-width: 960px) {
-    .maint-hero-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    .maint-hero-art {
-      max-width: 480px;
-      margin: 0 auto;
-      width: 100%;
-    }
-  }
-
   @media (max-width: 720px) {
     .maint-grid {
       grid-template-columns: 1fr;
-    }
-    .maint-hero-section {
-      padding-top: 5.5rem;
     }
   }
 </style>
