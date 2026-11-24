@@ -1,26 +1,35 @@
 ---
-// Clients.astro — case study cards. Data here so adding a client is one entry.
+// Clients.astro: case study cards. Data here so adding a client is one entry.
+// Each card shows the client's logo (the same SVGs the testimonial strip uses,
+// drawn in the page's ink colour) rather than the name set in type. The cards
+// are deliberately unnumbered so no client reads as first or best.
+import catagen from './logos/Catagen.svg?raw';
+import exportexplore from './logos/Exportexplore.svg?raw';
+import inclusioniq from './logos/Inclusioniq.svg?raw';
 
 const clients = [
   {
-    num: '01',
-    name: 'Catagen',
+    name: 'CATAGEN',
+    logo: catagen,
+    logoHeight: '1.7rem',
     desc: 'Full Squarespace-to-WordPress migration, custom Divi theme, and ongoing care across two domains.',
     statValue: '4 yrs',
     statLabel: '& counting',
     href: '/case-studies/catagen/',
   },
   {
-    num: '02',
-    name: 'Export Explore',
+    name: 'ExportExplore',
+    logo: exportexplore,
+    logoHeight: '1.9rem',
     desc: 'Custom WordPress build with ongoing maintenance and performance monitoring.',
     statValue: '100%',
     statLabel: 'Uptime',
     href: '/case-studies/exportexplore/',
   },
   {
-    num: '03',
     name: 'InclusionIQ',
+    logo: inclusioniq,
+    logoHeight: '1.95rem',
     desc: 'Full platform migration to WP Engine with bespoke theme and ongoing support.',
     statValue: 'WP Engine',
     statLabel: 'Platform',
@@ -34,18 +43,20 @@ const clients = [
     <div class="section-header-split">
       <div class="section-header-left">
         <span class="section-label">Selected Work</span>
-        <h2>Long-term partnerships,<br />not one-off projects.</h2>
-      </div>
-      <div class="section-header-right">
-        Every client relationship is built on trust, direct communication, and work that actually gets done.
+        <h2>Long-term partnerships,<br />not one-off projects</h2>
       </div>
     </div>
     <div class="clients-grid-v2">
       {clients.map((client) => (
         <a href={client.href} class="client-card-v2">
           <div class="client-card-top">
-            <span class="client-num">{client.num}</span>
-            <span class="client-card-name">{client.name}</span>
+            <span
+              class="client-card-logo"
+              role="img"
+              aria-label={client.name}
+              style={`--logo-h:${client.logoHeight}`}
+              set:html={client.logo}
+            />
             <span class="client-card-desc">{client.desc}</span>
           </div>
           <div class="client-card-bottom">
@@ -82,6 +93,21 @@ const clients = [
 </section>
 
 <style>
+  /* Logo in place of the client name. It takes the ink colour, so the logos
+     sit quietly on the cards; the teal flag and the pink IQ keep their own. */
+  .client-card-logo {
+    display: block;
+    margin-bottom: 1.5rem;
+    color: var(--midnight);
+    line-height: 0;
+  }
+  .client-card-logo :global(svg) {
+    display: block;
+    height: var(--logo-h, 1.8rem);
+    width: auto;
+    max-width: 100%;
+  }
+
   /* WP Engine partner line under the case study cards. Logo is the official
      mark supplied through the Agency Partner Program, used as-is. */
   .clients-partner {
