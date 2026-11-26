@@ -137,11 +137,12 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
 
          Targets are worked out from the markup rather than listed by class, so
          pages built later pick the effect up without anything being wired in.
-         For each top-level block in <main> it takes the block's content
-         children, and where one of those is a known card grid it takes the
-         cards instead so they arrive one after another. Blocks that already
-         run an entrance animation of their own, the homepage hero and the case
-         study and blog headers among them, are left alone. -->
+         A block holding a known card grid has its cards arrive one after
+         another, with everything around them arriving together. A block with
+         no grid in it is prose, and reveals in one piece rather than one
+         movement per heading, paragraph and link. Blocks that already run an
+         entrance animation of their own, the hero and the case study and blog
+         headers among them, are left alone. -->
     <script is:inline>
       (function () {
         if (!('IntersectionObserver' in window)) return;
@@ -192,20 +193,27 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
           }
 
           var kids = Array.prototype.slice.call(scope.children);
-          if (!kids.length || kids.length > MAX_GROUP) {
+          var hasGrid = kids.some(function (kid) {
+            return usable(kid) && kid.matches(STAGGER);
+          });
+
+          /* No card grid here, so the block is prose and arrives as one piece.
+             Splitting it would give a label, a heading, a paragraph and each
+             link a movement of its own. */
+          if (!hasGrid || !kids.length || kids.length > MAX_GROUP) {
             mark(block, 0);
             return;
           }
 
-          var n = 0;
           kids.forEach(function (kid) {
             if (!usable(kid) || kid.matches(SKIP) || animating(kid)) return;
             if (kid.matches(STAGGER)) {
               var cards = Array.prototype.slice.call(kid.children);
-              if (!cards.length || cards.length > MAX_CARDS) { mark(kid, n++); return; }
+              if (!cards.length || cards.length > MAX_CARDS) { mark(kid, 0); return; }
               cards.forEach(function (card, i) { mark(card, i); });
             } else {
-              mark(kid, n++);
+              /* The copy around a grid arrives together, not in sequence. */
+              mark(kid, 0);
             }
           });
         }
