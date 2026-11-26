@@ -1,26 +1,44 @@
----
+// wordpress-maintenance.astro — the service page for WordPress care plans.
+//
+// Updated 26 November 2026: this page no longer targets Northern Ireland.
+// It was titled "WordPress Maintenance & Support Northern Ireland" while
+// /northern-ireland/ was titled "WordPress Maintenance in Northern Ireland"
+// and the homepage was titled "WordPress Maintenance for Small Businesses in
+// NI". Three pages claiming the same query is why Search Console showed four
+// to six pages rotating on "website maintenance belfast" with none of them
+// ranking well. This page now owns the national service queries ("wordpress
+// maintenance services", "wp support and maintenance", "managed wordpress
+// maintenance", "wordpress maintenance uk"), which is where it was already
+// picking up most of its impressions, and /northern-ireland/ owns the local
+// ones. The link near the foot of the page points local visitors there, which
+// also tells Google which page is the local answer.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceHero from '../components/ServiceHero.astro';
 import Marquee from '../components/Marquee.astro';
 import Pricing from '../components/Pricing.astro';
 import Contact from '../components/Contact.astro';
 
+// The provider references the same @id the homepage declares rather than
+// describing the business again. The previous version created a second,
+// unlinked ProfessionalService with its own address, which is the same
+// entity-splitting problem /northern-ireland/ already had fixed. It also
+// carried +447379334695; the number on the Google Business Profile and
+// everywhere else on the site is +447440018091, and a mismatch between the
+// site and GBP works against the local signals.
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   serviceType: 'WordPress Maintenance',
+  name: 'WordPress care plans',
+  url: 'https://wpbase.co.uk/wordpress-maintenance/',
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
   provider: {
     '@type': 'ProfessionalService',
+    '@id': 'https://wpbase.co.uk/#business',
     name: 'WP Base',
     url: 'https://wpbase.co.uk/',
     email: 'hello@wpbase.co.uk',
-    telephone: '+447379334695',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Newtownabbey',
-      addressRegion: 'Northern Ireland',
-      addressCountry: 'GB',
-    },
+    telephone: '+447440018091',
   },
   description:
     'Ongoing WordPress maintenance for small businesses. Updates, backups, security, performance and a real person to call when something needs doing. A care plan that keeps your site working so you do not have to think about it.',
@@ -60,8 +78,8 @@ const included = [
 ];
 ---
 <BaseLayout
-  title="WordPress Maintenance & Support Northern Ireland | WP Base"
-  description="Ongoing WordPress maintenance for small businesses. Updates, backups, security, performance and a real person to call. A simple care plan that keeps your site working so you do not have to think about it."
+  title="WordPress Maintenance & Support Plans | WP Base"
+  description="Ongoing WordPress maintenance for small businesses across the UK. Updates, backups, security and a real person to call, for one fixed monthly fee."
   schema={serviceSchema}
 >
   <ServiceHero
@@ -119,6 +137,11 @@ const included = [
         with me directly and don't pay for layers of overhead. Not sure what state
         your site is in? The free audit tells you plainly what needs doing, with no
         obligation.
+      </p>
+      <p class="maint-related-link">
+        <a href="/northern-ireland/">
+          Based in Northern Ireland? Here's how I work locally →
+        </a>
       </p>
       <p class="maint-related-link">
         <a href="/posts/why-wordpress-maintenance-matters/">
