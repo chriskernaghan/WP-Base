@@ -1,5 +1,6 @@
 ---
-// Hero.astro: homepage hero on a single midnight surface.
+// Hero.astro: hero for the homepage and /northern-ireland/, on a single
+// midnight surface.
 //
 // The old split (dark copy panel, cream card panel) is gone. One background,
 // one soft lime glow behind the chat card, and the page gutter taken from the
@@ -10,17 +11,29 @@
 // promise), the main button (the action) and Chris's replies in the chat (the
 // voice). Everything else is cream on midnight.
 //
-// Styles are scoped to this component and use their own .hero-calm-* names, so
-// HeroLocal.astro (/northern-ireland/) is unaffected. Corner radii come from
-// the shared tokens in global.css (--radius-pill, --radius-lg). HeroChat.astro
-// is shared with HeroLocal, so the dark-on-dark look is applied from here with
-// :global() overrides, while its shape lives in HeroChat itself.
+// Corner radii come from the shared tokens in global.css (--radius-pill,
+// --radius-lg). HeroChat.astro is shared, so the dark-on-dark look is applied
+// from here with :global() overrides, while its shape lives in HeroChat itself.
 //
 // The "hero-split" class is kept on the section as a marker only. Nav.astro
 // keys its clear, cream-ink header on body:has(.hero-split), which is what
-// stops the header flashing white on first paint. Nothing in global.css
-// styles .hero-split on its own, so the class has no side effects here.
+// stops the header flashing white on first paint.
+//
+// The props replace HeroLocal.astro, which was a hand-synced copy of this file
+// and had fallen a redesign behind. With no props this is the homepage hero.
 import HeroChat from './HeroChat.astro';
+
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+  accent?: string;
+}
+
+const {
+  eyebrow,
+  headline = 'A WordPress site you never have',
+  accent = 'to worry about',
+} = Astro.props;
 ---
 
 <section class="hero-calm hero-split" aria-labelledby="hero-heading">
@@ -29,7 +42,8 @@ import HeroChat from './HeroChat.astro';
   <div class="hero-calm-inner">
     <div class="hero-calm-copy">
       <h1 class="hero-calm-headline" id="hero-heading">
-        A WordPress site you never have <span class="hero-calm-accent">to worry about</span>
+        {eyebrow && <span class="hero-calm-eyebrow">{eyebrow}</span>}
+        {headline} <span class="hero-calm-accent">{accent}</span>
       </h1>
 
       <div class="hero-calm-actions">
@@ -109,6 +123,21 @@ import HeroChat from './HeroChat.astro';
     letter-spacing: -0.035em;
     color: var(--cream);
     text-wrap: balance;
+  }
+
+  /* Every type property is set, since it otherwise inherits the h1's display
+     size and negative tracking. */
+  .hero-calm-eyebrow {
+    display: block;
+    margin-bottom: 1.1rem;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-wrap: wrap;
+    color: rgba(245, 241, 232, 0.62);
   }
 
   .hero-calm-accent {
@@ -327,6 +356,11 @@ import HeroChat from './HeroChat.astro';
 
     .hero-calm .hero-calm-card :global(.hero-chat) {
       max-width: none;
+    }
+
+    .hero-calm-eyebrow {
+      font-size: 0.8125rem;
+      margin-bottom: 0.9rem;
     }
   }
 
