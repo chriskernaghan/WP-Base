@@ -6,20 +6,14 @@
 // three-jobs block, the town-level FAQ answers) was folded in here and the old
 // URL 301s to this page.
 //
-// Updated 26 November 2026: this page now owns the LOCAL maintenance queries
-// and nothing else does. Search Console showed four to six pages competing for
-// "website maintenance belfast" and "website maintenance northern ireland",
-// with this page losing at position 48-63 while the homepage sat at 2-3 on the
-// same terms. Google was already choosing this page most of the time, it just
-// wasn't ranking it, so the fix is to make this page unambiguously the local
-// one and stop /wordpress-maintenance/ competing for the same phrase.
+// This page owns the local maintenance queries. /wordpress-maintenance/ owns
+// the national ones and no longer mentions Northern Ireland in its title, so
+// the two aren't competing for the same search.
 //
-// Note the wording: local searchers type "website maintenance", not "wordpress
-// maintenance". "website maintenance belfast" and "website maintenance northern
-// ireland" pulled 226 impressions in three months against 29 for "wordpress
-// maintenance belfast", so the title and h1 lead with the phrase people use.
+// The hero is Hero.astro with an eyebrow, not the old HeroLocal.astro, which
+// is now unused and can be deleted.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroLocal from '../components/HeroLocal.astro';
+import Hero from '../components/Hero.astro';
 import Marquee from '../components/Marquee.astro';
 import Clients from '../components/Clients.astro';
 import WhyLocal from '../components/WhyLocal.astro';
@@ -30,26 +24,16 @@ import LatestPosts from '../components/LatestPosts.astro';
 import FAQLocal from '../components/FAQLocal.astro';
 import Contact from '../components/Contact.astro';
 
-// One business entity for the whole site. This references the same @id the
-// homepage declares rather than inventing a second ProfessionalService, which
-// is what the old #localbusiness id was doing. Three separate entities for one
-// business splits the signals between them.
+// One business entity for the whole site, referencing the same @id the
+// homepage declares rather than inventing a second ProfessionalService. url
+// points at the homepage for the same reason.
 //
-// url now points at the homepage, not at this page. If this is the same entity
-// as the one the homepage declares, and the matching @id says it is, then its
-// canonical url has to be the same too. Pointing it here asserted two
-// different homes for one business.
-//
-// areaServed matches the service areas set on the Google Business Profile
-// (Ballymena, Antrim, Londonderry, Lisburn, Newtownabbey, Belfast), plus the
-// two neighbouring towns that appear in the page copy. Same logic as the
-// homepage comment about name, address and phone: if GBP and the schema
-// disagree about where the business works, the signals work against each other.
+// areaServed matches the service areas set on the Google Business Profile,
+// plus the neighbouring towns named in the page copy.
 //
 // No aggregateRating. Google's guidelines prohibit a business marking up its
-// own rating about itself and it can trigger a manual action. The old version
-// of this page carried 5.0 from 5 reviews. The rating still shows in search
-// through the Google Business Profile, which is the legitimate route.
+// own rating about itself and it can trigger a manual action. The rating shows
+// in search through the Business Profile, which is the legitimate route.
 const schema = [
   {
     '@context': 'https://schema.org',
@@ -109,7 +93,7 @@ const schema = [
   description="Website maintenance and WordPress support for small businesses in Belfast and across Northern Ireland. Fixed monthly fee, based in Newtownabbey."
   schema={schema}
 >
-  <HeroLocal />
+  <Hero eyebrow="Website maintenance in Belfast and Northern Ireland" />
   <Marquee />
   <Clients />
   <WhyLocal />
