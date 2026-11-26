@@ -4882,13 +4882,11 @@ footer a:hover {
 
 .has-reveal [data-reveal] {
     opacity: 0;
-    translate: 0 22px;
 }
 
 .has-reveal [data-reveal="in"] {
     opacity: 1;
-    translate: none;
-    transition: opacity 0.55s ease, translate 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition: opacity 0.55s ease;
     transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -4897,7 +4895,6 @@ footer a:hover {
 @media (prefers-reduced-motion: reduce) {
     .has-reveal [data-reveal] {
         opacity: 1;
-        translate: none;
         transition: none;
     }
 }
