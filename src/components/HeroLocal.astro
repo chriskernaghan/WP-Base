@@ -1,10 +1,21 @@
----
 // HeroLocal.astro: local variant of the homepage hero, used on /northern-ireland/.
 // Mirrors Hero.astro: rating pill, three-line headline, .hero-v2-desc paragraph,
-// CTA row and the shared HeroChat panel. The headline gains a small "Northern
-// Ireland" line inside the h1 (so the keyword stays in the heading without
-// lengthening the big lines), and the description names Newtownabbey.
+// CTA row and the shared HeroChat panel. The headline gains a small location
+// line inside the h1 (so the keyword stays in the heading without lengthening
+// the big lines), and the description names Newtownabbey and Belfast.
 // If Hero.astro changes structurally, change this file to match.
+//
+// Updated 26 November 2026: the eyebrow line now reads "Website maintenance in
+// Belfast and Northern Ireland" rather than "WordPress care in Northern
+// Ireland". Search Console shows local searchers type "website maintenance",
+// not "wordpress maintenance": "website maintenance belfast" and "website
+// maintenance northern ireland" pulled 226 impressions in three months against
+// 29 for "wordpress maintenance belfast". The eyebrow exists to carry the
+// keyword in the h1, so it should carry the one people actually search for.
+//
+// The rating pill now reads 4.5, which is what the Google Business Profile
+// currently shows (seven 5-star reviews and one 1-star with no text). Put it
+// back to 5.0 if and when Google removes that review.
 import HeroChat from './HeroChat.astro';
 ---
 
@@ -13,17 +24,18 @@ import HeroChat from './HeroChat.astro';
     <div class="hero-v2-left hero-split-content">
       <a href="https://share.google/HmqVC5OhdKakcRtS4" target="_blank" rel="noopener" class="hero-v2-rating">
         <span class="hero-v2-rating-stars" aria-hidden="true">★★★★★</span>
-        <span class="hero-v2-rating-text"><strong>5.0</strong> on Google<span class="hero-v2-rating-extra"> · clients love working with me</span></span>
+        <span class="hero-v2-rating-text"><strong>4.5</strong> on Google<span class="hero-v2-rating-extra"> · clients love working with me</span></span>
       </a>
       <h1 class="hero-v2-headline">
-        <span class="hero-local-eyebrow">WordPress care in Northern Ireland</span>
+        <span class="hero-local-eyebrow">Website maintenance in Belfast and Northern Ireland</span>
         A WordPress site<br />
         <span class="accent">you never have<br />to worry about</span>
       </h1>
       <p class="hero-v2-desc">
         I handle the updates, backups and security for a fixed monthly fee, so
-        your site stays fast and safe. I'm based in Newtownabbey, I work with
-        small businesses across Northern Ireland, and I pick up the phone.
+        your site stays fast and safe. I'm based in Newtownabbey, I look after
+        websites for small businesses in Belfast and across Northern Ireland,
+        and I pick up the phone.
       </p>
       <div class="hero-v2-cta-row">
         <a href="#contact" class="hero-v2-cta-primary">
